@@ -37,27 +37,23 @@
         </div>
         <div>
 
-            <h1>Usuarios</h1>
-            <a href="/usuarios/novo">Novo</a>
+            <h1>Produtos</h1>
+            <a href="/produtos/novo">Novo</a>
             <table id="tabela">
                 <tr>
                     <th>Nome</th>
-                    <th>E-mail</th>
-                    <th>CPF</th>
-                    <th>Matricula</th>
-                    <th>Status</th>
-                    <th>Função</th>
+                    <th>Descrição</th>
+                    <th>Estoque</th>
+                    <th>Preço</th>
                 </tr>
-                @foreach($usuarios as $usuario)
+                @foreach($produtos as $produto)
                     <tr>
-                        <td>{{$usuario->nome}}</td>
-                        <td>{{$usuario->email}}</td>
-                        <td>{{$usuario->cpf}}</td>
-                        <td>{{$usuario->matricula}}</td>
-                        <td>{{$usuario->status}}</td>
-                        <td>{{$usuario->funcao}}</td>
-                        <td><a href="/usuarios/editar/{{$usuario->id}}">Editar</a></td>
-                        <td><a href="/usuarios/remover/{{$usuario->id}}">Excluir</a></td>
+                        <td>{{$produto->nome}}</td>
+                        <td>{{$produto->descricao}}</td>
+                        <td>{{$produto->estoque}}</td>
+                        <td>{{$produto->preco}}</td>
+                        <td><a href="/produtos/editar/{{$produto->id}}">Editar</a></td>
+                        <td><a href="/produtos/remover/{{$produto->id}}">Excluir</a></td>
                     </tr>
                 @endforeach
             </table>

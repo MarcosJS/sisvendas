@@ -37,27 +37,29 @@
         </div>
         <div>
 
-            <h1>Usuarios</h1>
-            <a href="/usuarios/novo">Novo</a>
+            <h1>Clientes</h1>
+            <a href="/clientes/novo">Novo</a>
             <table id="tabela">
                 <tr>
                     <th>Nome</th>
-                    <th>E-mail</th>
+                    <th>Data de Nascimento</th>
                     <th>CPF</th>
-                    <th>Matricula</th>
+                    <th>Credito Abilitado</th>
                     <th>Status</th>
-                    <th>Função</th>
+                    <th>Endereco</th>
+                    <th>Telefone</th>
                 </tr>
-                @foreach($usuarios as $usuario)
+                @foreach($clientes as $cliente)
                     <tr>
-                        <td>{{$usuario->nome}}</td>
-                        <td>{{$usuario->email}}</td>
-                        <td>{{$usuario->cpf}}</td>
-                        <td>{{$usuario->matricula}}</td>
-                        <td>{{$usuario->status}}</td>
-                        <td>{{$usuario->funcao}}</td>
-                        <td><a href="/usuarios/editar/{{$usuario->id}}">Editar</a></td>
-                        <td><a href="/usuarios/remover/{{$usuario->id}}">Excluir</a></td>
+                        <td>{{$cliente->nome}}</td>
+                        <td>{{$cliente->datanasc}}</td>
+                        <td>{{$cliente->cpf}}</td>
+                        <td>{{$cliente->modcredito}}</td>
+                        <td>{{$cliente->status}}</td>
+                        <td>{{$cliente->status}}</td>
+                        <td>{{$cliente->status}}</td>
+                        <td><a href="/clientes/editar/{{$cliente->id}}">Editar</a></td>
+                        <td><a href="/clientes/remover/{{$cliente->id}}">Excluir</a></td>
                     </tr>
                 @endforeach
             </table>

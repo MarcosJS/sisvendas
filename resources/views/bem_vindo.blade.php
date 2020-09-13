@@ -5,8 +5,11 @@
         <title>SISVendas</title>
     </head>
     <body>
+        <h1>Bem vindo ao SISVendas</h1>
         <div>
             <a href="/usuarios">Usuarios</a>
+            <a href="/clientes">Clientes</a>
+            <a href="/produtos">Produtos</a>
         </div>
     </body>
 </html>

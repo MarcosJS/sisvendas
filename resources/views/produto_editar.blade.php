@@ -12,11 +12,12 @@
             <a href="/produtos">Produtos</a>
         </div>
         <div>
-            <form action="/usuarios/atualizar/{{$usuario->id}}" method="post">
+            <form action="/produtos/atualizar/{{$produto->id}}" method="post">
                 {{csrf_field()}}
-                Nome: <input type="text" name="nome" value="{{$usuario->nome}}"/>
-                E-mail: <input type="text" name="email" value="{{$usuario->email}}"/>
-                Funcao: <input type="text" name="funcao" value="{{$usuario->funcao}}"/>
+                Nome: <input type="text" name="nome" value="{{$produto->nome}}"/>
+                Descrição: <input type="text" name="descricao" value="{{$produto->descricao}}"/>
+                Estoque: <input type="text" name="estoque" value="{{$produto->estoque}}"/>
+                Preço: <input type="text" name="preco" value="{{$produto->preco}}"/>
                 <input type="submit" value="adicionar"/>
             </form>
         </div>

@@ -13,14 +13,15 @@
         </div>
         <div>
             <br>
-            <form action="/usuarios/adicionar" method="post">
+            <form action="/clientes/adicionar" method="post">
                 {{csrf_field()}}
                 Nome: <input type="text" name="nome"/><br>
-                E-mail: <input type="text" name="email"/><br>
-                Senha: <input type="text" name="senha"/><br>
+                Data de Nascimento: <input type="date" name="datanasc"/><br>
                 CPF: <input type="text" name="cpf"/><br>
-                Matricula: <input type="text" name="matricula"/><br>
-                Funcao: <input type="text" name="funcao"/><br>
+                Logradouro: <input type="text" name="logradouro"/><br>
+                Bairro: <input type="text" name="bairro"/><br>
+                Cidade: <input type="text" name="cidade"/><br>
+                Telefone: <input type="tel" name="numerotel"/><br>
                 <input type="submit" value="adicionar"/>
             </form>
         </div>

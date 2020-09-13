@@ -4,9 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-class UsuarioControllerNovo extends Controller
+class ClienteControllerNovo extends Controller
 {
     public function novo() {
-        return view("usuario_novo");
+        return view("cliente_novo");
     }
 }

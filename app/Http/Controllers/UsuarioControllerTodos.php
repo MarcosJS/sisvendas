@@ -6,7 +6,7 @@ use App\User;
 use App\Usuario;
 use Illuminate\Http\Request;
 
-class UsuarioControllerObterTodos extends Controller
+class UsuarioControllerTodos extends Controller
 {
     public function obterTodos() {
         $usuarios = Usuario::all();
