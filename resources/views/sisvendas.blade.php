@@ -10,6 +10,7 @@
             <a href="/usuarios">Usuarios</a>
             <a href="/clientes">Clientes</a>
             <a href="/produtos">Produtos</a>
+            <a href="/sisvendaspdv">SISVendas PDV</a>
         </div>
     </body>
 </html>

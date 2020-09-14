@@ -13,7 +13,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {return view('bem_vindo');});
+Route::get('/', function () {return view('sisvendas');});
 
 Route::get('usuarios', "UsuarioControllerTodos@obterTodos");
 Route::get('usuarios/novo', "UsuarioControllerNovo@novo");
@@ -35,4 +35,13 @@ Route::post('produtos/adicionar', "ProdutoControllerAdicionar@adicionar");
 Route::get('produtos/editar/{id}', "ProdutoControllerEditar@editar");
 Route::post('produtos/atualizar/{id}', "ProdutoControllerAtualizar@atualizar");
 Route::get('produtos/remover/{id}', "ProdutoControllerRemover@remover");
+
+Route::get('sisvendaspdv', function () {return view('sisvendaspdv');});
+
+Route::get('sisvendaspdvitens', "VendaItemPDVControllerTodos@obterTodos");
+Route::post('sisvendaspdvitens/adicionar', "VendaItemPDVControllerAdicionar@adicionar");
+Route::get('sisvendaspdvitens/cancelar', "VendaItemPDVControllerCancelar@cancelar");
+Route::get('sisvendaspdvpagamento', "VendasPDVPagamentoControllerPreparar@preparar");
+Route::post('sisvendaspdvrevisao', "VendasPDVRevisaoControllerRevisar@revisar");
+Route::post('sisvendaspdvregistro', "VendasPDVRegistroControllerRegistrar@registrar");
 

@@ -21,7 +21,6 @@ class ClienteControllerAdicionar extends Controller
         $telefone = new Telefone();
         $telefone->fill($request->all());
         $cliente->telefone()->saveMany([$telefone]);
-        //return $telefone;
         return redirect('clientes');
     }
 }

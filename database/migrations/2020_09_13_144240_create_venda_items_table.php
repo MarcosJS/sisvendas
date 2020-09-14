@@ -1,0 +1,36 @@
+<?php
+
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
+
+class CreateVendaItemsTable extends Migration
+{
+    /**
+     * Run the migrations.
+     *
+     * @return void
+     */
+    public function up()
+    {
+        Schema::create('venda_items', function (Blueprint $table) {
+            $table->id();
+            $table->timestamps();
+            $table->integer('qtd');
+            $table->decimal('precofinal');
+            $table->decimal('subtotal');
+            $table->integer('vendas_id')->unsigned();
+            $table->foreign('vendas_id')->references('id')->on('vendas')->cascadeOnDelete()->cascadeOnUpdate();
+        });
+    }
+
+    /**
+     * Reverse the migrations.
+     *
+     * @return void
+     */
+    public function down()
+    {
+        Schema::dropIfExists('venda_items');
+    }
+}

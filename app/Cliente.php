@@ -17,4 +17,8 @@ class Cliente extends Model
     public function telefone() {
         return $this->hasMany('App\Telefone');
     }
+
+    public function compras() {
+        return $this->hasMany('App\Venda');
+    }
 }
