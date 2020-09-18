@@ -1,41 +1,12 @@
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
     <head>
-        <meta charset="utf-8">
+        <meta charset="UTF-8">
+        <meta name="viewport"
+              content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <link href="{{asset('css/app.css')}}" rel="stylesheet" type="text/css"/>
         <title>SISVendas</title>
-        <style>
-            *{
-                padding: 0;
-                margin: 0;
-            }
-            body{
-                position: absolute;
-                width: 100%;
-                height: 100%;
-            }
-            .cabecalho{
-                height: 40px;
-                background-color: #636b6f;
-            }
-            .principal{
-                height: 90%;
-            }
-            .menu{
-                float: left;
-                width: 150px;
-                height: 100%;
-                background-color: #7fff00;
-            }
-            .conteudo{
-                width: 100%;
-                height: 100%;
-                background-color: bisque;
-            }
-            .rodape{
-                height: 30px;
-                background-color: aqua;
-            }
-        </style>
     </head>
     <body>
         <div class="cabecalho">
@@ -66,5 +37,6 @@
             <footer><span>rodape</span></footer>
         </div>
 
+        <script src="{{asset('js/app.js')}}" type="text/javascript"></script>
     </body>
 </html>
