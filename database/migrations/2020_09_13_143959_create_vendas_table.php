@@ -24,10 +24,10 @@ class CreateVendasTable extends Migration
             $table->date('dtpagamento')->nullable();
             $table->string('metodopg', 20);
             $table->string('status', 20);
-            $table->integer('usuarios_id')->unsigned();
-            $table->integer('clientes_id')->unsigned();
-            $table->foreign('usuarios_id')->references('id')->on('usuarios')->cascadeOnDelete()->cascadeOnUpdate();
-            $table->foreign('clientes_id')->references('id')->on('clientes')->cascadeOnDelete()->cascadeOnUpdate();
+            $table->integer('usuario_id')->unsigned();
+            $table->integer('cliente_id')->unsigned();
+            $table->foreign('usuario_id')->references('id')->on('usuarios');
+            $table->foreign('cliente_id')->references('id')->on('clientes');
         });
     }
 

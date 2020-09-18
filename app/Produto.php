@@ -11,6 +11,7 @@ class Produto extends Model
     ];
 
     public function vendaItens() {
-        return $this->$this->belongsToMany('App\VendaItem', 'produto_vendaitem');
+        return $this->belongsToMany('App\VendaItem', 'produto_venda_item',
+                        'produto_id', 'venda_item_id')->withTimestamps();
     }
 }

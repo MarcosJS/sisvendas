@@ -19,7 +19,7 @@ class CreateUsuariosTable extends Migration
             $table->string('nome');
             $table->string('email')->unique();
             $table->string('senha');
-            $table->string('cpf', 11)->unique();
+            $table->string('cpf', 14)->unique();
             $table->integer('matricula')->unique();
             $table->boolean('status')->default(true);
             $table->string('funcao', 50);

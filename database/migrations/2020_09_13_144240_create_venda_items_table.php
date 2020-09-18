@@ -19,8 +19,8 @@ class CreateVendaItemsTable extends Migration
             $table->integer('qtd');
             $table->decimal('precofinal');
             $table->decimal('subtotal');
-            $table->integer('vendas_id')->unsigned();
-            $table->foreign('vendas_id')->references('id')->on('vendas')->cascadeOnDelete()->cascadeOnUpdate();
+            $table->integer('venda_id')->unsigned();
+            $table->foreign('venda_id')->references('id')->on('vendas');
         });
     }
 

@@ -44,11 +44,11 @@
                 @if(count($itens) > 0)
                     @foreach($itens as $iten)
                         <tr>
-                            <td>{{$iten[0]}}</td>
-                            <td>{{$iten[1]}}</td>
-                            <td>{{$iten[2]}}</td>
-                            <td>{{$iten[3]}}</td>
-                            <td>{{$iten[4]}}</td>
+                            <td>{{$iten['codproduto']}}</td>
+                            <td>{{$iten['nomeproduto']}}</td>
+                            <td>{{$iten['qtd']}}</td>
+                            <td>{{$iten['precofinal']}}</td>
+                            <td>{{$iten['subtotal']}}</td>
                         </tr>
                     @endforeach
                 @endif

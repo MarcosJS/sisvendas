@@ -2,59 +2,60 @@
 
 namespace App\Http\Controllers;
 
+use App\Auxiliar\CookieAuxiliarDadosItens;
 use App\Cliente;
 use App\Produto;
+use App\Usuario;
 use App\Venda;
 use App\VendaItem;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Cookie;
 
 class VendasPDVRegistroControllerRegistrar extends Controller
 {
     public function registrar(Request $request)
     {
-
-        /*Preparando os dados para VendaItem*/
+        /*1 - Buscando os dados no cookie para VendaItem*/
         $cooks = $request->cookie('itens');
         if (!$cooks) {
-            return redirect('sisvendapdvitens');
+            return redirect('sisvendaspdvitens');
         }
-        $dadosBrutos = explode("*", $cooks);
-        $dados = [];
-        for ($i = 0; $i < count($dadosBrutos) - 1; $i++) {
-            $dados[] = explode("-", $dadosBrutos[$i]);
-        }
+        $itens = CookieAuxiliarDadosItens::converteParaArray($cooks);
 
-        /*Inicializando VendaItem e recuperando os produtos*/
-
+        /*2 - Inicializando VendaItem e recuperando os produtos*/
         $vendaItens = array();
-        foreach ($dados as $dado) {
+        $produtos = array();
+        foreach ($itens as $item) {
             $vendaItem = new VendaItem();
-            $vendaItem->qtd = $dado[2];
-            $vendaItem->precofinal = $dado[3];
-            $vendaItem->subtotal = $dado[4];
-            $produto = Produto::find($dado[0])->vendaItens()->save($vendaItem);
-            //$produto->vendaItens()->save($vendaItem);
+            $vendaItem->qtd = $item['qtd'];
+            $vendaItem->precofinal = $item['precofinal'];
+            $vendaItem->subtotal = $item['subtotal'];
             $vendaItens[] = $vendaItem;
+            $produtos[] = Produto::find($item['codproduto']);
         }
+        //return $produtos;
 
-        /*Inicializando e associando Venda*/
+        /*3 - Inicializando e associando Venda ao Usuario e Cliente*/
+        /*3.1 - Inicializando Venda*/
         $venda = new Venda();
         $venda->fill($request->all());
         $venda->desconto = 1;
-
-        /*Buscando usuario e cliente*/
+        /*3.2 - Buscando usuario e cliente*/
         $cliente = Cliente::find($request->idcliente);
-        $usuario= Usuario::find($request->idusuario);
+        $usuario = Usuario::find($request->idusuario);
+        /*3.3 - Associando Cliente e Usuario a Venda*/
         $venda->usuario()->associate($usuario);
         $venda->cliente()->associate($cliente);
         $venda->save();
 
-        /*Relacionando itens em Venda*/
-        foreach ($vendaItens as $vendaItem) {
-            $venda->vendaItens()->saveMany($vendaItem);
+        /*4 - Relacionando VendaItem à Venda*/
+        $venda->vendaItens()->saveMany($vendaItens);
+
+        /*5 - Relacionando VendaItem à Produto*/
+        for($i = 0; $i <= count($produtos)-1; $i++) {
+            $vendaItens[$i]->produtos()->attach([$produtos[$i]->id]);
         }
-
+        Cookie::queue(Cookie::forget('itens'));
         return redirect('/');
-
     }
 }

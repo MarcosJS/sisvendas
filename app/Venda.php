@@ -13,4 +13,12 @@ class Venda extends Model
     public function vendaItens() {
         return $this->hasMany('App\VendaItem');
     }
+
+    public function usuario() {
+        return $this->belongsTo('App\Usuario');
+    }
+
+    public function cliente() {
+        return $this->belongsTo('App\Cliente');
+    }
 }
