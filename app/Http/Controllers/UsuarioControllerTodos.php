@@ -10,6 +10,6 @@ class UsuarioControllerTodos extends Controller
 {
     public function obterTodos() {
         $usuarios = Usuario::all();
-        return view('usuarios', ['usuarios' => $usuarios]);
+        return view('usuarios.usuarios', ['usuarios' => $usuarios]);
     }
 }

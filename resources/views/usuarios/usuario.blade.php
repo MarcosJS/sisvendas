@@ -3,12 +3,12 @@
 @section('titulo', 'Perfil de Usuário')
 
 @section('submenu')
-    @include('menu_usuarios')
+    @include('usuarios.menu_usuarios')
 @endsection
 
 @section('conteudo')
     <div class="p-3">
-        <h1>Usuário</h1>
+        <h1>Cliente</h1>
 
         <div class="form-group row">
             <label for="id" class="col-sm-2 col-form-label">ID</label>
@@ -71,7 +71,7 @@
 
         <div class="form-group row">
             <div class="col-sm-10">
-                <button id="btneditusuario" type="button" class="btn btnformusuario">Editar</button>
+                <button id="usuarios" type="button" class="btn btnform btnformedit">Editar</button>
             </div>
         </div>
 

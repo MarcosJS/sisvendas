@@ -3,7 +3,7 @@
 @section('titulo', 'Cadastro de Usuário')
 
 @section('submenu')
-    @include('menu_usuarios')
+    @include('usuarios.menu_usuarios')
 @endsection
 
 @section('conteudo')
@@ -17,7 +17,7 @@
             </div>
             <div class="form-group">
                 <label>CPF</label>
-                <input type="text" class="form-control" name="cpf">
+                <input type="text" class="form-control" name="cpf" placeholder="000.000.000-00" data-mask="000.000.000-00">
             </div>
             <div class="form-row">
                 <div class="form-group col-md-6">
@@ -38,7 +38,7 @@
                 <input type="text" class="form-control" name="matricula">
             </div>
 
-            <button type="submit" class="btn btnformusuario">Cadastrar</button>
+            <button type="submit" class="btn btnform">Cadastrar</button>
         </form>
     </div>
 @endsection

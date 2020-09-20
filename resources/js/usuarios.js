@@ -8,16 +8,4 @@ for(linha in tabelaUsuarios) {
     }
 }
 
-btncadusuario = document.getElementById('btncadasusuario');
-if(btncadusuario) {
-    btncadusuario.addEventListener('click', function () {
-        location.href='/usuarios/novo';
-    });
-}
 
-btneditusuario = document.getElementById('btneditusuario');
-if(btneditusuario) {
-    btneditusuario.addEventListener('click', function () {
-        location.href = '/usuarios/editar/' + document.getElementById('id').innerText;
-    });
-}

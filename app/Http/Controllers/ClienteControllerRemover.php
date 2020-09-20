@@ -11,7 +11,7 @@ class ClienteControllerRemover extends Controller
         $cliente = Cliente::find($id);
         if($cliente) {
             $cliente->delete();
-            return redirect('clientes');
+            return redirect('clientes.clientes');
         }
     }
 }

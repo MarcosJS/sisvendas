@@ -9,6 +9,6 @@ class UsuarioControllerAcessar extends Controller
 {
     public function acessar(Request $request) {
         $usuario = Usuario::find($request->id);
-        return view('usuario', ['usuario' => $usuario]);
+        return view('usuarios.usuario', ['usuario' => $usuario]);
     }
 }

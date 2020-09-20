@@ -8,6 +8,6 @@ class ClienteControllerTodos extends Controller
 {
     public function obterTodos() {
         $clientes = Cliente::all();
-        return view('clientes', ['clientes' => $clientes]);
+        return view('clientes.clientes', ['clientes' => $clientes]);
     }
 }

@@ -15,6 +15,14 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {return view('inicio');});
 
+Route::get('clientes', "ClienteControllerTodos@obterTodos");
+Route::get('clientes/perfil/{id}', "ClienteControllerAcessar@acessar");
+Route::get('clientes/novo', "ClienteControllerNovo@novo");
+Route::post('clientes/adicionar', "ClienteControllerAdicionar@adicionar");
+Route::get('clientes/editar/{id}', "ClienteControllerEditar@editar");
+Route::post('clientes/atualizar/{id}', "ClienteControllerAtualizar@atualizar");
+Route::get('clientes/remover/{id}', "ClienteControllerRemover@remover");
+
 Route::get('usuarios', "UsuarioControllerTodos@obterTodos");
 Route::get('usuarios/perfil/{id}', "UsuarioControllerAcessar@acessar");
 Route::get('usuarios/novo', "UsuarioControllerNovo@novo");
@@ -23,14 +31,8 @@ Route::get('usuarios/editar/{id}', "UsuarioControllerEditar@editar");
 Route::post('usuarios/atualizar/{id}', "UsuarioControllerAtualizar@atualizar");
 Route::get('usuarios/remover/{id}', "UsuarioControllerRemover@remover");
 
-Route::get('clientes', "ClienteControllerTodos@obterTodos");
-Route::get('clientes/novo', "ClienteControllerNovo@novo");
-Route::post('clientes/adicionar', "ClienteControllerAdicionar@adicionar");
-Route::get('clientes/editar/{id}', "ClienteControllerEditar@editar");
-Route::post('clientes/atualizar/{id}', "ClienteControllerAtualizar@atualizar");
-Route::get('clientes/remover/{id}', "ClienteControllerRemover@remover");
-
 Route::get('produtos', "ProdutoControllerTodos@obterTodos");
+Route::get('produtos/perfil/{id}', "ProdutoControllerAcessar@acessar");
 Route::get('produtos/novo', "ProdutoControllerNovo@novo");
 Route::post('produtos/adicionar', "ProdutoControllerAdicionar@adicionar");
 Route::get('produtos/editar/{id}', "ProdutoControllerEditar@editar");

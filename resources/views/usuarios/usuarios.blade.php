@@ -3,7 +3,7 @@
 @section('titulo', 'Painel de Usuários')
 
 @section('submenu')
-    @include('menu_usuarios')
+    @include('usuarios.menu_usuarios')
 @endsection
 
 @section('conteudo')
@@ -20,7 +20,7 @@
                 <th scope="col">Função</th>
             </tr>
             @foreach($usuarios as $usuario)
-                <tr class="linhatabelausuarios">
+                <tr title="usuarios" class="linhatabelaclick">
                     <td scope="row">{{$usuario->id}}</td>
                     <td scope="row">{{$usuario->nome}}</td>
                     <td scope="row">{{$usuario->email}}</td>
@@ -32,7 +32,7 @@
             @endforeach
         </table>
         <div class="row justify-content-center">
-            <button id="btncadasusuario" type="button" class="btnformusuario col-auto btn">Novo Usuário</button>
+            <button id="usuarios" type="button" class="btnform btnformcad col-auto btn">Novo Usuário</button>
         </div>
 
     </div>

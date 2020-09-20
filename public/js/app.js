@@ -37267,10 +37267,7 @@ module.exports = function(module) {
 __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js"); // Master
 
 
-__webpack_require__(/*! ./master */ "./resources/js/master.js"); // Usuarios
-
-
-__webpack_require__(/*! ./usuarios */ "./resources/js/usuarios.js");
+__webpack_require__(/*! ./master */ "./resources/js/master.js");
 
 /***/ }),
 
@@ -37333,41 +37330,31 @@ document.getElementById("menu-toggle").addEventListener('click', function (e) {
   btn.classList.toggle("toggled");
   console.log(btn);
 });
+linhatb = document.getElementsByClassName("linhatabelaclick");
 
-/***/ }),
-
-/***/ "./resources/js/usuarios.js":
-/*!**********************************!*\
-  !*** ./resources/js/usuarios.js ***!
-  \**********************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-tabelaUsuarios = document.getElementsByClassName("linhatabelausuarios");
-
-for (linha in tabelaUsuarios) {
-  tabelaUsuarios[linha].onmousemove = function () {
+for (linha in linhatb) {
+  linhatb[linha].onmousemove = function () {
     this.style.cursor = 'pointer';
   };
 
-  tabelaUsuarios[linha].onclick = function () {
-    location.href = '/usuarios/perfil/' + this.firstElementChild.innerHTML;
+  linhatb[linha].onclick = function () {
+    location.href = '/' + this.title + '/perfil/' + this.firstElementChild.innerHTML;
   };
 }
 
-btncadusuario = document.getElementById('btncadasusuario');
+btnformcad = document.getElementsByClassName('btnformcad');
 
-if (btncadusuario) {
-  btncadusuario.addEventListener('click', function () {
-    location.href = '/usuarios/novo';
+if (btnformcad.length > 0) {
+  btnformcad[0].addEventListener('click', function () {
+    location.href = '/' + btnformcad[0].id + '/novo';
   });
 }
 
-btneditusuario = document.getElementById('btneditusuario');
+btnformedit = document.getElementsByClassName('btnformedit');
 
-if (btneditusuario) {
-  btneditusuario.addEventListener('click', function () {
-    location.href = '/usuarios/editar/' + document.getElementById('id').innerText;
+if (btnformedit.length > 0) {
+  btnformedit[0].addEventListener('click', function () {
+    location.href = '/' + btnformedit[0].id + '/editar/' + document.getElementById('id').innerText;
   });
 }
 

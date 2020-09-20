@@ -3,7 +3,7 @@
 @section('titulo', 'Alteração do Perfil de Usuário')
 
 @section('submenu')
-    @include('menu_usuarios')
+    @include('usuarios.menu_usuarios')
 @endsection
 
 @section('conteudo')
@@ -72,7 +72,7 @@
 
             <div class="form-group row">
                 <div class="col-sm-10">
-                    <button type="submit" class="btn btnformusuario">Atualizar</button>
+                    <button type="submit" class="btn btnform">Atualizar</button>
                 </div>
             </div>
         </form>
