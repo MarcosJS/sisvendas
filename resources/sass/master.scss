@@ -3,6 +3,9 @@
  * Copyright 2013-2020 Start Bootstrap
  * Licensed under MIT (https://github.com/StartBootstrap/startbootstrap-simple-sidebar/blob/master/LICENSE)
  */
+body {
+    background-color: #ffffff;
+}
 
 #wrapper {
     overflow-x: hidden;
@@ -19,15 +22,14 @@
 
 .sidebar-heading a {
     color: #4CAF50;
-
 }
 
 #sidebar-wrapper .sidebar-heading {
-    padding: 0.875rem 1.25rem;
+    padding: 0.5rem 1.25rem;
     font-size: 1.2rem;
 }
 
-.list-group:hover {
+.list-group a:hover {
     color: #ffffff;
     background-color: #4CAF50;
 }
@@ -42,6 +44,27 @@
 
 #wrapper.toggled #sidebar-wrapper {
     margin-left: 0;
+}
+
+#navbar-interna {
+    background-color: #495057;
+}
+
+#menu-toggle {
+    color: #ffffff;
+    border: 1px solid #4CAF50;
+}
+
+#navbarSupportedContent ul li a{
+    color: #ffffff;
+}
+
+#drop-menu {
+    background-color: #495057;
+}
+
+#drop-menu a:hover{
+    color: #495057;
 }
 
 @media (min-width: 768px) {

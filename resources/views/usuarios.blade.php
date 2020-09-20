@@ -1,69 +1,39 @@
-<!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
-    <head>
-        <meta charset="utf-8">
-        <title>SISVendas</title>
-        <style>
-            #tabela {
-                font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
-                border-collapse: collapse;
-                width: 100%;
-            }
+@extends('layouts.master')
 
-            #tabela td, #tabela th {
-                border: 1px solid #ddd;
-                padding: 8px;
-            }
+@section('titulo', 'Painel de Usuários')
 
-            #tabela tr:nth-child(even){background-color: #f2f2f2;}
+@section('submenu')
+    @include('menu_usuarios')
+@endsection
 
-            #tabela tr:hover {background-color: #ddd;}
-
-            #tabela th {
-                padding-top: 12px;
-                padding-bottom: 12px;
-                text-align: left;
-                background-color: #a2a2a2;
-                color: white;
-            }
-        </style>
-    </head>
-    <body>
-        <div>
-            <a href="/">Início</a>
-            <a href="/usuarios">Usuarios</a>
-            <a href="/clientes">Clientes</a>
-            <a href="/produtos">Produtos</a>
-        </div>
-        <div>
-
-            <h1>Usuarios</h1>
-            <a href="/usuarios/novo">Novo</a>
-            <table id="tabela">
-                <tr>
-                    <th>Nome</th>
-                    <th>E-mail</th>
-                    <th>CPF</th>
-                    <th>Matricula</th>
-                    <th>Status</th>
-                    <th>Função</th>
+@section('conteudo')
+    <div class="p-3">
+        <h1>Usuarios</h1>
+        <table class="table table-sm table-hover">
+            <tr>
+                <th scope="col">ID</th>
+                <th scope="col">Nome</th>
+                <th scope="col">E-mail</th>
+                <th scope="col">CPF</th>
+                <th scope="col">Matricula</th>
+                <th scope="col">Status</th>
+                <th scope="col">Função</th>
+            </tr>
+            @foreach($usuarios as $usuario)
+                <tr class="linhatabelausuarios">
+                    <td scope="row">{{$usuario->id}}</td>
+                    <td scope="row">{{$usuario->nome}}</td>
+                    <td scope="row">{{$usuario->email}}</td>
+                    <td scope="row">{{$usuario->cpf}}</td>
+                    <td scope="row">{{$usuario->matricula}}</td>
+                    <td scope="row">{{$usuario->status}}</td>
+                    <td scope="row">{{$usuario->funcao}}</td>
                 </tr>
-                @foreach($usuarios as $usuario)
-                    <tr>
-                        <td>{{$usuario->nome}}</td>
-                        <td>{{$usuario->email}}</td>
-                        <td>{{$usuario->cpf}}</td>
-                        <td>{{$usuario->matricula}}</td>
-                        <td>{{$usuario->status}}</td>
-                        <td>{{$usuario->funcao}}</td>
-                        <td><a href="/usuarios/editar/{{$usuario->id}}">Editar</a></td>
-                        <td><a href="/usuarios/remover/{{$usuario->id}}">Excluir</a></td>
-                    </tr>
-                @endforeach
-            </table>
-
-            </ul>
-
+            @endforeach
+        </table>
+        <div class="row justify-content-center">
+            <button id="btncadasusuario" type="button" class="btnformusuario col-auto btn">Novo Usuário</button>
         </div>
-    </body>
-</html>
+
+    </div>
+@endsection

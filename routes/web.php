@@ -16,6 +16,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {return view('inicio');});
 
 Route::get('usuarios', "UsuarioControllerTodos@obterTodos");
+Route::get('usuarios/perfil/{id}', "UsuarioControllerAcessar@acessar");
 Route::get('usuarios/novo', "UsuarioControllerNovo@novo");
 Route::post('usuarios/adicionar', "UsuarioControllerAdicionar@adicionar");
 Route::get('usuarios/editar/{id}', "UsuarioControllerEditar@editar");

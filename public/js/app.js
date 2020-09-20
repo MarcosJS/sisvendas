@@ -37264,7 +37264,13 @@ module.exports = function(module) {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
+__webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js"); // Master
+
+
+__webpack_require__(/*! ./master */ "./resources/js/master.js"); // Usuarios
+
+
+__webpack_require__(/*! ./usuarios */ "./resources/js/usuarios.js");
 
 /***/ }),
 
@@ -37310,6 +37316,60 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 //     cluster: process.env.MIX_PUSHER_APP_CLUSTER,
 //     forceTLS: true
 // });
+
+/***/ }),
+
+/***/ "./resources/js/master.js":
+/*!********************************!*\
+  !*** ./resources/js/master.js ***!
+  \********************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+document.getElementById("menu-toggle").addEventListener('click', function (e) {
+  e.preventDefault();
+  btn = document.getElementById("wrapper");
+  console.log(btn);
+  btn.classList.toggle("toggled");
+  console.log(btn);
+});
+
+/***/ }),
+
+/***/ "./resources/js/usuarios.js":
+/*!**********************************!*\
+  !*** ./resources/js/usuarios.js ***!
+  \**********************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+tabelaUsuarios = document.getElementsByClassName("linhatabelausuarios");
+
+for (linha in tabelaUsuarios) {
+  tabelaUsuarios[linha].onmousemove = function () {
+    this.style.cursor = 'pointer';
+  };
+
+  tabelaUsuarios[linha].onclick = function () {
+    location.href = '/usuarios/perfil/' + this.firstElementChild.innerHTML;
+  };
+}
+
+btncadusuario = document.getElementById('btncadasusuario');
+
+if (btncadusuario) {
+  btncadusuario.addEventListener('click', function () {
+    location.href = '/usuarios/novo';
+  });
+}
+
+btneditusuario = document.getElementById('btneditusuario');
+
+if (btneditusuario) {
+  btneditusuario.addEventListener('click', function () {
+    location.href = '/usuarios/editar/' + document.getElementById('id').innerText;
+  });
+}
 
 /***/ }),
 

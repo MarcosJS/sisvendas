@@ -8,11 +8,11 @@ use Illuminate\Http\Request;
 class UsuarioControllerAtualizar extends Controller
 {
     public function atualizar(Request $request) {
-        $usuario = Usuario::find($request->id);
+        $usuario = Usuario::find($request->idusuario);
         if($usuario) {
-            $usuario->nome = $request->nome;
-            $usuario->email = $request->email;
-            $usuario->funcao = $request->funcao;
+            $usuario->nome = $request->nomeusuario;
+            $usuario->email = $request->emailusuario;
+            $usuario->funcao = $request->funcaousuario;
             $usuario->update();
             return redirect('usuarios');
         }
