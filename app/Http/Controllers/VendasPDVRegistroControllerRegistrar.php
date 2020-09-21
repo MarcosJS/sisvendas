@@ -48,13 +48,14 @@ class VendasPDVRegistroControllerRegistrar extends Controller
         $venda->cliente()->associate($cliente);
         $venda->save();
 
-        /*4 - Relacionando VendaItem à Venda*/
-        $venda->vendaItens()->saveMany($vendaItens);
 
         /*5 - Relacionando VendaItem à Produto*/
         for($i = 0; $i <= count($produtos)-1; $i++) {
-            $vendaItens[$i]->produtos()->attach([$produtos[$i]->id]);
+            $vendaItens[$i]->produto()->associate($produtos[$i]);
         }
+        /*4 - Relacionando VendaItem à Venda*/
+        $venda->vendaItens()->saveMany($vendaItens);
+
         Cookie::queue(Cookie::forget('itens'));
         return redirect('/');
     }

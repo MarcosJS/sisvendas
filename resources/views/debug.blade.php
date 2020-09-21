@@ -2,9 +2,14 @@
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
     <head>
         <meta charset="utf-8">
-        <title>SISVendas</title>
+        <link href="{{asset('css/div.css')}}" rel="stylesheet" type="text/css"/>
+        <link href="{{asset('css/app.css')}}" rel="stylesheet" type="text/css"/>
+        <title>Teste</title>
     </head>
     <body>
-        Saida: {{$usuario ?? 'nada'}}
+    @include('debugclientes')
+    @include('debugprodutosvendaitens')
+    @include('debugvendas')
+    <script src="{{asset('js/app.js')}}" type="text/javascript"></script>
     </body>
 </html>

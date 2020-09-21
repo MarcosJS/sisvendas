@@ -5,6 +5,7 @@
         <meta name="viewport"
               content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <link href="{{asset('css/div.css')}}" rel="stylesheet" type="text/css"/>
         <link href="{{asset('css/app.css')}}" rel="stylesheet" type="text/css"/>
         <title>@yield('titulo')</title>
     </head>
@@ -17,10 +18,10 @@
                 <div class="sidebar-heading"><a class="navbar-brand" href="/">SISVendas</a></div>
 
                 <div class="list-group list-group-flush">
+                    <a class="list-group-item list-group-item-action" href="/sisvendaspdv">SISVendas PDV</a>
                     <a class="list-group-item list-group-item-action" href="/usuarios">Usuarios</a>
                     <a class="list-group-item list-group-item-action" href="/clientes">Clientes</a>
                     <a class="list-group-item list-group-item-action" href="/produtos">Produtos</a>
-                    <a class="list-group-item list-group-item-action" href="/sisvendaspdv">SISVendas PDV</a>
                 </div>
 
             </div>

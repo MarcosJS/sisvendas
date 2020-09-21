@@ -18,6 +18,6 @@ use Faker\Generator as Faker;
 
 $factory->define(Telefone::class, function (Faker $faker) {
     return [
-        'numerotel'=>$faker->phoneNumber
+        'numero'=>$faker->phoneNumber
     ];
 });

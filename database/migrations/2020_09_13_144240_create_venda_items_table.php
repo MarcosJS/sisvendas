@@ -21,6 +21,8 @@ class CreateVendaItemsTable extends Migration
             $table->decimal('subtotal');
             $table->integer('venda_id')->unsigned();
             $table->foreign('venda_id')->references('id')->on('vendas');
+            $table->integer('produto_id')->unsigned()->nullable();
+            $table->foreign('produto_id')->references('id')->on('produtos');
         });
     }
 

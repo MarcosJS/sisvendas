@@ -9,4 +9,8 @@ class Endereco extends Model
     protected $fillable = [
         'logradouro', 'numero', 'bairro', 'cidade', 'cep'
     ];
+
+    public function cliente() {
+        return $this->belongsTo('App\Cliente');
+    }
 }

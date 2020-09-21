@@ -11,8 +11,11 @@ class VendaItem extends Model
         'qtd', 'precofinal', 'subtotal'
     ];
 
-    public function produtos() {
-        return $this->belongsToMany('App\Produto', 'produto_venda_item',
-            'venda_item_id', 'produto_id')->withTimestamps();
+    public function produto() {
+        return $this->belongsTo('App\Produto');
+    }
+
+    public function venda() {
+        return $this->belongsTo('App\Venda');
     }
 }

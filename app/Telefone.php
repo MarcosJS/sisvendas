@@ -7,6 +7,9 @@ use Illuminate\Database\Eloquent\Model;
 class Telefone extends Model
 {
     protected $fillable = [
-        'numerotel'
+        'numero'
     ];
+    public function cliente() {
+        return $this->belongsTo('App\Cliente');
+    }
 }

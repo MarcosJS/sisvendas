@@ -10,8 +10,11 @@ class Produto extends Model
         'nome', 'descricao', 'estoque', 'preco'
     ];
 
-    public function vendaItens() {
+    /*public function vendaItens() {
         return $this->belongsToMany('App\VendaItem', 'produto_venda_item',
                         'produto_id', 'venda_item_id')->withTimestamps();
+    }*/
+    public function vendaItens() {
+        return $this->hasMany('App\VendaItem');
     }
 }

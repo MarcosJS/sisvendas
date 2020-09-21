@@ -14,6 +14,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {return view('inicio');});
+Route::get('teste', "TesteControllerTesteRelBD@relBD");
 
 Route::get('clientes', "ClienteControllerTodos@obterTodos");
 Route::get('clientes/perfil/{id}', "ClienteControllerAcessar@acessar");

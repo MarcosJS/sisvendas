@@ -1,15 +1,16 @@
-<!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
-    <head>
-        <meta charset="utf-8">
-        <title>SISVendas PDV</title>
-    </head>
-    <body>
+@extends('layouts.master')
+
+@section('titulo', 'SISVendas PDV')
+
+@section('submenu')
+    @include('menu_pdv')
+@endsection
+
+@section('conteudo')
+    <div class="p-3">
         <h1>SISVendas PDV</h1>
-        <div>
-            <a href="/">Inicio</a>
-            <a href="/vendas">Consultar todas as Vendas</a>
-            <a href="/sisvendaspdvitens">Nova Operação</a>
-        </div>
-    </body>
-</html>
+
+        <a href="/vendas">Consultar todas as Vendas</a>
+        <a href="/sisvendaspdvitens">Nova Operação</a>
+    </div>
+@endsection

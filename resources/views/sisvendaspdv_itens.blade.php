@@ -1,73 +1,86 @@
-<!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
-    <head>
-        <meta charset="utf-8">
-        <title>SISVendas PDV</title>
-    </head>
-    <body>
-        <h1>Operação de Venda - Itens</h1>
+@extends('layouts.master')
+
+@section('titulo', 'SISVendas PDV')
+
+@section('submenu')
+    @include('menu_pdv')
+@endsection
+
+@section('conteudo')
+    <div class="p-3">
         <div>
+            <h1>Operação de Venda - Itens</h1>
             <a href="/sisvendaspdvitens/cancelar">Cancelar</a>
             <a href="/sisvendaspdvpagamento">Pagamento</a>
         </div>
 
         <div>
-            <span>Produtos em estoque</span>
-            <table>
-                <tr>
-                    <th>cod. produto</th>
-                    <th>nome</th>
-                    <th>estoque</th>
-                    <th>preco</th>
-                </tr>
-                @foreach($produtos as $produto)
-                <tr>
-                    <td>{{$produto->id}}</td>
-                    <td>{{$produto->nome}}</td>
-                    <td>{{$produto->estoque}}</td>
-                    <td>{{$produto->preco}}</td>
-                </tr>
-                @endforeach
-            </table>
-        </div>
+            <div class="row">
+                <div class="col-sm-6">
+                    <form action="/sisvendaspdvitens/adicionar" method="post">
+                        {{csrf_field()}}
+                        <div>
+                            <div class="form-row">
+                                <div class="form-group col">
+                                    <label>Produto</label>
+                                    <select class="form-control" name="nomeproduto">
+                                        <option selected>Produtos...</option>
+                                        @foreach($produtos as $produto)
+                                            <option>{{$produto->nome}}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
 
-        <div>
-            <table align="center">
-                <tr>
-                    <th>Cod. Produto</th>
-                    <th>Nome do Produto</th>
-                    <th>Quant</th>
-                    <th>Preco Final</th>
-                    <th>Subtotal</th>
-                </tr>
+                                <div class="form-group col">
+                                    <label for="inputEmail4">Cod.</label>
+                                    <input type="text" class="form-control" name="codproduto">
+                                </div>
 
-                @if(count($itens) > 0)
-                    @foreach($itens as $iten)
-                        <tr>
-                            <td>{{$iten['codproduto']}}</td>
-                            <td>{{$iten['nomeproduto']}}</td>
-                            <td>{{$iten['qtd']}}</td>
-                            <td>{{$iten['precofinal']}}</td>
-                            <td>{{$iten['subtotal']}}</td>
-                        </tr>
-                    @endforeach
-                @endif
+                                <div class="form-group col">
+                                    <label for="inputEmail4">Quantidade</label>
+                                    <input type="text" class="form-control" name="qtd">
+                                </div>
 
+                                <div class="form-group col">
+                                    <label for="inputEmail4">Preço Final</label>
+                                    <input type="text" class="form-control" name="precofinal">
+                                </div>
+                            </div>
 
-            </table>
+                            <button type="submit" class="btn btnform">Adicionar</button>
+                        </div>
 
-            <div align="center">
-                <form action="/sisvendaspdvitens/adicionar" method="post">
-                    {{csrf_field()}}
-                    Cod. Produto: <input type="text" name="codproduto"/>
-                    Nome do Produto: <input type="text" name="nomeproduto"/>
-                    Quantidade: <input type="text" name="qtd"/>
-                    Preco Final: <input type="text" name="precofinal"/>
-                    <input type="submit" value="Adicionar"/>
-                </form>
+                    </form>
+                </div>
+
+                <div class="col-sm-6 rounded">
+                    <div class="border rounded">
+                        <table class="table table-sm">
+                            <tr>
+                                <th>Cod. Produto</th>
+                                <th>Nome do Produto</th>
+                                <th>Quant</th>
+                                <th>Preco Final</th>
+                                <th>Subtotal</th>
+                            </tr>
+
+                            @if(count($itens) > 0)
+                                @foreach($itens as $iten)
+                                    <tr>
+                                        <td>{{$iten['codproduto']}}</td>
+                                        <td>{{$iten['nomeproduto']}}</td>
+                                        <td>{{$iten['qtd']}}</td>
+                                        <td>{{$iten['precofinal']}}</td>
+                                        <td>{{$iten['subtotal']}}</td>
+                                    </tr>
+                                @endforeach
+                            @endif
+
+                        </table>
+                    </div>
+                </div>
             </div>
 
         </div>
-
-    </body>
-</html>
+    </div>
+@endsection
