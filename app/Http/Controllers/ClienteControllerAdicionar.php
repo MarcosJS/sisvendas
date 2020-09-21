@@ -19,6 +19,7 @@ class ClienteControllerAdicionar extends Controller
         $cliente->endereco()->save($endereco);
 
         $telefone = new Telefone();
+
         $telefone->fill($request->all());
         $cliente->telefone()->saveMany([$telefone]);
         return redirect('clientes');

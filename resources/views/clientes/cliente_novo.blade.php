@@ -22,7 +22,7 @@
                 </div>
                 <div class="form-group col-md-3">
                     <label>Data de Nascimento</label>
-                    <input type="text" class="form-control" name="datanasc" placeholder="dd/mm/aaaa">
+                    <input type="date" class="form-control" name="datanasc" placeholder="dd/mm/aaaa">
                 </div>
             </div>
 
@@ -43,7 +43,7 @@
             <div class="form-row">
                 <div class="form-group col-md-3">
                     <label>Telefone</label>
-                    <input type="text" class="form-control" name="telefone">
+                    <input type="text" class="form-control" name="numerotel">
                 </div>
             </div>
 
