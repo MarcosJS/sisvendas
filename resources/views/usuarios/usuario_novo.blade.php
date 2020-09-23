@@ -9,36 +9,76 @@
 @section('conteudo')
     <div class="p-3">
         <h1>Novo Usuario</h1>
-        <form action="/usuarios/adicionar" method="post">
-            {{csrf_field()}}
-            <div class="form-group">
-                <label>Nome</label>
-                <input type="text" class="form-control" name="nome">
-            </div>
-            <div class="form-group">
-                <label>CPF</label>
-                <input type="text" class="form-control" name="cpf" placeholder="000.000.000-00" data-mask="000.000.000-00">
-            </div>
-            <div class="form-row">
-                <div class="form-group col-md-6">
-                    <label>Email</label>
-                    <input type="text" class="form-control" name="email">
-                </div>
-                <div class="form-group col-md-6">
-                    <label>Senha</label>
-                    <input type="password" class="form-control" name="senha">
-                </div>
-            </div>
-            <div class="form-group">
-                <label>Função</label>
-                <input type="text" class="form-control" name="funcao">
-            </div>
-            <div class="form-group">
-                <label>Matrícula</label>
-                <input type="text" class="form-control" name="matricula">
-            </div>
 
-            <button type="submit" class="btn btnform">Cadastrar</button>
-        </form>
+            <form action="/usuarios/adicionar" method="post">
+                {{csrf_field()}}
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label>Nome</label>
+                            <input type="text" class="form-control @error('nome') is-invalid @enderror" name="nome" value="{{old('nome')}}">
+                            @error('nome')
+                            <span>
+                                <small class="text-danger">{{$message}}</small>
+                            </span>
+                            @enderror
+                        </div>
+                        <div class="form-group">
+                            <label>CPF</label>
+                            <input type="text" class="form-control @error('cpf') is-invalid @enderror" name="cpf" value="{{old('cpf')}}">
+                            @error('cpf')
+                            <span>
+                                <small class="text-danger">{{$message}}</small>
+                            </span>
+                            @enderror
+                        </div>
+                        <div class="form-group">
+                            <label>Função</label>
+                            <input type="text" class="form-control @error('funcao') is-invalid @enderror" name="funcao" value="{{old('funcao')}}">
+                            @error('funcao')
+                            <span>
+                                <small class="text-danger">{{$message}}</small>
+                            </span>
+                            @enderror
+                        </div>
+                        <div class="form-group">
+                            <label>Matrícula</label>
+                            <input type="text" class="form-control @error('matricula') is-invalid @enderror" name="matricula" value="{{old('matricula')}}">
+                            @error('matricula')
+                            <span>
+                                <small class="text-danger">{{$message}}</small>
+                            </span>
+                            @enderror
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label>Email</label>
+                            <input type="text" class="form-control @error('email') is-invalid @enderror" name="email" value="{{old('email')}}">
+                            @error('email')
+                            <span>
+                                <small class="text-danger">{{$message}}</small>
+                            </span>
+                            @enderror
+                        </div>
+                        <div class="form-group">
+                            <label>Senha</label>
+                            <input type="password" class="form-control @error('senha') is-invalid @enderror" name="senha" value="{{old('senha')}}">
+                            @error('senha')
+                            <span>
+                                <small class="text-danger">{{$message}}</small>
+                            </span>
+                            @enderror
+                        </div>
+                        <div class="form-group">
+                            <label>Confirmar Senha</label>
+                            <input type="password" class="form-control @error('senha') is-invalid @enderror" name="senha_confirmation" value="{{old('senha')}}">
+                        </div>
+                    </div>
+                </div>
+
+                <button type="submit" class="btn btnform">Cadastrar</button>
+            </form>
+
     </div>
 @endsection

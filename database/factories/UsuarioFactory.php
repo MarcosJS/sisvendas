@@ -4,7 +4,7 @@
 
 use App\Usuario;
 use Faker\Generator as Faker;
-use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Hash;
 
 /*
 |--------------------------------------------------------------------------
@@ -21,9 +21,8 @@ $factory->define(Usuario::class, function (Faker $faker) {
     return [
         'nome'=>$faker->name,
         'email'=>$faker->email,
-        'senha'=>Str::random(5),
-        'cpf'=>$faker->cpf,
-        'matricula'=>$faker->numberBetween(1,100),
-        'funcao'=>$faker->randomElement(['Gerente', 'Vendedor', 'Aux Contabil', 'Administrador']),
+        'senha'=>Hash::make($faker->randomElement(['teste1', 'teste2'])),
+        'cpf'=>preg_replace("/[^0-9]/", "", $faker->cpf),
+        'matricula'=>$faker->numberBetween(1,100)
     ];
 });

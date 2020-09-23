@@ -27,7 +27,7 @@
                     <td scope="row">{{$usuario->cpf}}</td>
                     <td scope="row">{{$usuario->matricula}}</td>
                     <td scope="row">{{$usuario->status}}</td>
-                    <td scope="row">{{$usuario->funcao}}</td>
+                    <td scope="row">{{$usuario->funcao->nomefuncao}}</td>
                 </tr>
             @endforeach
         </table>

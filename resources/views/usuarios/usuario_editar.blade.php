@@ -38,7 +38,7 @@
             <div class="form-group row">
                 <label for="funcao" class="col-sm-2 col-form-label">Função</label>
                 <div class="col-sm-10">
-                    <input type="text" class="form-control" name="funcaousuario" value="{{$usuario->funcao}}">
+                    <input type="text" class="form-control" name="funcaousuario" value="{{$usuario->funcao->nomefuncao}}">
                 </div>
             </div>
             <div class="form-group row">

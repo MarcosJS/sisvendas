@@ -22,7 +22,7 @@ class CreateVendasTable extends Migration
             $table->decimal('desconto');
             $table->decimal('totalliq');
             $table->date('dtpagamento')->nullable();
-            $table->string('metodopg', 20);
+            $table->string('metodopg', 30);
             $table->string('status', 20);
             $table->integer('usuario_id')->unsigned();
             $table->integer('cliente_id')->unsigned();

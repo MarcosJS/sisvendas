@@ -19,7 +19,7 @@ use Faker\Generator as Faker;
 $factory->define(Produto::class, function (Faker $faker) {
     return [
         'nome'=>$faker->randomElement(['fuba', 'xerem', 'flocao', 'milho']),
-        'descricao'=>$faker->paragraph,
+        'descricao'=>$faker->text(100),
         'estoque'=>$faker->numberBetween(100,200),
         'preco'=>$faker->randomFloat(2,1,10)
     ];

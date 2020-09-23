@@ -20,6 +20,6 @@ $factory->define(Cliente::class, function (Faker $faker) {
     return [
         'nome'=>$faker->name,
         'datanasc'=>$faker->date('Y-m-d','now'),
-        'cpf'=>$faker->cpf
+        'cpf'=>preg_replace("/[^0-9]/", "", $faker->cpf),
     ];
 });

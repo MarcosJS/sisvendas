@@ -21,7 +21,7 @@ class CreateEnderecosTable extends Migration
             $table->string('bairro');
             $table->string('cidade');
             $table->string('cep', 11)->nullable();
-            $table->integer('cliente_id')->unsigned()->nullable();
+            $table->integer('cliente_id')->unsigned();
             $table->foreign('cliente_id')->references('id')->on('clientes')->cascadeOnDelete()->cascadeOnUpdate();
         });
     }

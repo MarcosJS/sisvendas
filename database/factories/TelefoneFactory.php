@@ -18,6 +18,6 @@ use Faker\Generator as Faker;
 
 $factory->define(Telefone::class, function (Faker $faker) {
     return [
-        'numero'=>$faker->phoneNumber
+        'numero'=>preg_replace("/[^0-9]/", "", $faker->phoneNumber)
     ];
 });

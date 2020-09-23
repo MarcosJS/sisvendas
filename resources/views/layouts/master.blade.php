@@ -18,10 +18,10 @@
                 <div class="sidebar-heading"><a class="navbar-brand" href="/">SISVendas</a></div>
 
                 <div class="list-group list-group-flush">
-                    <a class="list-group-item list-group-item-action" href="/sisvendaspdv">SISVendas PDV</a>
+                    <a class="list-group-item list-group-item-action" href="#">SISVendas PDV - Em construção</a>
                     <a class="list-group-item list-group-item-action" href="/usuarios">Usuarios</a>
-                    <a class="list-group-item list-group-item-action" href="/clientes">Clientes</a>
-                    <a class="list-group-item list-group-item-action" href="/produtos">Produtos</a>
+                    <a class="list-group-item list-group-item-action" href="#">Clientes - Em construção</a>
+                    <a class="list-group-item list-group-item-action" href="#">Produtos - Em construção</a>
                 </div>
 
             </div>

@@ -37,7 +37,7 @@
         <div class="form-group row">
             <label for="funcao" class="col-sm-2 col-form-label">Função</label>
             <div class="col-sm-10">
-                <label>{{$usuario->funcao}}</label>
+                <label>{{$usuario->funcao->nomefuncao}}</label>
             </div>
         </div>
         <div class="form-group row">

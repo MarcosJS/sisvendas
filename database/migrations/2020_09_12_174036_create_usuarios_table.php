@@ -16,13 +16,14 @@ class CreateUsuariosTable extends Migration
         Schema::create('usuarios', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
-            $table->string('nome');
-            $table->string('email')->unique();
+            $table->string('nome', 100);
+            $table->string('email', 50)->unique()->nullable();
             $table->string('senha');
-            $table->string('cpf', 14)->unique();
-            $table->integer('matricula')->unique();
+            $table->string('cpf', 11)->unique();
+            $table->integer('matricula')->unique()->nullable();
             $table->boolean('status')->default(true);
-            $table->string('funcao', 50);
+            $table->integer('funcao_id')->unsigned();
+            $table->foreign('funcao_id')->references('id')->on('funcaos');
         });
     }
 

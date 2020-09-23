@@ -1,7 +1,9 @@
 <?php
 
+use App\Funcao;
 use App\Usuario;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\Hash;
 
 class UsuarioSeeder extends Seeder
 {
@@ -12,6 +14,13 @@ class UsuarioSeeder extends Seeder
      */
     public function run()
     {
-        factory(Usuario::class, 2)->create();
+        $usuario = new Usuario();
+        $usuario->nome = 'Admin';
+        $usuario->email =  'admin@sisvendas';
+        $usuario->senha = Hash::make('sisvendasadmin');
+        $usuario->cpf =  '00011122233';
+
+        $funcao = Funcao::find(1);
+        $funcao->usuarios()->saveMany([$usuario]);
     }
 }
