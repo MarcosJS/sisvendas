@@ -6,8 +6,8 @@
                 @foreach($clientes as $cliente)
                     <li>{{$cliente->nome}}</li>
                     <ul>
-                        @foreach($cliente->telefone as $tel)
-                            <li>{{$tel->numero}}</li>
+                        @foreach($cliente->telefones as $tel)
+                            <li>{{$tel->numerotel}}</li>
                         @endforeach
                     </ul>
                 @endforeach
@@ -20,7 +20,7 @@
             <h2>Telefone>>Cliente</h2>
             <ul>
                 @foreach($telefones as $telefone)
-                    <li>{{$telefone->numero}}</li>
+                    <li>{{$telefone->numerotel}}</li>
                     <ul>
                         <li>{{$telefone->cliente->nome}}</li>
                     </ul>

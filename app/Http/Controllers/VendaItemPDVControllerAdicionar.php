@@ -11,7 +11,7 @@ class VendaItemPDVControllerAdicionar extends Controller
         $cook = $request['codproduto']."-".$request['nomeproduto']."-".$request['qtd']."-".$request['precofinal']."-".($request['precofinal']*$request['qtd']."*");
         $cooks = $request->cookie('itens');
         $cooks = $cooks.$cook;
-        $cookie = cookie('itens',$cooks, 30);
+        $cookie = cookie('itens',$cooks);
         return redirect('sisvendaspdvitens')->cookie($cookie);
     }
 }

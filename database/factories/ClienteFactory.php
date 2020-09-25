@@ -1,9 +1,10 @@
 <?php
 
-/** @var \Illuminate\Database\Eloquent\Factory $factory */
+namespace Database\Factories;
 
-use App\Cliente;
-use Faker\Generator as Faker;
+use App\Models\Cliente;
+
+use Illuminate\Database\Eloquent\Factories\Factory;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,10 +17,16 @@ use Faker\Generator as Faker;
 |
 */
 
-$factory->define(Cliente::class, function (Faker $faker) {
-    return [
-        'nome'=>$faker->name,
-        'datanasc'=>$faker->date('Y-m-d','now'),
-        'cpf'=>preg_replace("/[^0-9]/", "", $faker->cpf),
-    ];
-});
+class ClienteFactory extends Factory
+{
+    protected $model = Cliente::class;
+
+    public function definition()
+    {
+        return [
+                'nome' => $this->faker->name,
+                'datanasc' => $this->faker->date('Y-m-d','now'),
+                'cpf' => preg_replace("/[^0-9]/", "", $this->faker->cpf)
+                ];
+    }
+}

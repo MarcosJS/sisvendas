@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Auxiliar\CookieAuxiliarDadosItens;
-use App\Produto;
+use App\Models\Produto;
 use Illuminate\Http\Request;
 
 class VendaItemPDVControllerTodos extends Controller

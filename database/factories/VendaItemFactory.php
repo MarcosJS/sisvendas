@@ -1,9 +1,9 @@
 <?php
 
-/** @var \Illuminate\Database\Eloquent\Factory $factory */
+namespace Database\Factories;
 
-use Faker\Generator as Faker;
-use App\VendaItem;
+use App\Models\VendaItem;
+use Illuminate\Database\Eloquent\Factories\Factory;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,10 +16,17 @@ use App\VendaItem;
 |
 */
 
-$factory->define(\App\VendaItem::class, function (Faker $faker) {
-    return [
-        'qtd'=>$faker->numberBetween(1,20),
-        'precofinal'=>$faker->randomFloat(2, 1,3),
-        'subtotal'=>$faker->randomFloat(2, 3, 6)
-    ];
-});
+class VendaItemFactory extends Factory
+{
+    protected $model = VendaItem::class;
+
+    public function definition()
+    {
+        return [
+            'qtd' => $this->faker->numberBetween(1,20),
+            'precofinal' => $this->faker->randomFloat(2, 1,3),
+            'subtotal' => $this->faker->randomFloat(2, 3, 6),
+            'produto_id' => $this->faker->numberBetween(1,10)
+        ];
+    }
+}

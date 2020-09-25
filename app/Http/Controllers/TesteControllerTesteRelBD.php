@@ -2,13 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use App\Cliente;
-use App\Endereco;
-use App\Produto;
-use App\Telefone;
-use App\Usuario;
-use App\Venda;
-use App\VendaItem;
+use App\Models\Cliente;
+use App\Models\Endereco;
+use App\Models\Produto;
+use App\Models\Telefone;
+use App\Models\Usuario;
+use App\Models\Venda;
+use App\Models\VendaItem;
 use Illuminate\Http\Request;
 
 class TesteControllerTesteRelBD extends Controller

@@ -18,10 +18,15 @@
                 <div class="sidebar-heading"><a class="navbar-brand" href="/">SISVendas</a></div>
 
                 <div class="list-group list-group-flush">
+                    @if(session('usuario_id'))
                     <a class="list-group-item list-group-item-action" href="#">SISVendas PDV - Em construção</a>
-                    <a class="list-group-item list-group-item-action" href="/usuarios">Usuarios</a>
                     <a class="list-group-item list-group-item-action" href="#">Clientes - Em construção</a>
                     <a class="list-group-item list-group-item-action" href="#">Produtos - Em construção</a>
+                    @endif
+                    @if(session('usuario_nivel') > 1)
+                        <a class="list-group-item list-group-item-action" href="/usuarios">Usuarios</a>
+                    @endif
+                    <a class="list-group-item list-group-item-action" href="#">Contato</a>
                 </div>
 
             </div>
@@ -29,6 +34,12 @@
             <div id="page-content-wrapper">
                 <nav id="navbar-interna" class="navbar navbar-expand-lg navbar-light border-bottom">
                     <button id="menu-toggle" class="btn">Menu</button>
+
+                    <div>
+                        @if(session()->has('usuario_id'))
+                        <p class="text-white">{{session('usuario_nome')}} - {{session('usuario_funcao')}} <a href="/deslogar">Sair</a></p>
+                        @endif
+                    </div>
 
                     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                         <span class="navbar-toggler-icon"></span>

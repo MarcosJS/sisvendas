@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Cliente;
-use App\Usuario;
+use App\Models\Cliente;
+use App\Models\Usuario;
 use Illuminate\Http\Request;
 
 class VendasPDVPagamentoControllerPreparar extends Controller

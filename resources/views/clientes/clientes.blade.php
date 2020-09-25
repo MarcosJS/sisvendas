@@ -30,7 +30,7 @@
                 <td scope="row">{{$cliente->modcredito}}</td>
                 <td scope="row">{{$cliente->status}}</td>
                 <td scope="row">{{$cliente->endereco->cidade}}</td>
-                <td scope="row">{{$cliente->telefone[0]->numerotel}}</td>
+                <td scope="row">{{$cliente->telefones[0]->numerotel}}</td>
             </tr>
         @endforeach
     </table>

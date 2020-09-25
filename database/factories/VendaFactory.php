@@ -1,9 +1,9 @@
 <?php
 
-/** @var \Illuminate\Database\Eloquent\Factory $factory */
+namespace Database\Factories;
 
-use App\Venda;
-use Faker\Generator as Faker;
+use App\Models\Venda;
+use Illuminate\Database\Eloquent\Factories\Factory;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,15 +16,21 @@ use Faker\Generator as Faker;
 |
 */
 
-$factory->define(Venda::class, function (Faker $faker) {
-    return [
-        'dtvenda'=>$faker->date('Y-m-d'),
-        'hrvenda'=>$faker->time('h:i:s'),
-        'totalprodutos'=>$faker->numberBetween(1,10),
-        'desconto'=>1,
-        'totalliq'=>$faker->randomFloat(2,50,200),
-        'dtpagamento'=>$faker->date('Y-m-d'),
-        'metodopg'=>'dinheiro',
-        'status'=>'em andamento'
-    ];
-});
+class VendaFactory extends Factory
+{
+    protected $model = Venda::class;
+
+    public function definition()
+    {
+        return [
+            'dtvenda' => $this->faker->date('Y-m-d'),
+            'hrvenda' => $this->faker->time('h:i:s'),
+            'totalprodutos' => $this->faker->numberBetween(1,10),
+            'desconto' => 1,
+            'totalliq' => $this->faker->randomFloat(2,50,200),
+            'dtpagamento' => $this->faker->date('Y-m-d'),
+            'metodopg' => 'dinheiro',
+            'status' => 'em andamento'
+        ];
+    }
+}

@@ -3,11 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Auxiliar\CookieAuxiliarDadosItens;
-use App\Cliente;
-use App\Produto;
-use App\Usuario;
-use App\Venda;
-use App\VendaItem;
+use App\Models\Cliente;
+use App\Models\Produto;
+use App\Models\Usuario;
+use App\Models\Venda;
+use App\Models\VendaItem;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cookie;
 

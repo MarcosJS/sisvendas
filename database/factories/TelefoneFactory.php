@@ -1,9 +1,9 @@
 <?php
 
-/** @var \Illuminate\Database\Eloquent\Factory $factory */
+namespace Database\Factories;
 
-use App\Telefone;
-use Faker\Generator as Faker;
+use App\Models\Telefone;
+use Illuminate\Database\Eloquent\Factories\Factory;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,8 +16,14 @@ use Faker\Generator as Faker;
 |
 */
 
-$factory->define(Telefone::class, function (Faker $faker) {
-    return [
-        'numero'=>preg_replace("/[^0-9]/", "", $faker->phoneNumber)
-    ];
-});
+class TelefoneFactory extends Factory
+{
+    protected $model = Telefone::class;
+
+    public function definition()
+    {
+        return [
+            'numerotel' => preg_replace("/[^0-9]/", "", $this->faker->phoneNumber)
+        ];
+    }
+}

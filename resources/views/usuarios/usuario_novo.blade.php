@@ -34,13 +34,19 @@
                         </div>
                         <div class="form-group">
                             <label>Função</label>
-                            <input type="text" class="form-control @error('funcao') is-invalid @enderror" name="funcao" value="{{old('funcao')}}">
+                            <select class="custom-select @error('funcao') is-invalid @enderror" name="funcao">
+                                <option value="" {{ (old("funcao") == "" ? "selected":"") }}>Default select</option>
+                                @foreach($funcoes as $funcao)
+                                <option value="{{$funcao->id}}" {{ (old("funcao") == $funcao->id ? "selected":"") }}>{{$funcao->nomefuncao}}</option>
+                                @endforeach
+                            </select>
                             @error('funcao')
                             <span>
                                 <small class="text-danger">{{$message}}</small>
                             </span>
                             @enderror
                         </div>
+
                         <div class="form-group">
                             <label>Matrícula</label>
                             <input type="text" class="form-control @error('matricula') is-invalid @enderror" name="matricula" value="{{old('matricula')}}">

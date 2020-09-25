@@ -1,9 +1,9 @@
 <?php
 
-/** @var \Illuminate\Database\Eloquent\Factory $factory */
+namespace Database\Factories;
 
-use App\Produto;
-use Faker\Generator as Faker;
+use App\Models\Produto;
+use Illuminate\Database\Eloquent\Factories\Factory;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,11 +16,17 @@ use Faker\Generator as Faker;
 |
 */
 
-$factory->define(Produto::class, function (Faker $faker) {
-    return [
-        'nome'=>$faker->randomElement(['fuba', 'xerem', 'flocao', 'milho']),
-        'descricao'=>$faker->text(100),
-        'estoque'=>$faker->numberBetween(100,200),
-        'preco'=>$faker->randomFloat(2,1,10)
-    ];
-});
+class ProdutoFactory extends Factory
+{
+    protected $model = Produto::class;
+
+    public function definition()
+    {
+        return [
+            'nome' => $this->faker->randomElement(['fuba', 'xerem', 'flocao', 'milho']),
+            'descricao' => $this->faker->text(100),
+            'estoque' => $this->faker->numberBetween(100,200),
+            'preco' => $this->faker->randomFloat(2,1,10)
+        ];
+    }
+}

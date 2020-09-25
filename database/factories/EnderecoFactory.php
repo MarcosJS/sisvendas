@@ -1,9 +1,9 @@
 <?php
 
-/** @var \Illuminate\Database\Eloquent\Factory $factory */
+namespace Database\Factories;
 
-use App\Endereco;
-use Faker\Generator as Faker;
+use App\Models\Endereco;
+use Illuminate\Database\Eloquent\Factories\Factory;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,13 +16,19 @@ use Faker\Generator as Faker;
 |
 */
 
-$factory->define(Endereco::class, function (Faker $faker) {
-    return [
-        'logradouro'=>$faker->streetName,
-        'numero'=>$faker->numberBetween(1,100),
-        'bairro'=>$faker->name,
-        'cidade'=>$faker->city,
-        'cep'=>$faker->postcode,
+class EnderecoFactory extends Factory
+{
+    protected $model = Endereco::class;
 
-    ];
-});
+    public function definition()
+    {
+        return [
+            'logradouro' => $this->faker->streetName,
+            'numero' => $this->faker->numberBetween(1,100),
+            'bairro' => $this->faker->name,
+            'cidade' => $this->faker->city,
+            'cep' => $this->faker->postcode
+        ];
+    }
+
+}
