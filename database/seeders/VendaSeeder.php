@@ -16,7 +16,11 @@ class VendaSeeder extends Seeder
     public function run()
     {
         Venda::factory()->count(5)
-            ->state(['usuario_id'=>1, 'cliente_id'=>2])
+            ->state([
+                'usuario_id'=>1,
+                'cliente_id'=>2,
+                'statusvenda_id' => 1,
+                'statuspagamento_id' => 1])
             ->has(VendaItem::factory()->count(5), 'vendaItens')
             ->create();
     }

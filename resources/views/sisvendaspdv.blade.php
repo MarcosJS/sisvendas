@@ -11,6 +11,6 @@
         <h1>SISVendas PDV</h1>
 
         <a href="/vendas">Consultar todas as Vendas</a>
-        <a href="/sisvendaspdvitens">Nova Operação</a>
+        <a href="/vendas/novo">Nova Venda</a>
     </div>
 @endsection

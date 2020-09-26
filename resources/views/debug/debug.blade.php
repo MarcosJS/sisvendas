@@ -7,9 +7,9 @@
         <title>Teste</title>
     </head>
     <body>
-    @include('debugclientes')
-    @include('debugprodutosvendaitens')
-    @include('debugvendas')
+    @include('debug.debugclientes')
+    @include('debug.debugprodutosvendaitens')
+    @include('debug.debugvendas')
     <script src="{{asset('js/app.js')}}" type="text/javascript"></script>
     </body>
 </html>

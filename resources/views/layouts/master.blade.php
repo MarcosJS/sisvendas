@@ -18,12 +18,12 @@
                 <div class="sidebar-heading"><a class="navbar-brand" href="/">SISVendas</a></div>
 
                 <div class="list-group list-group-flush">
-                    @if(session('usuario_id'))
-                    <a class="list-group-item list-group-item-action" href="#">SISVendas PDV - Em construção</a>
+                    @if(session('usuario')->id)
+                    <a class="list-group-item list-group-item-action" href="/sisvendaspdv">SISVendas PDV - Em construção</a>
                     <a class="list-group-item list-group-item-action" href="#">Clientes - Em construção</a>
                     <a class="list-group-item list-group-item-action" href="#">Produtos - Em construção</a>
                     @endif
-                    @if(session('usuario_nivel') > 1)
+                    @if(session('usuario')->funcao->nivel > 1)
                         <a class="list-group-item list-group-item-action" href="/usuarios">Usuarios</a>
                     @endif
                     <a class="list-group-item list-group-item-action" href="#">Contato</a>
@@ -36,8 +36,8 @@
                     <button id="menu-toggle" class="btn">Menu</button>
 
                     <div>
-                        @if(session()->has('usuario_id'))
-                        <p class="text-white">{{session('usuario_nome')}} - {{session('usuario_funcao')}} <a href="/deslogar">Sair</a></p>
+                        @if(session()->has('usuario'))
+                        <p class="text-white">{{session('usuario')->nome}} - {{session('usuario')->funcao->nomefuncao}} <a href="/deslogar">Sair</a></p>
                         @endif
                     </div>
 
@@ -69,5 +69,6 @@
         </footer>-->
 
         <script src="{{asset('js/app.js')}}" type="text/javascript"></script>
+        <script src="{{asset('js/select_itens.js')}}" type="text/javascript"></script>
     </body>
 </html>

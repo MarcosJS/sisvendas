@@ -10,11 +10,9 @@ class SessaoControllerLogar extends Controller
 {
     public function logar(Request $request) {
         $usuario = Usuario::find($request->usuario_id);
+        $usuario->senha = "";
         if ($usuario) {
-            $request->session()->put('usuario_id', $usuario->id);
-            $request->session()->put('usuario_nome', $usuario->nome);
-            $request->session()->put('usuario_nivel', $usuario->funcao->nivel);
-            $request->session()->put('usuario_funcao', $usuario->funcao->nomefuncao);
+            $request->session()->put('usuario', $usuario);
             return redirect('/');
         }
 

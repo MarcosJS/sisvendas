@@ -24,8 +24,9 @@ use App\Http\Controllers\Usuario\UsuarioControllerAtualizar;
 use App\Http\Controllers\Usuario\UsuarioControllerEditar;
 use App\Http\Controllers\Usuario\UsuarioControllerNovo;
 use App\Http\Controllers\Usuario\UsuarioControllerRemover;
-use App\Http\Controllers\VendaItemPDVControllerTodos;
-use App\Http\Controllers\VendaItemPDVControllerAdicionar;
+use App\Http\Controllers\Venda\VendaControllerItens;
+use App\Http\Controllers\Venda\VendaControllerNovo;
+use App\Http\Controllers\Venda\VendaControllerItensAdicionar;
 use App\Http\Controllers\VendaItemPDVControllerCancelar;
 use App\Http\Controllers\VendasPDVPagamentoControllerPreparar;
 use App\Http\Controllers\VendasPDVRegistroControllerRegistrar;
@@ -44,7 +45,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function (Request $request) {return ($request->session()->has('usuario_id')) ? view('inicio') : view('login');});
+Route::get('/', function (Request $request) {return ($request->session()->has('usuario')) ? view('inicio') : view('login');});
 Route::post('/logar', [SessaoControllerLogar::class, 'logar']);
 Route::get('/deslogar', [SessaoControllerDeslogar::class, 'deslogar']);
 Route::get('teste', [TesteControllerTesteRelBD::class, 'relBD']);
@@ -75,8 +76,9 @@ Route::get('produtos/remover/{id}', [ProdutoControllerRemover::class, 'remover']
 
 Route::get('sisvendaspdv', function () {return view('sisvendaspdv');});
 
-Route::get('sisvendaspdvitens', [VendaItemPDVControllerTodos::class, 'todos']);
-Route::post('sisvendaspdvitens/adicionar', [VendaItemPDVControllerAdicionar::class, 'adicionar']);
+Route::get('vendas/novo', [VendaControllerNovo::class, 'novo']);
+Route::get('vendas/itens', [VendaControllerItens::class, 'todos']);
+Route::post('vendas/itens/adicionar', [VendaControllerItensAdicionar::class, 'adicionarItem']);
 Route::get('sisvendaspdvitens/cancelar', [VendaItemPDVControllerCancelar::class, 'cancelar']);
 Route::get('sisvendaspdvpagamento', [VendasPDVPagamentoControllerPreparar::class, 'preparar']);
 Route::post('sisvendaspdvrevisao', [VendasPDVRevisaoControllerRevisar::class, 'revisar']);

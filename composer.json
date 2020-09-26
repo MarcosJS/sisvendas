@@ -40,6 +40,7 @@
             "App\\Http\\Controllers\\Cliente\\": "app/Http/Controllers/Cliente/",
             "App\\Http\\Controllers\\Produto\\": "app//Http/Controllers/Produto/",
             "App\\Http\\Controllers\\Usuario\\": "app//Http/Controllers/Usuario/",
+            "App\\Http\\Controllers\\Venda\\": "app//Http/Controllers/Venda/",
             "App\\Http\\Controllers\\": "app//Http/Controllers/",
             "Database\\Factories\\": "database/factories/",
             "Database\\Seeders\\": "database/seeders/"

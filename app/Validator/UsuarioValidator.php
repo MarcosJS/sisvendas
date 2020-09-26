@@ -2,7 +2,7 @@
 
 namespace App\Validator;
 
-use App\Usuario;
+use App\Models\Usuario;
 
 class UsuarioValidator
 {

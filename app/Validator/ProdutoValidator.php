@@ -2,7 +2,7 @@
 
 namespace App\Validator;
 
-use App\Produto;
+use App\Models\Produto;
 
 class ProdutoValidator
 {

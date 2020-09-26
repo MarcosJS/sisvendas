@@ -29,8 +29,6 @@ class VendaFactory extends Factory
             'desconto' => 1,
             'totalliq' => $this->faker->randomFloat(2,50,200),
             'dtpagamento' => $this->faker->date('Y-m-d'),
-            'metodopg' => 'dinheiro',
-            'status' => 'em andamento'
         ];
     }
 }
