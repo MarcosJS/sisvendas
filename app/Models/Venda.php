@@ -25,15 +25,15 @@ class Venda extends Model
         return $this->belongsTo('App\Models\Cliente');
     }
 
-    public function status() {
+    public function statusvenda() {
         return $this->belongsTo('App\Models\StatusVenda');
     }
 
-    public function metodoPagamento() {
+    public function metodopagamento() {
         return $this->belongsTo('App\Models\MetodoPagamento');
     }
 
-    public function statusPagamento() {
+    public function statuspagamento() {
         return $this->belongsTo('App\Models\StatusPagamento');
     }
 
@@ -41,6 +41,11 @@ class Venda extends Model
     {
         if($this->vendaItens()){
             $this->totalprodutos = $this->vendaItens()->sum('subtotal');
+            if($this->desconto === null) {
+                $this->desconto = 1;
+            }
+            $this->totalliq = $this->totalprodutos * $this->desconto;
+            $this->save();
         }
     }
 }

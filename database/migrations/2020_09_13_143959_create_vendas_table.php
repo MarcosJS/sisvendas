@@ -19,7 +19,7 @@ class CreateVendasTable extends Migration
             $table->date('dtvenda');
             $table->time('hrvenda');
             $table->decimal('totalprodutos')->default(0);
-            $table->decimal('desconto')->default(1);
+            $table->decimal('desconto')->default(1.0);
             $table->decimal('totalliq')->default(0);
             $table->date('dtpagamento')->nullable();
             $table->integer('metodopagamento_id')->unsigned()->nullable();

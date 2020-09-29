@@ -1,25 +1,27 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Venda;
 
+use App\Http\Controllers\Controller;
 use App\Models\Cliente;
-use App\Models\Usuario;
+use App\Models\MetodoPagamento;
+use App\Models\Venda;
 use Illuminate\Http\Request;
 
-class VendasPDVPagamentoControllerPreparar extends Controller
+class VendasControllerPagamento extends Controller
 {
-    public function preparar(Request $request) {
+    public function pagamento(Request $request) {
         $clientes = Cliente::all();
-        $usuarios = Usuario::all();
-        $cooks = $request->cookie('itens');
-        if($cooks) {
-            $dadosBrutos = explode("*", $cooks);
-            $dados = [];
-            for ($i = 0; $i < count($dadosBrutos) - 1; $i++) {
-                $dados[] = explode("-", $dadosBrutos[$i]);
-            }
-            return view("sisvendaspdv_pagamento", ['clientes'=>$clientes, 'usuarios'=>$usuarios, 'itens' => $dados]);
+        $venda = Venda::find($request->session()->get('venda_id'));
+        $metodospg = MetodoPagamento::all();
+
+        if($venda) {
+            return view("vendas.vendas_pagamento", [
+                'clientes' => $clientes,
+                'venda' => $venda,
+                'metodospg' => $metodospg]);
         }
-        return redirect('sisvendaspdvitens');
+
+        return redirect('vendas/itens');
     }
 }

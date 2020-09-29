@@ -2,7 +2,6 @@
 
 namespace App\Validator;
 
-use App\Models\Venda;
 use App\Models\VendaItem;
 
 class InclusaoItemValidator
@@ -12,10 +11,6 @@ class InclusaoItemValidator
 
         if(!isset($request['codproduto'])) {
             $validator->errors()->add('codproduto', 'Informe um produto');
-        }
-
-        if ($request->session()->get('LastTokenFormItem') != $request->_token) {
-            $validator->errors()->add('codproduto', 'Este item já esta na lista');
         }
 
         if (!$validator->errors()->isEmpty()) {

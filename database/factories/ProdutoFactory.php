@@ -23,7 +23,7 @@ class ProdutoFactory extends Factory
     public function definition()
     {
         return [
-            'nome' => $this->faker->randomElement(['fuba', 'xerem', 'flocao', 'milho']),
+            'nome' => $this->faker->randomElement(['fuba', 'xerem', 'flocao', 'milho', 'amido']),
             'descricao' => $this->faker->text(100),
             'estoque' => $this->faker->numberBetween(100,200),
             'preco' => $this->faker->randomFloat(2,1,10)

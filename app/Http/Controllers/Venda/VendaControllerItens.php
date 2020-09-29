@@ -10,14 +10,12 @@ use Illuminate\Http\Request;
 class VendaControllerItens extends Controller
 {
     public function todos(Request $request){
-        $venda = new Venda();
-        $itens = [];
-        if ($request->session()->has('itens')) {
-            $itens = $request->session()->get('itens');
-        } else {
-            $request->session()->put('itens', $itens);
-        }
         $produtos = Produto::all();
-        return view('vendas.venda_itens', ['produtos' => $produtos, 'itens' => $itens]);
+        $venda = Venda::find($request->session()->get('venda_id'));
+
+        if (!$venda) {
+            $venda = new Venda();
+        }
+        return view('vendas.venda_itens', ['produtos' => $produtos, 'venda' => $venda]);
     }
 }

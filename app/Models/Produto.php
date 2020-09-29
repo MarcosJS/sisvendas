@@ -4,12 +4,14 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Notifications\Notifiable;
 
 class Produto extends Model
 {
     use HasFactory;
+    use Notifiable;
 
-    protected $fillable = [
+    protected $fillable     = [
         'nome', 'descricao', 'estoque', 'preco'
     ];
 

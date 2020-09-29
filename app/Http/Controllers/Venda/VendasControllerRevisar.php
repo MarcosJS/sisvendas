@@ -1,10 +1,11 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Venda;
 
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
-class VendasPDVRevisaoControllerRevisar extends Controller
+class VendasControllerRevisar extends Controller
 {
     public function revisar(Request $request) {
         $cooks = $request->cookie('itens');

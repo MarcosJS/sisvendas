@@ -21,26 +21,25 @@ class VendaControllerItensAdicionar extends Controller
             $item->produto()->associate(Produto::find($request->codproduto));
 
             $venda = Venda::find($request['venda_id']);
+
             if($venda) {
                 $venda->vendaItens()->saveMany([$item]);
+                $venda->atualizarValores();
             } else {
                 $venda = new Venda();
                 $venda->usuario()->associate($request->session()->get('usuario')->id);
                 $venda->dtvenda = date("Y-m-d");
                 $venda->hrvenda = date("H:i:s");
-                $venda->totalprodutos = 0;
-                $venda->desconto = 1;
-                $venda->status = 'em andamento';
-                $venda->atualizarValores();
                 $venda->save();
+                $venda->vendaItens()->saveMany([$item]);
+                $venda->atualizarValores();
             }
 
-            $request->session()->put('LastTokenFormItem', $request->_token);
-
-            return redirect('venda_itens');
+            $request->session()->put('venda_id', $venda->id);
+            return redirect('vendas/itens');
 
         } catch (ValidationException $exception) {
-            return redirect('venda_itens')
+            return redirect('vendas/itens')
                 ->withErrors($exception->getValidator())
                 ->withInput();
         }

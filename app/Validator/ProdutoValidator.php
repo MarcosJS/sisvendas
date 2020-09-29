@@ -6,6 +6,7 @@ use App\Models\Produto;
 
 class ProdutoValidator
 {
+
     public static function validate($data) {
         $validator = \Validator::make($data, Produto::$rules, Produto::$messages);
         if(!$validator->errors()->isEmpty())

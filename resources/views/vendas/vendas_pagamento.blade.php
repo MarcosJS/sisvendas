@@ -1,46 +1,17 @@
-<!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
-    <head>
-        <meta charset="utf-8">
-        <title>SISVendas PDV</title>
-    </head>
-    <body>
+@extends('layouts.master')
+
+@section('titulo', 'SISVendas PDV - Pagamento')
+
+@section('submenu')
+    @include('menu_pdv')
+@endsection
+
+@section('conteudo')
+    <div class="p-3"></div>
         <h1>Operação de Venda - Pagamento</h1>
         <div>
-            <a href="/sisvendaspdvitens">Voltar</a>
-            <a href="/sisvendaspdvpagamento/cancelar">Cancelar</a>
-        </div>
-
-        <div>
-            <br><br><span>Clientes cadastrados</span>
-            <table>
-                <tr>
-                    <th>id</th>
-                    <th>nome</th>
-                </tr>
-                @foreach($clientes as $cliente)
-                    <tr>
-                        <td>{{$cliente->id}}</td>
-                        <td>{{$cliente->nome}}</td>
-                    </tr>
-                @endforeach
-            </table>
-            <a href="/clientes/novo">novo cliente</a>
-
-            br><br><span>Usuarios cadastrados</span>
-            <table>
-                <tr>
-                    <th>id</th>
-                    <th>nome</th>
-                </tr>
-                @foreach($usuarios as $usuario)
-                    <tr>
-                        <td>{{$usuario->id}}</td>
-                        <td>{{$usuario->nome}}</td>
-                    </tr>
-                @endforeach
-            </table>
-            <a href="/usuarios/novo">novo usuario</a>
+            <a href="/vendas/itens">Voltar</a>
+            <a href="/vendas/cancelar">Cancelar</a>
         </div>
 
         <div>
@@ -53,44 +24,58 @@
                     <th>Subtotal</th>
                 </tr>
 
-                @if(count($itens) > 0)
-                    @foreach($itens as $iten)
+                @if(count($venda->vendaItens) > 0)
+                    @foreach($venda->vendaItens as $iten)
                         <tr>
-                            <td>{{$iten[0]}}</td>
-                            <td>{{$iten[1]}}</td>
-                            <td>{{$iten[2]}}</td>
-                            <td>{{$iten[3]}}</td>
-                            <td>{{$iten[4]}}</td>
+                            <td>{{$iten->produto->id}}</td>
+                            <td>{{$iten->produto->nome}}</td>
+                            <td>{{$iten->qtd}}</td>
+                            <td>{{$iten->precofinal}}</td>
+                            <td>{{$iten->subtotal}}</td>
                         </tr>
                     @endforeach
                 @endif
 
-
             </table>
+        </div>
+        <div>
 
-            <div align="center">
-                <form action="/sisvendaspdvrevisao" method="post">
+                <form action="/vendas/revisar" method="post">
                     {{csrf_field()}}
-                    <br><br><label>Dados do Cliente</label>
-                    <table>
-                        <tr><td>Id Cliente: </td><td><input type="text" name="idcliente"/></td></tr>
-                        <tr><td>Nome do Cliente: </td><td><input type="text" name="nomecliente"/></td></tr>
-                    </table>
-                    <br><br><label>Dados do Ususario</label>
-                    <table>
-                        <tr><td>Id Usuario: </td><td><input type="text" name="idusuario"/></td></tr>
-                        <tr><td>Nome do Usuario: </td><td><input type="text" name="nomeusuario"/></td></tr>
-                    </table>
-                    <br><br><label>Escolha o Metodo de Pagamento</label>
-                    <table>
-                        <tr><td>Metodo de Pagamento: </td><td><input type="text" name="metodopg"/></td></tr>
-                    </table>
+                    <div class="form-row">
 
-                    <br><input type="submit" value="Revisar e Confirmar"/>
+                        <div class="form-group">
+                            <select id="cliente" class="form-control @error('cliente_ie') is-invalid @enderror" name="nomecliente">
+                                <option selected value="" {{ (old("cliente_id") == "" ? "selected":"") }}>Clientes...</option>
+                                @foreach($clientes as $cliente)
+                                    <option value="{{$cliente->id}}" {{ (old("cliente_id") == $cliente->id ? "selected":"") }}>{{$cliente->nome}}</option>
+                                @endforeach
+                            </select>
+                            @error('cliente_id')
+                            <span>
+                                <small class="text-danger">{{$message}}</small>
+                            </span>
+                            @enderror
+                        </div>
+
+                        <div class="form-group">
+                            <select id="metodopg" class="form-control @error('metodospg') is-invalid @enderror" name="metodospg">
+                                <option selected value="" {{ (old("metodospg") == "" ? "selected":"") }}>Método de pagamento...</option>
+                                @foreach($metodospg as $metodo)
+                                    <option value="{{$metodo->id}}" {{ (old("codproduto") == $metodo->id ? "selected":"") }}>{{$metodo->nomemetodopagamento}}</option>
+                                @endforeach
+                            </select>
+                            @error('metodospg')
+                            <span>
+                                <small class="text-danger">{{$message}}</small>
+                            </span>
+                            @enderror
+                        </div>
+
+                        <br><input type="submit" value="Revisar e Confirmar"/>
+
+                    </div>
                 </form>
-            </div>
 
         </div>
-
-    </body>
-</html>
+@endsection

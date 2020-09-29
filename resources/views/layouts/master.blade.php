@@ -18,14 +18,17 @@
                 <div class="sidebar-heading"><a class="navbar-brand" href="/">SISVendas</a></div>
 
                 <div class="list-group list-group-flush">
-                    @if(session('usuario')->id)
+                    @if(session('usuario'))
                     <a class="list-group-item list-group-item-action" href="/sisvendaspdv">SISVendas PDV - Em construção</a>
                     <a class="list-group-item list-group-item-action" href="#">Clientes - Em construção</a>
                     <a class="list-group-item list-group-item-action" href="#">Produtos - Em construção</a>
+
+                        @if(session('usuario')->funcao->nivel > 1)
+                            <a class="list-group-item list-group-item-action" href="/usuarios">Usuarios</a>
+                        @endif
+
                     @endif
-                    @if(session('usuario')->funcao->nivel > 1)
-                        <a class="list-group-item list-group-item-action" href="/usuarios">Usuarios</a>
-                    @endif
+
                     <a class="list-group-item list-group-item-action" href="#">Contato</a>
                 </div>
 
@@ -62,7 +65,6 @@
             </div>
 
         </div>
-
 
         <!--<footer class="rodape mb-0" style="background-color: #385d7a">
             <span>rodape</span>

@@ -27,10 +27,10 @@ use App\Http\Controllers\Usuario\UsuarioControllerRemover;
 use App\Http\Controllers\Venda\VendaControllerItens;
 use App\Http\Controllers\Venda\VendaControllerNovo;
 use App\Http\Controllers\Venda\VendaControllerItensAdicionar;
-use App\Http\Controllers\VendaItemPDVControllerCancelar;
-use App\Http\Controllers\VendasPDVPagamentoControllerPreparar;
+use App\Http\Controllers\Venda\VendaControllerCancelar;
+use App\Http\Controllers\Venda\VendasControllerPagamento;
 use App\Http\Controllers\VendasPDVRegistroControllerRegistrar;
-use App\Http\Controllers\VendasPDVRevisaoControllerRevisar;
+use App\Http\Controllers\Venda\VendasControllerRevisar;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -79,8 +79,8 @@ Route::get('sisvendaspdv', function () {return view('sisvendaspdv');});
 Route::get('vendas/novo', [VendaControllerNovo::class, 'novo']);
 Route::get('vendas/itens', [VendaControllerItens::class, 'todos']);
 Route::post('vendas/itens/adicionar', [VendaControllerItensAdicionar::class, 'adicionarItem']);
-Route::get('sisvendaspdvitens/cancelar', [VendaItemPDVControllerCancelar::class, 'cancelar']);
-Route::get('sisvendaspdvpagamento', [VendasPDVPagamentoControllerPreparar::class, 'preparar']);
-Route::post('sisvendaspdvrevisao', [VendasPDVRevisaoControllerRevisar::class, 'revisar']);
+Route::get('vendas/cancelar', [VendaControllerCancelar::class, 'cancelar']);
+Route::get('vendas/pagamento', [VendasControllerPagamento::class, 'pagamento']);
+Route::post('vendas/revisar', [VendasControllerRevisar::class, 'revisar']);
 Route::post('sisvendaspdvregistro', [VendasPDVRegistroControllerRegistrar::class, 'registrar']);
 

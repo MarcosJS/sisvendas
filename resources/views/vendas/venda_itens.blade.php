@@ -10,8 +10,8 @@
     <div class="p-3">
         <div>
             <h1>Operação de Venda - Itens</h1>
-            <a href="/sisvendaspdvitens/cancelar">Cancelar</a>
-            <a href="/sisvendaspdvpagamento">Pagamento</a>
+            <a href="/vendas/cancelar">Cancelar</a>
+            <a href="/vendas/pagamento">Pagamento</a>
         </div>
 
         <div>
