@@ -18,8 +18,8 @@ class StatusVendaSeeder extends Seeder
         StatusVenda::factory()->count(3)
             ->state(new Sequence(
                 ['nomestatus' => 'EM ANDAMENTO'],
-                ['nomestatus' => 'CANCELADO'],
-                ['nomestatus' => 'CONCLUIDO']
+                ['nomestatus' => 'CONCLUIDO'],
+                ['nomestatus' => 'CANCELADO']
             ))
             ->create();
     }

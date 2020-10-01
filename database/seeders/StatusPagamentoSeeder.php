@@ -15,9 +15,9 @@ class StatusPagamentoSeeder extends Seeder
      */
     public function run()
     {
-        StatusPagamento::factory()->count(3)
+        StatusPagamento::factory()->count(4)
             ->state(new Sequence(
-                ['nomestatuspagamento' => 'A RECEBER'],
+                ['nomestatuspagamento' => 'AGUARDANDO'],
                 ['nomestatuspagamento' => 'PAGO'],
                 ['nomestatuspagamento' => 'ESTORNADO']
             ))

@@ -29,7 +29,7 @@ use App\Http\Controllers\Venda\VendaControllerNovo;
 use App\Http\Controllers\Venda\VendaControllerItensAdicionar;
 use App\Http\Controllers\Venda\VendaControllerCancelar;
 use App\Http\Controllers\Venda\VendasControllerPagamento;
-use App\Http\Controllers\VendasPDVRegistroControllerRegistrar;
+use App\Http\Controllers\Venda\VendasControllerRegistrar;
 use App\Http\Controllers\Venda\VendasControllerRevisar;
 use Illuminate\Support\Facades\Route;
 
@@ -89,6 +89,6 @@ Route::middleware(['auth'])->group(function () {
     Route::get('vendas/cancelar', [VendaControllerCancelar::class, 'cancelar']);
     Route::get('vendas/pagamento', [VendasControllerPagamento::class, 'pagamento']);
     Route::post('vendas/revisar', [VendasControllerRevisar::class, 'revisar']);
-    Route::post('sisvendaspdvregistro', [VendasPDVRegistroControllerRegistrar::class, 'registrar']);
+    Route::post('vendas/registrar', [VendasControllerRegistrar::class, 'registrar']);
 });
 

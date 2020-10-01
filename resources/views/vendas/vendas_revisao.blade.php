@@ -53,7 +53,8 @@
                     <tr><td>Método de Pagamento: </td><td><input type="text" name="metodopg" value="{{$venda->metodopagamento->nomemetodopagamento}}" readonly="true"/></td></tr>
                 </table>
 
-                <br><input type="submit" value="Concluir"/>
+                <input type="hidden" value="{{$venda->id}}" name="venda_id">
+                <input type="submit" value="Concluir"/>
             </div>
 
         </form>
