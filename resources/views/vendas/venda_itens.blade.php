@@ -110,12 +110,15 @@
                                     </tr>
                                 @endforeach
                             @endif
-
+                            <tr class="bg-success">
+                                <td colspan="4" align="right"><b>TOTAL:</b></td>
+                                <td>{{$venda->totalprodutos}}</td>
+                            </tr>
                         </table>
                     </div>
+
                 </div>
             </div>
-
         </div>
     </div>
 @endsection

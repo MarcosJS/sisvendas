@@ -48,4 +48,8 @@ class Venda extends Model
             $this->save();
         }
     }
+
+    public function descPorcent() {
+        return (1 - $this->desconto) * 100;
+    }
 }

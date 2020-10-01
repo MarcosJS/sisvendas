@@ -18,17 +18,14 @@
                 <div class="sidebar-heading"><a class="navbar-brand" href="/">SISVendas</a></div>
 
                 <div class="list-group list-group-flush">
-                    @if(session('usuario'))
-                    <a class="list-group-item list-group-item-action" href="/sisvendaspdv">SISVendas PDV - Em construção</a>
-                    <a class="list-group-item list-group-item-action" href="#">Clientes - Em construção</a>
-                    <a class="list-group-item list-group-item-action" href="#">Produtos - Em construção</a>
-
-                        @if(session('usuario')->funcao->nivel > 1)
+                    @if(auth()->check())
+                        <a class="list-group-item list-group-item-action" href="/sisvendaspdv">SISVendas PDV - Em construção</a>
+                        <a class="list-group-item list-group-item-action" href="#">Clientes - Em construção</a>
+                        <a class="list-group-item list-group-item-action" href="#">Produtos - Em construção</a>
+                        @if(auth()->user()->funcao->nivel === 2)
                             <a class="list-group-item list-group-item-action" href="/usuarios">Usuarios</a>
                         @endif
-
                     @endif
-
                     <a class="list-group-item list-group-item-action" href="#">Contato</a>
                 </div>
 
@@ -39,8 +36,8 @@
                     <button id="menu-toggle" class="btn">Menu</button>
 
                     <div>
-                        @if(session()->has('usuario'))
-                        <p class="text-white">{{session('usuario')->nome}} - {{session('usuario')->funcao->nomefuncao}} <a href="/deslogar">Sair</a></p>
+                        @if(auth()->check())
+                        <p class="text-white">{{auth()->user()->nome}} - {{auth()->user()->funcao->nomefuncao}} <a href="/deslogar">Sair</a></p>
                         @endif
                     </div>
 

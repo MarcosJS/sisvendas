@@ -2,16 +2,22 @@
 
 namespace App\Models;
 
+use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
 
-class Usuario extends Model
+class Usuario extends Authenticatable
 {
     use HasFactory;
 
     protected $fillable = [
         'nome', 'email', 'senha', 'cpf', 'matricula', 'status', 'funcao'
     ];
+
+    protected $hidden = [
+        'senha', 'remember_token'
+    ];
+
+    protected $guard = 'usuario';
 
     public static $rules= [
         'nome'=>'required|min:5|max:100',

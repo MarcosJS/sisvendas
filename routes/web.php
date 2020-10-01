@@ -31,7 +31,6 @@ use App\Http\Controllers\Venda\VendaControllerCancelar;
 use App\Http\Controllers\Venda\VendasControllerPagamento;
 use App\Http\Controllers\VendasPDVRegistroControllerRegistrar;
 use App\Http\Controllers\Venda\VendasControllerRevisar;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -45,42 +44,51 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function (Request $request) {return ($request->session()->has('usuario')) ? view('inicio') : view('login');});
-Route::post('/logar', [SessaoControllerLogar::class, 'logar']);
-Route::get('/deslogar', [SessaoControllerDeslogar::class, 'deslogar']);
+Route::get('login', function () {return view('login');})->name('login');
+Route::post('logar', [SessaoControllerLogar::class, 'logar']);
+Route::get('deslogar', [SessaoControllerDeslogar::class, 'deslogar']);
 Route::get('teste', [TesteControllerTesteRelBD::class, 'relBD']);
 
-Route::get('clientes', [ClienteControllerTodos::class, 'obterTodos']);
-Route::get('clientes/perfil/{id}', [ClienteControllerAcessar::class, 'acessar']);
-Route::get('clientes/novo', [ClienteControllerNovo::class, 'novo']);
-Route::post('clientes/adicionar', [ClienteControllerAdicionar::class, 'adicionar']);
-Route::get('clientes/editar/{id}', [ClienteControllerEditar::class, 'editar']);
-Route::post('clientes/atualizar/{id}', [ClienteControllerAtualizar::class, 'atualizar']);
-Route::get('clientes/remover/{id}', [ClienteControllerRemover::class, 'remover']);
+Route::middleware(['auth'])->group(function () {
 
-Route::get('usuarios', [UsuarioControllerTodos::class, 'obterTodos']);
-Route::get('usuarios/perfil/{id}', [UsuarioControllerAcessar::class, 'acessar']);
-Route::get('usuarios/novo', [UsuarioControllerNovo::class, 'novo']);
-Route::post('usuarios/adicionar', [UsuarioControllerAdicionar::class, 'adicionar']);
-Route::get('usuarios/editar/{id}', [UsuarioControllerEditar::class, 'editar']);
-Route::post('usuarios/atualizar/{id}', [UsuarioControllerAtualizar::class, 'atualizar']);
-Route::get('usuarios/remover/{id}', [UsuarioControllerRemover::class, 'remover']);
+    Route::get('/', function () {return view('inicio');});//->middleware('auth');
 
-Route::get('produtos', [ProdutoControllerTodos::class, 'obterTodos']);
-Route::get('produtos/perfil/{id}', [ProdutoControllerAcessar::class, 'acessar']);
-Route::get('produtos/novo', [ProdutoControllerNovo::class, 'novo']);
-Route::post('produtos/adicionar', [ProdutoControllerAdicionar::class, 'adicionar']);
-Route::get('produtos/editar/{id}', [ProdutoControllerEditar::class, 'editar']);
-Route::post('produtos/atualizar/{id}', [ProdutoControllerAtualizar::class, 'atualizar']);
-Route::get('produtos/remover/{id}', [ProdutoControllerRemover::class, 'remover']);
+    Route::get('clientes', [ClienteControllerTodos::class, 'obterTodos']);
+    Route::get('clientes/perfil/{id}', [ClienteControllerAcessar::class, 'acessar']);
+    Route::get('clientes/novo', [ClienteControllerNovo::class, 'novo']);
+    Route::post('clientes/adicionar', [ClienteControllerAdicionar::class, 'adicionar']);
+    Route::get('clientes/editar/{id}', [ClienteControllerEditar::class, 'editar']);
+    Route::post('clientes/atualizar/{id}', [ClienteControllerAtualizar::class, 'atualizar']);
+    Route::get('clientes/remover/{id}', [ClienteControllerRemover::class, 'remover'])->middleware('verificarnivel');
 
-Route::get('sisvendaspdv', function () {return view('sisvendaspdv');});
+    Route::middleware('verificarnivel')->group(function () {
+        Route::get('usuarios', [UsuarioControllerTodos::class, 'obterTodos']);
+        Route::get('usuarios/novo', [UsuarioControllerNovo::class, 'novo']);
+        Route::post('usuarios/adicionar', [UsuarioControllerAdicionar::class, 'adicionar']);
+        Route::get('usuarios/remover/{id}', [UsuarioControllerRemover::class, 'remover']);
+    });
+    Route::middleware('verificarproprietario')->group(function () {
+        Route::get('usuarios/perfil/{id}', [UsuarioControllerAcessar::class, 'acessar'])->middleware('verificarproprietario');
+        Route::get('usuarios/editar/{id}', [UsuarioControllerEditar::class, 'editar']);
+        Route::post('usuarios/atualizar/{id}', [UsuarioControllerAtualizar::class, 'atualizar']);
+    });
 
-Route::get('vendas/novo', [VendaControllerNovo::class, 'novo']);
-Route::get('vendas/itens', [VendaControllerItens::class, 'todos']);
-Route::post('vendas/itens/adicionar', [VendaControllerItensAdicionar::class, 'adicionarItem']);
-Route::get('vendas/cancelar', [VendaControllerCancelar::class, 'cancelar']);
-Route::get('vendas/pagamento', [VendasControllerPagamento::class, 'pagamento']);
-Route::post('vendas/revisar', [VendasControllerRevisar::class, 'revisar']);
-Route::post('sisvendaspdvregistro', [VendasPDVRegistroControllerRegistrar::class, 'registrar']);
+    Route::get('produtos', [ProdutoControllerTodos::class, 'obterTodos']);
+    Route::get('produtos/perfil/{id}', [ProdutoControllerAcessar::class, 'acessar']);
+    Route::get('produtos/novo', [ProdutoControllerNovo::class, 'novo']);
+    Route::post('produtos/adicionar', [ProdutoControllerAdicionar::class, 'adicionar']);
+    Route::get('produtos/editar/{id}', [ProdutoControllerEditar::class, 'editar']);
+    Route::post('produtos/atualizar/{id}', [ProdutoControllerAtualizar::class, 'atualizar']);
+    Route::get('produtos/remover/{id}', [ProdutoControllerRemover::class, 'remover']);
+
+    Route::get('sisvendaspdv', function () {return view('sisvendaspdv');});
+
+    Route::get('vendas/novo', [VendaControllerNovo::class, 'novo']);
+    Route::get('vendas/itens', [VendaControllerItens::class, 'todos']);
+    Route::post('vendas/itens/adicionar', [VendaControllerItensAdicionar::class, 'adicionarItem']);
+    Route::get('vendas/cancelar', [VendaControllerCancelar::class, 'cancelar']);
+    Route::get('vendas/pagamento', [VendasControllerPagamento::class, 'pagamento']);
+    Route::post('vendas/revisar', [VendasControllerRevisar::class, 'revisar']);
+    Route::post('sisvendaspdvregistro', [VendasPDVRegistroControllerRegistrar::class, 'registrar']);
+});
 

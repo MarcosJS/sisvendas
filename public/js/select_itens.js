@@ -4,11 +4,15 @@ var qtd = document.getElementById('qtd');
 var precoFinal = document.getElementById('precofinal');
 var subTotal = document.getElementById("subtotal");
 var codProduto = document.getElementById('codproduto');
+var desconto = document.getElementById('desconto');
+var novoDesconto = document.getElementById('novodesconto');
+var totalProdutos = document.getElementById('totalprodutos');
+var totalLiq = document.getElementById('totalliq');
 
 function atualizarValoresItens() {
     let newSubTotal = qtd.value * precoFinal.value;
-    console.log('qtd: ', qtd.value, 'precofinal: ', precoFinal.value, 'newsubtotal: ', newSubTotal);
-    console.log('é nan ',isNaN(newSubTotal));
+    //console.log('qtd: ', qtd.value, 'precofinal: ', precoFinal.value, 'newsubtotal: ', newSubTotal);
+    //console.log('é nan ',isNaN(newSubTotal));
     if(newSubTotal !== undefined || !isNaN(newSubTotal)){
         subTotal.value = newSubTotal;
     } else {
@@ -16,9 +20,29 @@ function atualizarValoresItens() {
     }
 }
 
-qtd.addEventListener('keyup', atualizarValoresItens);
+function atualizarTotalProdutos() {
+    let newTotalProdutos = totalProdutos.innerText * (1 - (novoDesconto.value / 100));
+    newTotalProdutos = newTotalProdutos.toFixed(2);
 
-precoFinal.addEventListener('keyup', atualizarValoresItens);
+    if(newTotalProdutos !== undefined || !isNaN(newTotalProdutos)){
+        totalLiq.innerText = newTotalProdutos;
+        desconto.value = novoDesconto.value;
+    } else {
+        totalLiq.innerText = "";
+    }
+}
+
+if(qtd) {
+    qtd.addEventListener('keyup', atualizarValoresItens);
+}
+
+if(precoFinal) {
+    precoFinal.addEventListener('keyup', atualizarValoresItens);
+}
+
+if(novoDesconto) {
+    novoDesconto.addEventListener('keyup', atualizarTotalProdutos);
+}
 
 if(prodSelecionado != null) {
     prodSelecionado.addEventListener('change', function () {

@@ -19,6 +19,7 @@ class CreateUsuariosTable extends Migration
             $table->string('nome', 100);
             $table->string('email', 50)->unique()->nullable();
             $table->string('senha');
+            $table->rememberToken();
             $table->string('cpf', 11)->unique();
             $table->integer('matricula')->unique()->nullable();
             $table->boolean('status')->default(true);
