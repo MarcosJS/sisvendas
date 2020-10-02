@@ -3,7 +3,6 @@
 namespace Database\Seeders;
 
 use App\Models\Pagamento\StatusPagamento;
-use Illuminate\Database\Eloquent\Factories\Sequence;
 use Illuminate\Database\Seeder;
 
 class StatusPagamentoSeeder extends Seeder
@@ -15,12 +14,23 @@ class StatusPagamentoSeeder extends Seeder
      */
     public function run()
     {
-        StatusPagamento::factory()->count(3)
+        $status = new StatusPagamento();
+        $status->nomestatus = 'AGUARDANDO';
+        $status->save();
+
+        $status = new StatusPagamento();
+        $status->nomestatus = 'PAGO';
+        $status->save();
+
+        $status = new StatusPagamento();
+        $status->nomestatus = 'ESTORNADO';
+        $status->save();
+        /*StatusPagamento::factory()->count(3)
             ->state(new Sequence(
                 ['nomestatus' => 'AGUARDANDO'],
                 ['nomestatus' => 'PAGO'],
                 ['nomestatus' => 'ESTORNADO']
             ))
-            ->create();
+            ->create();*/
     }
 }

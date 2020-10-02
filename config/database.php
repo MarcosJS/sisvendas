@@ -80,6 +80,7 @@ return [
             'schema' => 'public',
             'sslmode' => 'prefer',
         ],
+
         //substituir quando estiver no ambiente local
         /*'pgsql' => [
             'driver' => 'pgsql',
