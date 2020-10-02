@@ -7,7 +7,7 @@ use App\Models\Endereco;
 use App\Models\Telefone;
 use Illuminate\Database\Seeder;
 
-class ClienteSeeder extends Seeder
+class ClienteTesteSeeder extends Seeder
 {
     /**
      * Run the database seeders.

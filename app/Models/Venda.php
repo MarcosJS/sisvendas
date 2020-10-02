@@ -10,7 +10,7 @@ class Venda extends Model
     use HasFactory;
 
     protected $fillable = [
-        'dtvenda', 'hrvenda', 'totalprodutos', 'desconto', 'totalliq', 'dtpagamento'
+        'dtvenda', 'hrvenda', 'totalprodutos', 'desconto', 'totalliq'
     ];
 
     public function vendaItens() {
@@ -29,12 +29,8 @@ class Venda extends Model
         return $this->belongsTo('App\Models\StatusVenda');
     }
 
-    public function metodopagamento() {
-        return $this->belongsTo('App\Models\MetodoPagamento');
-    }
-
-    public function statuspagamento() {
-        return $this->belongsTo('App\Models\StatusPagamento');
+    public function pagamentos() {
+        return $this->hasMany('App\Models\Pagamento\Pagamento');
     }
 
     public function atualizarValores()

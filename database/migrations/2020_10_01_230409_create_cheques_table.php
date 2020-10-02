@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateMetodoPagamentosTable extends Migration
+class CreateChequesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,12 @@ class CreateMetodoPagamentosTable extends Migration
      */
     public function up()
     {
-        Schema::create('metodo_pagamentos', function (Blueprint $table) {
+        Schema::create('cheques', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
-            $table->string('nomemetodopagamento', 30);
+            $table->string('numero')->unique();
+            $table->integer('pagamento_id')->unsigned();
+            $table->foreign('pagamento_id')->references('id')->on('pagamentos');
         });
     }
 
@@ -27,6 +29,6 @@ class CreateMetodoPagamentosTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('metodo_pagamentos');
+        Schema::dropIfExists('cheques');
     }
 }

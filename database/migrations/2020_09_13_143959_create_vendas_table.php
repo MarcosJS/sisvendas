@@ -21,17 +21,14 @@ class CreateVendasTable extends Migration
             $table->decimal('totalprodutos')->default(0);
             $table->decimal('desconto')->default(1.0);
             $table->decimal('totalliq')->default(0);
-            $table->date('dtpagamento')->nullable();
-            $table->integer('metodopagamento_id')->unsigned()->nullable();
-            $table->integer('statusvenda_id')->unsigned()->default(1);
-            $table->integer('statuspagamento_id')->unsigned()->default(1);
+
             $table->integer('usuario_id')->unsigned();
             $table->integer('cliente_id')->unsigned()->nullable();
-            $table->foreign('metodopagamento_id')->references('id')->on('metodo_pagamentos');
-            $table->foreign('statusvenda_id')->references('id')->on('status_vendas');
-            $table->foreign('statuspagamento_id')->references('id')->on('status_pagamentos');
+            $table->integer('status_venda_id')->unsigned()->default(1);
+
             $table->foreign('usuario_id')->references('id')->on('usuarios');
             $table->foreign('cliente_id')->references('id')->on('clientes');
+            $table->foreign('status_venda_id')->references('id')->on('status_vendas');
         });
     }
 

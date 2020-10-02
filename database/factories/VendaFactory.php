@@ -28,7 +28,7 @@ class VendaFactory extends Factory
             'totalprodutos' => $this->faker->numberBetween(1,10),
             'desconto' => 1,
             'totalliq' => $this->faker->randomFloat(2,50,200),
-            'dtpagamento' => $this->faker->date('Y-m-d'),
+            /*'dtpagamento' => $this->faker->date('Y-m-d'),*/
         ];
     }
 }

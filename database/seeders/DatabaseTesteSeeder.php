@@ -15,8 +15,8 @@ class DatabaseTesteSeeder extends Seeder
     {
         $this->call(FuncaoTesteSeeder::class);
         $this->call(UsuarioTesteSeeder::class);
-        $this->call(ProdutoSeeder::class);
-        $this->call(ClienteSeeder::class);
-        $this->call(VendaSeeder::class);
+        $this->call(ProdutoTesteSeeder::class);
+        $this->call(ClienteTesteSeeder::class);
+        $this->call(VendaTesteSeeder::class);
     }
 }
