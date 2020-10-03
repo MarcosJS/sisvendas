@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Pagamento\PagamentoChequeControllerRegistrar;
 use App\Http\Controllers\Sessao\SessaoControllerDeslogar;
 use App\Http\Controllers\Sessao\SessaoControllerLogar;
 use App\Http\Controllers\TesteControllerTesteRelBD;
@@ -51,7 +52,7 @@ Route::get('teste', [TesteControllerTesteRelBD::class, 'relBD']);
 
 Route::middleware(['auth'])->group(function () {
 
-    Route::get('/', function () {return view('inicio');});//->middleware('auth');
+    Route::get('/', function () {return view('inicio');});
 
     Route::get('clientes', [ClienteControllerTodos::class, 'obterTodos']);
     Route::get('clientes/perfil/{id}', [ClienteControllerAcessar::class, 'acessar']);
@@ -90,5 +91,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('vendas/pagamento', [VendasControllerPagamento::class, 'pagamento']);
     Route::post('vendas/revisar', [VendasControllerRevisar::class, 'revisar']);
     Route::post('vendas/registrar', [VendasControllerRegistrar::class, 'registrar']);
+
+    Route::post('pagamentos/registrarcheque', [PagamentoChequeControllerRegistrar::class, 'registrar']);
 });
 

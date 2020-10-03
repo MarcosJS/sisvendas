@@ -19,7 +19,7 @@ class UsuarioSeeder extends Seeder
         $usuario = new Usuario();
         $usuario->nome = 'Admin';
         $usuario->email =  'admin@sisvendas';
-        $usuario->senha = Hash::make('sisvendasadmin');
+        $usuario->senha = Hash::make('admin1234');
         $usuario->cpf =  '00011122233';
 
         $funcao = Funcao::find(1);

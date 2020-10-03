@@ -26,9 +26,8 @@ class UsuarioFactory extends Factory
         return [
             'nome' => $this->faker->name,
             'email' => $this->faker->email,
-            'senha' => Hash::make($this->faker->randomElement(['teste1', 'teste2'])),
             'cpf' => preg_replace("/[^0-9]/", "", $this->faker->cpf),
-            'matricula' => $this->faker->numberBetween(1,100)
+            'matricula' => $this->faker->numberBetween(100,10000)
         ];
     }
 }

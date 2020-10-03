@@ -9,6 +9,7 @@ use App\Models\VendaItem;
 use App\Validator\InclusaoItemValidator;
 use App\Validator\ValidationException;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class VendaControllerItensAdicionar extends Controller
 {
@@ -27,7 +28,8 @@ class VendaControllerItensAdicionar extends Controller
                 $venda->atualizarValores();
             } else {
                 $venda = new Venda();
-                $venda->usuario()->associate($request->session()->get('usuario')->id);
+                $venda->usuario()->associate(Auth::id());
+                date_default_timezone_set('America/Recife');
                 $venda->dtvenda = date("Y-m-d");
                 $venda->hrvenda = date("H:i:s");
                 $venda->save();

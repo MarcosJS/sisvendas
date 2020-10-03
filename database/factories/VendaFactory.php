@@ -23,12 +23,12 @@ class VendaFactory extends Factory
     public function definition()
     {
         return [
+
             'dtvenda' => $this->faker->date('Y-m-d'),
             'hrvenda' => $this->faker->time('h:i:s'),
             'totalprodutos' => $this->faker->numberBetween(1,10),
             'desconto' => 1,
             'totalliq' => $this->faker->randomFloat(2,50,200),
-            /*'dtpagamento' => $this->faker->date('Y-m-d'),*/
         ];
     }
 }

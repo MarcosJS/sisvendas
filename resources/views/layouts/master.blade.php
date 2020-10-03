@@ -7,6 +7,7 @@
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
         <link href="{{asset('css/div.css')}}" rel="stylesheet" type="text/css"/>
         <link href="{{asset('css/app.css')}}" rel="stylesheet" type="text/css"/>
+        <link href="{{asset('css/form_cheque.css')}}" rel="stylesheet" type="text/css"/>
         <title>@yield('titulo')</title>
     </head>
     <body>
@@ -69,5 +70,6 @@
 
         <script src="{{asset('js/app.js')}}" type="text/javascript"></script>
         <script src="{{asset('js/select_itens.js')}}" type="text/javascript"></script>
+        <script src="{{asset('js/form_pagamentos.js')}}" type="text/javascript"></script>
     </body>
 </html>

@@ -80,7 +80,6 @@
                                     @enderror
                                 </div>
                             </div>
-                            <input type="hidden" value="{{$venda->id}}" name="venda_id">
 
                             <button type="submit" class="btn btnform">Adicionar</button>
                         </div>

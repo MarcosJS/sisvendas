@@ -25,7 +25,7 @@ class Venda extends Model
         return $this->belongsTo('App\Models\Cliente');
     }
 
-    public function statusvenda() {
+    public function statusVenda() {
         return $this->belongsTo('App\Models\StatusVenda');
     }
 

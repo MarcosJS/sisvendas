@@ -11,6 +11,7 @@ var totalLiq = document.getElementById('totalliq');
 
 function atualizarValoresItens() {
     let newSubTotal = qtd.value * precoFinal.value;
+    newSubTotal = newSubTotal.toFixed(2);
     //console.log('qtd: ', qtd.value, 'precofinal: ', precoFinal.value, 'newsubtotal: ', newSubTotal);
     //console.log('é nan ',isNaN(newSubTotal));
     if(newSubTotal !== undefined || !isNaN(newSubTotal)){
