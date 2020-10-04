@@ -62,14 +62,15 @@ Route::middleware(['auth'])->group(function () {
     Route::post('clientes/atualizar/{id}', [ClienteControllerAtualizar::class, 'atualizar']);
     Route::get('clientes/remover/{id}', [ClienteControllerRemover::class, 'remover'])->middleware('verificarnivel');
 
-    Route::middleware('verificarnivel')->group(function () {
+    Route::middleware('can:isAdmin')->group(function () {
         Route::get('usuarios', [UsuarioControllerTodos::class, 'obterTodos']);
         Route::get('usuarios/novo', [UsuarioControllerNovo::class, 'novo']);
         Route::post('usuarios/adicionar', [UsuarioControllerAdicionar::class, 'adicionar']);
         Route::get('usuarios/remover/{id}', [UsuarioControllerRemover::class, 'remover']);
     });
-    Route::middleware('verificarproprietario')->group(function () {
-        Route::get('usuarios/perfil/{id}', [UsuarioControllerAcessar::class, 'acessar'])->middleware('verificarproprietario');
+
+    Route::middleware('can:isOwnerOrAdmin,id')->group(function () {
+        Route::get('usuarios/perfil/{id}', [UsuarioControllerAcessar::class, 'acessar']);
         Route::get('usuarios/editar/{id}', [UsuarioControllerEditar::class, 'editar']);
         Route::post('usuarios/atualizar/{id}', [UsuarioControllerAtualizar::class, 'atualizar']);
     });

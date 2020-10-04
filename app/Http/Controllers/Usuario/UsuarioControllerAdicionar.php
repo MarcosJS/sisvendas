@@ -21,7 +21,7 @@ class UsuarioControllerAdicionar extends Controller
             $usuario->senha = Hash::make($request->senha);
             $funcao = Funcao::find($request->funcao);
             if($funcao) {
-                $funcao->usuarios()->saveMany($usuario);
+                $funcao->usuarios()->saveMany([$usuario]);
                 return redirect('usuarios');
             }
         } catch (ValidationException $exception) {

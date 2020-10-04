@@ -21,7 +21,7 @@ class Usuario extends Authenticatable
 
     public static $rules= [
         'nome'=>'required|min:5|max:100',
-        'email'=>'unique:App\usuario,email',
+        'email'=>'unique:App\Models\Usuario,email',
         'senha'=>'required|min:6|confirmed',
         'cpf'=>'required|size:11',
         'matricula'=>'nullable|integer|min:1',
