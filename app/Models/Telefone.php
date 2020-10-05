@@ -12,6 +12,15 @@ class Telefone extends Model
     protected $fillable = [
         'numerotel'
     ];
+
+    public static $rules = [
+        'numerotel' => 'nullable|size:11'
+    ];
+
+    public static $messages = [
+        'numerotel.size' => 'O telefone deve ter apenas 11 digitos'
+    ];
+
     public function cliente() {
         return $this->belongsTo('App\Models\Cliente');
     }

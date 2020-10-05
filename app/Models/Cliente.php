@@ -13,6 +13,26 @@ class Cliente extends Model
         'nome', 'datanasc', 'cpf', 'modcredito', 'status'
     ];
 
+    public static $rules = [
+        'nome'=>'required|min:5|max:100',
+        'datanasc' => 'date',
+        'cpf'=>'required|size:11|unique:App\Models\Cliente',
+        'modcredito' => 'boolean',
+        'status' => 'boolean'
+    ];
+
+    public static $messages = [
+        'nome.required'=>'O campo nome é obrigatório',
+        'nome.min'=>'O nome deve ter no mínimo 5 letras',
+        'nome.max'=>'O nome deve ter no máximo 100 letras',
+        'datanasc.*'=>'Neste campo deve ser informada uma data',
+        'cpf.required'=>'O campo cpf é obrigatório',
+        'cpf.size'=>'O cpf deve ter apenas 11 digitos',
+        'cpf.unique'=>'Esse numero de cpf já esta cadastrado',
+        'modcredito'=>'Este campo é do tipo booleno',
+        'status'=>'Este campo é do tipo booleno',
+    ];
+
     public function endereco() {
         return $this->hasOne('App\Models\Endereco');
     }

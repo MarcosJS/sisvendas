@@ -17,7 +17,7 @@ class CreateClientesTable extends Migration
             $table->id();
             $table->timestamps();
             $table->string('nome', 100);
-            $table->date('datanasc');
+            $table->date('datanasc')->nullable();
             $table->string('cpf', 11)->unique();
             $table->boolean('modcredito')->default(false);
             $table->boolean('status')->default(true);

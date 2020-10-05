@@ -13,6 +13,31 @@ class Venda extends Model
         'dtvenda', 'hrvenda', 'totalprodutos', 'desconto', 'totalliq'
     ];
 
+    public  static $rules = [
+        'dtvenda' => 'require|date',
+        'hrvenda' => 'require|date_format:H:i:s',
+        'totalprodutos' => 'numeric|min:0',
+        'desconto' => 'numeric|min:0|max:1',
+        'totalliq' => 'numeric|min:0'
+    ];
+
+    public static $messages = [
+        'dtvenda.require' => 'O campo data é obrigatório',
+        'dtvenda.date' => 'Este campo deve ser do tipo data',
+        'hrvenda.require' => 'O campo hora é obrigatório',
+        'hrvenda.date_format:H:i:s' => 'Este campo deve ser do timpo hora (H:M:S)',
+        'totalprodutos.required' => 'O campo totalprodutos é obrigatório',
+        'totalprodutos.numeric' => 'O campo totalprodutos deve ser do  tipo numerico',
+        'totalprodutos.min' => 'O totalprodutos deve ser maior que 0 (zero)',
+        'desconto.required' => 'O campo desconto é obrigatório',
+        'desconto.numeric' => 'O campo desconto deve ser do  tipo numerico',
+        'desconto.min' => 'O desconto deve ser maior que 0 (zero)',
+        'desconto.max' => 'O desconto deve ser menor que 1 (um)',
+        'totalliq.required' => 'O campo totalliq é obrigatório',
+        'totalliq.numeric' => 'O campo totalliq deve ser do  tipo numerico',
+        'totalliq.min' => 'O totalliq deve ser maior que 0 (zero)',
+    ];
+
     public function vendaItens() {
         return $this->hasMany('App\Models\VendaItem');
     }
