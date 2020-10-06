@@ -16,9 +16,8 @@ class CadastrarProdutoTest extends DuskTestCase
     public function testExample()
     {
         $this->browse(function (Browser $browser) {
-            $browser->visit('/');
-                //->pause(2000)
-                    //->assertSee('ID');
+            $browser->visit('/')
+                ->assertSee('ID');
         });
     }
 }
