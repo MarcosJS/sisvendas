@@ -21,7 +21,7 @@ class CreateUsuariosTable extends Migration
             $table->string('senha');
             $table->rememberToken();
             $table->string('cpf', 11)->unique();
-            $table->integer('matricula')->unique()->nullable();
+            $table->integer('matricula')->nullable();
             $table->boolean('status')->default(true);
             $table->integer('funcao_id')->unsigned();
             $table->foreign('funcao_id')->references('id')->on('funcaos');

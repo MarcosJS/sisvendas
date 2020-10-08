@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateStatusPagamentosTable extends Migration
+class CreateEmitentesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,14 @@ class CreateStatusPagamentosTable extends Migration
      */
     public function up()
     {
-        Schema::create('status_pagamentos', function (Blueprint $table) {
+        Schema::create('emitentes', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
-            $table->string('nomestatus', 20)->unique();
+            $table->string('tipo', 20);
+            $table->string('inscricao', 14);
+            $table->string('nome', 100);
+            $table->integer('cheque_id')->unsigned();
+            $table->foreign('cheque_id')->references('id')->on('cheques');
         });
     }
 
@@ -27,6 +31,6 @@ class CreateStatusPagamentosTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('status_pagamentos');
+        Schema::dropIfExists('emitentes');
     }
 }

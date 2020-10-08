@@ -14,8 +14,15 @@ class ChequeFactory extends Factory
      */
     public function definition()
     {
+        $numero = Cheque::count();
         return [
-            'numero' => $this->faker->numberBetween(100,1000)
+            'numero' => $numero + 1000,
+            'valor' => $this->faker->randomFloat(2,50,1000),
+            'vencimento' => $this->faker->date('Y-m-d'),
+            'emissao' => $this->faker->date('Y-m-d'),
+            'banco' => $this->faker->numberBetween(100,100),
+            'agencia' => $this->faker->numberBetween(1000, 5000),
+            'contacorrente' => $this->faker->bankAccountNumber
         ];
     }
 }

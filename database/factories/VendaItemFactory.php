@@ -26,7 +26,7 @@ class VendaItemFactory extends Factory
             'qtd' => $this->faker->numberBetween(1,20),
             'precofinal' => $this->faker->randomFloat(2, 1,3),
             'subtotal' => $this->faker->randomFloat(2, 3, 6),
-            'produto_id' => $this->faker->numberBetween(1,10)
+            'produto_id' => $this->faker->numberBetween(1,6)
         ];
     }
 }

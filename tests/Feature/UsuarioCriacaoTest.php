@@ -4,6 +4,7 @@ namespace Tests\Feature;
 
 use App\Models\Usuario;
 use Database\Seeders\DatabaseTesteSeeder;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Auth;
 use Tests\TestCase;
@@ -11,6 +12,23 @@ use Tests\TestCase;
 class UsuarioCriacaoTest extends TestCase
 {
     use RefreshDatabase;
+
+    public function seeds() {
+        $this->seed();
+        $this->seed(DatabaseTesteSeeder::class);
+    }
+
+    private function usuarioNivelUm() {
+        return Usuario::whereHas('funcao', function(Builder $query) {
+            $query->where('nivel', '=', 1);
+        })->first();
+    }
+
+    private function usuarioNivelDois() {
+        return Usuario::whereHas('funcao', function(Builder $query) {
+            $query->where('nivel', '=', 2);
+        })->first();
+    }
 
     private function dadosDoUsuario() {
         $usuario =  Usuario::factory()->make();
@@ -29,8 +47,7 @@ class UsuarioCriacaoTest extends TestCase
     }
 
     public function testUsuarioAutenticadoAcessaAPaginaInicial() {
-        $this->seed();
-        $this->seed(DatabaseTesteSeeder::class);
+        $this->seeds();
         $usuario = Usuario::find(1);
         $response = $this
             ->actingAs($usuario)
@@ -59,81 +76,77 @@ class UsuarioCriacaoTest extends TestCase
     }
 
     public function testUsuarioNaoAutenticadoNaoRemoveQualquerUsusario() {
-        $this->seed();
-        $this->seed(DatabaseTesteSeeder::class);
-        $response = $this->get('usuarios/remover/2');
+        $this->seeds();
+        $response = $this->get('usuarios/remover/1');
         $response
             ->assertStatus(302)
             ->assertRedirect('login');
     }
 
     public function testUsuarioAutenticadoNivelUmNaoAcessaPagDeCadastro() {
-        $this->seed();
-        $this->seed(DatabaseTesteSeeder::class);
-        $usuario = Usuario::find(3);
+        $this->seeds();
+        $usuarioNivelUm = $this->usuarioNivelUm();
         $response = $this
-            ->actingAs($usuario)
+            ->actingAs($usuarioNivelUm)
             ->get('usuarios/novo');
         $response->assertStatus(403);
     }
 
     public function testUsuarioAutenticadoNivelUmNaoAdicionaQualquerUsuario() {
-        $this->seed();
-        $this->seed(DatabaseTesteSeeder::class);
+        $this->seeds();
+        $usuarioNivelUm = $this->usuarioNivelUm();
         $dados = $this->dadosDoUsuario();
-        $usuario = Usuario::find(3);
         $response = $this
-            ->actingAs($usuario)
+            ->actingAs($usuarioNivelUm)
             ->post('usuarios/adicionar', $dados);
         $response->assertStatus(403);
     }
 
     public function testUsuarioAutenticadoNivelUmNaoAcessaListaDeTodosUsuarios() {
-        $this->seed();
-        $this->seed(DatabaseTesteSeeder::class);
-        $usuario = Usuario::find(3);
+        $this->seeds();
+        $usuarioNivelUm = $this->usuarioNivelUm();
         $response = $this
-            ->actingAs($usuario)
+            ->actingAs($usuarioNivelUm)
             ->get('usuarios');
         $response->assertStatus(403);
     }
 
     public function testUsuarioAutenticadoNivelUmNaoRemoveQualquerUsuario() {
-        $this->seed();
-        $this->seed(DatabaseTesteSeeder::class);
-        $usuario = Usuario::find(3);
+        $this->seeds();
+        $usuarioNivelUm = $this->usuarioNivelUm();
+        $usuarioDiferente = Usuario::where('id', '!=', $usuarioNivelUm->id)->first();
         $response = $this
-            ->actingAs($usuario)
-            ->get('usuarios/remover/2');
+            ->actingAs($usuarioNivelUm)
+            ->get('usuarios/remover/'.$usuarioDiferente->id);
         $response->assertStatus(403);
     }
 
     public function testUsuarioAutenticadoNivelDoisAcessaListaDeTodosUsuarios() {
-        $this->seed();
-        $this->seed(DatabaseTesteSeeder::class);
-        $usuario = Usuario::find(1);
+        $this->seeds();
+        $usuarioNivelDois = $this->usuarioNivelDois();
         $response = $this
-            ->actingAs($usuario)
+            ->actingAs($usuarioNivelDois)
             ->get('usuarios');
         $response->assertStatus(200);
     }
 
     public function testUsuarioAutenticadoNivelDoisAcessaPagDeCadastro() {
-        $this->seed();
-        $this->seed(DatabaseTesteSeeder::class);
-        $usuario = Auth::loginUsingId(1);
-        $response = $this->get('usuarios/novo');
+        $this->seeds();
+        $usuarioNivelDois = $this->usuarioNivelDois();
+        $usuario = Auth::loginUsingId($usuarioNivelDois->id);
+        $response = $this
+            ->actingAs($usuario)
+            ->get('usuarios/novo');
         $response->assertStatus(200);
     }
 
     public function testUsuarioAutenticadoNivelDoisAdicionaUsuarioIncorretamente() {
-        $this->seed();
-        $this->seed(DatabaseTesteSeeder::class);
+        $this->seeds();
         $dados = $this->dadosDoUsuario();
         $dados['cpf'] = '';
-        $usuario = Usuario::find(1);
+        $usuarioNivelDois = $this->usuarioNivelDois();
         $response = $this
-            ->actingAs($usuario)
+            ->actingAs($usuarioNivelDois)
             ->post('usuarios/adicionar', $dados);
         $response->assertStatus(302)
             ->assertRedirect('usuarios/novo')
@@ -141,12 +154,11 @@ class UsuarioCriacaoTest extends TestCase
     }
 
     public function testUsuarioAutenticadoNivelDoisAdicionaUsuarioCorretamente() {
-        $this->seed();
-        $this->seed(DatabaseTesteSeeder::class);
+        $this->seeds();
         $dados = $this->dadosDoUsuario();
-        $usuario = Usuario::find(1);
+        $usuarioNivelDois = $this->usuarioNivelDois();
         $response = $this
-            ->actingAs($usuario)
+            ->actingAs($usuarioNivelDois)
             ->post('usuarios/adicionar', $dados);
         $response->assertStatus(302)
             ->assertRedirect('usuarios')
@@ -154,12 +166,12 @@ class UsuarioCriacaoTest extends TestCase
     }
 
     public function testUsuarioAutenticadoNivelDoisRemoveQualquerUsuario() {
-        $this->seed();
-        $this->seed(DatabaseTesteSeeder::class);
-        $usuario = Usuario::find(1);
+        $this->seeds();
+        $usuarioNivelDois = $this->usuarioNivelDois();
+        $usuarioDiferente = Usuario::where('id', '!=', $usuarioNivelDois->id)->first();
         $response = $this
-            ->actingAs($usuario)
-            ->get('usuarios/remover/2');
+            ->actingAs($usuarioNivelDois)
+            ->get('usuarios/remover/'.$usuarioDiferente->id);
         $response->assertStatus(302)
             ->assertRedirect('usuarios');
     }

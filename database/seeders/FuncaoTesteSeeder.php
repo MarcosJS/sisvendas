@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use App\Models\Funcao;
 use Illuminate\Database\Seeder;
+use Illuminate\Database\Eloquent\Factories\Sequence;
 
 class FuncaoTesteSeeder extends Seeder
 {
@@ -14,14 +15,12 @@ class FuncaoTesteSeeder extends Seeder
      */
     public function run()
     {
-        $funcao = new Funcao();
-        $funcao->nomefuncao = 'GERENTE';
-        $funcao->nivel = 2;
-        $funcao->save();
-
-        $funcao = new Funcao();
-        $funcao->nomefuncao = 'VENDEDOR';
-        $funcao->nivel = 1;
-        $funcao->save();
+        Funcao::factory()->count(3)
+            ->state(new Sequence(
+                ['nomefuncao' => 'VENDEDOR'],
+                ['nomefuncao' => 'GERENTE', 'nivel' => 2],
+                ['nomefuncao' => 'CONTROLADOR DE ESTOQUE']
+            ))
+            ->create();
     }
 }

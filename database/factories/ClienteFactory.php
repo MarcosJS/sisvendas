@@ -21,12 +21,21 @@ class ClienteFactory extends Factory
 {
     protected $model = Cliente::class;
 
+    private function cpfCliente($cpf) {
+        $cpfCadastrados = Cliente::where('cpf', '=', $cpf)->count();
+        if($cpfCadastrados > 0) {
+            $cpf = $this->faker->cpf;
+            return $this->cpfCliente($cpf);
+        }
+        return $cpf;
+    }
+
     public function definition()
     {
         return [
                 'nome' => $this->faker->name,
                 'datanasc' => $this->faker->date('Y-m-d','now'),
-                'cpf' => preg_replace("/[^0-9]/", "", $this->faker->cpf)
+                'cpf' => preg_replace("/[^0-9]/", "", $this->cpfCliente($this->faker->cpf))
                 ];
     }
 }

@@ -4,6 +4,7 @@ namespace Tests\Feature;
 
 use App\Models\Usuario;
 use Database\Seeders\DatabaseTesteSeeder;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Auth;
 use Tests\TestCase;
@@ -12,9 +13,21 @@ class UsuarioAtualizacaoTest extends TestCase
 {
     use RefreshDatabase;
 
-    public function seeds() {
+    private function seeds() {
         $this->seed();
         $this->seed(DatabaseTesteSeeder::class);
+    }
+
+    private function usuarioNivelUm() {
+        return Usuario::whereHas('funcao', function(Builder $query) {
+            $query->where('nivel', '=', 1);
+        })->first();
+    }
+
+    private function usuarioNivelDois() {
+        return Usuario::whereHas('funcao', function(Builder $query) {
+            $query->where('nivel', '=', 2);
+        })->first();
     }
 
     public function testUsuarioNaoAutenticadoNaoAcessaQualquerPerfil() {
@@ -26,25 +39,30 @@ class UsuarioAtualizacaoTest extends TestCase
 
     public function testUsuarioAutenticadoNivelUmNaoAcessaPerfilDiferenteDoSeu() {
         $this->seeds();
-        $usuario = Auth::loginUsingId(3);
+        $usuarioNivelUm = $this->usuarioNivelUm();
+        $usuarioDiferente = Usuario::where('id', '!=', $usuarioNivelUm->id)->first();
+        $usuario = Auth::loginUsingId($usuarioNivelUm->id);
         $response = $this->actingAs($usuario)
-            ->get('usuarios/perfil/1');
+            ->get('usuarios/perfil/'.$usuarioDiferente);
         $response->assertStatus(403);
     }
 
     public function testUsuarioAutenticadoNivelUmAcessaSeuProprioPerfil() {
         $this->seeds();
-        $usuario = Auth::loginUsingId(3);
+        $usuarioNivelUm = $this->usuarioNivelUm();
+        $usuario = Auth::loginUsingId($usuarioNivelUm->id);
         $response = $this->actingAs($usuario)
-            ->get('usuarios/perfil/3');
+            ->get('usuarios/perfil/'.Auth::id());
         $response->assertStatus(200);
     }
 
     public function testUsuarioAutenticadoNivelDoisAcessaQualquerPerfil() {
         $this->seeds();
-        $usuario = Auth::loginUsingId(1);
+        $usuarioNivelDois = $this->usuarioNivelDois();
+        $usuarioDiferente = Usuario::where('id', '!=', $usuarioNivelDois->id)->first();
+        $usuario = Auth::loginUsingId($usuarioNivelDois->id);
         $response = $this->actingAs($usuario)
-            ->get('usuarios/perfil/3');
+            ->get('usuarios/perfil/'.$usuarioDiferente->id);
         $response->assertStatus(200);
     }
 
@@ -57,25 +75,30 @@ class UsuarioAtualizacaoTest extends TestCase
 
     public function testUsuarioAutenticadoNivelUmNaoAcessaPagDeEdicaoDeOutroUsuario() {
         $this->seeds();
-        $usuario = Auth::loginUsingId(3);
+        $usuarioNivelUm = $this->usuarioNivelUm();
+        $usuarioDiferente = Usuario::where('id', '!=', $usuarioNivelUm->id)->first();
+        $usuario = Auth::loginUsingId($usuarioNivelUm->id);
         $response = $this->actingAs($usuario)
-            ->get('usuarios/editar/2');
+            ->get('usuarios/editar/'.$usuarioDiferente->id);
         $response->assertStatus(403);
     }
 
-    public function testUsuarioAutenticadoNivelUmAcessaPagDeEdicaoDosSeusPropriosDados() {
+    public function testUsuarioAutenticadoNivelUmAcessaSuaPropriaPagDeEdicao() {
         $this->seeds();
-        $usuario = Auth::loginUsingId(3);
+        $usuarioNivelUm = $this->usuarioNivelUm();
+        $usuario = Auth::loginUsingId($usuarioNivelUm->id);
         $response = $this->actingAs($usuario)
-            ->get('usuarios/editar/3');
+            ->get('usuarios/editar/'.Auth::id());
         $response->assertStatus(200);
     }
 
-    public function testUsuarioAutenticadoDoisAcessaPagDeEdicaoDeQualquerUsuario() {
+    public function testUsuarioAutenticadoNivelDoisAcessaPagDeEdicaoDeQualquerUsuario() {
         $this->seeds();
-        $usuario = Auth::loginUsingId(1);
+        $usuarioNivelDois = $this->usuarioNivelDois();
+        $usuarioDiferente = Usuario::where('id', '!=', $usuarioNivelDois->id)->first();
+        $usuario = Auth::loginUsingId($usuarioNivelDois->id);
         $response = $this->actingAs($usuario)
-            ->get('usuarios/editar/2');
+            ->get('usuarios/editar/'.$usuarioDiferente->id);
         $response->assertStatus(200);
     }
 
@@ -91,34 +114,36 @@ class UsuarioAtualizacaoTest extends TestCase
 
     public function testUsuarioAutenticadoNivelUmNaoAtualizaOutroUsuario() {
         $this->seeds();
-        $dados = Usuario::find(1);
-        $dados = $dados->toArray();
+        $usuarioNivelUm = $this->usuarioNivelUm();
+        $usuarioDiferente = Usuario::where('id', '!=', $usuarioNivelUm->id)->first();
+        $dados = $usuarioDiferente->toArray();
         $dados['nome'] = 'Nome alterado';
-        $usuario = Auth::loginUsingId(3);
+        $usuario = Auth::loginUsingId($usuarioNivelUm->id);
         $response = $this->actingAs($usuario)
-            ->post('usuarios/atualizar/1', $dados);
+            ->post('usuarios/atualizar/'.$usuarioDiferente->id, $dados);
         $response->assertStatus(403);
     }
 
     public function testUsuarioAutenticadoNivelUmAtualizaSeusPropriosDados() {
         $this->seeds();
-        $dados = Usuario::find(3);
-        $dados = $dados->toArray();
+        $usuarioNivelUm = $this->usuarioNivelUm();
+        $dados = $usuarioNivelUm->toArray();
         $dados['nome'] = 'Nome alterado';
-        $usuario = Auth::loginUsingId(3);
+        $usuario = Auth::loginUsingId($usuarioNivelUm->id);
         $response = $this->actingAs($usuario)
-            ->post('usuarios/atualizar/3', $dados);
+            ->post('usuarios/atualizar/'.$usuarioNivelUm->id, $dados);
         $response->assertStatus(200);
     }
 
     public function testUsuarioAutenticadoNivelDoisAtualizaDadosDeQualquerUsuario() {
         $this->seeds();
-        $dados = Usuario::find(3);
-        $dados = $dados->toArray();
+        $usuarioNivelDois = $this->usuarioNivelDois();
+        $usuarioDiferente = Usuario::where('id', '!=', $usuarioNivelDois->id)->first();
+        $dados = $usuarioDiferente->toArray();
         $dados['nome'] = 'Nome alterado';
-        $usuario = Auth::loginUsingId(1);
+        $usuario = Auth::loginUsingId($usuarioNivelDois->id);
         $response = $this->actingAs($usuario)
-            ->post('usuarios/atualizar/3', $dados);
+            ->post('usuarios/atualizar/'.$usuarioDiferente->id, $dados);
         $response->assertStatus(200);
     }
 }
