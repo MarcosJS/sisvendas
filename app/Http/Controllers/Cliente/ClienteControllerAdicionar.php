@@ -34,10 +34,12 @@ class ClienteControllerAdicionar extends Controller
                 $telefone->fill($request->all());
                 $cliente->telefone()->saveMany([$telefone]);
             }
-
-            return redirect('clientes');
+            if($request->session()->get('venda_id')) {
+                return redirect()->route('pagamento');
+            }
+            return redirect()->route('clientes');
         } catch (ValidationException $exception) {
-            return redirect('clientes/novo')
+            return redirect()->route('novocliente')
                 ->withErrors($exception->getValidator())
                 ->withInput();
         }

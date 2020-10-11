@@ -30,7 +30,9 @@
                 <td scope="row">{{$cliente->modcredito}}</td>
                 <td scope="row">{{$cliente->status}}</td>
                 <td scope="row">{{$cliente->endereco->cidade}}</td>
+                @if(count($cliente->telefones) > 0)
                 <td scope="row">{{$cliente->telefones[0]->numerotel}}</td>
+                @endif
             </tr>
         @endforeach
     </table>

@@ -18,11 +18,13 @@ class VendasControllerRegistrar extends Controller
     public function registrar(Request $request)
     {
         /*Recuperando a venda no banco de dados*/
-        $venda = Venda::find($request->venda_id);
+        $venda = Venda::find($request->session()->get('venda_id'));
 
-        /*Alterando o status da venda*/
+        /*Alterando o status da venda e apagando a sessao*/
         $status = StatusVenda::where('nomestatus', 'CONCLUIDO')->first();
-        $venda->statusvenda()->associate($status);
+        $venda->statusVenda()->associate($status);
+        $venda->save();
+        $request->session()->forget('venda_id');
         return redirect('/');
     }
 }

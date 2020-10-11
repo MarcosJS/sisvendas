@@ -10,6 +10,9 @@ use Illuminate\Http\Request;
 class VendaControllerNovo extends Controller
 {
     public function novo() {
+        if(session()->get('venda_id')) {
+            return redirect()->route('pagamento');
+        }
         $produtos = Produto::all();
         $venda = new Venda();
         return view('vendas.venda_itens', ['produtos' => $produtos, 'venda' => $venda]);

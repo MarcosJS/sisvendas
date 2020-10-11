@@ -11,8 +11,8 @@
 
         <h1>Operação de Venda - Revisão</h1>
         <div>
-            <a href="/vendas/pagamento">Voltar</a>
-            <a href="/vendas/cancelar">Cancelar</a>
+            <a href="{{route('pagamento')}}">Voltar</a>
+            <a href="{{route('cancelar')}}">Cancelar</a>
         </div>
 
         <div>
@@ -50,10 +50,11 @@
                     <tr><td>Hora da Venda: </td><td><input type="text" name="hrvenda" value="{{$venda->hrvenda}}" readonly="true"/></td></tr>
                     <tr><td>Total dos Produtos: </td><td><input type="text" name="totalprodutos" value="{{$venda->totalprodutos}}" readonly="true"/></td></tr>
                     <tr><td>Total Líquido: </td><td><input type="text" name="totalliq" value="{{$venda->totalliq}}" readonly="true"/></td></tr>
-                    <tr><td>Método de Pagamento: </td><td><input type="text" name="metodopg" value="{{$venda->metodopagamento->nomemetodopagamento}}" readonly="true"/></td></tr>
+                    @foreach($pagamentos as $pagamento)
+                    <tr><td>Método de Pagamento: </td><td><input type="text" name="metodopg" value="{{$pagamento->tipo}}" readonly="true"/></td></tr>
+                    @endforeach
                 </table>
 
-                <input type="hidden" value="{{$venda->id}}" name="venda_id">
                 <input type="submit" value="Concluir"/>
             </div>
 

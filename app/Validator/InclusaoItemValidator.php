@@ -16,5 +16,6 @@ class InclusaoItemValidator
         if (!$validator->errors()->isEmpty()) {
             throw new ValidationException($validator, "Erro na validação da inclusão do item");
         }
+        return $validator;
     }
 }

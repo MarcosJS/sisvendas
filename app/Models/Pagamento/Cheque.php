@@ -12,7 +12,7 @@ class Cheque extends Model
     protected $fillable = [
         'numero', 'valor', 'vencimento', 'emissao',
         'banco', 'agencia', 'contacorrente',
-        'portador', 'observacoes'
+        'portador'
     ];
 
     public static $rules = [

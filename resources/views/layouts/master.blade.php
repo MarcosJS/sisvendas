@@ -20,11 +20,11 @@
 
                 <div class="list-group list-group-flush">
                     @if(auth()->check())
-                        <a class="list-group-item list-group-item-action" href="/sisvendaspdv">SISVendas PDV - Em construção</a>
-                        <a class="list-group-item list-group-item-action" href="#">Clientes - Em construção</a>
-                        <a class="list-group-item list-group-item-action" href="#">Produtos - Em construção</a>
+                        <a class="list-group-item list-group-item-action" href="{{route('sisvendaspdv')}}">SISVendas PDV</a>
+                        <a class="list-group-item list-group-item-action" href="{{route('clientes')}}">Clientes</a>
+                        <a class="list-group-item list-group-item-action" href="{{route('produtos')}}">Produtos</a>
                         @if(auth()->user()->funcao->nivel === 2)
-                            <a class="list-group-item list-group-item-action" href="/usuarios">Usuarios</a>
+                            <a class="list-group-item list-group-item-action" href="{{route('usuarios')}}">Usuarios</a>
                         @endif
                     @endif
                     <a class="list-group-item list-group-item-action" href="#">Contato</a>
@@ -38,7 +38,7 @@
 
                     <div>
                         @if(auth()->check())
-                        <p class="text-white">{{auth()->user()->nome}} - {{auth()->user()->funcao->nomefuncao}} <a href="/deslogar">Sair</a></p>
+                        <p class="text-white">{{auth()->user()->nome}} - {{auth()->user()->funcao->nomefuncao}} <a href="{{route('deslogar')}}">Sair</a></p>
                         @endif
                     </div>
 
@@ -56,9 +56,7 @@
                     </div>
                 </nav>
 
-                <div class="container-fluid">
-                    @yield('conteudo')
-                </div>
+                @yield('conteudo')
 
             </div>
 

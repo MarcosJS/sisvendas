@@ -2,5 +2,14 @@
     top: 25%;
     left: 25%;
     border: solid 2px #495057;
-    background-color: #d6d8db;
+    background-color: white;
+    z-index: 1;
+}
+
+#listaclientes {
+    top: 25%;
+    left: 25%;
+    border: solid 2px #495057;
+    background-color: white;
+    z-index: 1;
 }

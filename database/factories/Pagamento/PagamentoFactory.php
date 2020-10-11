@@ -2,12 +2,12 @@
 
 namespace Database\Factories\Pagamento;
 
-use App\Models\Pagamento\PagamentoCheque;
+use App\Models\Pagamento\Pagamento;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
-class PagamentoChequeFactory extends Factory
+class PagamentoFactory extends Factory
 {
-    protected $model = PagamentoCheque::class;
+    protected $model = Pagamento::class;
 
     public function definition()
     {

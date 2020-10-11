@@ -4,7 +4,7 @@ namespace Database\Seeders;
 
 use App\Models\Pagamento\Cheque;
 use App\Models\Pagamento\Emitente;
-use App\Models\Pagamento\PagamentoCheque;
+use App\Models\Pagamento\Pagamento;
 use App\Models\Venda;
 use App\Models\VendaItem;
 use Illuminate\Database\Seeder;
@@ -27,7 +27,9 @@ class VendaTesteSeeder extends Seeder
             ->create();
 
         foreach ($vendas as $venda) {
-            $pagamento = PagamentoCheque::factory()->make();
+            $pagamento = Pagamento::factory()
+                ->state(['tipo' => 'CHEQUE'])
+                ->make();
             $pagamento->venda()->associate($venda);
             $pagamento->save();
             $cheque = Cheque::factory()->make();
