@@ -27,6 +27,6 @@ class TesteControllerTesteRelBD extends Controller
         'enderecos'=>$enderecos,
         'produtos'=>$produtos,
         'vendaItens'=>$vendaItens,
-        'vendas'=>$vendas]);
+        'venda'=>$vendas]);
     }
 }

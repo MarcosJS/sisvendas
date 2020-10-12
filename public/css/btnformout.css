@@ -1,0 +1,17 @@
+.btnformout {
+    background-color: #ffffff;
+    color: #4CAF50;
+    border: 1px solid #495057;
+}
+
+.btnformout:hover {
+    background-color: #495057;
+    color: #ffffff;
+    border: 1px solid #4CAF50;
+}
+
+.btnformout-active {
+    background-color: #4CAF50;
+    color: #495057;
+    border: 1px solid #495057;
+}

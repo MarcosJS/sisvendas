@@ -8,6 +8,7 @@
         <link href="{{asset('css/div.css')}}" rel="stylesheet" type="text/css"/>
         <link href="{{asset('css/app.css')}}" rel="stylesheet" type="text/css"/>
         <link href="{{asset('css/form_cheque.css')}}" rel="stylesheet" type="text/css"/>
+        <link href="{{asset('css/btnformout.css')}}" rel="stylesheet" type="text/css"/>
         <title>@yield('titulo')</title>
     </head>
     <body>
@@ -20,7 +21,7 @@
 
                 <div class="list-group list-group-flush">
                     @if(auth()->check())
-                        <a class="list-group-item list-group-item-action" href="{{route('sisvendaspdv')}}">SISVendas PDV</a>
+                        <a class="list-group-item list-group-item-action" href="{{route('iniciovendas')}}">SISVendas PDV</a>
                         <a class="list-group-item list-group-item-action" href="{{route('clientes')}}">Clientes</a>
                         <a class="list-group-item list-group-item-action" href="{{route('produtos')}}">Produtos</a>
                         @if(auth()->user()->funcao->nivel === 2)
@@ -69,5 +70,6 @@
         <script src="{{asset('js/app.js')}}" type="text/javascript"></script>
         <script src="{{asset('js/select_itens.js')}}" type="text/javascript"></script>
         <script src="{{asset('js/form_pagamentos.js')}}" type="text/javascript"></script>
+        <script src="{{asset('js/btnformout.js')}}" type="text/javascript"></script>
     </body>
 </html>

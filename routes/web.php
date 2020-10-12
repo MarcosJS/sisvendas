@@ -25,10 +25,13 @@ use App\Http\Controllers\Usuario\UsuarioControllerAtualizar;
 use App\Http\Controllers\Usuario\UsuarioControllerEditar;
 use App\Http\Controllers\Usuario\UsuarioControllerNovo;
 use App\Http\Controllers\Usuario\UsuarioControllerRemover;
+use App\Http\Controllers\Venda\VendaControllerAcessar;
+use App\Http\Controllers\Venda\VendaControllerAtivar;
 use App\Http\Controllers\Venda\VendaControllerItens;
 use App\Http\Controllers\Venda\VendaControllerNovo;
 use App\Http\Controllers\Venda\VendaControllerItensAdicionar;
 use App\Http\Controllers\Venda\VendaControllerCancelar;
+use App\Http\Controllers\Venda\VendaControllerPDV;
 use App\Http\Controllers\Venda\VendaControllerVincularCliente;
 use App\Http\Controllers\Venda\VendasControllerPagamento;
 use App\Http\Controllers\Venda\VendasControllerRegistrar;
@@ -56,7 +59,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/', function () {return view('inicio');});
 
     Route::get('clientes', [ClienteControllerTodos::class, 'obterTodos'])->name('clientes');
-    Route::get('clientes/perfil/{id}', [ClienteControllerAcessar::class, 'acessar']);
+    Route::get('clientes/perfil/{id}', [ClienteControllerAcessar::class, 'acessar'])->name('cliente');
     Route::get('clientes/novo', [ClienteControllerNovo::class, 'novo'])->name('novocliente');
     Route::post('clientes/adicionar', [ClienteControllerAdicionar::class, 'adicionar']);
     Route::get('clientes/editar/{id}', [ClienteControllerEditar::class, 'editar']);
@@ -84,16 +87,17 @@ Route::middleware(['auth'])->group(function () {
     Route::post('produtos/atualizar/{id}', [ProdutoControllerAtualizar::class, 'atualizar']);
     Route::get('produtos/remover/{id}', [ProdutoControllerRemover::class, 'remover']);
 
-    Route::get('sisvendaspdv', function () {return view('sisvendaspdv');})->name('sisvendaspdv');
-
-    Route::get('vendas/novo', [VendaControllerNovo::class, 'novo']);
-    Route::get('vendas/itens', [VendaControllerItens::class, 'todos'])->name('itens');
-    Route::post('vendas/itens/adicionar', [VendaControllerItensAdicionar::class, 'adicionarItem'])->name('adicionaritem');
-    Route::get('vendas/cancelar', [VendaControllerCancelar::class, 'cancelar'])->name('cancelar');
-    Route::get('vendas/pagamento', [VendasControllerPagamento::class, 'pagamento'])->name('pagamento');
-    Route::get('vendas/vincularcliente/{id}', [VendaControllerVincularCliente::class, 'vincular'])->name('vincularcliente');
-    Route::post('vendas/revisar', [VendasControllerRevisar::class, 'revisar'])->name('revisarpagamento');
-    Route::post('vendas/registrar', [VendasControllerRegistrar::class, 'registrar']);
+    Route::get('venda/inicio', [VendaControllerPDV::class, 'iniciar'])->name('iniciovendas');
+    Route::get('venda/novo', [VendaControllerNovo::class, 'novo'])->name('novavenda');
+    Route::get('venda/ativar/{id}', [VendaControllerAtivar::class, 'ativar'])->name('ativarvenda');
+    Route::get('venda/acessar/{id}', [VendaControllerAcessar::class, 'acessar'])->name('acessarvenda');
+    Route::get('venda/itens', [VendaControllerItens::class, 'todos'])->name('itens');
+    Route::post('venda/itens/adicionar', [VendaControllerItensAdicionar::class, 'adicionarItem'])->name('adicionaritem');
+    Route::get('venda/cancelar', [VendaControllerCancelar::class, 'cancelar'])->name('cancelar');
+    Route::get('venda/pagamento', [VendasControllerPagamento::class, 'pagamento'])->name('pagamento');
+    Route::get('venda/vincularcliente/{id}', [VendaControllerVincularCliente::class, 'vincular'])->name('vincularcliente');
+    Route::post('venda/revisar', [VendasControllerRevisar::class, 'revisar'])->name('revisarpagamento');
+    Route::post('venda/registrar', [VendasControllerRegistrar::class, 'registrar']);
 
     Route::post('pagamentos/registrarcheque', [PagamentoChequeControllerRegistrar::class, 'registrar'])->name('registrarcheque');
 });

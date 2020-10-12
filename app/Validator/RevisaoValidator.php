@@ -31,7 +31,7 @@ class RevisaoValidator
         }
 
         if(!$validator->errors()->isEmpty()) {
-            throw new ValidationException($validator, "Erro no processamento do pagamento");
+            throw new ValidationException($validator, "Erro na revisao da venda");
         }
         return $validator;
     }

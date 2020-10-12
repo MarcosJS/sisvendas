@@ -13,7 +13,7 @@ class CreateVendasTable extends Migration
      */
     public function up()
     {
-        Schema::create('vendas', function (Blueprint $table) {
+        Schema::create('venda', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
             $table->date('dtvenda');
@@ -39,6 +39,6 @@ class CreateVendasTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('vendas');
+        Schema::dropIfExists('venda');
     }
 }

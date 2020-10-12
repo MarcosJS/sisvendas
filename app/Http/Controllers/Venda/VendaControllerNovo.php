@@ -15,6 +15,6 @@ class VendaControllerNovo extends Controller
         }
         $produtos = Produto::all();
         $venda = new Venda();
-        return view('vendas.venda_itens', ['produtos' => $produtos, 'venda' => $venda]);
+        return view('venda.venda_itens', ['produtos' => $produtos, 'venda' => $venda]);
     }
 }

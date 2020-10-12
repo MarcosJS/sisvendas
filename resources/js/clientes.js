@@ -1,5 +1,5 @@
-tabelaUsuarios = document.getElementsByClassName("linhatabelausuarios");
-for(linha in tabelaUsuarios) {
+var tabelaUsuarios = document.getElementsByClassName("linhatabelausuarios");
+for(let linha in tabelaUsuarios) {
     tabelaUsuarios[linha].onmousemove = function() {
         this.style.cursor = 'pointer';
     };

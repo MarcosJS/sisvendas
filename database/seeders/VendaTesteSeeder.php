@@ -22,7 +22,7 @@ class VendaTesteSeeder extends Seeder
             ->state([
                 'usuario_id'=>1,
                 'cliente_id'=>2,
-                'status_venda_id' => 1])
+                'status_venda_id' => 2])
             ->has(VendaItem::factory()->count(5), 'vendaItens')
             ->create();
 

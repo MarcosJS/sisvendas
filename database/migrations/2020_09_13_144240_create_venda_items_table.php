@@ -20,7 +20,7 @@ class CreateVendaItemsTable extends Migration
             $table->decimal('precofinal');
             $table->decimal('subtotal');
             $table->integer('venda_id')->unsigned();
-            $table->foreign('venda_id')->references('id')->on('vendas')->cascadeOnDelete();
+            $table->foreign('venda_id')->references('id')->on('venda')->cascadeOnDelete();
             $table->integer('produto_id')->unsigned()->nullable();
             $table->foreign('produto_id')->references('id')->on('produtos');
         });

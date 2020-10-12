@@ -25,6 +25,6 @@ class VendasControllerRegistrar extends Controller
         $venda->statusVenda()->associate($status);
         $venda->save();
         $request->session()->forget('venda_id');
-        return redirect('/');
+        return redirect('iniciovendas');
     }
 }

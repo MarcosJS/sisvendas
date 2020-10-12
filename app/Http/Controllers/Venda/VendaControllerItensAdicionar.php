@@ -38,10 +38,10 @@ class VendaControllerItensAdicionar extends Controller
             }
 
             $request->session()->put('venda_id', $venda->id);
-            return redirect('vendas/itens');
+            return redirect('venda/itens');
 
         } catch (ValidationException $exception) {
-            return redirect('vendas/itens')
+            return redirect('venda/itens')
                 ->withErrors($exception->getValidator())
                 ->withInput();
         }

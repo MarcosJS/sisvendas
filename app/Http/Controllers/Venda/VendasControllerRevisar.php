@@ -33,7 +33,7 @@ class VendasControllerRevisar extends Controller
             $venda->desconto = (1 - ($request->desconto / 100));
             $venda->atualizarValores();
 
-            return view("vendas.vendas_revisao", [
+            return view("venda.vendas_revisao", [
                 'venda' => $venda,
                 'itens' => $venda->vendaItens,
                 'cliente'=>$cliente,
