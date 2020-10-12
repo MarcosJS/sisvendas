@@ -1,64 +1,147 @@
-@extends('layouts.master')
+@extends('layouts.conteudo_op_venda')
 
-@section('titulo', 'SISVendas PDV - Pagamento')
+@section('titulo', 'SISVendas PDV - Revisão')
 
-@section('submenu')
-@include('menu_pdv')
+@section('titulo_conteudo')
+    <div id="telavalidacao" class="row">
+        <h4>Operação de Venda - Validação</h4>
+    </div>
 @endsection
 
-@section('conteudo')
-    <div class="p-3">
+@section('conteudo_view')
+    <div class="row border rounded mt-3">
 
-        <h1>Operação de Venda - Revisão</h1>
-        <div>
-            <a href="{{route('pagamento')}}">Voltar</a>
-            <a href="{{route('cancelar')}}">Cancelar</a>
-        </div>
+        <table class="table table-sm">
+            <tr>
+                <th>Cod. Produto</th>
+                <th>Nome do Produto</th>
+                <th>Quant</th>
+                <th>Preço de Tabela</th>
+                <th>Preco Final</th>
+                <th class="text-right">Subtotal</th>
+            </tr>
 
-        <div>
-            <table class="table" align="center">
+            @foreach($itens as $iten)
                 <tr>
-                    <th>Cod. Produto</th>
-                    <th>Nome do Produto</th>
-                    <th>Quant</th>
-                    <th>Preco Final</th>
-                    <th>Subtotal</th>
+                    <td>{{$iten->produto->id}}</td>
+                    <td>{{$iten->produto->nome}}</td>
+                    <td>{{$iten->qtd}}</td>
+                    <td>{{$iten->produto->preco}}</td>
+                    <td>{{$iten->precofinal}}</td>
+                    <td class="text-right">{{$iten->subtotal}}</td>
                 </tr>
+            @endforeach
+        </table>
+    </div>
 
-                @if(count($itens) > 0)
-                    @foreach($itens as $iten)
-                        <tr>
-                            <td>{{$iten->id}}</td>
-                            <td>{{$iten->nome}}</td>
-                            <td>{{$iten->qtd}}</td>
-                            <td>{{$iten->precofinal}}</td>
-                            <td>{{$iten->subtotal}}</td>
-                        </tr>
-                    @endforeach
-                @endif
-
-            </table>
-        </div>
-
-        <form action="/vendas/registrar" method="post">
-            {{csrf_field()}}
-            <div class="form">
-                <table class="table">
-                    <tr><td>Id do Cliente: </td><td><input type="text" name="idcliente" value="{{$cliente->id}}" readonly="true"/></td></tr>
-                    <tr><td>Nome do Cliente: </td><td><input type="text" name="nomecliente" value="{{$cliente->nome}}" readonly="true"></td></tr>
-                    <tr><td>Data da Venda: </td><td><input type="text" name="dtvenda" value="{{$venda->dtvenda}}" readonly="true"/></td></tr>
-                    <tr><td>Hora da Venda: </td><td><input type="text" name="hrvenda" value="{{$venda->hrvenda}}" readonly="true"/></td></tr>
-                    <tr><td>Total dos Produtos: </td><td><input type="text" name="totalprodutos" value="{{$venda->totalprodutos}}" readonly="true"/></td></tr>
-                    <tr><td>Total Líquido: </td><td><input type="text" name="totalliq" value="{{$venda->totalliq}}" readonly="true"/></td></tr>
-                    @foreach($pagamentos as $pagamento)
-                    <tr><td>Método de Pagamento: </td><td><input type="text" name="metodopg" value="{{$pagamento->tipo}}" readonly="true"/></td></tr>
-                    @endforeach
-                </table>
-
-                <input type="submit" value="Concluir"/>
+    <div class="row pb-0 mt-3">
+        <div class="col pb-0 border rounded">
+            <div class="row">
+                <div class="col">
+                    <h4>Venda nº {{$venda->id}}</h4>
+                </div>
+                <div class="col">
+                    <p class="float-right">{{date('d/m/Y', strtotime($venda->dtvenda))}}</p>
+                </div>
             </div>
 
-        </form>
-
+            <div class="row">
+                <div class="col-sm card text-white bg-secondary" style="max-width: 18rem;">
+                    <div class="card-header">Total</div>
+                    <div class="card-body">
+                        <h1 class="card-title">R$ {{$venda->totalprodutos}}</h1>
+                    </div>
+                </div>
+                <div class="col-sm ml-3 card text-white bg-dark" style="max-width: 18rem;">
+                    <div class="card-header">Desconto</div>
+                    <div class="card-body">
+                        <h1 class="card-title">{{$venda->descPorcent()}}%</h1>
+                    </div>
+                </div>
+                <div class="col-sm ml-3 card text-white bg-primary" style="max-width: 18rem;">
+                    <div class="card-header">Líquido</div>
+                    <div class="card-body">
+                        <h1 class="card-title">R$ {{$venda->totalliq}}</h1>
+                    </div>
+                </div>
+                @php
+                    $bgColor = 'bg-warning';
+                @endphp
+                @switch($venda->statusVenda->id)
+                    @case(1)
+                    @php
+                        $bgColor = 'bg-warning';
+                    @endphp
+                    @break
+                    @case(2)
+                    @php
+                        $bgColor = 'bg-success';
+                    @endphp
+                    @break
+                    @case(3)
+                    @php
+                        $bgColor = 'bg-danger';
+                    @endphp
+                    @break
+                @endswitch
+                <div class="col-sm ml-3 card text-black-50 {{$bgColor}}" style="max-width: 18rem;">
+                    <div class="card-header">Status da Venda</div>
+                    <div class="card-body">
+                        <h2 class="card-title">{{$venda->statusVenda->nomestatus}}</h2>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
+
+    <div class="row border rounded mt-3 border-success">
+        <h4>Pagamentos</h4>
+        <table class="table table-sm table-hover table-success mb-0">
+            <tr>
+                <th>Valor R$</th>
+                <th>Tipo</th>
+                <th>Data</th>
+                <th></th>
+            </tr>
+
+            @foreach($pagamentos as $pag)
+                <tr>
+                    <td>{{$pag->valor}}</td>
+                    <td>{{$pag->tipo}}</td>
+                    <td>{{date('d/m/Y', strtotime($pag->dtpagamento))}}</td>
+                    <td class="text-center"><a class="badge-info badge" href="#">Acessar</a></td>
+                </tr>
+            @endforeach
+        </table>
+    </div>
+
+    <div class="row mt-3">
+        <div class="card col">
+            <h5 class="card-header">Cliente</h5>
+            @if($cliente != null)
+                <div class="card-body">
+                    <input type="text" class="form-control" id="cliente" placeholder="Cliente" value="{{$cliente->cpf}} - {{$cliente->nome}}" readonly>
+                </div>
+            @else
+                <div class="card-body">
+                    <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                        <strong>Atenção!</strong> Considere associar um cliente
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <input type="text" class="form-control" id="cliente" placeholder="Cliente" value="">
+                </div>
+            @endif
+        </div>
+
+        <div class="card col ml-3">
+            <h5 class="card-header">Usuario</h5>
+            <div class="card-body">
+                <h5 class="card-title">{{$usuario->nome}}</h5>
+                <p class="card-text">ID: {{$usuario->id}}</p>
+            </div>
+        </div>
+    </div>
+    @include('pagamentos.lista_clientes')
 @endsection

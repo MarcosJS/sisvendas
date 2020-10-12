@@ -10,7 +10,7 @@ class Venda extends Model
     use HasFactory;
 
     protected $fillable = [
-        'dtvenda', 'hrvenda', 'totalprodutos', 'desconto', 'totalliq'
+        'dtvenda', 'hrvenda', 'totalprodutos', 'desconto', 'totalliq', 'valida'
     ];
 
     public  static $rules = [

@@ -13,7 +13,7 @@ class CreateVendasTable extends Migration
      */
     public function up()
     {
-        Schema::create('venda', function (Blueprint $table) {
+        Schema::create('vendas', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
             $table->date('dtvenda');
@@ -21,6 +21,7 @@ class CreateVendasTable extends Migration
             $table->decimal('totalprodutos')->default(0);
             $table->decimal('desconto')->default(1.0);
             $table->decimal('totalliq')->default(0);
+            $table->boolean('valida')->default(false);
 
             $table->integer('usuario_id')->unsigned();
             $table->integer('cliente_id')->unsigned()->nullable();

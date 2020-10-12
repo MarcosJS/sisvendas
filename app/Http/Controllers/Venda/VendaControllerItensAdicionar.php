@@ -25,6 +25,7 @@ class VendaControllerItensAdicionar extends Controller
 
             if($venda) {
                 $venda->vendaItens()->saveMany([$item]);
+                $venda->valida = false;
                 $venda->atualizarValores();
             } else {
                 $venda = new Venda();

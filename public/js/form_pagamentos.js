@@ -5,7 +5,7 @@ var metodopg = document.getElementById('metodopg'),
     cliente = document.getElementById('cliente'),
     closeCliente = document.getElementById('closelistclientes'),
     clientePesq = document.getElementById("clientepesq"),
-    limparCliente = document.getElementById('limparcliente');
+    removerCliente = document.getElementById('removercliente');
 
 tabelaUsuarios = document.getElementsByClassName("listaclientes");
 for(linha in tabelaUsuarios) {
@@ -46,11 +46,9 @@ if(clientePesq) {
     clientePesq.onkeyup = function (){filtrarLista()};
 }
 
-if(limparCliente) {
-    limparCliente.addEventListener('click', function () {
-        document.getElementById('idcliente').value = '';
-        cliente.value = '';
-        document.getElementById('listaclientes').hidden = true;
+if(removerCliente) {
+    removerCliente.addEventListener('click', function () {
+        location.href='desvincularcliente/';
     })
 }
 
@@ -72,13 +70,11 @@ function filtrarLista() {
 
     var filtro, table, tr, tds, i, conteudo1, conteudo2, conteudo3;
     filtro = clientePesq.value.toUpperCase();
-    console.log(filtro)
     table = document.getElementById("tabelaclientes");
     tr = table.getElementsByTagName('tr');
 
     for (i = 1; i < tr.length; i++) {
         tds = tr[i].getElementsByTagName('td')/*[0]*/;
-        console.log('colunas: ',tds);
         if (tds) {
             conteudo1 = tds[0].textContent || tds[0].innerText;
             conteudo1 = conteudo1.toUpperCase().indexOf(filtro) > -1;

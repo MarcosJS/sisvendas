@@ -23,11 +23,13 @@ class PagamentoChequeControllerRegistrar extends Controller
 
             $pagamento = new Pagamento();
             $pagamento->tipo = 'CHEQUE';
-            $pagamento->valor = $request->valorcompra;
+            $pagamento->valor = $request->valor;
             date_default_timezone_set('America/Recife');
             $pagamento->dtpagamento = date("Y-m-d");
             $pagamento->venda()->associate($venda);
             $pagamento->save();
+            $venda->valida = false;
+            $venda->save();
 
             $cheque = new Cheque();
             $cheque->fill($request->all());

@@ -3,15 +3,15 @@
 @section('titulo', 'SISVendas PDV - Itens')
 
 @section('titulo_conteudo')
-    <div id="itens" class="row">
-        <h1>Operação de Venda - Itens</h1>
+    <div id="telaitens" class="row">
+        <h4>Operação de Venda - Itens</h4>
     </div>
 @endsection
 
 @section('conteudo_view')
     @error('venda_id')
     <div class="alert alert-info alert-dismissible fade show" role="alert">
-        <strong>Info</strong> {{$message}}
+        <strong>Info: </strong> {{$message}}
         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
             <span aria-hidden="true">&times;</span>
         </button>
@@ -90,7 +90,7 @@
             </form>
         </div>
 
-        <div class="col border rounded">
+        <div class="col border rounded mt-3">
             <table class="table table-sm">
                 <tr>
                     <th>Cod. Produto</th>

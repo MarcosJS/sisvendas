@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Pagamento\PagamentoControllerExcluir;
 use App\Http\Controllers\Pagamento\PagamentoChequeControllerRegistrar;
 use App\Http\Controllers\Sessao\SessaoControllerDeslogar;
 use App\Http\Controllers\Sessao\SessaoControllerLogar;
@@ -26,7 +27,9 @@ use App\Http\Controllers\Usuario\UsuarioControllerEditar;
 use App\Http\Controllers\Usuario\UsuarioControllerNovo;
 use App\Http\Controllers\Usuario\UsuarioControllerRemover;
 use App\Http\Controllers\Venda\VendaControllerAcessar;
+use App\Http\Controllers\Venda\VendaControllerAplicarDesconto;
 use App\Http\Controllers\Venda\VendaControllerAtivar;
+use App\Http\Controllers\Venda\VendaControllerDesvincularCliente;
 use App\Http\Controllers\Venda\VendaControllerItens;
 use App\Http\Controllers\Venda\VendaControllerNovo;
 use App\Http\Controllers\Venda\VendaControllerItensAdicionar;
@@ -35,7 +38,7 @@ use App\Http\Controllers\Venda\VendaControllerPDV;
 use App\Http\Controllers\Venda\VendaControllerVincularCliente;
 use App\Http\Controllers\Venda\VendasControllerPagamento;
 use App\Http\Controllers\Venda\VendasControllerRegistrar;
-use App\Http\Controllers\Venda\VendasControllerRevisar;
+use App\Http\Controllers\Venda\VendasControllerValidar;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -96,9 +99,12 @@ Route::middleware(['auth'])->group(function () {
     Route::get('venda/cancelar', [VendaControllerCancelar::class, 'cancelar'])->name('cancelar');
     Route::get('venda/pagamento', [VendasControllerPagamento::class, 'pagamento'])->name('pagamento');
     Route::get('venda/vincularcliente/{id}', [VendaControllerVincularCliente::class, 'vincular'])->name('vincularcliente');
-    Route::post('venda/revisar', [VendasControllerRevisar::class, 'revisar'])->name('revisarpagamento');
-    Route::post('venda/registrar', [VendasControllerRegistrar::class, 'registrar']);
+    Route::get('venda/desvincularcliente', [VendaControllerDesVincularCliente::class, 'desvincular'])->name('desvincularcliente');
+    Route::get('venda/validar', [VendasControllerValidar::class, 'validar'])->name('validarpagamento');
+    Route::post('venda/aplicardesconto', [VendaControllerAplicarDesconto::class, 'aplicar'])->name('aplicardesconto');
+    Route::get('venda/registrar', [VendasControllerRegistrar::class, 'registrar'])->name('registrarvenda');
 
     Route::post('pagamentos/registrarcheque', [PagamentoChequeControllerRegistrar::class, 'registrar'])->name('registrarcheque');
+    Route::get('pagamentos/excluir/{id}', [PagamentoControllerExcluir::class, 'excluir'])->name('excluirpagamento');
 });
 

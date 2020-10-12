@@ -9,6 +9,7 @@ class SessaoControllerDeslogar extends Controller
 {
     public function deslogar() {
         Auth::logout();
+        session()->flush();
         return redirect('/');
     }
 }

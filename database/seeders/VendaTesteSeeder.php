@@ -20,6 +20,7 @@ class VendaTesteSeeder extends Seeder
     {
         $vendas = Venda::factory()->count(5)
             ->state([
+                'valida'=>true,
                 'usuario_id'=>1,
                 'cliente_id'=>2,
                 'status_venda_id' => 2])

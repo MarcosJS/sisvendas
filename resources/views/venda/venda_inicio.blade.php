@@ -10,7 +10,7 @@
 
 @section('conteudo_view')
     <div class="row mt-3">
-        @if($vendasPendentes)
+        @if(count($vendasPendentes) > 0)
             <div class="col alert alert-warning" role="alert">
                 <h4 class="alert-heading"><strong>Atenção</strong></h4>
                 <p>As sequintes vendas estão em aberto:</p>

@@ -20,7 +20,7 @@ class CreateEmitentesTable extends Migration
             $table->string('inscricao', 14);
             $table->string('nome', 100);
             $table->integer('cheque_id')->unsigned();
-            $table->foreign('cheque_id')->references('id')->on('cheques');
+            $table->foreign('cheque_id')->references('id')->on('cheques')->cascadeOnDelete();
         });
     }
 

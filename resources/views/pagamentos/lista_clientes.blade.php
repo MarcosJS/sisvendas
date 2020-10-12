@@ -27,7 +27,7 @@
             <button type="submit" class="btn btnform">Novo</button>
         </form>
         <div class="col">
-            <button id="limparcliente" type="submit" class="btn btn-outline-secondary float-right">Sem Cliente</button>
+            <button id="removercliente" type="submit" class="btn btn-outline-secondary float-right">Remover Cliente</button>
         </div>
 
     </div>

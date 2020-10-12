@@ -8,19 +8,20 @@ class RevisaoValidator
 {
     public static function validate($data) {
         $rules = [
-            'cliente' => 'required'
+            'pagamento' => 'required'
         ];
 
         $messages = [
-            'cliente.*' => 'Nenhum cliente foi selecionado'
+            'pagamento.*' => 'Nenhum pagamento foi realizado'
         ];
+
         $validator = \Validator::make($data, $rules, $messages);
 
         $venda = Venda::find($data['venda_id']);
+
         $pagamentos = $venda->pagamentos;
-        if(count($pagamentos) == 0) {
-            $validator->errors()->add('pagamento', 'Nenhum pagamento foi realizado');
-        } else{
+
+        if($validator->errors()->isEmpty()) {
             $somaPagamento = 0;
             foreach ($pagamentos as $pagamento) {
                 $somaPagamento += $pagamento->valor;

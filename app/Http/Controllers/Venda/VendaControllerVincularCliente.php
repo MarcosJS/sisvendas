@@ -13,6 +13,6 @@ class VendaControllerVincularCliente extends Controller
         $cliente =Cliente::find($id);
         $venda->cliente()->associate($cliente);
         $venda->save();
-        return redirect()->route('pagamento');
+        return redirect()->back();
     }
 }
