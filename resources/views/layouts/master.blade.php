@@ -71,5 +71,6 @@
         <script src="{{asset('js/select_itens.js')}}" type="text/javascript"></script>
         <script src="{{asset('js/form_pagamentos.js')}}" type="text/javascript"></script>
         <script src="{{asset('js/btnformout.js')}}" type="text/javascript"></script>
+        <script src="{{asset('js/vendas.js')}}" type="text/javascript"></script>
     </body>
 </html>

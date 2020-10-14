@@ -1,5 +1,5 @@
 var inicioVendas = document.getElementById('iniciovendas'),
-    consultarVendas = document.getElementById('consultarvendas'),
+    telaConsultarVendas = document.getElementById('telaconsultarvendas'),
     telaitens = document.getElementById('telaitens'),
     telapagamento = document.getElementById('telapagamento'),
     telavalidacao = document.getElementById('telavalidacao'),
@@ -15,7 +15,7 @@ if (inicioVendas) {
     btn.classList.add('btnformout-active');
 }
 
-if (consultarVendas) {
+if (telaConsultarVendas) {
     btn = document.getElementById('btnconsultarvendas');
     btn.classList.add('btnformout-active');
 }

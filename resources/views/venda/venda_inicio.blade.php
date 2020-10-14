@@ -4,7 +4,7 @@
 
 @section('titulo_conteudo')
     <div id="iniciovendas" class="row">
-        <h1>SISVendas PDV</h1>
+        <h4>SISVendas PDV</h4>
     </div>
 @endsection
 

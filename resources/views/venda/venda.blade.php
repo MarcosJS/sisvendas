@@ -3,12 +3,20 @@
 @section('titulo', 'SISVendas PDV - Dados da Venda')
 
 @section('titulo_conteudo')
-    <div id="iniciovendas" class="row">
+    <div id="telavenda" class="row">
         <h4>Dados da Venda</h4>
     </div>
 @endsection
 
 @section('conteudo_view')
+    @error('warning')
+        <div class="alert alert-warning alert-dismissible fade show" role="alert">
+            <strong>Atenção: </strong> {{$message}}
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+    @enderror
     <div class="row mt-3">
         <a href="{{route('ativarvenda', $venda->id)}}" class="btn btnform">Ativar</a>
     </div>
@@ -68,7 +76,7 @@
                     </div>
                 </div>
                 @php
-                    $bgColor = 'bg-warning';
+                    $bgColor = '';
                 @endphp
                 @switch($venda->statusVenda->id)
                     @case(1)

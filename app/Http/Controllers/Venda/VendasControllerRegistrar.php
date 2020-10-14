@@ -22,8 +22,8 @@ class VendasControllerRegistrar extends Controller
                 $venda->save();
                 $request->session()->forget('venda_id');
                 return redirect()
-                    ->route('iniciovendas')
-                    ->with(['success', 'Venda finalizada com sucesso!']);
+                    ->route('listavendas')
+                    ->with(['success', 'Venda finalizada com sucesso!', 'venda_id' => $venda->id]);
             }
 
         }

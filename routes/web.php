@@ -35,6 +35,7 @@ use App\Http\Controllers\Venda\VendaControllerNovo;
 use App\Http\Controllers\Venda\VendaControllerItensAdicionar;
 use App\Http\Controllers\Venda\VendaControllerCancelar;
 use App\Http\Controllers\Venda\VendaControllerPDV;
+use App\Http\Controllers\Venda\VendaControllerTodos;
 use App\Http\Controllers\Venda\VendaControllerVincularCliente;
 use App\Http\Controllers\Venda\VendasControllerPagamento;
 use App\Http\Controllers\Venda\VendasControllerRegistrar;
@@ -90,6 +91,7 @@ Route::middleware(['auth'])->group(function () {
     Route::post('produtos/atualizar/{id}', [ProdutoControllerAtualizar::class, 'atualizar']);
     Route::get('produtos/remover/{id}', [ProdutoControllerRemover::class, 'remover']);
 
+    Route::get('vendas', [VendaControllerTodos::class, 'obterTodos'])->name('listavendas');
     Route::get('venda/inicio', [VendaControllerPDV::class, 'iniciar'])->name('iniciovendas');
     Route::get('venda/novo', [VendaControllerNovo::class, 'novo'])->name('novavenda');
     Route::get('venda/ativar/{id}', [VendaControllerAtivar::class, 'ativar'])->name('ativarvenda');
