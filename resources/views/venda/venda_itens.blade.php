@@ -23,7 +23,7 @@
             <form action="{{route('adicionaritem')}}" method="post">
                 {{csrf_field()}}
                 <div class="form-row">
-                    <div class="form-group col-sm-8">
+                    <div class="form-group col-sm-7">
                         <label for="nomeproduto">Produto</label>
                         <select id="nomeproduto" class="form-control @error('codproduto') is-invalid @enderror" name="nomeproduto">
                             <option selected value="" {{ (old("codproduto") == "" ? "selected":"") }}>Produtos...</option>
@@ -39,10 +39,11 @@
                     <!-- Esses dados são apenas para preencher os campos id e preco através de javascrip -->
                         @foreach($produtos as $produto)
                             <input id="{{$produto->id}}" type="hidden" value="{{$produto->preco}}">
+                            <input id="estoque{{$produto->id}}" type="hidden" value="{{$produto->estoque}}">
                         @endforeach
                     </div>
 
-                    <div class="form-group col-sm-4">
+                    <div class="form-group col-sm-2">
                         <label for="codproduto">Cod.</label>
                         <input id="codproduto" type="text" class="form-control @error('codproduto') is-invalid @enderror" name="codproduto" value="{{old('codproduto')}}" readonly>
                         @error('codproduto')
@@ -51,7 +52,18 @@
                         </span>
                         @enderror
                     </div>
+
+                    <div class="form-group col-sm-3">
+                        <label for="estoqueproduto">Estoque</label>
+                        <input id="estoqueproduto" type="text" class="form-control @error('estoqueproduto') is-invalid @enderror" name="estoqueproduto" value="{{old('estoqueproduto')}}" readonly>
+                        @error('estoqueproduto')
+                        <span>
+                            <small class="text-danger">{{$message}}</small>
+                        </span>
+                        @enderror
+                    </div>
                 </div>
+
                 <div class="form-row">
 
                     <div class="form-group col">
@@ -101,13 +113,14 @@
                 </tr>
 
                 @if(count($venda->vendaItens) > 0)
-                    @foreach($venda->vendaItens as $iten)
+                    @foreach($venda->vendaItens as $item)
                         <tr>
-                            <td>{{$iten->produto->id}}</td>
-                            <td>{{$iten->produto->nome}}</td>
-                            <td>{{$iten->qtd}}</td>
-                            <td>{{$iten->precofinal}}</td>
-                            <td>{{$iten->subtotal}}</td>
+                            <td>{{$item->produto->id}}</td>
+                            <td>{{$item->produto->nome}}</td>
+                            <td>{{$item->qtd}}</td>
+                            <td>{{$item->precofinal}}</td>
+                            <td>{{$item->subtotal}}</td>
+                            <td class="text-center"><a class="badge-danger badge" href="{{route('excluiritem', $item->id)}}">Remover</a></td>
                         </tr>
                     @endforeach
                 @endif

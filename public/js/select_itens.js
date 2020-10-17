@@ -4,6 +4,7 @@ var qtd = document.getElementById('qtd');
 var precoFinal = document.getElementById('precofinal');
 var subTotal = document.getElementById("subtotal");
 var codProduto = document.getElementById('codproduto');
+var estoqueProduto = document.getElementById('estoqueproduto');
 var desconto = document.getElementById('desconto');
 var novoDesconto = document.getElementById('novodesconto');
 var totalProdutos = document.getElementById('totalprodutos');
@@ -48,11 +49,13 @@ if(prodSelecionado != null) {
         codProduto.value = prodSelecionado.value;
 
         if(prodSelecionado.value !== "") {
+            estoqueProduto.value = document.getElementById('estoque'+prodSelecionado.value).value;
             precoFinal.value = document.getElementById(prodSelecionado.value).value;
             precoFinal.value = precoFinal.value.replace(/,/g, '.');
             qtd.value = 1;
             atualizarValoresItens();
         } else {
+            estoqueProduto.value = "";
             precoFinal.value = prodSelecionado.value;
             qtd.value = "";
             subTotal.value = "";

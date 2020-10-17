@@ -10,7 +10,7 @@ use Illuminate\Http\Request;
 class VendaControllerItens extends Controller
 {
     public function todos(Request $request){
-        $produtos = Produto::all();
+        $produtos = Produto::all()->sortBy('nome');
         $venda = Venda::find($request->session()->get('venda_id'));
 
         if (!$venda) {

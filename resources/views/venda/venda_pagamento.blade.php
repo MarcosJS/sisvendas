@@ -98,7 +98,7 @@
                     <th></th>
                 </tr>
                 @foreach($pagamentos as $pag)
-                    @include('pagamentos.'.$pag->tipo)
+                    @include('pagamentos.pagamento')
                 @endforeach
             </table>
         </div>

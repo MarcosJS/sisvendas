@@ -9,7 +9,7 @@ use App\Validator\PagamentoValidator;
 use App\Validator\ValidationException;
 use Illuminate\Http\Request;
 
-class VendasControllerPagamento extends Controller
+class VendaControllerPagamento extends Controller
 {
     public function pagamento(Request $request) {
         try {

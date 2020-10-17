@@ -7,7 +7,7 @@ use App\Models\StatusVenda;
 use App\Models\Venda;
 use Illuminate\Http\Request;
 
-class VendasControllerRegistrar extends Controller
+class VendaControllerRegistrar extends Controller
 {
     public function registrar(Request $request)
     {

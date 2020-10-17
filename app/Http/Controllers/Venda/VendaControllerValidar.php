@@ -10,7 +10,7 @@ use App\Validator\ValidationException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
-class VendasControllerValidar extends Controller
+class VendaControllerValidar extends Controller
 {
     public function validar(Request $request) {
 

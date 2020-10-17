@@ -19,11 +19,12 @@ class VendaControllerItensAdicionar extends Controller
             InclusaoItemValidator::validate($request->all());
             $item = new VendaItem();
             $item->fill($request->all());
-            $item->produto()->associate(Produto::find($request->codproduto));
+            $produto = Produto::find($request->codproduto);
+            $item->produto()->associate($produto);
 
-            $venda = Venda::find($request['venda_id']);
 
-            if($venda) {
+            if($request->session()->has('venda_id')) {
+                $venda = Venda::find($request->session()->get('venda_id'));
                 $venda->vendaItens()->saveMany([$item]);
                 $venda->valida = false;
                 $venda->atualizarValores();
@@ -36,9 +37,11 @@ class VendaControllerItensAdicionar extends Controller
                 $venda->save();
                 $venda->vendaItens()->saveMany([$item]);
                 $venda->atualizarValores();
+                $request->session()->put('venda_id', $venda->id);
             }
+            $produto->estoque -= $item->qtd;
+            $produto->save();
 
-            $request->session()->put('venda_id', $venda->id);
             return redirect('venda/itens');
 
         } catch (ValidationException $exception) {

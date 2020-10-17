@@ -13,6 +13,13 @@ class VendaControllerCancelar extends Controller
         if($request->session()->has('venda_id')) {
             $status = StatusVenda::where('nomestatus', 'CANCELADO')->first();
             $venda = Venda::find($request->session()->get('venda_id'));
+
+            foreach ($venda->vendaItens as $item) {
+                $produto = $item->produto;
+                $produto->estoque += $item->qtd;
+                $produto->save();
+            }
+
             $venda->statusVenda()->associate($status);
             $venda->save();
             $request->session()->forget('venda_id');

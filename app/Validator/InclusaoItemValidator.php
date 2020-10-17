@@ -2,6 +2,7 @@
 
 namespace App\Validator;
 
+use App\Models\Produto;
 use App\Models\VendaItem;
 
 class InclusaoItemValidator
@@ -11,6 +12,11 @@ class InclusaoItemValidator
 
         if(!isset($request['codproduto'])) {
             $validator->errors()->add('codproduto', 'Informe um produto');
+        } else {
+            $produto = Produto::find($request['codproduto']);
+            if(!$validator->errors()->has('qtd') && $request['qtd'] > $produto->estoque) {
+                $validator->errors()->add('qtd', 'Quantidade informada maior do que o estoque do produto');
+            }
         }
 
         if (!$validator->errors()->isEmpty()) {
