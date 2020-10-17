@@ -66,7 +66,7 @@ return [
             ]) : [],
         ],
 
-        /*'pgsql' => [
+        'pgsql' => [
             'driver' => 'pgsql',
             'host' => $DATABASE_URL["host"],
             'port' => $DATABASE_URL["port"],
@@ -79,10 +79,9 @@ return [
             'prefix_indexes' => true,
             'schema' => 'public',
             'sslmode' => 'prefer',
-        ],*/
-
+        ],
         //substituir quando estiver no ambiente local
-        'pgsql' => [
+        /*'pgsql' => [
             'driver' => 'pgsql',
             'url' => env('DATABASE_URL'),
             'host' => env('DB_HOST', '127.0.0.1'),
@@ -95,7 +94,8 @@ return [
             'prefix_indexes' => true,
             'schema' => 'public',
             'sslmode' => 'prefer',
-        ],
+        ],*/
+
 
         'sqlsrv' => [
             'driver' => 'sqlsrv',
