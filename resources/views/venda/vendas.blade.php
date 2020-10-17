@@ -12,7 +12,7 @@
 
     <div class="row border rounded mt-3">
 
-        <table class="table table-sm table-hover">
+        <table id="tabelavendas" class="table table-sm table-hover">
             <tr>
                 <th>Cod. Venda</th>
                 <th>Data da Venda</th>
@@ -24,7 +24,7 @@
 
             @foreach($vendas as $v)
                 <tr class="linhatabelavendas">
-                    <td>{{$v->id}}</td>
+                    <td class="col_venda_id">{{$v->id}}</td>
                     <td>{{date('d/m/Y', strtotime($v->dtvenda))}}</td>
                     <td>{{$v->totalprodutos}}</td>
                     <td>{{$v->descPorcent()}}</td>

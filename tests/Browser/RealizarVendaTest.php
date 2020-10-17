@@ -79,9 +79,18 @@ class RealizarVendaTest extends DuskTestCase
                 ->assertInputValue('#cliente', $cliente->cpf.' - '.$cliente->nome)
                 ->screenshot('realizarvenda/14-clienteadded');
 
+            $venda = str_replace('Venda nº ', '', $usuario->text('#col_venda_id'));
             $usuario->clickLink('Finalizar')
-                ->assertPathIs('/vendas')
-                ->screenshot('realizarvenda/15-final');
+                ->assertPathIs('/vendas');
+
+            $colunasId = $usuario->elements('.col_venda_id');
+            foreach ($colunasId as $col) {
+                if($col->getText('.col_venda_id') == $venda) {
+                    self::assertTrue(true);
+                }
+            }
+
+            $usuario->screenshot('realizarvenda/15-telavendas');
         });
     }
 }

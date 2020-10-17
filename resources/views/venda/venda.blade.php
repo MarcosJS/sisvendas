@@ -49,7 +49,7 @@
         <div class="col pb-0 border rounded">
             <div class="row">
                 <div class="col">
-                    <h4>Venda nº {{$venda->id}}</h4>
+                    <h4>Venda nº <b>{{$venda->id}}</b></h4>
                 </div>
                 <div class="col">
                     <p class="float-right">{{date('d/m/Y', strtotime($venda->dtvenda))}}</p>
