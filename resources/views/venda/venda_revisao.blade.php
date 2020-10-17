@@ -120,7 +120,7 @@
             <h5 class="card-header">Cliente</h5>
             @if($cliente != null)
                 <div class="card-body">
-                    <input type="text" class="form-control" id="cliente" placeholder="Cliente" value="{{$cliente->cpf}} - {{$cliente->nome}}" readonly>
+                    <input type="text" class="form-control" id="cliente" placeholder="Cliente" value="{{$cliente->cpf}} - {{$cliente->nome}}" name="cliente">
                 </div>
             @else
                 <div class="card-body">
@@ -143,5 +143,5 @@
             </div>
         </div>
     </div>
-    @include('pagamentos.lista_clientes')
+    @include('venda.lista_clientes')
 @endsection

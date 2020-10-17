@@ -37,7 +37,7 @@
                 </tr>
                 <tr >
                     <td colspan="4" class="text-right"><label for="novodesconto"><b>Desconto %:</b></label></td>
-                    <td class="text-right"><input id="novodesconto" class="form-control text-right" type="text" value="{{$venda->descPorcent()}}"></td>
+                    <td class="text-right"><input id="novodesconto" class="form-control text-right" type="text" value="{{$venda->descPorcent()}}" name="novodesconto"></td>
                 </tr>
                 <tr class="bg-success">
                     <td colspan="4" class="text-right"><b>LÍQUIDO R$:</b></td>
@@ -106,6 +106,6 @@
 
 
     <!-- TELAS DE FORMULÁRIOS DE PAGAMENTO -->
-    @include('pagamentos.lista_clientes')
+    @include('venda.lista_clientes')
     @include('pagamentos.form_cheque')
 @endsection

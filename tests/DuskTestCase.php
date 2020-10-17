@@ -33,7 +33,7 @@ abstract class DuskTestCase extends BaseTestCase
             '--disable-gpu',
             '--headless',
             '--no-sandbox',
-            //'--window-size=1280,720',
+            '--window-size=1280,900',
         ]);
 
         return RemoteWebDriver::create(

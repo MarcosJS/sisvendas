@@ -33,8 +33,8 @@
                         </select>
                         @error('codproduto')
                         <span>
-                                <small class="text-danger">{{$message}}</small>
-                            </span>
+                            <small class="text-danger">{{$message}}</small>
+                        </span>
                         @enderror
                     <!-- Esses dados são apenas para preencher os campos id e preco através de javascrip -->
                         @foreach($produtos as $produto)
@@ -47,8 +47,8 @@
                         <input id="codproduto" type="text" class="form-control @error('codproduto') is-invalid @enderror" name="codproduto" value="{{old('codproduto')}}" readonly>
                         @error('codproduto')
                         <span>
-                                        <small class="text-danger">{{$message}}</small>
-                                    </span>
+                            <small class="text-danger">{{$message}}</small>
+                        </span>
                         @enderror
                     </div>
                 </div>
@@ -59,8 +59,8 @@
                         <input id="qtd" type="text" class="form-control @error('qtd') is-invalid @enderror" name="qtd" value="{{old('qtd')}}">
                         @error('qtd')
                         <span>
-                                        <small class="text-danger">{{$message}}</small>
-                                    </span>
+                            <small class="text-danger">{{$message}}</small>
+                        </span>
                         @enderror
                     </div>
 
@@ -69,8 +69,8 @@
                         <input id="precofinal" type="text" class="form-control @error('precofinal') is-invalid @enderror" name="precofinal" value="{{old('precofinal')}}">
                         @error('precofinal')
                         <span>
-                                        <small class="text-danger">{{$message}}</small>
-                                    </span>
+                            <small class="text-danger">{{$message}}</small>
+                        </span>
                         @enderror
                     </div>
 
@@ -79,8 +79,8 @@
                         <input id="subtotal" type="text" class="form-control @error('subtotal') is-invalid @enderror" name="subtotal" value="{{old('precofinal')}}" readonly>
                         @error('subtotal')
                         <span>
-                                        <small class="text-danger">{{$message}}</small>
-                                    </span>
+                            <small class="text-danger">{{$message}}</small>
+                        </span>
                         @enderror
                     </div>
                 </div>

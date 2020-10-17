@@ -83,11 +83,11 @@
                     <label for="tipopessoa">Tipo de Pessoa</label>
                 </div>
                 <div class="custom-control custom-radio custom-control-inline">
-                    <input class="custom-control-input" type="radio" id="pessoafisica" name="tipo" value="PESSOA FISICA" {{ (old("tipo") == 'PESSOA FISICA' ? "checked":"") }}>
+                    <input class="custom-control-inpu radio" type="radio" id="pessoafisica" name="tipo" value="PESSOA FISICA" {{ (old("tipo") == 'PESSOA FISICA' ? "checked":"") }}>
                     <label class="custom-control-label" for="pessoafisica">Física</label>
                 </div>
                 <div class="custom-control custom-radio custom-control-inline">
-                    <input  class="custom-control-input" type="radio" id="pessoajuridica" name="tipo" value="PESSOA JURIDICA" {{ (old("tipo") == 'PESSOA JURIDICA' ? "checked":"") }}>
+                    <input  class="custom-control-input radio" type="radio" id="pessoajuridica" name="tipo" value="PESSOA JURIDICA" {{ (old("tipo") == 'PESSOA JURIDICA' ? "checked":"") }}>
                     <label class="custom-control-label" for="pessoajuridica">Jurídica</label>
                 </div>
                 @error('tipo')
@@ -99,7 +99,7 @@
                 @enderror
             </div>
             <div class="form-group col-md-3">
-                <label for="cnpj-cpf">CNPJ/CPF</label>
+                <label for="inscricao">CNPJ/CPF</label>
                 <input type="text" class="form-control @error('inscricao') is-invalid @enderror" id="inscricao" placeholder="000.000.000-00" name="inscricao" value="{{old('inscricao')}}">
                 @error('inscricao')
                 <span>
