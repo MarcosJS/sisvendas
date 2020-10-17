@@ -9,7 +9,7 @@
 @section('conteudo')
     <div class="p-3">
         <h1>Novo Cliente</h1>
-        <form action="/clientes/adicionar" method="post">
+        <form action="{{route('adicionarcliente')}}" method="post">
             {{csrf_field()}}
             <div class="form-row">
                 <div class="form-group col-md-6">

@@ -9,7 +9,7 @@
 @section('conteudo')
     <div>
         <h1>Dados do Usuario</h1>
-        <form action="/usuarios/atualizar/{{$usuario->id}}" method="post">
+        <form action="{{'atualizarusuario', $usuario->id}}" method="post">
             {{csrf_field()}}
             <div class="form-group row">
                 <label for="id" class="col-sm-2 col-form-label">ID</label>

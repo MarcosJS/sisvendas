@@ -17,7 +17,7 @@
 
             <div id="sidebar-wrapper" class="border-right">
 
-                <div class="sidebar-heading"><a class="navbar-brand" href="/">SISVendas</a></div>
+                <div class="sidebar-heading"><a class="navbar-brand" href="{{route('inicio')}}">SISVendas</a></div>
 
                 <div class="list-group list-group-flush">
                     @if(auth()->check())
@@ -37,21 +37,12 @@
                 <nav id="navbar-interna" class="navbar navbar-expand-lg navbar-light border-bottom">
                     <button id="menu-toggle" class="btn">Menu</button>
 
-                    <div>
-                        @if(auth()->check())
-                        <p class="text-white">{{auth()->user()->nome}} - {{auth()->user()->funcao->nomefuncao}} <a href="{{route('deslogar')}}">Sair</a></p>
-                        @endif
-                    </div>
-
                     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                         <span class="navbar-toggler-icon"></span>
                     </button>
 
                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
                         <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
-                            <li class="nav-item">
-                                <a class="nav-link" href="/">Início</a>
-                            </li>
                             @yield('submenu')
                         </ul>
                     </div>

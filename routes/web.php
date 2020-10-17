@@ -61,35 +61,35 @@ Route::get('teste', [TesteControllerTesteRelBD::class, 'relBD']);
 
 Route::middleware(['auth'])->group(function () {
 
-    Route::get('/', function () {return view('inicio');});
+    Route::get('/', function () {return view('inicio');})->name('inicio');
 
     Route::get('clientes', [ClienteControllerTodos::class, 'obterTodos'])->name('clientes');
     Route::get('clientes/perfil/{id}', [ClienteControllerAcessar::class, 'acessar'])->name('cliente');
     Route::get('clientes/novo', [ClienteControllerNovo::class, 'novo'])->name('novocliente');
-    Route::post('clientes/adicionar', [ClienteControllerAdicionar::class, 'adicionar']);
+    Route::post('clientes/adicionar', [ClienteControllerAdicionar::class, 'adicionar'])->name('adicionarcliente');
     Route::get('clientes/editar/{id}', [ClienteControllerEditar::class, 'editar']);
-    Route::post('clientes/atualizar/{id}', [ClienteControllerAtualizar::class, 'atualizar']);
+    Route::post('clientes/atualizar/{id}', [ClienteControllerAtualizar::class, 'atualizar'])->name('atualizarcliente');
     Route::get('clientes/remover/{id}', [ClienteControllerRemover::class, 'remover'])->middleware('verificarnivel');
 
     Route::middleware('can:isAdmin')->group(function () {
         Route::get('usuarios', [UsuarioControllerTodos::class, 'obterTodos'])->name('usuarios');
         Route::get('usuarios/novo', [UsuarioControllerNovo::class, 'novo']);
-        Route::post('usuarios/adicionar', [UsuarioControllerAdicionar::class, 'adicionar']);
+        Route::post('usuarios/adicionar', [UsuarioControllerAdicionar::class, 'adicionar'])->name('adicionarusuario');
         Route::get('usuarios/remover/{id}', [UsuarioControllerRemover::class, 'remover']);
     });
 
     Route::middleware('can:isOwnerOrAdmin,id')->group(function () {
-        Route::get('usuarios/perfil/{id}', [UsuarioControllerAcessar::class, 'acessar']);
+        Route::get('usuarios/perfil/{id}', [UsuarioControllerAcessar::class, 'acessar'])->name('usuario');
         Route::get('usuarios/editar/{id}', [UsuarioControllerEditar::class, 'editar']);
-        Route::post('usuarios/atualizar/{id}', [UsuarioControllerAtualizar::class, 'atualizar']);
+        Route::post('usuarios/atualizar/{id}', [UsuarioControllerAtualizar::class, 'atualizar'])->name('atualizarusuario');
     });
 
     Route::get('produtos', [ProdutoControllerTodos::class, 'obterTodos'])->name('produtos');
     Route::get('produtos/perfil/{id}', [ProdutoControllerAcessar::class, 'acessar']);
     Route::get('produtos/novo', [ProdutoControllerNovo::class, 'novo']);
-    Route::post('produtos/adicionar', [ProdutoControllerAdicionar::class, 'adicionar']);
+    Route::post('produtos/adicionar', [ProdutoControllerAdicionar::class, 'adicionar'])->name('adicionarproduto');
     Route::get('produtos/editar/{id}', [ProdutoControllerEditar::class, 'editar']);
-    Route::post('produtos/atualizar/{id}', [ProdutoControllerAtualizar::class, 'atualizar']);
+    Route::post('produtos/atualizar/{id}', [ProdutoControllerAtualizar::class, 'atualizar'])->name('atualizarproduto');
     Route::get('produtos/remover/{id}', [ProdutoControllerRemover::class, 'remover']);
 
     Route::get('vendas', [VendaControllerTodos::class, 'obterTodos'])->name('listavendas');

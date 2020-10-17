@@ -10,7 +10,7 @@
     <div class="p-3">
         <h1>Novo Produto</h1>
 
-        <form action="/produtos/adicionar" method="post">
+        <form action="{{route('adicionarproduto')}}" method="post">
             {{csrf_field()}}
             <div class="row">
                 <div class="col-md-4">

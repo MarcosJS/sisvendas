@@ -8,7 +8,7 @@
 
 @section('conteudo')
 <div>
-    <form action="/produtos/atualizar/{{$produto->id}}" method="post">
+    <form action="{{route('atualizarproduto', $produto->id)}}" method="post">
         {{csrf_field()}}
         <div class="form-group">
             <label>Nome</label>

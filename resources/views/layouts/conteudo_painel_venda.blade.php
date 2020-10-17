@@ -5,7 +5,7 @@
 @endsection
 
 @section('submenu')
-    @include('menu_pdv')
+    @include('menu_usuario')
 @endsection
 
 @section('conteudo')
