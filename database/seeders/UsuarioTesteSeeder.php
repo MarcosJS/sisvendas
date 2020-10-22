@@ -18,7 +18,7 @@ class UsuarioTesteSeeder extends Seeder
     {
         for($i = 2; $i <= 3; $i++) {
             $usuario = Usuario::factory()->make();
-            $usuario->senha = Hash::make('11112222');
+            $usuario->password = Hash::make('11112222');
             $funcao = Funcao::find($i);
             $funcao->usuarios()->saveMany([$usuario]);
         }

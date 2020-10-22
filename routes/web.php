@@ -87,14 +87,14 @@ Route::middleware(['auth'])->group(function () {
     });
 
     Route::get('produtos', [ProdutoControllerTodos::class, 'obterTodos'])->name('produtos');
-    Route::get('produto/perfil/{id}', [ProdutoControllerAcessar::class, 'acessar'])->name('dadosdoproduto');
+    Route::get('produto/acessar/{id}', [ProdutoControllerAcessar::class, 'acessar'])->name('dadosdoproduto');
     Route::get('produto/novo', [ProdutoControllerNovo::class, 'novo'])->name('novoproduto');
     Route::post('produto/adicionar', [ProdutoControllerAdicionar::class, 'adicionar'])->name('adicionarproduto');
     Route::get('produto/editar/{id}', [ProdutoControllerEditar::class, 'editar']);
     Route::post('produto/atualizar/{id}', [ProdutoControllerAtualizar::class, 'atualizar'])->name('atualizarproduto');
-    Route::post('produto/registrarproducao', [ProdutoControllerProducaoRegistrar::class, 'registrar'])->name('atualizarproduto');
+    Route::post('produto/registrarproducao/{id}', [ProdutoControllerProducaoRegistrar::class, 'registrar'])->name('registrarproducao');
     Route::get('produto/remover/{id}', [ProdutoControllerRemover::class, 'remover']);
-    Route::get('produto/fluxodeestoque', [ProdutoControllerFluxoEstoque::class, 'fluxo'])->name('fluxoestoque');
+    Route::get('produtos/fluxodeestoque', [ProdutoControllerFluxoEstoque::class, 'fluxo'])->name('fluxoestoque');
 
     Route::get('vendas', [VendaControllerTodos::class, 'obterTodos'])->name('listavendas');
     Route::get('venda/inicio', [VendaControllerPDV::class, 'iniciar'])->name('iniciovendas');

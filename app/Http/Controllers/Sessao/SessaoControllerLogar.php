@@ -3,32 +3,36 @@
 namespace App\Http\Controllers\Sessao;
 
 use App\Http\Controllers\Controller;
-use App\Models\Usuario;
+use App\Validator\LoginValidator;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\Validator\ValidationException;
 
 class SessaoControllerLogar extends Controller
 {
     public function logar(Request $request) {
 
-        /*$credencias = $request->only('usuario_id');
-        Auth::loginUsingId($credencias['usuario_id']);*/
+        try {
+            //LoginValidator::validate($request->all());
 
-        $credencias = $request->only('cpf', 'senha');
-        //return var_dump($credencias);
-        //Auth::guard('usuario')->loginUsingId($credencias['usuario_id']);
-        //Auth::loginUsingId($credencias['usuario_id']);
-        if(Auth::attempt($credencias)) {
-            return 'true';
-        } else {
-            return 'false';
-        }
-        //return Auth::user();
-        //return Usuario::find($request->usuario_id);
+            $credencias = $request->only('usuario_id');
+            Auth::loginUsingId($credencias['usuario_id']);
 
-        if(Auth::check()) {
-            return redirect('/');
+            /*$credencias = $request->only('cpf', 'password');
+            Auth::attempt($credencias);*/
+
+            if(Auth::check()) {
+                return redirect('/');
+            }
+
+            return redirect('login')
+                ->withErrors(['dadosnaoconferem' => 'O cpf ou a senha estão errados.']);
+
+        } catch (ValidationException $exception) {
+            return redirect()
+                ->back()
+                ->withErrors($exception->getValidator())
+                ->withInput();
         }
-        return redirect('login');
     }
 }

@@ -22,7 +22,7 @@ class CreateVendaItemsTable extends Migration
             $table->integer('venda_id')->unsigned();
             $table->foreign('venda_id')->references('id')->on('vendas')->cascadeOnDelete();
             $table->integer('produto_id')->unsigned()->nullable();
-            $table->foreign('produto_id')->references('id')->on('produto');
+            $table->foreign('produto_id')->references('id')->on('produtos');
         });
     }
 
