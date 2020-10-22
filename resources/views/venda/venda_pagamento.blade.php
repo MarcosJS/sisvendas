@@ -1,4 +1,4 @@
-@extends('layouts.conteudo_op_venda')
+@extends('layouts.operacao_venda')
 
 @section('titulo', 'SISVendas PDV - Pagamento')
 

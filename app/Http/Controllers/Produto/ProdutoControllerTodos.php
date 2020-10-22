@@ -9,6 +9,6 @@ class ProdutoControllerTodos extends Controller
 {
     public function obterTodos() {
         $produtos = Produto::all();
-        return view('produtos.produtos', ['produtos' => $produtos]);
+        return view('produto.produtos', ['produtos' => $produtos]);
     }
 }

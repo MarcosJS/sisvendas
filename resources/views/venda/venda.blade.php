@@ -1,4 +1,4 @@
-@extends('layouts.conteudo_painel_venda')
+@extends('layouts.painel_venda')
 
 @section('titulo', 'SISVendas PDV - Dados da Venda')
 

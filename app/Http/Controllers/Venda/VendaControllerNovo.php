@@ -13,7 +13,7 @@ class VendaControllerNovo extends Controller
         if(session()->get('venda_id')) {
             return redirect()->route('pagamento');
         }
-        $produtos = Produto::all();
+        $produtos = Produto::all()->sortBy('nome');
         $venda = new Venda();
         return view('venda.venda_itens', ['produtos' => $produtos, 'venda' => $venda]);
     }

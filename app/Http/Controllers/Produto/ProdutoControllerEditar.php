@@ -10,7 +10,7 @@ class ProdutoControllerEditar extends Controller
     public function editar($id) {
         $produto = Produto::find($id);
         if($produto) {
-            return view('produtos.produto_editar', ['produto' => $produto]);
+            return view('produto.produto_editar', ['produto' => $produto]);
         }
     }
 }

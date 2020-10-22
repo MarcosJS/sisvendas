@@ -10,6 +10,6 @@ class ProdutoControllerAcessar extends Controller
 {
     public function acessar(Request $request) {
         $produto = Produto::find($request->id);
-        return view('produtos.produto', ['produto' => $produto]);
+        return view('produto.produto', ['produto' => $produto]);
     }
 }

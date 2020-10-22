@@ -3,7 +3,7 @@
 @section('titulo', 'Estoque')
 
 @section('submenu')
-    @include('produtos.menu_produtos')
+    @include('produto.produtos_menu_painel')
 @endsection
 
 @section('conteudo')

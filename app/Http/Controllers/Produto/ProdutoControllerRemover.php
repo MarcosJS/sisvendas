@@ -11,7 +11,7 @@ class ProdutoControllerRemover extends Controller
         $produto = Produto::find($id);
         if($produto) {
             $produto->delete();
-            return redirect('produtos');
+            return redirect('produto');
         }
     }
 }

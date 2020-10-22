@@ -9,8 +9,7 @@
 @endsection
 
 @section('conteudo_modulo')
-    <div class="p-3">
-
+    <div class="row mt-3">
         <table class="table table-sm table-hover">
             <tr>
                 <th>ID</th>
@@ -20,7 +19,7 @@
                 <th>Preço</th>
             </tr>
             @foreach($produtos as $produto)
-                <tr title="produtos" class="linhatabelaclick">
+                <tr title="produto" class="linhatabelaclick">
                     <td>{{$produto->id}}</td>
                     <td>{{$produto->nome}}</td>
                     <td>{{$produto->descricao}}</td>
@@ -29,9 +28,5 @@
                 </tr>
             @endforeach
         </table>
-
-        <div class="row justify-content-center">
-            <button id="produtos" type="button" class="btnform btnformcad col-auto btn">Novo Produto</button>
-        </div>
     </div>
 @endsection

@@ -43,7 +43,7 @@
 
                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
                         <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
-                            @yield('submenu')
+                            @include('menu_usuario')
                         </ul>
                     </div>
                 </nav>
@@ -54,14 +54,11 @@
 
         </div>
 
-        <!--<footer class="rodape mb-0" style="background-color: #385d7a">
-            <span>rodape</span>
-        </footer>-->
-
         <script src="{{asset('js/app.js')}}" type="text/javascript"></script>
         <script src="{{asset('js/select_itens.js')}}" type="text/javascript"></script>
         <script src="{{asset('js/form_pagamentos.js')}}" type="text/javascript"></script>
-        <script src="{{asset('js/btnformout.js')}}" type="text/javascript"></script>
+        <script src="{{asset('js/menu_venda.js')}}" type="text/javascript"></script>
+        <script src="{{asset('js/menu_produto.js')}}" type="text/javascript"></script>
         <script src="{{asset('js/vendas.js')}}" type="text/javascript"></script>
     </body>
 </html>

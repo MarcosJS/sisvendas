@@ -17,7 +17,7 @@ class ProdutoControllerAtualizar extends Controller
             $produto->estoque = $request->estoque;
             $produto->preco = $request->preco;
             $produto->update();
-            return redirect('produtos');
+            return redirect('produto');
         }
     }
 }

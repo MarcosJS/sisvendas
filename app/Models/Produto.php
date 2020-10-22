@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Notifications\Notifiable;
 
 class Produto extends Model
@@ -34,6 +35,10 @@ class Produto extends Model
         'preco.numeric' => 'O campo preço deve ser do  tipo numerico',
         'preco.min' => 'O preço deve ser maior que 0 (zero)'
     ];
+
+    public function producao() {
+        return $this->hasMany('App\Models\Producao');
+    }
 
     public function vendaItens() {
         return $this->hasMany('App\Models\VendaItem');
