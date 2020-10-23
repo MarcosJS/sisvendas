@@ -33,8 +33,8 @@ class UsuarioCriacaoTest extends TestCase
     private function dadosDoUsuario() {
         $usuario =  Usuario::factory()->make();
         $dadosUsusario = $usuario->toArray();
-        $dadosUsusario['senha'] = '11112222';
-        $dadosUsusario['senha_confirmation'] = '11112222';
+        $dadosUsusario['password'] = '11112222';
+        $dadosUsusario['password_confirmation'] = '11112222';
         $dadosUsusario['funcao'] = 2;
         return $dadosUsusario;
     }
@@ -146,6 +146,7 @@ class UsuarioCriacaoTest extends TestCase
         $dados['cpf'] = '';
         $usuarioNivelDois = $this->usuarioNivelDois();
         $response = $this
+            ->from('usuarios/novo')
             ->actingAs($usuarioNivelDois)
             ->post('usuarios/adicionar', $dados);
         $response->assertStatus(302)
@@ -158,6 +159,7 @@ class UsuarioCriacaoTest extends TestCase
         $dados = $this->dadosDoUsuario();
         $usuarioNivelDois = $this->usuarioNivelDois();
         $response = $this
+            ->from('usuarios/novo')
             ->actingAs($usuarioNivelDois)
             ->post('usuarios/adicionar', $dados);
         $response->assertStatus(302)

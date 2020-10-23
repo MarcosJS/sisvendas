@@ -17,10 +17,11 @@ class ProdutoControllerAdicionar extends Controller
             $produto->fill($request->all());
             if($produto) {
                 $produto->save();
-                return redirect('produtos');
+                return redirect()->route('produtos');
             }
         } catch (ValidationException $exception) {
-            return redirect('produto/novo')
+            return redirect()
+                ->back()
                 ->withErrors($exception->getValidator())
                 ->withInput();
         }

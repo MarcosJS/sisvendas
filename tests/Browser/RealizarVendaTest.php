@@ -31,17 +31,17 @@ class RealizarVendaTest extends DuskTestCase
                 ->assertSee('SISVendas PDV')
                 ->screenshot('realizarvenda/1-telainicial')
                 ->clickLink('SISVendas PDV')
-                ->assertPathIS('/venda/inicio')
+                ->assertRouteIs('iniciovendas')
                 ->screenshot('realizarvenda/2-iniciovendas')
                 ->clickLink('Nova Venda')
-                ->assertPathIs('/venda/novo')
+                ->assertRouteIs('novavenda')
                 ->screenshot('realizarvenda/3-telaitens')
                 ->select('nomeproduto', $produto->id)
                 ->screenshot('realizarvenda/4-selproduto')
                 ->press('Adicionar')
                 ->screenshot('realizarvenda/5-prodadded')
                 ->clickLink('Pagamento')
-                ->assertPathis('/venda/pagamento');
+                ->assertRouteIs('pagamento');
 
             $desconto = 50;
             $usuario->visit('/venda/pagamento')
@@ -67,7 +67,7 @@ class RealizarVendaTest extends DuskTestCase
             $usuario->assertSee('Pagamentos')
                 ->screenshot('realizarvenda/10-pagadded')
                 ->clickLink('Validação')
-                ->assertPathIs('/venda/validar')
+                ->assertRouteIs('validarpagamento')
                 ->screenshot('realizarvenda/11-telavalidacao')
                 ->click('#cliente');
 
@@ -81,7 +81,7 @@ class RealizarVendaTest extends DuskTestCase
 
             $venda = str_replace('Venda nº ', '', $usuario->text('#col_venda_id'));
             $usuario->clickLink('Finalizar')
-                ->assertPathIs('/vendas');
+                ->assertRouteIs('listavendas');
 
             $colunasId = $usuario->elements('.col_venda_id');
             foreach ($colunasId as $col) {

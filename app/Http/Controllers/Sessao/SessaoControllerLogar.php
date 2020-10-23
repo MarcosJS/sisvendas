@@ -13,13 +13,13 @@ class SessaoControllerLogar extends Controller
     public function logar(Request $request) {
 
         try {
-            //LoginValidator::validate($request->all());
+            LoginValidator::validate($request->all());
 
-            $credencias = $request->only('usuario_id');
-            Auth::loginUsingId($credencias['usuario_id']);
+            /*$credencias = $request->only('usuario_id');
+            Auth::loginUsingId($credencias['usuario_id']);*/
 
-            /*$credencias = $request->only('cpf', 'password');
-            Auth::attempt($credencias);*/
+            $credencias = $request->only('cpf', 'password');
+            Auth::attempt($credencias);
 
             if(Auth::check()) {
                 return redirect('/');

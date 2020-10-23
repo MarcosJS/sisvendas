@@ -95,6 +95,7 @@ class ProdutoValidatorTest extends TestCase
     public function testProdutoComDadosCorretos()
     {
         $produto = Produto::factory()->make();
+        $produto->estoque = 0;
         ProdutoValidator::validate($produto->toArray());
         $this->assertTrue(true);
     }

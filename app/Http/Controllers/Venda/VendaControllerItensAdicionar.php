@@ -22,7 +22,6 @@ class VendaControllerItensAdicionar extends Controller
             $produto = Produto::find($request->codproduto);
             $item->produto()->associate($produto);
 
-
             if($request->session()->has('venda_id')) {
                 $venda = Venda::find($request->session()->get('venda_id'));
                 $venda->vendaItens()->saveMany([$item]);
@@ -42,10 +41,11 @@ class VendaControllerItensAdicionar extends Controller
             $produto->estoque -= $item->qtd;
             $produto->save();
 
-            return redirect('venda/itens');
+            return redirect()->back();
 
         } catch (ValidationException $exception) {
-            return redirect('venda/itens')
+            return redirect()
+                ->back()
                 ->withErrors($exception->getValidator())
                 ->withInput();
         }

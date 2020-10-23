@@ -26,26 +26,31 @@ class LoginTest extends DuskTestCase
     {
         $this->browse(function (Browser $browser) {
             $browser->visit('/')
-                ->screenshot('login/login-telalogin')
+                ->screenshot('login/1-login_telalogin')
                 ->type('usuario_id', 1)
-                ->screenshot('login/login-loginpreenchido')
-                ->press('Submit')
-                ->assertPathIs('/')
+                ->screenshot('login/2-login_loginpreenchido')
+                ->press('Logar')
+                ->assertRouteIs('inicio')
                 ->assertSee('Bem vindo ao SISVendas')
-                ->screenshot('login/login-telainicial');
+                ->screenshot('login/3-login_telainicial');
         });
     }
 
     public function testLogout()
     {
         $this->browse(function ($usuario) {
-            $usuario->loginAs(Usuario::find(1))
+            $user = Usuario::find(1);
+            $usuario->loginAs($user)
                 ->visit('/')
+                ->assertSee($user->nome)
+                ->screenshot('login/1-logou_menudousuario')
+                ->clickLink($user->nome)
                 ->assertSee('Sair')
-                ->screenshot('login/logout-telainicial')
+                ->screenshot('login/2-logout_botaosair')
                 ->clickLink('Sair')
-                ->assertPathIs('/login')
-                ->screenshot('login/logout-telalogin');
+                ->assertRouteIs('login')
+                ->screenshot('login/3-logout_telalogin');
+
         });
     }
 }

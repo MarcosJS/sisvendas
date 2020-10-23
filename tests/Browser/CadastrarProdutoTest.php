@@ -27,17 +27,17 @@ class CadastrarProdutoTest extends DuskTestCase
         $this->browse(function ($primeiro) {
             $primeiro->loginAs(Usuario::find(1))
                 ->visit('/produto/novo')
-                ->assertPathIs('/produto/novo')
-                ->screenshot('cadprod/formulario')
+                ->assertRouteIs('novoproduto')
+                ->screenshot('cadprod/1-formulario')
                 ->type('nome', 'farinha branca')
                 ->type('descricao', 'farinha de trigo')
                 ->type('estoque', 100)
                 ->type('preco', 4.50)
-                ->screenshot('cadprod/preenchido')
+                ->screenshot('cadprod/2-preenchido')
                 ->press('Cadastrar')
-                ->assertPathIs('/produto')
+                ->assertRouteIs('produtos')
                 ->assertSee('farinha branca')
-                ->screenshot('cadprod/prodcadastrado');
+                ->screenshot('cadprod/3-prodcadastrado');
         });
     }
 }

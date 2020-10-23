@@ -8,7 +8,7 @@
 
 @section('conteudo')
     <div class="p-3">
-        <h1>Cliente</h1>
+        <h1>Usuário</h1>
 
         <div class="form-group row">
             <label for="id" class="col-sm-2 col-form-label">ID</label>
@@ -46,28 +46,6 @@
                 <label>{{$usuario->matricula}}</label>
             </div>
         </div>
-
-
-        <fieldset class="form-group">
-            <div class="row">
-                <legend class="col-form-label col-sm-2 pt-0">Ativo</legend>
-                <div class="col-sm-10">
-                    <div class="form-check custom-control-inline">
-                        <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios1" value="option1" checked>
-                        <label class="form-check-label" for="gridRadios1">
-                            Sim
-                        </label>
-                    </div>
-                    <div class="form-check custom-control-inline">
-                        <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios2" value="option2">
-                        <label class="form-check-label" for="gridRadios2">
-                            Não
-                        </label>
-                    </div>
-
-                </div>
-            </div>
-        </fieldset>
 
         <div class="form-group row">
             <div class="col-sm-10">

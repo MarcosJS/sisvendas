@@ -14,61 +14,59 @@
             <div class="form-group row">
                 <label for="id" class="col-sm-2 col-form-label">ID</label>
                 <div class="col-sm-10">
-                    <input type="text" class="form-control" name="idusuario" value="{{$usuario->id}}" readonly>
+                    <input id="id" type="text" class="form-control" name="idusuario" value="{{$usuario->id}}" readonly>
                 </div>
             </div>
             <div class="form-group row">
                 <label for="nome" class="col-sm-2 col-form-label">Nome</label>
                 <div class="col-sm-10">
-                    <input type="text" class="form-control" name="nomeusuario" value="{{$usuario->nome}}">
+                    <input type="text" id="nome" class="form-control @error('nome') is-invalid @enderror" name="nome" value="@if(count($errors) > 0){{old('nome')}}@else{{$usuario->nome}}@endif">
+                    @error('nome')
+                    <span>
+                        <small class="text-danger">{{$message}}</small>
+                    </span>
+                    @enderror
                 </div>
             </div>
             <div class="form-group row">
                 <label for="cpf" class="col-sm-2 col-form-label">CPF</label>
                 <div class="col-sm-10">
-                    <input type="text" class="form-control" name="cpfusuario" value="{{$usuario->cpf}}">
+                    <input type="text" class="form-control @error('cpf') is-invalid @enderror" name="cpf" value="@if(count($errors) > 0){{old('cpf')}}@else{{$usuario->cpf}}@endif" readonly>
+                    @error('cpf')
+                    <span>
+                        <small class="text-danger">{{$message}}</small>
+                    </span>
+                    @enderror
                 </div>
             </div>
             <div class="form-group row">
                 <label for="email" class="col-sm-2 col-form-label">E-mail</label>
                 <div class="col-sm-10">
-                    <input type="text" class="form-control" name="emailusuario" value="{{$usuario->email}}">
+                    <input type="text" class="form-control @error('email') is-invalid @enderror" name="email" value="@if(count($errors) > 0){{old('email')}}@else{{$usuario->email}}@endif">
+                    @error('email')
+                    <span>
+                        <small class="text-danger">{{$message}}</small>
+                    </span>
+                    @enderror
                 </div>
             </div>
             <div class="form-group row">
                 <label for="funcao" class="col-sm-2 col-form-label">Função</label>
                 <div class="col-sm-10">
-                    <input type="text" class="form-control" name="funcaousuario" value="{{$usuario->funcao->nomefuncao}}">
+                    <input id="funcao" type="text" class="form-control" name="funcaousuario" value="{{$usuario->funcao->nomefuncao}}" readonly>
                 </div>
             </div>
             <div class="form-group row">
                 <label for="matricula" class="col-sm-2 col-form-label">Matrícula</label>
                 <div class="col-sm-10">
-                    <input type="text" class="form-control" name="matriculausuario" value="{{$usuario->matricula}}">
+                    <input type="text" class="form-control @error('matricula') is-invalid @enderror" name="matricula" value="@if(count($errors) > 0){{old('matricula')}}@else{{$usuario->matricula}}@endif">
+                    @error('matricula')
+                    <span>
+                        <small class="text-danger">{{$message}}</small>
+                    </span>
+                    @enderror
                 </div>
             </div>
-
-
-            <fieldset class="form-group">
-                <div class="row">
-                    <legend class="col-form-label col-sm-2 pt-0">Ativo</legend>
-                    <div class="col-sm-10">
-                        <div class="form-check custom-control-inline">
-                            <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios1" value="option1" checked>
-                            <label class="form-check-label" for="gridRadios1">
-                                Sim
-                            </label>
-                        </div>
-                        <div class="form-check custom-control-inline">
-                            <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios2" value="option2">
-                            <label class="form-check-label" for="gridRadios2">
-                                Não
-                            </label>
-                        </div>
-
-                    </div>
-                </div>
-            </fieldset>
 
             <div class="form-group row">
                 <div class="col-sm-10">

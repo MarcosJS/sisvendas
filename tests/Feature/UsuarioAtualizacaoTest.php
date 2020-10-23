@@ -32,7 +32,7 @@ class UsuarioAtualizacaoTest extends TestCase
 
     public function testUsuarioNaoAutenticadoNaoAcessaQualquerPerfil() {
         $this->seeds();
-        $response = $this->get('usuarios/perfil/1');
+        $response = $this->get('usuarios/acessar/1');
         $response->assertStatus(302)
             ->assertRedirect('login');
     }
@@ -43,7 +43,7 @@ class UsuarioAtualizacaoTest extends TestCase
         $usuarioDiferente = Usuario::where('id', '!=', $usuarioNivelUm->id)->first();
         $usuario = Auth::loginUsingId($usuarioNivelUm->id);
         $response = $this->actingAs($usuario)
-            ->get('usuarios/perfil/'.$usuarioDiferente);
+            ->get('usuarios/acessar/'.$usuarioDiferente);
         $response->assertStatus(403);
     }
 
@@ -52,7 +52,7 @@ class UsuarioAtualizacaoTest extends TestCase
         $usuarioNivelUm = $this->usuarioNivelUm();
         $usuario = Auth::loginUsingId($usuarioNivelUm->id);
         $response = $this->actingAs($usuario)
-            ->get('usuarios/perfil/'.Auth::id());
+            ->get('usuarios/acessar/'.Auth::id());
         $response->assertStatus(200);
     }
 
@@ -62,7 +62,7 @@ class UsuarioAtualizacaoTest extends TestCase
         $usuarioDiferente = Usuario::where('id', '!=', $usuarioNivelDois->id)->first();
         $usuario = Auth::loginUsingId($usuarioNivelDois->id);
         $response = $this->actingAs($usuario)
-            ->get('usuarios/perfil/'.$usuarioDiferente->id);
+            ->get('usuarios/acessar/'.$usuarioDiferente->id);
         $response->assertStatus(200);
     }
 

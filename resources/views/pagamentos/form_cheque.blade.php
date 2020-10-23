@@ -83,12 +83,12 @@
                     <label for="tipopessoa">Tipo de Pessoa</label>
                 </div>
                 <div class="custom-control custom-radio custom-control-inline">
-                    <input class="custom-control-input radio" type="radio" id="pessoafisica" name="tipo" value="PESSOA FISICA" {{ (old("tipo") == 'PESSOA FISICA' ? "checked":"") }}>
-                    <label class="custom-control-label" for="pessoafisica">Física</label>
+                    <input class="form-check-input radio" type="radio" id="pessoafisica" name="tipo" value="PESSOA FISICA" {{ (old("tipo") == 'PESSOA FISICA' ? "checked":"") }}>
+                    <label class="form-check-label" for="pessoafisica">Física</label>
                 </div>
                 <div class="custom-control custom-radio custom-control-inline">
-                    <input  class="custom-control-input radio" type="radio" id="pessoajuridica" name="tipo" value="PESSOA JURIDICA" {{ (old("tipo") == 'PESSOA JURIDICA' ? "checked":"") }}>
-                    <label class="custom-control-label" for="pessoajuridica">Jurídica</label>
+                    <input  class="form-check-input radio" type="radio" id="pessoajuridica" name="tipo" value="PESSOA JURIDICA" {{ (old("tipo") == 'PESSOA JURIDICA' ? "checked":"") }}>
+                    <label class="form-check-label" for="pessoajuridica">Jurídica</label>
                 </div>
                 @error('tipo')
                 <div class="row">
@@ -109,7 +109,7 @@
             </div>
             <div class="form-group col-md-6">
                 <label for="emitente">Emitente</label>
-                <input type="text" class="form-control @error('nome') is-invalid @enderror" id="nomeemitente" placeholder="Nome do emitente do cheque" name="nome" value="{{old('nome')}}">
+                <input type="text" class="form-control @error('nome') is-invalid @enderror" id="emitente" placeholder="Nome do emitente do cheque" name="nome" value="{{old('nome')}}">
                 @error('nome')
                 <span>
                     <small class="text-danger">{{$message}}</small>

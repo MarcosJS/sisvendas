@@ -21,12 +21,14 @@
                 <p><strong>Código: </strong>{{$produto->id}}</p>
                 <p><strong>Estoque: </strong>{{$produto->estoque}}</p>
                 <p><strong>Preço: </strong>{{$produto->preco}}</p>
-                <!--<button id="produtos" type="button" class="btn btnform btnformedit">Editar</button>-->
-
                 <p>
                     <button class="btn btnformout" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
                         Informar Produção
                     </button>
+                    <a class="btn btn-outline-primary btnformedit" href="{{route('editarproduto', $produto->id)}}">
+                        Editar
+                    </a>
+
                 </p>
                 <div class="collapse" id="collapseExample">
                     @include('produto.form_producao')
