@@ -17,15 +17,16 @@ class UsuarioControllerAdicionar extends Controller
         try {
             UsuarioValidator::validate($request->all());
             $usuario = new Usuario();
-            $usuario->fill($request->except('senha', 'funcao'));
-            $usuario->senha = Hash::make($request->senha);
+            $usuario->fill($request->except('password', 'funcao'));
+            $usuario->password = Hash::make($request->senha);
             $funcao = Funcao::find($request->funcao);
             if($funcao) {
                 $funcao->usuarios()->saveMany([$usuario]);
-                return redirect('usuarios');
+                return redirect()->route('usuarios');
             }
         } catch (ValidationException $exception) {
-            return redirect('usuarios/novo')
+            return redirect()
+                ->back()
                 ->withErrors($exception->getValidator())
                 ->withInput();
         }

@@ -15,7 +15,7 @@ class ClienteControllerAtualizar extends Controller
             $cliente->datanasc = $request->datanasc;
             $cliente->cpf = $request->cpf;
             $cliente->update();
-            return redirect('clientes/acessar'+$cliente->id);
+            return redirect()->route('cliente', $cliente->id);
         }
     }
 }

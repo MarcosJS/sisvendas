@@ -17,7 +17,7 @@ class ProdutoControllerAdicionar extends Controller
             $produto->fill($request->all());
             if($produto) {
                 $produto->save();
-                return redirect('produto');
+                return redirect('produtos');
             }
         } catch (ValidationException $exception) {
             return redirect('produto/novo')

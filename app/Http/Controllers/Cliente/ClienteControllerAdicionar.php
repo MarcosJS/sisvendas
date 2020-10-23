@@ -32,7 +32,7 @@ class ClienteControllerAdicionar extends Controller
             if($request->numerotel != '') {
                 $telefone = new Telefone();
                 $telefone->fill($request->all());
-                $cliente->telefone()->saveMany([$telefone]);
+                $cliente->telefones()->saveMany([$telefone]);
             }
             if($request->session()->get('venda_id')) {
                 return redirect()->back();

@@ -69,8 +69,8 @@
                         </div>
                         <div class="form-group">
                             <label>Senha</label>
-                            <input type="password" class="form-control @error('senha') is-invalid @enderror" name="senha" value="{{old('senha')}}">
-                            @error('senha')
+                            <input type="password" class="form-control @error('password') is-invalid @enderror" name="password" value="{{old('password')}}">
+                            @error('password')
                             <span>
                                 <small class="text-danger">{{$message}}</small>
                             </span>
@@ -78,7 +78,7 @@
                         </div>
                         <div class="form-group">
                             <label>Confirmar Senha</label>
-                            <input type="password" class="form-control @error('senha') is-invalid @enderror" name="senha_confirmation" value="{{old('senha')}}">
+                            <input type="password" class="form-control @error('password') is-invalid @enderror" name="password_confirmation" value="{{old('password')}}">
                         </div>
                     </div>
                 </div>
