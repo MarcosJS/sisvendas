@@ -14,17 +14,26 @@ class ProdutoControllerFluxoEstoque extends Controller
         date_default_timezone_set('America/Recife');
         $todosProdutos = Produto::sum('estoque');
 
+        $dia = date("Y-m-d");
+        $mes = [date("Y-m--1"), date("Y-m-t")];
+
         foreach ($produtos as $prod) {
             $p['produto'] = $prod;
-            $vendasDia = $prod->vendaItens()->whereHas('venda', function ($q) {
-                $date = date("Y-m-d");
-                $q->where('dtvenda', '=', $date);
-            })->count();
-            $vendasMes = $prod->vendaItens()->whereHas('venda', function ($q) {
-                $inicio = date("Y-m--1");
-                $fim = date("Y-m-t");
-                $q->whereBetween('dtvenda', [$inicio, $fim]);
-            })->count();
+
+            $producaoDia = $prod->producao()->where('dtproducao', '=', $dia)->sum('quantidade');
+            $producaoMes = $prod->producao()->whereBetween('dtproducao', $mes)->sum('quantidade');
+
+            $vendasDia = $prod->vendaItens()->whereHas('venda', function ($q) use ($dia){
+                $q->where('status_venda_id', '=', 2)
+                    ->where('dtvenda', '=', $dia);
+            })->sum('qtd');
+            $vendasMes = $prod->vendaItens()->whereHas('venda', function ($q) use ($mes){
+                $q->where('status_venda_id', '=', 2)
+                    ->whereBetween('dtvenda', $mes);
+            })->sum('qtd');
+
+            $p['producaodia'] = $producaoDia;
+            $p['producaomes'] = $producaoMes;
             $p['vendasdia'] = $vendasDia;
             $p['vendasmes'] = $vendasMes;
             $p['porcentagem'] = ($prod->estoque * 100) / $todosProdutos;

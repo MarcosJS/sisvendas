@@ -8,7 +8,7 @@ use App\Models\Produto;
 class ProdutoControllerTodos extends Controller
 {
     public function obterTodos() {
-        $produtos = Produto::all();
+        $produtos = Produto::all()->sortBy('nome');
         return view('produto.produtos', ['produtos' => $produtos]);
     }
 }

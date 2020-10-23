@@ -23,7 +23,6 @@ class VendaFactory extends Factory
     public function definition()
     {
         return [
-
             'dtvenda' => $this->faker->date('Y-m-d'),
             'hrvenda' => $this->faker->time('h:i:s'),
             'totalprodutos' => $this->faker->numberBetween(1,10),

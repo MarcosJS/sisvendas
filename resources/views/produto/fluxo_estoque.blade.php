@@ -28,8 +28,8 @@
                     <td class="text-center">{{$f['produto']->id}}</td>
                     <td class="text-right">{{$f['produto']->estoque}}</td>
                     <td class="text-center">{{number_format($f['porcentagem'], 2, '.', '')}}%</td>
-                    <td class="text-right"></td>
-                    <td class="text-right"></td>
+                    <td class="text-right">{{$f['producaodia']}}</td>
+                    <td class="text-right">{{$f['producaomes']}}</td>
                     <td class="text-right">{{$f['vendasdia']}}</td>
                     <td class="text-right">{{$f['vendasmes']}}</td>
                 </tr>

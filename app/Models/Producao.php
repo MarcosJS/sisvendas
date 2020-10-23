@@ -15,14 +15,14 @@ class Producao extends Model
 
     public static $rules = [
         'quantidade' => 'required|integer|min:0',
-        'dtproducao' => 'require|date'
+        'dtproducao' => 'required|date'
      ];
 
     public static $messages = [
         'quantidade.required' => 'O campo quantidade é obrigatório',
         'quantidade.integer' => 'A quantidade deve ser é um numero inteiro',
         'quantidade.min' => 'A quantidade deve ser maior que 0 (zero)',
-        'dtproducao.require' => 'O campo data é obrigatório',
+        'dtproducao.required' => 'O campo data é obrigatório',
         'dtproducao.date' => 'Este campo deve ser do tipo data'
     ];
 

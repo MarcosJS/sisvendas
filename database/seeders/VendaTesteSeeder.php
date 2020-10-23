@@ -20,12 +20,19 @@ class VendaTesteSeeder extends Seeder
     {
         $vendas = Venda::factory()->count(5)
             ->state([
-                'valida'=>true,
-                'usuario_id'=>1,
-                'cliente_id'=>2,
+                'valida' => true,
+                'usuario_id' => 1,
+                'cliente_id' => 2,
                 'status_venda_id' => 2])
             ->has(VendaItem::factory()->count(5), 'vendaItens')
             ->create();
+
+        $vendaItens = VendaItem::all();
+        foreach ($vendaItens as $itens) {
+            $produto = $itens->produto;
+            $produto->estoque -= $itens->qtd;
+            $produto->save();
+        }
 
         foreach ($vendas as $venda) {
             $pagamento = Pagamento::factory()

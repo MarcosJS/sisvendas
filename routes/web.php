@@ -66,7 +66,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/', function () {return view('inicio');})->name('inicio');
 
     Route::get('clientes', [ClienteControllerTodos::class, 'obterTodos'])->name('clientes');
-    Route::get('clientes/perfil/{id}', [ClienteControllerAcessar::class, 'acessar'])->name('cliente');
+    Route::get('clientes/acessar/{id}', [ClienteControllerAcessar::class, 'acessar'])->name('cliente');
     Route::get('clientes/novo', [ClienteControllerNovo::class, 'novo'])->name('novocliente');
     Route::post('clientes/adicionar', [ClienteControllerAdicionar::class, 'adicionar'])->name('adicionarcliente');
     Route::get('clientes/editar/{id}', [ClienteControllerEditar::class, 'editar']);
@@ -81,7 +81,7 @@ Route::middleware(['auth'])->group(function () {
     });
 
     Route::middleware('can:isOwnerOrAdmin,id')->group(function () {
-        Route::get('usuarios/perfil/{id}', [UsuarioControllerAcessar::class, 'acessar'])->name('usuario');
+        Route::get('usuarios/acessar/{id}', [UsuarioControllerAcessar::class, 'acessar'])->name('usuario');
         Route::get('usuarios/editar/{id}', [UsuarioControllerEditar::class, 'editar']);
         Route::post('usuarios/atualizar/{id}', [UsuarioControllerAtualizar::class, 'atualizar'])->name('atualizarusuario');
     });

@@ -13,9 +13,8 @@ class UsuarioControllerAtualizar extends Controller
         if($usuario) {
             $usuario->nome = $request->nomeusuario;
             $usuario->email = $request->emailusuario;
-            //$usuario->funcao = $request->funcaousuario;
             $usuario->update();
-            return redirect('usuarios/perfil/'.$request->idusuario);
+            return redirect('usuarios/acessar/'.$request->idusuario);
         }
     }
 }

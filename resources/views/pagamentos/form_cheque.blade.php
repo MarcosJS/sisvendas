@@ -83,7 +83,7 @@
                     <label for="tipopessoa">Tipo de Pessoa</label>
                 </div>
                 <div class="custom-control custom-radio custom-control-inline">
-                    <input class="custom-control-inpu radio" type="radio" id="pessoafisica" name="tipo" value="PESSOA FISICA" {{ (old("tipo") == 'PESSOA FISICA' ? "checked":"") }}>
+                    <input class="custom-control-input radio" type="radio" id="pessoafisica" name="tipo" value="PESSOA FISICA" {{ (old("tipo") == 'PESSOA FISICA' ? "checked":"") }}>
                     <label class="custom-control-label" for="pessoafisica">Física</label>
                 </div>
                 <div class="custom-control custom-radio custom-control-inline">

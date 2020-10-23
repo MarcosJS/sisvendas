@@ -37338,7 +37338,7 @@ for (linha in linhatb) {
   };
 
   linhatb[linha].onclick = function () {
-    location.href = '/' + this.title + '/perfil/' + this.firstElementChild.innerHTML;
+    location.href = '/' + this.title + '/acessar/' + this.firstElementChild.innerHTML;
   };
 }
 

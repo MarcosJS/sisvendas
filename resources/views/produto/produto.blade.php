@@ -36,12 +36,12 @@
             <div class="card-footer text-center text-primary">
                 <div class="row">
                     <div class="col-sm-6 emphasis">
-                        <h2><strong>2220</strong></h2>
-                        <p><small>Produção Mês</small></p>
+                        <h2><strong>{{$producao}}</strong></h2>
+                        <p><small>Total Produzido</small></p>
                     </div>
                     <div class="col-sm-6 emphasis">
-                        <h2><strong>2220</strong></h2>
-                        <p><small>Venda Mês</small></p>
+                        <h2><strong>{{$vendas}}</strong></h2>
+                        <p><small>Total Vendido</small></p>
                     </div>
                 </div>
             </div>

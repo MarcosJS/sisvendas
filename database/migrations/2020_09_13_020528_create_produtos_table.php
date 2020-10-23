@@ -18,7 +18,7 @@ class CreateProdutosTable extends Migration
             $table->timestamps();
             $table->string('nome', 50);
             $table->string('descricao', 100)->nullable();
-            $table->integer('estoque');
+            $table->integer('estoque')->default(0);
             $table->decimal('preco');
         });
     }
