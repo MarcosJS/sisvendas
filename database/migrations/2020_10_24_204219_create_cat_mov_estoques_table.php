@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateProducaosTable extends Migration
+class CreateCatMovEstoquesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,14 +13,10 @@ class CreateProducaosTable extends Migration
      */
     public function up()
     {
-        Schema::create('producaos', function (Blueprint $table) {
+        Schema::create('cat_mov_estoques', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
-            $table->integer('quantidade');
-            $table->date('dtproducao');
-            $table->integer('produto_id')->unsigned();
-            $table->foreign('produto_id')->references('id')->on('produtos');
-
+            $table->string('nome', 20);
         });
     }
 
@@ -31,6 +27,6 @@ class CreateProducaosTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('producaos');
+        Schema::dropIfExists('cat_mov_estoques');
     }
 }
