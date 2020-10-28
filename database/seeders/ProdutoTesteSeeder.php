@@ -2,8 +2,10 @@
 
 namespace Database\Seeders;
 
-use App\Models\Producao;
-use App\Models\Produto;
+use App\Models\Produto\Produto;
+use App\Models\Produto\TipoMovEstoque;
+use App\Models\Usuario;
+use Database\Factories\Produto\MovimentoEstoque;
 use Illuminate\Database\Eloquent\Factories\Sequence;
 use Illuminate\Database\Seeder;
 
@@ -28,10 +30,8 @@ class ProdutoTesteSeeder extends Seeder
             ->create();
 
         foreach ($produtos as $produto) {
-            $producao = Producao::factory()->make();
-            $produto->estoque = $producao->quantidade;
-            $produto->producao()->saveMany([$producao]);
-            $produto->save();
+            $resultado = rand(strtotime('2020-01-01'), strtotime('2020-10-28'));
+            $produto->addMovEstoque('ENTRADA', 'ENTRADA PRODUCAO', random_int(10, 100), date("Y-m-d", $resultado), 1);
         }
     }
 }

@@ -16,6 +16,8 @@ class DatabaseSeeder extends Seeder
         date_default_timezone_set('America/Recife');
         $this->call(FuncaoSeeder::class);
         $this->call(UsuarioSeeder::class);
+        $this->call(TipoMovEstoqueSeeder::class);
+        $this->call(CatMovEstoqueSeeder::class);
         $this->call(StatusVendaSeeder::class);
         $this->call(StatusPagamentoSeeder::class);
     }

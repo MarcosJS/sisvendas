@@ -20,6 +20,9 @@ class CreateProdutosTable extends Migration
             $table->string('descricao', 100)->nullable();
             $table->integer('estoque')->default(0);
             $table->decimal('preco');
+            $table->integer('saldo_control_estoque')->default(0);
+            $table->integer('interv_controle')->default(1);
+            $table->boolean('controle_estoque')->default(false);
         });
     }
 

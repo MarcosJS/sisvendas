@@ -1,8 +1,8 @@
 <?php
 
-namespace Database\Factories;
+namespace Database\Factories\Produto;
 
-use App\Models\Produto;
+use App\Models\Produto\Produto;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 class ProdutoFactory extends Factory
@@ -14,7 +14,6 @@ class ProdutoFactory extends Factory
         return [
             'nome' => $this->faker->firstName,
             'descricao' => $this->faker->text(100),
-            //'estoque' => $this->faker->numberBetween(100,200),
             'preco' => $this->faker->randomFloat(2,1,10)
         ];
     }

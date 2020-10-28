@@ -8,11 +8,6 @@ use Illuminate\Database\Eloquent\Factories\Sequence;
 
 class FuncaoTesteSeeder extends Seeder
 {
-    /**
-     * Run the database seeders.
-     *
-     * @return void
-     */
     public function run()
     {
         Funcao::factory()->count(3)

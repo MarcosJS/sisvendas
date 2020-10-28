@@ -2,9 +2,9 @@
 
 namespace App\Models\Produto;
 
+use App\Models\Usuario;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Notifications\Notifiable;
 
 class Produto extends Model
@@ -13,7 +13,7 @@ class Produto extends Model
     use Notifiable;
 
     protected $fillable     = [
-        'nome', 'descricao', 'estoque', 'preco'
+        'nome', 'descricao', 'estoque', 'preco', 'saldo_control_estoque', 'interv_controle', 'controle_estoque'
     ];
 
     public static $rules = [
@@ -36,11 +36,64 @@ class Produto extends Model
         'preco.min' => 'O preço deve ser maior que 0 (zero)'
     ];
 
-    public function producao() {
-        return $this->hasMany('App\Models\Producao');
+    public function movimentoEstoques() {
+        return $this->hasMany('App\Models\Produto\MovimentoEstoque');
     }
 
     public function vendaItens() {
         return $this->hasMany('App\Models\VendaItem');
+    }
+
+    public function estoqueApartirMovs() {
+        return $this->movimentoEstoques()->sum('quantidade');
+    }
+
+    public function atualizarEstoque() {
+        if ($this->controle_estoque) {
+            $totalMovimentos = $this->movimentoEstoques()->count();
+
+            $pontoControle = -1;
+            if ($totalMovimentos > 0) {
+                $pontoControle = $totalMovimentos % $this->interv_controle;
+            }
+
+            //verificando se é momento para atualizar o saldo de controle do estoque
+            if ($pontoControle == 0) {
+                $indiceBusca = $totalMovimentos - $this->interv_controle;
+                $somaMovimentos = $this->movimentoEstoques()->sortBy('dtmovimento')->skip($indiceBusca)->sum('quantidade');
+                $this->saldo_control_estoque = $this->saldo_control_estoque + $somaMovimentos;
+                $this->estoque = $this->saldo_control_estoque;
+            } else {
+                $indiceBusca = $totalMovimentos / $this->interv_controle;
+                $indiceBusca *= $this->interv_controle;
+                $somaMovimentos = $this->movimentoEstoques()->sortBy('dtmovimento')->skip($indiceBusca)->sum('quantidade');
+                $this->estoque = $this->saldoControlEstoque + $somaMovimentos;
+            }
+        } else {
+            $somaMovimentos = $this->movimentoEstoques()->sum('quantidade');
+            $this->saldo_control_estoque = $somaMovimentos;
+            $this->estoque = $somaMovimentos;
+        }
+        $this->save();
+    }
+
+    public function addMovEstoque($tipo, $categoria, $qtd, $data, $idUsuario) {
+        $movimento = new MovimentoEstoque();
+        $movimento->quantidade = $qtd;
+        $movimento->dtmovimento = $data;
+
+        $tip = TipoMovEstoque::where('nome', '=', $tipo)->first();
+        $movimento->tipoMovEstoque()->associate($tip);
+
+        $cat = CatMovEstoque::where('nome', '=', $categoria)->first();
+        $movimento->CatMovEstoque()->associate($cat);
+
+        $usuario = Usuario::find($idUsuario);
+        $movimento->usuario()->associate($usuario);
+
+        $movimento->produto()->associate($this);
+        $movimento->save();
+
+        $this->atualizarEstoque();
     }
 }

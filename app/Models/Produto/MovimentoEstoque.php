@@ -14,13 +14,12 @@ class MovimentoEstoque extends Model
     ];
 
     public static $rules = [
-        'categoria' => 'required',
+
         'quantidade' => 'required|integer|min:0',
         'dtproducao' => 'required|date'
     ];
 
     public static $messages = [
-        'categoria.required' => 'A categoria é obrigatória',
         'quantidade.required' => 'O campo quantidade é obrigatório',
         'quantidade.integer' => 'A quantidade deve ser é um numero inteiro',
         'quantidade.min' => 'A quantidade deve ser maior que 0 (zero)',
