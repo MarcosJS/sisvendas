@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Produto;
 
 use App\Http\Controllers\Controller;
-use App\Models\Produto;
+use App\Models\Produto\Produto;
 use Illuminate\Http\Request;
 
 class ProdutoControllerFluxoEstoque extends Controller
@@ -20,8 +20,8 @@ class ProdutoControllerFluxoEstoque extends Controller
         foreach ($produtos as $prod) {
             $p['produto'] = $prod;
 
-            $producaoDia = $prod->producao()->where('dtproducao', '=', $dia)->sum('quantidade');
-            $producaoMes = $prod->producao()->whereBetween('dtproducao', $mes)->sum('quantidade');
+            $producaoDia = $prod->movimentoEstoques()->where('dtmovimento', '=', $dia)->sum('quantidade');
+            $producaoMes = $prod->movimentoEstoques()->whereBetween('dtmovimento', $mes)->sum('quantidade');
 
             $vendasDia = $prod->vendaItens()->whereHas('venda', function ($q) use ($dia){
                 $q->where('status_venda_id', '=', 2)

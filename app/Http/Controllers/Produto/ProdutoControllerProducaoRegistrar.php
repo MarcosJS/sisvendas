@@ -3,8 +3,7 @@
 namespace App\Http\Controllers\Produto;
 
 use App\Http\Controllers\Controller;
-use App\Models\Producao;
-use App\Models\Produto;
+use App\Models\Produto\Produto;
 use App\Validator\ProducaoValidator;
 use App\Validator\ValidationException;
 use Illuminate\Http\Request;

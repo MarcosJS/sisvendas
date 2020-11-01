@@ -57,13 +57,13 @@ class Produto extends Model
                 $pontoControle = $totalMovimentos % $this->interv_controle;
             }
 
-            //verificando se é momento para atualizar o saldo de controle do estoque
+            //É hora de atualizar o saldo de controle do estoque
             if ($pontoControle == 0) {
                 $indiceBusca = $totalMovimentos - $this->interv_controle;
                 $somaMovimentos = $this->movimentoEstoques()->sortBy('dtmovimento')->skip($indiceBusca)->sum('quantidade');
                 $this->saldo_control_estoque = $this->saldo_control_estoque + $somaMovimentos;
                 $this->estoque = $this->saldo_control_estoque;
-            } else {
+            } else {//Não é hora de atualizar o saldo de controle do estoque
                 $indiceBusca = $totalMovimentos / $this->interv_controle;
                 $indiceBusca *= $this->interv_controle;
                 $somaMovimentos = $this->movimentoEstoques()->sortBy('dtmovimento')->skip($indiceBusca)->sum('quantidade');

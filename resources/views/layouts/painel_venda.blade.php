@@ -9,9 +9,8 @@
 @endsection
 
 @section('conteudo')
-    <div class="container p-3">
+    <div id="painelvendas" class="container p-3">
         @yield('titulo_conteudo')
-        @include('venda.venda_menu_painel')
         @yield('conteudo_view')
     </div>
 @endsection

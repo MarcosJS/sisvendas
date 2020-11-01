@@ -28,10 +28,9 @@ class VendaTesteSeeder extends Seeder
             ->create();
 
         $vendaItens = VendaItem::all();
-        foreach ($vendaItens as $itens) {
-            $produto = $itens->produto;
-            $produto->estoque -= $itens->qtd;
-            $produto->save();
+        foreach ($vendaItens as $item) {
+            $produto = $item->produto;
+            $produto->addMovEstoque('SAIDA', 'VENDA', -$item->qtd, $item->venda->dtvenda, $item->venda->usuario->id);
         }
 
         foreach ($vendas as $venda) {

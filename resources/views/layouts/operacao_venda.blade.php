@@ -9,7 +9,7 @@
 @endsection
 
 @section('conteudo')
-    <div class="container p-3">
+    <div id="operacaovenda" class="container p-3">
         @yield('titulo_conteudo')
         @include('venda.venda_menu_op')
         @yield('conteudo_view')

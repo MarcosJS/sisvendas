@@ -2,7 +2,7 @@
 
 namespace Tests\Unit;
 
-use App\Models\Produto;
+use App\Models\Produto\Produto;
 use App\Validator\ProdutoValidator;
 use App\Validator\ValidationException;
 use Tests\TestCase;

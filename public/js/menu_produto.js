@@ -1,6 +1,14 @@
-var telaprodutos = document.getElementById('telaprodutos'),
+var painelprodutos = document.getElementById('painelprodutos'),
+    telaprodutos = document.getElementById('telaprodutos'),
     telanovoproduto = document.getElementById('telanovoproduto'),
     telafluxoestoque = document.getElementById('telafluxoestoque');
+
+if (painelprodutos) {
+    menuProdutos= document.getElementById('menu_produtos');
+    subMenuProdutos = document.getElementById('sub_menu_produtos');
+    menuProdutos.classList.add('collapsed');
+    subMenuProdutos.classList.add('show');
+}
 
 if (telaprodutos) {
     btn = document.getElementById('btnprodutos');

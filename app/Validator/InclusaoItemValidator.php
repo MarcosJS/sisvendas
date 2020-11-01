@@ -2,7 +2,7 @@
 
 namespace App\Validator;
 
-use App\Models\Produto;
+use App\Models\Produto\Produto;
 use App\Models\VendaItem;
 
 class InclusaoItemValidator

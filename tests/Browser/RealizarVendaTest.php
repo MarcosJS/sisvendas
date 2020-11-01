@@ -3,7 +3,7 @@
 namespace Tests\Browser;
 
 use App\Models\Cliente;
-use App\Models\Produto;
+use App\Models\Produto\Produto;
 use App\Models\Usuario;
 use App\Models\Venda;
 use Illuminate\Foundation\Testing\DatabaseMigrations;

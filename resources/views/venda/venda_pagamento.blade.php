@@ -57,21 +57,7 @@
 
         <div class="col-sm-6 mt-3">
             <div class="form-group">
-                <label class="sr-only" for="cliente">Cliente</label>
-                @if($cliente != null)
-                    <input type="text" class="form-control @error('cliente') is-invalid @enderror" id="cliente" placeholder="Cliente" value="{{$cliente->cpf}} - {{$cliente->nome}}" readonly>
-                @else
-                    <input type="text" class="form-control @error('cliente') is-invalid @enderror" id="cliente" placeholder="Cliente" value="" readonly>
-                @endif
-                @error('cliente')
-                <span>
-                    <small class="text-danger">{{$message}}</small>
-                </span>
-                @enderror
-            </div>
-
-            <div class="form-group">
-                <label for="metodopg">Método de Pagamento</label>
+                <label for="metodopg">Adicionar Pagamento</label>
                 <select id="metodopg" class="form-control @error('pagamento') is-invalid @enderror" name="pagamento">
                     <option selected value="" {{ (old("pagamento") == "" ? "selected":"") }}>Método de pagamento...</option>
                     @foreach($metodospg as $metodo)
@@ -87,14 +73,76 @@
         </div>
     </div>
 
+    <div class="row pb-0 mt-3">
+        <div class="col pb-0 border rounded">
+            <div class="row">
+                <div class="col">
+                    <h4 id="col_venda_id">Venda nº {{$venda->id}}</h4>
+                </div>
+                <div class="col">
+                    <p class="float-right">{{date('d/m/Y', strtotime($venda->dtvenda))}}</p>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-sm card text-white bg-secondary" style="max-width: 18rem;">
+                    <div class="card-header">Total</div>
+                    <div class="card-body">
+                        <h1 class="card-title">R$ {{$venda->totalprodutos}}</h1>
+                    </div>
+                </div>
+                <div class="col-sm ml-3 card text-white bg-dark" style="max-width: 18rem;">
+                    <div class="card-header">Desconto</div>
+                    <div class="card-body">
+                        <h1 class="card-title">{{$venda->descPorcent()}}%</h1>
+                    </div>
+                </div>
+                <div class="col-sm ml-3 card text-white bg-primary" style="max-width: 18rem;">
+                    <div class="card-header">Líquido</div>
+                    <div class="card-body">
+                        <h1 class="card-title">R$ {{$venda->totalliq}}</h1>
+                    </div>
+                </div>
+                @php
+                    $bgColor = 'bg-warning';
+                @endphp
+                @switch($venda->statusVenda->id)
+                    @case(1)
+                    @php
+                        $bgColor = 'bg-warning';
+                    @endphp
+                    @break
+                    @case(2)
+                    @php
+                        $bgColor = 'bg-success';
+                    @endphp
+                    @break
+                    @case(3)
+                    @php
+                        $bgColor = 'bg-danger';
+                    @endphp
+                    @break
+                @endswitch
+                <div class="col-sm ml-3 card text-black-50 {{$bgColor}}" style="max-width: 18rem;">
+                    <div class="card-header">Status da Venda</div>
+                    <div class="card-body">
+                        <h2 class="card-title">{{$venda->statusVenda->nomestatus}}</h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
     @if(count($pagamentos)> 0)
         <div class="row border rounded mt-3 border-success">
             <h4>Pagamentos</h4>
+
             <table class="table table-sm table-hover table-success mb-0">
                 <tr>
                     <th>Valor R$</th>
                     <th>Tipo</th>
                     <th>Data</th>
+                    <th></th>
                     <th></th>
                 </tr>
                 @foreach($pagamentos as $pag)
@@ -104,6 +152,34 @@
         </div>
     @endif
 
+    <div class="row mt-3">
+        <div class="card col">
+            <h5 class="card-header">Cliente</h5>
+            @if($cliente != null)
+                <div class="card-body">
+                    <input type="text" class="form-control" id="cliente" value="{{$cliente->cpf}} - {{$cliente->nome}}" readonly>
+                </div>
+            @else
+                <div class="card-body">
+                    <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                        <strong>Atenção!</strong> Considere vincular um cliente
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <input type="text" class="form-control" id="cliente" placeholder="Cliente" value="">
+                </div>
+            @endif
+        </div>
+
+        <div class="card col ml-3">
+            <h5 class="card-header">Usuario</h5>
+            <div class="card-body">
+                <h5 class="card-title">{{auth()->user()->nome}}</h5>
+                <p class="card-text">ID: {{auth()->user()->id}}</p>
+            </div>
+        </div>
+    </div>
 
     <!-- TELAS DE FORMULÁRIOS DE PAGAMENTO -->
     @include('venda.lista_clientes')

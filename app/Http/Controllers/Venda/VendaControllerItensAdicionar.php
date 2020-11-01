@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Venda;
 
 use App\Http\Controllers\Controller;
-use App\Models\Produto;
+use App\Models\Produto\Produto;
 use App\Models\Venda;
 use App\Models\VendaItem;
 use App\Validator\InclusaoItemValidator;
@@ -41,7 +41,7 @@ class VendaControllerItensAdicionar extends Controller
             $produto->estoque -= $item->qtd;
             $produto->save();
 
-            return redirect()->back();
+            return redirect()->route('itens');
 
         } catch (ValidationException $exception) {
             return redirect()

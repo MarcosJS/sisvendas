@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Produto;
 
 use App\Http\Controllers\Controller;
-use App\Models\Produto;
+use App\Models\Produto\Produto;
 
 class ProdutoControllerRemover extends Controller
 {

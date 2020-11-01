@@ -1,38 +1,42 @@
-var inicioVendas = document.getElementById('iniciovendas'),
+var painelVendas = document.getElementById('painelvendas'),
+    inicioVendas = document.getElementById('iniciovendas'),
     telaConsultarVendas = document.getElementById('telaconsultarvendas'),
+    operacaoVenda = document.getElementById('operacaovenda'),
     telaitens = document.getElementById('telaitens'),
-    telapagamento = document.getElementById('telapagamento'),
-    telavalidacao = document.getElementById('telavalidacao'),
-    validadeVenda = document.getElementById('validadevenda');
+    telapagamento = document.getElementById('telapagamento');
 
-if (validadeVenda != null && validadeVenda.value) {
-    var btnf = document.getElementById('btnfinalizar');
-    btnf.classList.remove('disabled');
+if (painelVendas || operacaoVenda) {
+    menuVendas= document.getElementById('menu_vendas');
+    subMenuVendas = document.getElementById('sub_menu_vendas');
+    menuVendas.classList.add('collapsed');
+    subMenuVendas.classList.add('show');
+}
+
+function destacarMenu(botao, classe) {
+    btn = document.getElementById(botao);
+    btn.classList.add(classe);
 }
 
 if (inicioVendas) {
-    var btn = document.getElementById('btniniciovendas');
-    btn.classList.add('btnformout-active');
+    destacarMenu('btniniciovendas', 'btnformout-active');
 }
 
 if (telaConsultarVendas) {
-    btn = document.getElementById('btnconsultarvendas');
-    btn.classList.add('btnformout-active');
+    destacarMenu('btnconsultarvendas', 'btnformout-active');
+}
+
+if (operacaoVenda) {
+    destacarMenu('btnnovavenda', 'btnformout-active');
 }
 
 if (telaitens) {
-    btn = document.getElementById('btnitens');
-    btn.classList.add('btnformout-active');
+    destacarMenu('btnitens', 'btnformout-active');
 }
 
 if (telapagamento) {
-    btn = document.getElementById('btnpagamento');
-    btn.classList.add('btnformout-active');
-}
-
-if (telavalidacao) {
-    btn = document.getElementById('btnvalidacao');
-    btn.classList.add('btnformout-active');
+    destacarMenu('btnpagamento', 'btnformout-active');
+    btnf = document.getElementById('btnfinalizar');
+    btnf.classList.remove('disabled');
 }
 
 

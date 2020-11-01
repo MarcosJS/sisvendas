@@ -42,7 +42,6 @@ use App\Http\Controllers\Venda\VendaControllerTodos;
 use App\Http\Controllers\Venda\VendaControllerVincularCliente;
 use App\Http\Controllers\Venda\VendaControllerPagamento;
 use App\Http\Controllers\Venda\VendaControllerRegistrar;
-use App\Http\Controllers\Venda\VendaControllerValidar;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -108,7 +107,6 @@ Route::middleware(['auth'])->group(function () {
     Route::get('venda/pagamento', [VendaControllerPagamento::class, 'pagamento'])->name('pagamento');
     Route::get('venda/vincularcliente/{id}', [VendaControllerVincularCliente::class, 'vincular'])->name('vincularcliente');
     Route::get('venda/desvincularcliente', [VendaControllerDesVincularCliente::class, 'desvincular'])->name('desvincularcliente');
-    Route::get('venda/validar', [VendaControllerValidar::class, 'validar'])->name('validarpagamento');
     Route::post('venda/aplicardesconto', [VendaControllerAplicarDesconto::class, 'aplicar'])->name('aplicardesconto');
     Route::get('venda/registrar', [VendaControllerRegistrar::class, 'registrar'])->name('registrarvenda');
 
