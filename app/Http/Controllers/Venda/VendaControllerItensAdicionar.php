@@ -38,7 +38,7 @@ class VendaControllerItensAdicionar extends Controller
                 $venda->atualizarValores();
                 $request->session()->put('venda_id', $venda->id);
             }
-            $produto->estoque -= $item->qtd;
+            $produto->addMovEstoque('SAIDA', 'VENDA', -$item->qtd, $item->venda->dtvenda, $item->venda->usuario->id);
             $produto->save();
 
             return redirect()->route('itens');

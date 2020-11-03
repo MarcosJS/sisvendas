@@ -5,29 +5,18 @@ namespace Database\Factories;
 use App\Models\Venda;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
-/*
-|--------------------------------------------------------------------------
-| Model Factories
-|--------------------------------------------------------------------------
-|
-| This directory should contain each of the model factory definitions for
-| your application. Factories provide a convenient way to generate new
-| model instances for testing / seeding your application's database.
-|
-*/
-
 class VendaFactory extends Factory
 {
     protected $model = Venda::class;
 
     public function definition()
     {
+        $resultado = rand(strtotime('2019-01-01'), strtotime('2020-10-28'));
+
         return [
-            'dtvenda' => $this->faker->date('Y-m-d'),
+            'dtvenda' => date("Y-m-d", $resultado),
             'hrvenda' => $this->faker->time('h:i:s'),
-            'totalprodutos' => $this->faker->numberBetween(1,10),
             'desconto' => 1,
-            'totalliq' => $this->faker->randomFloat(2,50,200),
         ];
     }
 }

@@ -24,7 +24,7 @@ class VendaControllerRegistrar extends Controller
                 $venda->hrvenda = date("H:i:s");
 
                 /*Alterando o status da venda e apagando a sessao*/
-                $status = StatusVenda::where('nomestatus', 'CONCLUIDO')->first();
+                $status = StatusVenda::find(2);
                 $venda->statusVenda()->associate($status);
                 $venda->valida = true;
                 $venda->save();

@@ -30,28 +30,29 @@
                     <td>{{$v->descPorcent()}}</td>
                     <td> {{$v->totalliq}}</td>
                     @php
-                        $bgColor = '';
+                        $badge = '';
                     @endphp
                     @switch($v->statusVenda->id)
                         @case(1)
                         @php
-                            $bgColor = 'bg-warning';
+                            $badge = 'badge-warning';
                         @endphp
                         @break
 
                         @case(2)
                         @php
-                            $bgColor = 'bg-success';
+                            $badge = 'badge-success';
                         @endphp
                         @break
 
                         @case(3)
                         @php
-                            $bgColor = 'bg-danger';
+                            $badge = 'badge-danger';
                         @endphp
                         @break
+
                     @endswitch
-                    <td class="{{$bgColor}} text-center">{{$v->statusVenda->nomestatus}}</td>
+                    <td class="text-center"><span class="badge {{$badge}}">{{$v->statusVenda->nomestatus}}</span></td>
                 </tr>
             @endforeach
         </table>

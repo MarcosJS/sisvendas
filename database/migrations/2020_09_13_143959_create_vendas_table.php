@@ -21,7 +21,7 @@ class CreateVendasTable extends Migration
             $table->decimal('totalprodutos')->default(0);
             $table->decimal('desconto')->default(1.0);
             $table->decimal('totalliq')->default(0);
-            $table->boolean('valida')->default(false);
+            $table->string('nomecliente')->nullable();
 
             $table->integer('usuario_id')->unsigned();
             $table->integer('cliente_id')->unsigned()->nullable();

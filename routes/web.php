@@ -32,6 +32,7 @@ use App\Http\Controllers\Venda\VendaControllerAcessar;
 use App\Http\Controllers\Venda\VendaControllerAplicarDesconto;
 use App\Http\Controllers\Venda\VendaControllerAtivar;
 use App\Http\Controllers\Venda\VendaControllerDesvincularCliente;
+use App\Http\Controllers\Venda\VendaControllerIncluirNomeCliente;
 use App\Http\Controllers\Venda\VendaControllerItens;
 use App\Http\Controllers\Venda\VendaControllerNovo;
 use App\Http\Controllers\Venda\VendaControllerItensAdicionar;
@@ -106,6 +107,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('venda/cancelar', [VendaControllerCancelar::class, 'cancelar'])->name('cancelar');
     Route::get('venda/pagamento', [VendaControllerPagamento::class, 'pagamento'])->name('pagamento');
     Route::get('venda/vincularcliente/{id}', [VendaControllerVincularCliente::class, 'vincular'])->name('vincularcliente');
+    Route::post('venda/incluirnomecliente', [VendaControllerIncluirNomeCliente::class, 'incluirNome'])->name('incluirnomecliente');
     Route::get('venda/desvincularcliente', [VendaControllerDesVincularCliente::class, 'desvincular'])->name('desvincularcliente');
     Route::post('venda/aplicardesconto', [VendaControllerAplicarDesconto::class, 'aplicar'])->name('aplicardesconto');
     Route::get('venda/registrar', [VendaControllerRegistrar::class, 'registrar'])->name('registrarvenda');

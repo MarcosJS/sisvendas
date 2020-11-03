@@ -2,19 +2,9 @@
 
 namespace Database\Factories;
 
+use App\Models\Produto\Produto;
 use App\Models\VendaItem;
 use Illuminate\Database\Eloquent\Factories\Factory;
-
-/*
-|--------------------------------------------------------------------------
-| Model Factories
-|--------------------------------------------------------------------------
-|
-| This directory should contain each of the model factory definitions for
-| your application. Factories provide a convenient way to generate new
-| model instances for testing / seeding your application's database.
-|
-*/
 
 class VendaItemFactory extends Factory
 {
@@ -22,11 +12,15 @@ class VendaItemFactory extends Factory
 
     public function definition()
     {
+        $produto = Produto::find($this->faker->numberBetween(1,6));
+        $qtd = $this->faker->numberBetween(1,100);
+        $precoFinal = $produto->preco;
+
         return [
-            'qtd' => $this->faker->numberBetween(1,100),
-            'precofinal' => $this->faker->randomFloat(2, 1,3),
-            'subtotal' => $this->faker->randomFloat(2, 3, 6),
-            'produto_id' => $this->faker->numberBetween(1,6)
+            'qtd' => $qtd,
+            'precofinal' => $precoFinal,
+            'subtotal' => $qtd * $precoFinal,
+            'produto_id' => $produto->id
         ];
     }
 }

@@ -16,6 +16,7 @@ class VendaControllerAcessar extends Controller
         return view('venda.venda', [
             'venda' => $venda,
             'cliente' => $cliente,
+            'nomecliente' =>$venda->nomecliente,
             'pagamentos' => $pagamentos,
             'usuario' => $usuario,
             'itens' => $itens]);

@@ -10,7 +10,7 @@ class Venda extends Model
     use HasFactory;
 
     protected $fillable = [
-        'dtvenda', 'hrvenda', 'totalprodutos', 'desconto', 'totalliq', 'valida'
+        'dtvenda', 'hrvenda', 'totalprodutos', 'desconto', 'totalliq', 'nomecliente'
     ];
 
     public  static $rules = [
@@ -18,7 +18,8 @@ class Venda extends Model
         'hrvenda' => 'require|date_format:H:i:s',
         'totalprodutos' => 'numeric|min:0',
         'desconto' => 'numeric|min:0|max:1',
-        'totalliq' => 'numeric|min:0'
+        'totalliq' => 'numeric|min:0',
+        'nomecliente' => 'nullable|min:5|max:100'
     ];
 
     public static $messages = [
@@ -36,6 +37,8 @@ class Venda extends Model
         'totalliq.required' => 'O campo totalliq é obrigatório',
         'totalliq.numeric' => 'O campo totalliq deve ser do  tipo numerico',
         'totalliq.min' => 'O totalliq deve ser maior que 0 (zero)',
+        'nomecliente.min'=>'O nome deve ter no mínimo 5 letras',
+        'nomecliente.max'=>'O nome deve ter no máximo 100 letras',
     ];
 
     public function vendaItens() {

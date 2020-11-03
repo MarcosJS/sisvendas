@@ -135,7 +135,9 @@
                     <p class="card-text">CPF: {{$cliente->cpf}}</p>
                     <a href="{{route('cliente', ['id' => $cliente->id])}}" class="btn btnform btn-primary">Acessar</a>
                 </div>
-            @endif
+            @elseif($nomecliente != null)
+                <h5 class="card-title">{{$nomecliente}}</h5>
+             @endif
         </div>
 
         <div class="card col ml-3">

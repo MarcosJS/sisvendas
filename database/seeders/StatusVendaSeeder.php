@@ -19,18 +19,15 @@ class StatusVendaSeeder extends Seeder
         $status->save();
 
         $status = new StatusVenda();
-        $status->nomestatus = 'CONCLUIDO';
+        $status->nomestatus = 'CONCLUIDA';
         $status->save();
 
         $status = new StatusVenda();
-        $status->nomestatus = 'CANCELADO';
+        $status->nomestatus = 'EM ABERTO';
         $status->save();
-        /*StatusVenda::factory()->count(3)
-            ->state(new Sequence(
-                ['nomestatus' => 'EM ANDAMENTO'],
-                ['nomestatus' => 'CONCLUIDO'],
-                ['nomestatus' => 'CANCELADO']
-            ))
-            ->create();*/
+
+        $status = new StatusVenda();
+        $status->nomestatus = 'CANCELADA';
+        $status->save();
     }
 }

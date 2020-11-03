@@ -2,6 +2,8 @@
 
 namespace App\Validator;
 
+use App\Models\Venda;
+
 class PagamentoValidator
 {
     public static function validate($data) {
@@ -14,6 +16,14 @@ class PagamentoValidator
         ];
 
         $validator = \Validator::make($data, $rules, $messages);
+
+        if($validator->errors()->isEmpty()) {
+            $venda = Venda::find($data['venda_id']);
+            $qtdItens = $venda->vendaItens()->count();
+            if($qtdItens <= 0) {
+                $validator->errors()->add('venda_id', 'Nenhum item foi adicionado a venda');
+            }
+        }
 
         if(!$validator->errors()->isEmpty()) {
             throw new ValidationException($validator, "Erro no processamento do pagamento");

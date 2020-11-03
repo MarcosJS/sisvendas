@@ -43,6 +43,7 @@
                     <td colspan="4" class="text-right"><b>LÍQUIDO R$:</b></td>
                     <td id="totalliq" class="text-right"><b>{{$venda->totalliq}}</b></td>
                 </tr>
+                <input id="totalliqfinal" type="hidden" value="{{$venda->totalliq}}">
             </table>
 
             <form action="{{route('aplicardesconto')}}" method="post">
@@ -55,21 +56,43 @@
             </form>
         </div>
 
-        <div class="col-sm-6 mt-3">
-            <div class="form-group">
-                <label for="metodopg">Adicionar Pagamento</label>
-                <select id="metodopg" class="form-control @error('pagamento') is-invalid @enderror" name="pagamento">
-                    <option selected value="" {{ (old("pagamento") == "" ? "selected":"") }}>Método de pagamento...</option>
-                    @foreach($metodospg as $metodo)
-                        <option value="{{$metodo['id']}}" {{ (old("pagamento") == $metodo['id'] ? "selected":"") }}>{{$metodo['nomemetodopagamento']}}</option>
-                    @endforeach
-                </select>
-                @error('pagamento')
-                <span>
-                    <small class="text-danger">{{$message}}</small>
-                </span>
-                @enderror
+        <div class="col border rounded">
+            <h4>Forma de Pagamento</h4>
+
+            <div class="row">
+                <div class="col">
+                    <button type="button" class="col btn btn-outline-primary btn-lg btn-block rounded-0" data-toggle="modal" data-target="#formdinheiro">
+                        DINHEIRO
+                    </button>
+                </div>
+                <div class="col">
+                    <button type="button" class="col btn btn-outline-primary btn-lg btn-block rounded-0" data-toggle="modal" data-target="#formcheque">
+                        CHEQUE
+                    </button>
+                </div>
             </div>
+
+            <div class="row mt-4">
+                <div class="col">
+                    <button type="button" class="col btn btn-outline-primary btn-lg btn-block rounded-0" data-toggle="modal" data-target="#exampleModalCenter" disabled>
+                        TRANSFERÊNCIA
+                    </button>
+                </div>
+                <div class="col">
+                    <button type="button" class="col btn btn-outline-primary btn-lg btn-block rounded-0" data-toggle="modal" data-target="#exampleModalCenter" disabled>
+                        VALE
+                    </button>
+                </div>
+            </div>
+
+            <div class="row mt-4">
+                <div class="col-sm-6">
+                    <button type="button" class="col btn btn-outline-primary btn-lg btn-block rounded-0" data-toggle="modal" data-target="#exampleModalCenter" disabled>
+                        CARTÃO
+                    </button>
+                </div>
+            </div>
+
         </div>
     </div>
 
@@ -122,6 +145,7 @@
                         $bgColor = 'bg-danger';
                     @endphp
                     @break
+
                 @endswitch
                 <div class="col-sm ml-3 card text-black-50 {{$bgColor}}" style="max-width: 18rem;">
                     <div class="card-header">Status da Venda</div>
@@ -155,21 +179,44 @@
     <div class="row mt-3">
         <div class="card col">
             <h5 class="card-header">Cliente</h5>
-            @if($cliente != null)
                 <div class="card-body">
-                    <input type="text" class="form-control" id="cliente" value="{{$cliente->cpf}} - {{$cliente->nome}}" readonly>
-                </div>
-            @else
-                <div class="card-body">
+                    @if($cliente != null)
+                    <h5 class="card-title">{{$cliente->nome}}</h5>
+                    <p class="card-text">CPF: {{$cliente->cpf}}</p>
+                    <a href="{{route('cliente', ['id' => $cliente->id])}}" class="btn btnform btn-primary">Acessar</a>
+                    <a class="btn btn-outline-danger" href="{{route('desvincularcliente')}}" role="button">Desvincular</a>
+
+                    @elseif($nomecliente != null)
+                    <h5 class="card-title">{{$nomecliente}}</h5>
+                    <a class="btn btn-outline-danger" href="{{route('desvincularcliente')}}" role="button">Desvincular</a>
+
+                    @else
                     <div class="alert alert-warning alert-dismissible fade show" role="alert">
                         <strong>Atenção!</strong> Considere vincular um cliente
                         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
-                    <input type="text" class="form-control" id="cliente" placeholder="Cliente" value="">
+                    <form action="{{route('incluirnomecliente')}}" method="post">
+                        @csrf()
+                        <div class="input-group mb-3">
+                            <input type="text" class="form-control @error('nomecliente') is-invalid @enderror" placeholder="Nome" aria-label="Recipient's username" aria-describedby="basic-addon2" name="nomecliente">
+                            <div class="input-group-append">
+                                <button class="btn btn-outline-secondary" type="submit">Salvar</button>
+                            </div>
+                        </div>
+                        @error('nomecliente')
+                        <span>
+                                <small class="text-danger">{{$message}}</small>
+                            </span>
+                        @enderror
+                    </form>
+
+                    <button type="button" class="btn btn-link" data-toggle="modal" data-target="#listaclientes">
+                        Vincular cliente exitente
+                    </button>
+                    @endif
                 </div>
-            @endif
         </div>
 
         <div class="card col ml-3">
@@ -182,6 +229,7 @@
     </div>
 
     <!-- TELAS DE FORMULÁRIOS DE PAGAMENTO -->
-    @include('venda.lista_clientes')
+    @include('clientes.lista_clientes')
     @include('pagamentos.form_cheque')
+    @include('pagamentos.form_dinheiro')
 @endsection

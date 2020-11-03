@@ -11,7 +11,7 @@ class VendaControllerCancelar extends Controller
 {
     public function cancelar(Request $request) {
         if($request->session()->has('venda_id')) {
-            $status = StatusVenda::where('nomestatus', 'CANCELADO')->first();
+            $status = StatusVenda::find(4);
             $venda = Venda::find($request->session()->get('venda_id'));
 
             foreach ($venda->vendaItens as $item) {

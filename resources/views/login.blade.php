@@ -1,6 +1,6 @@
 @extends('layouts.master')
 
-@section('titulo', 'SISVendas')
+@section('titulo', 'SISVendas - Login')
 
 @section('conteudo')
     <div class="container p-3">

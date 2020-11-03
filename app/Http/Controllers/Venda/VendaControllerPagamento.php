@@ -16,15 +16,13 @@ class VendaControllerPagamento extends Controller
             PagamentoValidator::validate($request->session()->all());
             $clientes = Cliente::all();
             $venda = Venda::find($request->session()->get('venda_id'));
-            $metodospg = [
-                ['id' => 1, 'nomemetodopagamento' => 'CHEQUE']];
 
             return view("venda.venda_pagamento", [
                 'clientes' => $clientes,
                 'venda' => $venda,
-                'metodospg' => $metodospg,
                 'pagamentos' => $venda->pagamentos,
-                'cliente' => $venda->cliente]);
+                'cliente' => $venda->cliente,
+                'nomecliente' => $venda->nomecliente]);
 
         } catch (ValidationException $exception) {
             return redirect()
