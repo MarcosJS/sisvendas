@@ -1,7 +1,7 @@
 <?php
 
 
-namespace Database\Seeders;
+namespace Database\Seeders\Teste;
 
 use App\Models\Pagamento\Pagamento;
 use Illuminate\Database\Seeder;

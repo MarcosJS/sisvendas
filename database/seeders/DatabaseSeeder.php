@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Caixa\StatusTurno;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -20,5 +21,6 @@ class DatabaseSeeder extends Seeder
         $this->call(CatMovEstoqueSeeder::class);
         $this->call(StatusVendaSeeder::class);
         $this->call(StatusPagamentoSeeder::class);
+        $this->call(StatusTurnoSeeder::class);
     }
 }

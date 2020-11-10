@@ -16,9 +16,11 @@ class Pagamento extends Model
     public function venda() {
         return $this->belongsTo('App\Models\Venda');
     }
+
     public function statuspagamento() {
         return $this->belongsTo('App\Models\Pagamento\StatusPagamento');
     }
+
     public function cheque() {
         return $this->hasOne('App\Models\Pagamento\Cheque');
     }

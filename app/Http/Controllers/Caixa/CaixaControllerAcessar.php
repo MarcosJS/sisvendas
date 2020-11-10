@@ -1,0 +1,34 @@
+<?php
+
+namespace App\Http\Controllers\Caixa;
+
+use App\Http\Controllers\Controller;
+use App\Models\Caixa\Caixa;
+use App\Models\Caixa\Turno;
+use App\Models\Produto\Produto;
+use App\Models\Venda;
+use Illuminate\Http\Request;
+
+class CaixaControllerAcessar extends Controller
+{
+    public function acessar() {
+        $caixa = Caixa::first();
+        if ($caixa == null) {
+            $caixa = new Caixa();
+            $caixa->save();
+        }
+        $turno = Turno::find($caixa->turnoAtual);
+
+        $produtos = Produto::all()->sortBy('nome');
+        $venda = Venda::find(Session()->get('venda_id'));
+        if (!$venda) {
+            $venda = new Venda();
+        }
+
+        return view('caixa.caixa', [
+            'caixa' => $caixa,
+            'turno' => $turno,
+            'produtos' => $produtos,
+            'venda' => $venda]);
+    }
+}

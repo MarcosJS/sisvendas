@@ -25,7 +25,6 @@ class VendaControllerItensAdicionar extends Controller
             if($request->session()->has('venda_id')) {
                 $venda = Venda::find($request->session()->get('venda_id'));
                 $venda->vendaItens()->saveMany([$item]);
-                $venda->valida = false;
                 $venda->atualizarValores();
             } else {
                 $venda = new Venda();
@@ -41,7 +40,7 @@ class VendaControllerItensAdicionar extends Controller
             $produto->addMovEstoque('SAIDA', 'VENDA', -$item->qtd, $item->venda->dtvenda, $item->venda->usuario->id);
             $produto->save();
 
-            return redirect()->route('itens');
+            return redirect()->back();
 
         } catch (ValidationException $exception) {
             return redirect()

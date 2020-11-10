@@ -26,7 +26,7 @@ if (telaConsultarVendas) {
 }
 
 if (operacaoVenda) {
-    destacarMenu('btnnovavenda', 'btnformout-active');
+    destacarMenu('btncaixa', 'btnformout-active');
 }
 
 if (telaitens) {

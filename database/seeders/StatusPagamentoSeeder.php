@@ -25,12 +25,5 @@ class StatusPagamentoSeeder extends Seeder
         $status = new StatusPagamento();
         $status->nomestatus = 'ESTORNADO';
         $status->save();
-        /*StatusPagamento::factory()->count(3)
-            ->state(new Sequence(
-                ['nomestatus' => 'AGUARDANDO'],
-                ['nomestatus' => 'PAGO'],
-                ['nomestatus' => 'ESTORNADO']
-            ))
-            ->create();*/
     }
 }

@@ -1,6 +1,6 @@
 <?php
 
-namespace Database\Seeders;
+namespace Database\Seeders\Teste;
 
 use App\Models\Cliente;
 use App\Models\Endereco;

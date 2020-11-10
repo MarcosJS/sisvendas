@@ -7,7 +7,6 @@
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
         <link href="{{asset('css/div.css')}}" rel="stylesheet" type="text/css"/>
         <link href="{{asset('css/app.css')}}" rel="stylesheet" type="text/css"/>
-        <link href="{{asset('css/master.css')}}" rel="stylesheet" type="text/css"/>
         <link href="{{asset('css/form_cheque.css')}}" rel="stylesheet" type="text/css"/>
         <link href="{{asset('css/btnformout.css')}}" rel="stylesheet" type="text/css"/>
         <title>@yield('titulo')</title>
@@ -21,26 +20,28 @@
                 @include('layouts.menu_sidebar')
             </div>
 
-            <nav id="navbar-interna" class="navbar navbar-expand-lg navbar-light border-bottom">
-                <button id="menu-toggle" class="btn">Menu</button>
-
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
-                        @include('menu_usuario')
-                    </ul>
-                </div>
-            </nav>
-
             <div id="page-content-wrapper">
+                <nav id="navbar-interna" class="navbar navbar-expand-lg navbar-light border-bottom">
+                    <button id="menu-toggle" class="btn">Menu</button>
+
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+
+                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                        <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
+                            @include('menu_usuario')
+                        </ul>
+                    </div>
+                </nav>
+
                 @yield('conteudo')
             </div>
 
-            <footer id="footer">
-                @yield('rodape')
+            <footer class="fixed-bottom bg-secondary">
+                <div class="container">
+                    <span>menu</span>
+                </div>
             </footer>
 
         </div>

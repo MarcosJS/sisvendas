@@ -1,7 +1,7 @@
 <div class="list-group list-group-flush">
     @if(auth()->check())
         <a id="menu_vendas" class="list-group-item list-group-item-action" data-toggle="collapse" data-target="#sub_menu_vendas">
-            <strong>SISVendas PDV</strong>
+            <strong>PDV</strong>
             <span class="float-right">
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-down">
                     <polyline points="6 9 12 15 18 9"></polyline>
@@ -10,7 +10,7 @@
         </a>
         @include('venda.venda_menu_painel')
 
-        <a class="list-group-item list-group-item-action" href="#">
+        <a class="list-group-item list-group-item-action" data-toggle="collapse" data-target="#sub_menu_caixa">
             <strong>Financeiro</strong>
             <span class="float-right">
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-down">
@@ -18,6 +18,7 @@
                 </svg>
             </span>
         </a>
+        @include('caixa.caixa_submenu')
 
         <a class="list-group-item list-group-item-action" href="{{route('clientes')}}">
             <strong>Clientes</strong>

@@ -1,5 +1,8 @@
 <?php
 
+use App\Http\Controllers\Caixa\CaixaControllerAbrir;
+use App\Http\Controllers\Caixa\CaixaControllerAcessar;
+use App\Http\Controllers\Caixa\CaixaControllerFechar;
 use App\Http\Controllers\Pagamento\PagamentoControllerExcluir;
 use App\Http\Controllers\Pagamento\PagamentoChequeControllerRegistrar;
 use App\Http\Controllers\Produto\ProdutoControllerFluxoEstoque;
@@ -114,5 +117,9 @@ Route::middleware(['auth'])->group(function () {
 
     Route::post('pagamentos/registrarcheque', [PagamentoChequeControllerRegistrar::class, 'registrar'])->name('registrarcheque');
     Route::get('pagamentos/excluir/{id}', [PagamentoControllerExcluir::class, 'excluir'])->name('excluirpagamento');
+
+    Route::get('caixa', [CaixaControllerAcessar::class, 'acessar'])->name('caixa');
+    Route::get('caixa/abrir', [CaixaControllerAbrir::class, 'abrir'])->name('abrircaixa');
+    Route::get('caixa/fechar', [CaixaControllerFechar::class, 'fechar'])->name('fecharcaixa');
 });
 

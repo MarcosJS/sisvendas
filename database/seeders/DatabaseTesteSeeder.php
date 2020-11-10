@@ -2,6 +2,11 @@
 
 namespace Database\Seeders;
 
+use Database\Seeders\Teste\ClienteTesteSeeder;
+use Database\Seeders\Teste\FuncaoTesteSeeder;
+use Database\Seeders\Teste\ProdutoTesteSeeder;
+use Database\Seeders\Teste\UsuarioTesteSeeder;
+use Database\Seeders\Teste\VendaTesteSeeder;
 use Illuminate\Database\Seeder;
 
 class DatabaseTesteSeeder extends Seeder
