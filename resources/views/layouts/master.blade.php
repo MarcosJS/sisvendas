@@ -10,6 +10,7 @@
         <link href="{{asset('css/master.css')}}" rel="stylesheet" type="text/css"/>
         <link href="{{asset('css/form_cheque.css')}}" rel="stylesheet" type="text/css"/>
         <link href="{{asset('css/btnformout.css')}}" rel="stylesheet" type="text/css"/>
+        <link href="{{asset('css/caixa.css')}}" rel="stylesheet" type="text/css"/>
         <title>@yield('titulo')</title>
     </head>
     <body>
@@ -51,5 +52,7 @@
         <script src="{{asset('js/menu_venda.js')}}" type="text/javascript"></script>
         <script src="{{asset('js/menu_produto.js')}}" type="text/javascript"></script>
         <script src="{{asset('js/vendas.js')}}" type="text/javascript"></script>
+        <script src="{{asset('js/caixa_suprimento.js')}}" type="text/javascript"></script>
+        <script src="{{asset('js/caixa_sangria.js')}}" type="text/javascript"></script>
     </body>
 </html>

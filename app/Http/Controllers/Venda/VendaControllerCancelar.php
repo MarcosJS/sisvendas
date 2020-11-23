@@ -25,6 +25,6 @@ class VendaControllerCancelar extends Controller
             $request->session()->forget('venda_id');
         }
 
-        return redirect()->route('iniciovendas');
+        return redirect()->route('caixa');
     }
 }

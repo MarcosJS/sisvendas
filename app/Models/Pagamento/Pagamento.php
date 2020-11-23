@@ -25,4 +25,7 @@ class Pagamento extends Model
         return $this->hasOne('App\Models\Pagamento\Cheque');
     }
 
+    public function movimento() {
+        return $this->hasOne('App\Models\Caixa\MovimentoCaixa');
+    }
 }

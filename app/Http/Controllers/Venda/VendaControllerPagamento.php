@@ -26,7 +26,7 @@ class VendaControllerPagamento extends Controller
 
         } catch (ValidationException $exception) {
             return redirect()
-                ->route('itens')
+                ->back()
                 ->withErrors($exception->getValidator());;
         }
     }

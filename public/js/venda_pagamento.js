@@ -43,7 +43,7 @@ for(let linha of tabelaClientes) {
         this.style.cursor = 'pointer';
     };
     linha.onclick = function() {
-        location.href='vincularcliente/'+this.firstElementChild.innerHTML;
+        location.href='venda/vincularcliente/'+this.firstElementChild.innerHTML;
     }
 }
 

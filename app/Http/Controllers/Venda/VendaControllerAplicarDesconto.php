@@ -12,12 +12,13 @@ class VendaControllerAplicarDesconto extends Controller
         if ($request->session()->has('venda_id')){
             $venda = Venda::find($request->session()->get('venda_id'));
             $venda->desconto = (1 - ($request->desconto / 100));
-            $venda->valida = false;
             $venda->atualizarValores();
 
-            return redirect()->route('pagamento');
-        } else {
             return redirect()->back();
+        } else {
+            return redirect()
+                ->back()
+                ->withErrors(['venda_id' => 'Não há nenhuma venda ativa.']);
         }
 
     }

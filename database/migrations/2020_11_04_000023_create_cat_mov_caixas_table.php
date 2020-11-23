@@ -16,6 +16,7 @@ class CreateCatMovCaixasTable extends Migration
         Schema::create('cat_mov_caixas', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
+            $table->string('nome');
         });
     }
 

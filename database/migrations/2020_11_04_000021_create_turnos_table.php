@@ -19,12 +19,10 @@ class CreateTurnosTable extends Migration
             $table->dateTime('abertura');
             $table->dateTime('fechamento')->nullable();
 
-            $table->integer('movimento_caixa_id')->unsigned()->nullable();
             $table->integer('usuario_id')->unsigned();
             $table->integer('caixa_id')->unsigned();
             $table->integer('status_turno_id')->unsigned()->default(1);
 
-            $table->foreign('movimento_caixa_id')->references('id')->on('movimento_caixas');
             $table->foreign('usuario_id')->references('id')->on('usuarios');
             $table->foreign('caixa_id')->references('id')->on('caixas');
             $table->foreign('status_turno_id')->references('id')->on('status_turnos');

@@ -12,20 +12,23 @@ class VendaControllerIncluirNomeCliente extends Controller
 {
     public function incluirNome(Request $request) {
         try {
-
             InclusaoNomeClienteValidator::validate($request->all());
+            $erro = '';
             if(session()->has('venda_id')) {
                 $venda = Venda::find(session()->get('venda_id'));
                 if($venda->cliente == null) {
                     $venda->nomecliente = $request['nomecliente'];
                     $venda->save();
+                    return  redirect()->back();
                 } else {
-                    return redirect()
-                        ->back()
-                        ->withErrors(['nomecliente' => 'Desvincule o cliente atual primeiro']);
+                    $erro = ['nomecliente' => 'Desvincule o cliente atual primeiro'];
                 }
+            } else {
+                $erro = ['vinculocliente' => 'Não há nenhuma venda ativa.'];
             }
-            return redirect()->back();
+            return redirect()
+                ->back()
+                ->withErrors($erro);
         } catch (ValidationException $exception) {
             return redirect()
                 ->back()

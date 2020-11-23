@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Caixa;
 use App\Http\Controllers\Controller;
 use App\Models\Caixa\Caixa;
 use App\Models\Caixa\Turno;
+use App\Models\Cliente;
 use App\Models\Produto\Produto;
 use App\Models\Venda;
 use Illuminate\Http\Request;
@@ -23,12 +24,16 @@ class CaixaControllerAcessar extends Controller
         $venda = Venda::find(Session()->get('venda_id'));
         if (!$venda) {
             $venda = new Venda();
+            $venda->totalprodutos = 0;
+            $venda->totalliq = 0;
         }
+        $clientes = Cliente::all()->sortBy('nome');
 
         return view('caixa.caixa', [
             'caixa' => $caixa,
             'turno' => $turno,
             'produtos' => $produtos,
-            'venda' => $venda]);
+            'venda' => $venda,
+            'clientes' => $clientes]);
     }
 }

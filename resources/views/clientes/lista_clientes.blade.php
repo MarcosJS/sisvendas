@@ -9,6 +9,21 @@
             </div>
 
             <div class="modal-body">
+                <form action="{{route('incluirnomecliente')}}" method="post">
+                    @csrf()
+                    <div class="input-group mb-3">
+                        <input type="text" class="form-control @error('nomecliente') is-invalid @enderror" placeholder="Acrescentar apenas um nome" aria-label="Recipient's username" aria-describedby="basic-addon2" name="nomecliente">
+                        <div class="input-group-append">
+                            <button class="btn btn-outline-secondary" type="submit">Salvar</button>
+                        </div>
+                    </div>
+                    @error('nomecliente')
+                    <span>
+                        <small class="text-danger">{{$message}}</small>
+                    </span>
+                    @enderror
+                </form>
+
                 <div class="input-group mb-3">
                     <input type="text" id="clientepesq" class="form-control" aria-label="Recipient's username" aria-describedby="basic-addon2">
                     <div class="input-group-append">
@@ -34,7 +49,7 @@
             </div>
 
             <div class="modal-footer">
-                <a class="btn btnform" href="{{route('novocliente')}}" role="button">Cadastrar</a>
+                <a class="btn btnform" href="{{route('novocliente')}}" role="button">Cadastrar Novo</a>
             </div>
         </div>
     </div>

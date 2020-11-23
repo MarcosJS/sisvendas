@@ -16,6 +16,7 @@ class CreateTipoMovCaixasTable extends Migration
         Schema::create('tipo_mov_caixas', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
+            $table->string('nome');
         });
     }
 

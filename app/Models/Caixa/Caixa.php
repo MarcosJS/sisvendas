@@ -2,6 +2,7 @@
 
 namespace App\Models\Caixa;
 
+use App\Models\Usuario;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Auth;
@@ -59,7 +60,9 @@ class Caixa extends Model
             $turno = Turno::find($this->turnoAtual);
             if ($turno != null) {
                 if ($filtro == null) {
-                    //itera todos os movimentos do turno
+                    foreach ($turno->movimentos as $movimento) {
+                        $saldo += $movimento->valor;
+                    }
                 }
             }
             return $saldo;
@@ -68,8 +71,24 @@ class Caixa extends Model
         }
     }
 
-    public function addMovimento() {
-        //
+    public function addMovimento($tipo, $categoria, $valor, $data, $idUsuario) {
+        $movimento = new MovimentoCaixa();
+        $movimento['valor'] = $valor;
+        $movimento['dt_movimento'] = $data;
+
+        $tipo = TipoMovCaixa::where('nome', '=', $tipo)->first();
+        $movimento->tipoMovCaixa()->associate($tipo);
+
+        $cat = CatMovCaixa::where('nome', '=', $categoria)->first();
+        $movimento->catMovCaixa()->associate($cat);
+
+        $usuario = Usuario::find($idUsuario);
+        $movimento->usuario()->associate($usuario);
+
+        $turno = Turno::find($this->turnoAtual);
+        $movimento->turno()->associate($turno);
+
+        $movimento->save();
     }
 
     public function turnos() {
