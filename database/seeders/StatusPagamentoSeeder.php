@@ -23,7 +23,7 @@ class StatusPagamentoSeeder extends Seeder
         $status->save();
 
         $status = new StatusPagamento();
-        $status->nomestatus = 'ESTORNADO';
+        $status->nomestatus = 'DEVOLVIDO';
         $status->save();
     }
 }

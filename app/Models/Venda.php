@@ -76,4 +76,12 @@ class Venda extends Model
     public function descPorcent() {
         return (1 - $this->desconto) * 100;
     }
+
+    public function aReceber() {
+        $valorPago = 0;
+        foreach ($this->pagamentos as $pagamento) {
+            $valorPago += $pagamento->valor;
+        }
+        return $this['totalliq'] - $valorPago;
+    }
 }

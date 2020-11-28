@@ -27,7 +27,7 @@ class MovimentoCaixa extends Model
         return $this->belongsTo('App\Models\Usuario');
     }
 
-    public function recebimento() {
+    public function pagamento() {
         return $this->belongsTo('App\Models\Pagamento\Pagamento');
     }
 }

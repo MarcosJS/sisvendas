@@ -4,9 +4,11 @@ use App\Http\Controllers\Caixa\CaixaControllerAbrir;
 use App\Http\Controllers\Caixa\CaixaControllerAcessar;
 use App\Http\Controllers\Caixa\CaixaControllerAdicionarSuprimento;
 use App\Http\Controllers\Caixa\CaixaControllerFechar;
+use App\Http\Controllers\Caixa\CaixaControllerPagamento;
 use App\Http\Controllers\Caixa\CaixaControllerRealizarSangria;
 use App\Http\Controllers\Pagamento\PagamentoControllerExcluir;
-use App\Http\Controllers\Pagamento\PagamentoChequeControllerRegistrar;
+use App\Http\Controllers\Pagamento\PagamentoControllerRegistrarCheque;
+use App\Http\Controllers\Pagamento\PagamentoControllerRegistrarDinheiro;
 use App\Http\Controllers\Produto\ProdutoControllerFluxoEstoque;
 use App\Http\Controllers\Produto\ProdutoControllerProducaoRegistrar;
 use App\Http\Controllers\Sessao\SessaoControllerDeslogar;
@@ -110,17 +112,19 @@ Route::middleware(['auth'])->group(function () {
     Route::post('venda/itens/adicionar', [VendaControllerItensAdicionar::class, 'adicionarItem'])->name('adicionaritem');
     Route::get('venda/itens/excluir/{id}', [VendaControllerItensExcluir::class, 'excluirItem'])->name('excluiritem');
     Route::get('venda/cancelar', [VendaControllerCancelar::class, 'cancelar'])->name('cancelar');
-    Route::get('venda/pagamento', [VendaControllerPagamento::class, 'pagamento'])->name('pagamento');
+    Route::get('venda/pagamento', [VendaControllerPagamento::class, 'pagamento']);
     Route::get('venda/vincularcliente/{id}', [VendaControllerVincularCliente::class, 'vincular'])->name('vincularcliente');
     Route::post('venda/incluirnomecliente', [VendaControllerIncluirNomeCliente::class, 'incluirNome'])->name('incluirnomecliente');
     Route::get('venda/desvincularcliente', [VendaControllerDesVincularCliente::class, 'desvincular'])->name('desvincularcliente');
     Route::post('venda/aplicardesconto', [VendaControllerAplicarDesconto::class, 'aplicar'])->name('aplicardesconto');
     Route::get('venda/registrar', [VendaControllerRegistrar::class, 'registrar'])->name('registrarvenda');
 
-    Route::post('pagamentos/registrarcheque', [PagamentoChequeControllerRegistrar::class, 'registrar'])->name('registrarcheque');
+    Route::post('pagamentos/registrarcheque', [PagamentoControllerRegistrarCheque::class, 'registrar'])->name('registrarcheque');
+    Route::post('pagamentos/registrardinheiro', [PagamentoControllerRegistrarDinheiro::class, 'registrar'])->name('registrardinheiro');
     Route::get('pagamentos/excluir/{id}', [PagamentoControllerExcluir::class, 'excluir'])->name('excluirpagamento');
 
     Route::get('caixa', [CaixaControllerAcessar::class, 'acessar'])->name('caixa');
+    Route::get('caixa/pagamento', [CaixaControllerPagamento::class, 'pagamento'])->name('pagamento');
     Route::get('caixa/abrir', [CaixaControllerAbrir::class, 'abrir'])->name('abrircaixa');
     Route::get('caixa/fechar', [CaixaControllerFechar::class, 'fechar'])->name('fecharcaixa');
     Route::post('caixa/realizarsangria', [CaixaControllerRealizarSangria::class, 'realizarSangria'])->name('realizar_sangria');

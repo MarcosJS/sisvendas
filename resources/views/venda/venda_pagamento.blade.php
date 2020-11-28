@@ -157,7 +157,7 @@
         </div>
     </div>
 
-    @if(count($pagamentos)> 0)
+    @if(count($pagamentos) > 0)
         <div class="row border rounded mt-3 border-success">
             <h4>Pagamentos</h4>
 
@@ -170,7 +170,7 @@
                     <th></th>
                 </tr>
                 @foreach($pagamentos as $pag)
-                    @include('pagamentos.pagamento')
+                    @include('pagamentos._pagamento')
                 @endforeach
             </table>
         </div>

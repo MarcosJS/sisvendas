@@ -52,8 +52,8 @@
                             @enderror
                         </div>
                         <div class="form-group col-md-3">
-                            <label for="valor">Valor</label>
-                            <input type="text" class="form-control valor_pagamento @error('valor') is-invalid @enderror" id="valor" placeholder="0,00" name="valor" value="{{old('valor')}}">
+                            <label for="valor_cheque">Valor</label>
+                            <input type="text" class="form-control @error('valor') is-invalid @enderror" id="valor_cheque" placeholder="0,00" name="valor" value="{{old('valor')}}">
                             @error('valor')
                             <span>
                                 <small class="text-danger">{{$message}}</small>

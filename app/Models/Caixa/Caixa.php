@@ -22,13 +22,19 @@ class Caixa extends Model
         return $resultado;
     }
 
-    public function abrir() {
+    public function abrir($usuario = null) {
         if (!$this->aberto()) {
-            DB::transaction(function () {
+            DB::transaction(function () use ($usuario) {
                 $turno = new Turno();
                 date_default_timezone_set('America/Recife');
                 $turno->abertura = date("Y-m-d H:i:s");
-                $turno->usuario()->associate(Auth::user());
+
+                if ($usuario == null) {
+                    $turno->usuario()->associate(Auth::user());
+                } else {
+                    $turno->usuario()->associate($usuario);
+                }
+
                 $turno->caixa()->associate($this);
                 $statusTurno = StatusTurno::where('nome', '=', 'ABERTO')->first();
                 $turno->statusTurno()->associate($statusTurno);
@@ -71,7 +77,7 @@ class Caixa extends Model
         }
     }
 
-    public function addMovimento($tipo, $categoria, $valor, $data, $idUsuario) {
+    public function addMovimento($tipo, $categoria, $valor, $data, $usuario, $recebimento = null) {
         $movimento = new MovimentoCaixa();
         $movimento['valor'] = $valor;
         $movimento['dt_movimento'] = $data;
@@ -82,11 +88,14 @@ class Caixa extends Model
         $cat = CatMovCaixa::where('nome', '=', $categoria)->first();
         $movimento->catMovCaixa()->associate($cat);
 
-        $usuario = Usuario::find($idUsuario);
         $movimento->usuario()->associate($usuario);
 
         $turno = Turno::find($this->turnoAtual);
         $movimento->turno()->associate($turno);
+
+        if ($recebimento != null) {
+            $movimento->pagamento()->associate($recebimento);
+        }
 
         $movimento->save();
     }

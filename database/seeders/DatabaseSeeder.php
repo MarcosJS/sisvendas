@@ -26,5 +26,6 @@ class DatabaseSeeder extends Seeder
         $this->call(StatusTurnoSeeder::class);
         $this->call(TipoMovCaixaSeeder::class);
         $this->call(CatMovCaixaSeeder::class);
+        $this->call(CaixaSeeder::class);
     }
 }

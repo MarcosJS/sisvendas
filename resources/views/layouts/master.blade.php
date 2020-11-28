@@ -54,5 +54,7 @@
         <script src="{{asset('js/vendas.js')}}" type="text/javascript"></script>
         <script src="{{asset('js/caixa_suprimento.js')}}" type="text/javascript"></script>
         <script src="{{asset('js/caixa_sangria.js')}}" type="text/javascript"></script>
+        <script src="{{asset('js/form_dinheiro.js')}}" type="text/javascript"></script>
+        <script src="{{asset('js/form_cheque.js')}}" type="text/javascript"></script>
     </body>
 </html>

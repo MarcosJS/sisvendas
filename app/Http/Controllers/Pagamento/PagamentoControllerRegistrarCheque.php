@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Pagamento;
 
 use App\Http\Controllers\Controller;
+use App\Models\Caixa\Caixa;
 use App\Models\Pagamento\Cheque;
 use App\Models\Pagamento\Emitente;
 use App\Models\Pagamento\Pagamento;
@@ -12,7 +13,7 @@ use App\Validator\EmitenteValidator;
 use App\Validator\ValidationException;
 use Illuminate\Http\Request;
 
-class PagamentoChequeControllerRegistrar extends Controller
+class PagamentoControllerRegistrarCheque extends Controller
 {
     public function registrar(Request $request) {
         try {
@@ -27,9 +28,9 @@ class PagamentoChequeControllerRegistrar extends Controller
             date_default_timezone_set('America/Recife');
             $pagamento->dtpagamento = date("Y-m-d");
             $pagamento->venda()->associate($venda);
-            $pagamento->save();
-            $venda->valida = false;
-            $venda->save();
+
+            $caixa = Caixa::first();
+            $pagamento->concluir($caixa);
 
             $cheque = new Cheque();
             $cheque->fill($request->all());
@@ -40,11 +41,12 @@ class PagamentoChequeControllerRegistrar extends Controller
             $emitente->fill($request->all());
             $cheque->emitente()->save($emitente);
 
-            return redirect()->route('pagamento');
+            return redirect()->back();
 
         } catch (ValidationException $exception) {
             $exception->getValidator()->errors()->add('pagamento', 'Erro na validação do pagamento');
-            return redirect()->route('pagamento')
+            return redirect()
+                ->back()
                 ->withErrors($exception->getValidator())
                 ->withInput();
         }

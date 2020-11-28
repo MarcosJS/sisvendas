@@ -2,9 +2,11 @@
 
 namespace Database\Seeders\Teste;
 
+use App\Models\Caixa\Caixa;
 use App\Models\Pagamento\Cheque;
 use App\Models\Pagamento\Emitente;
 use App\Models\Pagamento\Pagamento;
+use App\Models\Usuario;
 use App\Models\Venda;
 use App\Models\VendaItem;
 use Illuminate\Database\Eloquent\Factories\Sequence;
@@ -33,17 +35,22 @@ class VendaTesteSeeder extends Seeder
             $produto->addMovEstoque('SAIDA', 'VENDA', -$item->qtd, $item->venda->dtvenda, $item->venda->usuario->id);
         }
 
+        $caixa = Caixa::first();
+        $usuario = Usuario::find(1);
+        $caixa->abrir($usuario);
+
         foreach ($vendas as $venda) {
             $pagamento = Pagamento::factory()
                 ->state(['tipo' => 'CHEQUE', 'valor' => $venda->totalliq])
                 ->make();
             $pagamento->venda()->associate($venda);
-            $pagamento->save();
+            $pagamento->concluir($caixa, $usuario);
             $cheque = Cheque::factory()->make();
             $cheque->pagamento()->associate($pagamento);
             $cheque->save();
             $emitente = Emitente::factory()->make();
             $cheque->emitente()->save($emitente);
         }
+        $caixa->fechar();
     }
 }
