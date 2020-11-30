@@ -21,6 +21,10 @@ class Pagamento extends Model
         return $this->belongsTo('App\Models\Venda');
     }
 
+    public function vale() {
+        return $this->belongsTo('App\Models\Pagamento\Vale');
+    }
+
     public function statusPagamento() {
         return $this->belongsTo('App\Models\Pagamento\StatusPagamento');
     }

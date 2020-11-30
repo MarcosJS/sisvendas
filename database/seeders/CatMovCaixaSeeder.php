@@ -10,12 +10,13 @@ class CatMovCaixaSeeder extends Seeder
 {
     public function run()
     {
-        CatMovCaixa::factory()->count(4)
+        CatMovCaixa::factory()->count(5)
             ->state(new Sequence(
                 ['nome' => 'SUPRIMENTO'],
                 ['nome' => 'SANGRIA'],
                 ['nome' => 'RECEBIMENTO'],
-                ['nome' => 'ESTORNO']
+                ['nome' => 'ESTORNO'],
+                ['nome' => 'DEVOLUCAO']
             ))
             ->create();
     }

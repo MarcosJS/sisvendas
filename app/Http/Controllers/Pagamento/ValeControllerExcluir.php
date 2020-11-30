@@ -3,22 +3,20 @@
 namespace App\Http\Controllers\Pagamento;
 
 use App\Http\Controllers\Controller;
-use App\Models\Pagamento\Pagamento;
+use App\Models\Pagamento\Vale;
+use Illuminate\Http\Request;
 use Illuminate\Validation\ValidationException;
 
-class PagamentoControllerExcluir extends Controller
+class ValeControllerExcluir extends Controller
 {
     public function excluir($id) {
-        $pagamento = Pagamento::find($id);
+        $vale = Vale::find($id);
         try {
-            if($pagamento != null) {
-                $venda = $pagamento->venda;
-                $pagamento->delete();
-                $venda->valida = false;
-                $venda->save();
+            if ($vale != null) {
+                $vale->delete();
                 return redirect()->back();
             } else {
-                throw ValidationException::withMessages(['pagamento' => 'O Pagamento não existe']);
+                throw ValidationException::withMessages(['vale' => 'O Vale não existe']);
             }
         } catch (ValidationException $exception) {
             return redirect()

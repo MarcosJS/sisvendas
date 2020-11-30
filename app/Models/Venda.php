@@ -61,6 +61,10 @@ class Venda extends Model
         return $this->hasMany('App\Models\Pagamento\Pagamento');
     }
 
+    public function vales() {
+        return $this->hasMany('App\Models\Pagamento\Vale');
+    }
+
     public function atualizarValores()
     {
         if($this->vendaItens()){

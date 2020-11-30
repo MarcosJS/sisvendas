@@ -9,6 +9,8 @@ use App\Http\Controllers\Caixa\CaixaControllerRealizarSangria;
 use App\Http\Controllers\Pagamento\PagamentoControllerExcluir;
 use App\Http\Controllers\Pagamento\PagamentoControllerRegistrarCheque;
 use App\Http\Controllers\Pagamento\PagamentoControllerRegistrarDinheiro;
+use App\Http\Controllers\Pagamento\PagamentoControllerRegistrarVale;
+use App\Http\Controllers\Pagamento\ValeControllerExcluir;
 use App\Http\Controllers\Produto\ProdutoControllerFluxoEstoque;
 use App\Http\Controllers\Produto\ProdutoControllerProducaoRegistrar;
 use App\Http\Controllers\Sessao\SessaoControllerDeslogar;
@@ -121,7 +123,9 @@ Route::middleware(['auth'])->group(function () {
 
     Route::post('pagamentos/registrarcheque', [PagamentoControllerRegistrarCheque::class, 'registrar'])->name('registrarcheque');
     Route::post('pagamentos/registrardinheiro', [PagamentoControllerRegistrarDinheiro::class, 'registrar'])->name('registrardinheiro');
+    Route::post('pagamentos/registrarvale', [PagamentoControllerRegistrarVale::class, 'registrar'])->name('registrarvale');
     Route::get('pagamentos/excluir/{id}', [PagamentoControllerExcluir::class, 'excluir'])->name('excluirpagamento');
+    Route::get('vales/excluir/{id}', [ValeControllerExcluir::class, 'excluir'])->name('excluirvale');
 
     Route::get('caixa', [CaixaControllerAcessar::class, 'acessar'])->name('caixa');
     Route::get('caixa/pagamento', [CaixaControllerPagamento::class, 'pagamento'])->name('pagamento');

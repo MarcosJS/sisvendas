@@ -21,6 +21,15 @@
     </div>
     @enderror
 
+    @error('cliente_id')
+    <div class="alert alert-info alert-dismissible fade show" role="alert">
+        <strong>Info: </strong> {{$message}}
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    @enderror
+
     <div class="row mt-3">
         <div class="col-sm-6 pb-1">
 
@@ -36,6 +45,7 @@
             @endif
 
             @include('pagamentos._pagamentos_venda')
+            @include('pagamentos._vales_venda')
 
         </div>
 
@@ -64,6 +74,7 @@
     @include('caixa._modal_desconto_caixa')
     @include('pagamentos.form_cheque')
     @include('pagamentos.form_dinheiro')
+    @include('pagamentos.form_vale')
 @endsection
 
 @section('rodape')

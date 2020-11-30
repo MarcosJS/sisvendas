@@ -23,7 +23,6 @@ class CaixaControllerPagamento extends Controller
         }
         $turno = Turno::find($caixa->turnoAtual);
 
-        $produtos = Produto::all()->sortBy('nome');
         $venda = Venda::find(Session()->get('venda_id'));
         if (!$venda) {
             $venda = new Venda();
@@ -35,7 +34,8 @@ class CaixaControllerPagamento extends Controller
             'caixa' => $caixa,
             'turno' => $turno,
             'venda' => $venda,
-            'pagamentos' => $venda->pagamentos
+            'pagamentos' => $venda->pagamentos,
+            'vales' => $venda->vales
         ]);
 
     } catch (ValidationException $exception) {
