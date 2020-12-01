@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Cliente;
 use App\Models\Endereco;
 use App\Models\Telefone;
-use App\Validator\ClienteValidator;
+use App\Validator\AdicionarClienteValidator;
 use App\Validator\EnderecoValidator;
 use App\Validator\TelefoneValidator;
 use App\Validator\ValidationException;
@@ -16,7 +16,7 @@ class ClienteControllerAdicionar extends Controller
 {
     public function adicionar(Request $request) {
         try {
-            ClienteValidator::validate($request->all());
+            AdicionarClienteValidator::validate($request->all());
             $cliente = new Cliente();
             $cliente->fill($request->all());
 

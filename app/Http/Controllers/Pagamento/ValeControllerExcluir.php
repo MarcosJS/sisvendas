@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Pagamento;
 
 use App\Http\Controllers\Controller;
 use App\Models\Pagamento\Vale;
-use Illuminate\Http\Request;
 use Illuminate\Validation\ValidationException;
 
 class ValeControllerExcluir extends Controller

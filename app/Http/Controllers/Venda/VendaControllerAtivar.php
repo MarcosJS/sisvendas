@@ -11,9 +11,10 @@ class VendaControllerAtivar extends Controller
         $erro = null;
         if(!session()->has('venda_id')){
             $venda = Venda::find($id);
-            if($venda->statusVenda->id == 1){
+            $status = $venda->statusVenda->id;
+            if($status == 1 || $status == 3){
                 session()->put('venda_id', $id);
-                return redirect()->route('itens');
+                return redirect()->route('caixa');
             } else {
                 $erro = ['warning' => 'Voce não pode ativar uma venda com esse status!'];
             }

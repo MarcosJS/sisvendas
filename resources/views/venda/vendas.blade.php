@@ -45,7 +45,7 @@
                         @endphp
                         @break
 
-                        @case(3)
+                        @case(4)
                         @php
                             $badge = 'badge-danger';
                         @endphp

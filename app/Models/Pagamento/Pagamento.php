@@ -38,13 +38,6 @@ class Pagamento extends Model
     }
 
     public function concluir(Caixa $caixa, $usuario = null) {
-        $statusPago = StatusPagamento::where('nomestatus', '=', 'PAGO')->first();
-        $this->statusPagamento()->associate($statusPago);
-        $this->save();
-
-        date_default_timezone_set('America/Recife');
-        $data = date("Y-m-d");
-
         $usu = Auth::user();
         if ($usuario != null) {
             $usu = $usuario;
@@ -52,12 +45,19 @@ class Pagamento extends Model
 
         if ($caixa != null) {
             if ($caixa->aberto()) {
+                $statusPago = StatusPagamento::where('nomestatus', '=', 'PAGO')->first();
+                $this->statusPagamento()->associate($statusPago);
+                $this->save();
+
+                date_default_timezone_set('America/Recife');
+                $data = date("Y-m-d");
+
                 $caixa->addMovimento('ENTRADA', 'RECEBIMENTO', $this->valor, $data, $usu, $this);
             } else {
-                throw new OperacaoNaoPermitidaParaCaixaFechadoException();
+                throw new OperacaoNaoPermitidaParaCaixaFechadoException('Esse operação não é permitida para caixa fechado');
             }
         } else {
-            throw new OCaixaNaoFoiInicializadoException();
+            throw new OCaixaNaoFoiInicializadoException('O caixa não foi inicializado');
         }
     }
 }

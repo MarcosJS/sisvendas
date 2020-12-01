@@ -12,10 +12,11 @@ class RevisaoValidator
         ];
 
         $messages = [
-            'pagamento.*' => 'Nenhum pagamento foi realizado'
+            'pagamento.required' => 'Nenhum pagamento foi realizado'
         ];
 
         $validator = \Validator::make($data, $rules, $messages);
+
 
         $venda = Venda::find($data['venda_id']);
 

@@ -20,6 +20,9 @@
         <a class="ml-1 mb-1 pt-3 pb-3 nav-item nav-link btnformout shadow" href="{{route('caixa')}}">
             <b>Itens</b>
         </a>
+        <a class="ml-1 mb-1 pt-3 pb-3 nav-item nav-link btnformout shadow" href="{{route('registrarvenda')}}">
+            <b>Finalizar</b>
+        </a>
         <a class="ml-1 mb-1 pt-3 pb-3 mr-1 nav-item nav-link btn-outline-danger shadow" href="{{route('cancelar')}}">
             <b>Cancelar Venda</b>
         </a>

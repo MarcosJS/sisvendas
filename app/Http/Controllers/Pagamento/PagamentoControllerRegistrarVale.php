@@ -15,7 +15,7 @@ class PagamentoControllerRegistrarVale extends Controller
             $venda = Venda::find(Session()->get('venda_id'));
 
             if ($venda->cliente != null) {
-                if(true/*$venda->cliente->modcrecito*/) {
+                if($venda->cliente->modcredito) {
                     $vale = new Vale();
                     $vale['valor'] = $request['vale'];
                     date_default_timezone_set('America/Recife');

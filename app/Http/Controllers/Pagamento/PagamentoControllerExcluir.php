@@ -14,7 +14,6 @@ class PagamentoControllerExcluir extends Controller
             if($pagamento != null) {
                 $venda = $pagamento->venda;
                 $pagamento->delete();
-                $venda->valida = false;
                 $venda->save();
                 return redirect()->back();
             } else {

@@ -14,7 +14,7 @@ class VendaControllerTodos extends Controller
         if($request['venda_id']){
             $venda = Venda::find($request['venda_id']);
         }
-        $vendas = Venda::all();
+        $vendas = Venda::all()->sortBy('id');
 
         return view('venda.vendas', [
             'success' => $request->success,

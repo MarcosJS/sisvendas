@@ -14,7 +14,6 @@ class CaixaControllerFechar extends Controller
         if ($caixa != null) {
             if($caixa->aberto()) {
                 $caixa->fechar();
-                Session()->forget('venda_id');
                 return redirect()->back();
             }
             $erro = ['fechar' => 'O caixa já esta fechado'];

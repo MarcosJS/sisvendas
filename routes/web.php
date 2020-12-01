@@ -78,7 +78,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('clientes/acessar/{id}', [ClienteControllerAcessar::class, 'acessar'])->name('cliente');
     Route::get('clientes/novo', [ClienteControllerNovo::class, 'novo'])->name('novocliente');
     Route::post('clientes/adicionar', [ClienteControllerAdicionar::class, 'adicionar'])->name('adicionarcliente');
-    Route::get('clientes/editar/{id}', [ClienteControllerEditar::class, 'editar']);
+    Route::get('clientes/editar/{id}', [ClienteControllerEditar::class, 'editar'])->name('editarcliente');
     Route::post('clientes/atualizar/{id}', [ClienteControllerAtualizar::class, 'atualizar'])->name('atualizarcliente');
     Route::get('clientes/remover/{id}', [ClienteControllerRemover::class, 'remover'])->middleware('verificarnivel');
 

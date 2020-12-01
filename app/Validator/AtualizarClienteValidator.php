@@ -4,12 +4,16 @@ namespace App\Validator;
 
 use App\Models\Cliente;
 
-class ClienteValidator
+class AtualizarClienteValidator
 {
     public static function validate($data) {
-        $validator = \Validator::make($data, Cliente::$rules, Cliente::$messages);
+        $rules = Cliente::$rules;
+        unset($rules['cpf']);
+
+        $validator = \Validator::make($data, $rules, Cliente::$messages);
         if(!$validator->errors()->isEmpty())
             throw new ValidationException($validator, "Erro na validação do Cliente");
         return $validator;
     }
+
 }
