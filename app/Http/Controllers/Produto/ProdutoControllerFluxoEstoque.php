@@ -15,13 +15,13 @@ class ProdutoControllerFluxoEstoque extends Controller
         $todosProdutos = Produto::sum('estoque');
 
         $dia = date("Y-m-d");
-        $mes = [date("Y-m--1"), date("Y-m-t")];
+        $mes = [date("Y-m-1"), date("Y-m-t")];
 
         foreach ($produtos as $prod) {
             $p['produto'] = $prod;
 
-            $producaoDia = $prod->movimentoEstoques()->where('dtmovimento', '=', $dia)->sum('quantidade');
-            $producaoMes = $prod->movimentoEstoques()->whereBetween('dtmovimento', $mes)->sum('quantidade');
+            $producaoDia = $prod->movimentoEstoques()->where('dtmovimento', '=', $dia)->where('cat_mov_estoque_id', '=', 1)->sum('quantidade');
+            $producaoMes = $prod->movimentoEstoques()->whereBetween('dtmovimento', $mes)->where('cat_mov_estoque_id', '=', 1)->sum('quantidade');
 
             $vendasDia = $prod->vendaItens()->whereHas('venda', function ($q) use ($dia){
                 $q->where('status_venda_id', '=', 2)

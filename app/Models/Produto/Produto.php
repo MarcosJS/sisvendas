@@ -74,6 +74,7 @@ class Produto extends Model
             $this->saldo_control_estoque = $somaMovimentos;
             $this->estoque = $somaMovimentos;
         }
+
         $this->save();
     }
 
@@ -92,6 +93,7 @@ class Produto extends Model
         $movimento->usuario()->associate($usuario);
 
         $movimento->produto()->associate($this);
+
         $movimento->save();
 
         $this->atualizarEstoque();

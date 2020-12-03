@@ -2,39 +2,32 @@
 
 namespace App\Http\Controllers\Produto;
 
+use App\Exceptions\ObjetoNaoEcontradoException;
 use App\Http\Controllers\Controller;
 use App\Models\Produto\Produto;
-use App\Validator\ProducaoValidator;
-use App\Validator\ValidationException;
+use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class ProdutoControllerProducaoRegistrar extends Controller
 {
     public function registrar(Request $request, $id) {
 
         try{
-            ProducaoValidator::validate($request->all());
-            $producao = new Producao();
-            $producao->fill($request->all());
             $produto = Produto::find($id);
 
-            if($producao != null && $produto != null)
+            if($produto != null)
             {
-                $estoque = $produto->estoque;
-                $produto->estoque += $producao->quantidade;
-
-                if($produto->estoque == $estoque + $producao->quantidade) {
-                    $produto->producao()->saveMany([$producao]);
-                    $produto->save();
-                }
+                $produto->addMovEstoque('ENTRADA', 'ENTRADA PRODUCAO', $request['quantidade'], $request['dtproducao'], Auth::id());
+                return redirect()->back();
+            } else {
+                throw new ObjetoNaoEcontradoException('Objeto ['.gettype($produto).']=>'.$id.' não encontrado no banco de dados.');
             }
 
-            return redirect()->back();
-
-        } catch (ValidationException $exception) {
+        } catch (Exception $exception) {
             return redirect()
                 ->back()
-                ->withErrors($exception->getValidator())
+                ->withErrors(['producao' => $exception->getMessage()])
                 ->withInput();
         }
     }

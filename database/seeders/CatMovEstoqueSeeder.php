@@ -10,7 +10,7 @@ class CatMovEstoqueSeeder extends Seeder
 {
     public function run()
     {
-        CatMovEstoque::factory()->count(6)
+        CatMovEstoque::factory()->count(5)
             ->state(new Sequence(
                 ['nome' => 'ENTRADA PRODUCAO'],
                 ['nome' => 'ENTRADA ESTOQUE'],

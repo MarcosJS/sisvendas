@@ -17,6 +17,7 @@ class ProdutoControllerAcessar extends Controller
             $producao = $produto->movimentoEstoques()->whereHas('catMovEstoque', function ($q) {
                 $q->where('nome', '=', 'ENTRADA PRODUCAO');
             })->sum('quantidade');
+
             return view('produto.produto', [
                 'produto' => $produto,
                 'producao' => $producao,

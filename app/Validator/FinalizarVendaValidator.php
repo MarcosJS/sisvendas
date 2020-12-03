@@ -36,8 +36,19 @@ class FinalizarVendaValidator
             foreach ($vales as $vale) {
                 $somaPagamento += $vale->valor;
             }
-            if ($somaPagamento != $venda->totalliq) {
-                $validator->errors()->add('pagamentos', 'Soma dos pagamentos e (ou) vales é diferente do valor da venda');
+
+            $somaPagamento = strval($somaPagamento);
+            $valorVenda = strval($venda->totalliq);
+
+            if ($somaPagamento > $valorVenda) {
+                $validator->errors()->add('pagamentos', 'Soma dos pagamentos e (ou) vales é maior do que o valor da venda '. $valorVenda.' ->soma '.$somaPagamento);
+            }
+            if ($somaPagamento < $valorVenda) {
+                $validator->errors()->add('pagamentos', 'Soma dos pagamentos e (ou) vales é menor do que o valor da venda '. $valorVenda.' '.gettype($valorVenda).' ->soma '.$somaPagamento.' '.gettype($somaPagamento));
+            }
+
+            if ($venda->cliente == null && $venda->nomecliente == null) {
+                $validator->errors()->add('cliente_id', 'Nenhuma informação de cliente foi vinculada a venda');
             }
         }
 
