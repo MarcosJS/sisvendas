@@ -12,6 +12,10 @@ class ControleDeCaixaContollerFiltrar extends Controller
     public function filtrar (Request $request) {
         $movimentos = $this->consulta($request);
 
+        if (count($movimentos) ==  0) {
+            return redirect()->back();
+        }
+
         $caixa = Caixa::first();
         $saldoCaixa = $caixa->obterSaldo();
         $saldoAnterior = $caixa->obterSaldo($movimentos->first());

@@ -11,10 +11,18 @@ class ControleDeCaixaControllerAcessar extends Controller
 {
     public function acessar() {
         $ultimoTurno = Turno::orderByDesc('id')->first();
-        $movimentos = $ultimoTurno->movimentos->sortByDesc('id');
+
+        if ($ultimoTurno != null) {
+            $movimentos = $ultimoTurno->movimentos->sortByDesc('id');
+            $saldoAnterior = $ultimoTurno['saldo_anterior'];
+        } else {
+            $movimentos = [];
+            $saldoAnterior = 0;
+        }
+
         $caixa = Caixa::first();
         $saldoCaixa = $caixa->obterSaldo();
-        $saldoAnterior = $ultimoTurno['saldo_anterior'];
+
 
         $saldoSaidas = 0;
         $quantSaidas = 0;
