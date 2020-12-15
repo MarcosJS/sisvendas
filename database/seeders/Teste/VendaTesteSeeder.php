@@ -11,6 +11,7 @@ use App\Models\Venda;
 use App\Models\VendaItem;
 use Illuminate\Database\Eloquent\Factories\Sequence;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
 
 class VendaTesteSeeder extends Seeder
 {
@@ -39,11 +40,11 @@ class VendaTesteSeeder extends Seeder
         $usuario = Usuario::find(1);
         $caixa->abrir($usuario);
 
-        foreach ($vendas as $venda) {
+        for ($i = 0; $i < 25 ; $i++) {
             $pagamento = Pagamento::factory()
-                ->state(['tipo' => 'CHEQUE', 'valor' => $venda->totalliq])
+                ->state(['tipo' => 'CHEQUE', 'valor' => $vendas[$i]->totalliq])
                 ->make();
-            $pagamento->venda()->associate($venda);
+            $pagamento->venda()->associate($vendas[$i]);
             $pagamento->concluir($caixa, $usuario);
             $cheque = Cheque::factory()->make();
             $cheque->pagamento()->associate($pagamento);
@@ -51,6 +52,15 @@ class VendaTesteSeeder extends Seeder
             $emitente = Emitente::factory()->make();
             $cheque->emitente()->save($emitente);
         }
+
+        for ($i = 25; $i < 50; $i++) {
+            $pagamento = Pagamento::factory()
+                ->state(['tipo' => 'DINHEIRO', 'valor' => $vendas[$i]->totalliq])
+                ->make();
+            $pagamento->venda()->associate($vendas[$i]);
+            $pagamento->concluir($caixa, $usuario);
+        }
+
         $caixa->fechar();
     }
 }

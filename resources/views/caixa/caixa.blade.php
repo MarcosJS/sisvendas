@@ -2,12 +2,6 @@
 
 @section('titulo', 'SISVendas PDV - Caixa')
 
-@section('titulo_conteudo')
-    <div id="caixa" class="row">
-        <h4>Caixa</h4>
-    </div>
-@endsection
-
 @section('conteudo_view')
 
     @include('caixa._cabecalho_caixa')

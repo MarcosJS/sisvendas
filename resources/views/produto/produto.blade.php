@@ -20,7 +20,8 @@
                 <p class="card-text">{{$produto->descricao}}</p>
                 <p><strong>Código: </strong>{{$produto->id}}</p>
                 <p><strong>Estoque: </strong>{{$produto->estoque}}</p>
-                <p><strong>Preço: </strong>{{$produto->preco}}</p>
+                <p><strong>Preço Unitário: </strong>R$ {{$produto->preco}}</p>
+                <p><strong>Peso: </strong>99 Kg</p>
                 <p>
                     <button class="btn btnformout" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
                         Informar Produção

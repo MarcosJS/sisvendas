@@ -4,15 +4,9 @@
     @yield('titulo')
 @endsection
 
-@section('submenu')
-    @include('menu_usuario')
-@endsection
-
 @section('conteudo')
-    <div id="painelcaixa" class="container p-3">
+    <div class="container p-3">
         @yield('titulo_conteudo')
-        @yield('conteudo_view')
+        @yield('conteudo_modulo')
     </div>
 @endsection
-
-

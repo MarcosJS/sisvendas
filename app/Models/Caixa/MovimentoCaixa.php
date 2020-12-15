@@ -9,7 +9,7 @@ class MovimentoCaixa extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['valor', 'dt_movimento'];
+    protected $fillable = ['valor', 'dt_movimento', 'hr_movimento'];
 
     public function tipoMovCaixa() {
         return $this->belongsTo('App\Models\Caixa\TipoMovCaixa');

@@ -2,7 +2,6 @@
 
 namespace App\Models\Caixa;
 
-use App\Models\Usuario;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Auth;
@@ -27,6 +26,7 @@ class Caixa extends Model
             DB::transaction(function () use ($usuario) {
                 $turno = new Turno();
                 date_default_timezone_set('America/Recife');
+                //$turno['abertura'] = date("Y-m-d H:i:s");
                 $turno->abertura = date("Y-m-d H:i:s");
 
                 if ($usuario == null) {
@@ -37,7 +37,9 @@ class Caixa extends Model
 
                 $turno->caixa()->associate($this);
                 $statusTurno = StatusTurno::where('nome', '=', 'ABERTO')->first();
+                //$statusTurno = DB::table('status_turnos')->where('nome', '=', 'ABERTO')->first();
                 $turno->statusTurno()->associate($statusTurno);
+                $turno->saldo_anterior = $this->obterSaldo();
                 $turno->save();
                 $this->turnoAtual = $turno->id;
                 $this->save();
@@ -48,39 +50,51 @@ class Caixa extends Model
     public function fechar() {
         if ($this->aberto()) {
             DB::transaction(function () {
-                $turno = Turno::find($this->turnoAtual);
+                //$turno = DB::table('turno')->find($this['turnoAtual']);
+                $turno = Turno::find($this['turnoAtual']);
                 date_default_timezone_set('America/Recife');
-                $turno->fechamento = date("Y-m-d H:i:s");
+                $turno['fechamento'] = date("Y-m-d H:i:s");
                 $statusTurno = StatusTurno::where('nome', '=', 'FECHADO')->first();
                 $turno->statusTurno()->associate($statusTurno);
                 $turno->save();
-                $this->turnoAtual = null;
+                $this['turnoAtual'] = null;
                 $this->save();
             });
         }
     }
 
-    public function obterSaldo($filtro = null) {
+    public function obterSaldo($movimento = null) {
         $saldo = 0;
-        try {
-            $turno = Turno::find($this->turnoAtual);
-            if ($turno != null) {
-                if ($filtro == null) {
-                    foreach ($turno->movimentos as $movimento) {
-                        $saldo += $movimento->valor;
-                    }
+
+        $turnoAlvo = Turno::orderByDesc('id')->first();
+
+        if ($movimento != null) {
+            $turnoAlvo = $movimento->turno;
+            $saldo = $turnoAlvo->saldo_anterior;
+
+            foreach ($turnoAlvo->movimentos->sortBy('id') as $mov) {
+                if ($mov->id <= $movimento->id) {
+                    $saldo += $mov->valor;
+                } else {
+                    break;
                 }
             }
-            return $saldo;
-        } catch (\Exception $exception) {
-            return $saldo;
+        } else {
+            if($turnoAlvo != null) {
+                $saldo = $turnoAlvo['saldo_anterior'];
+                foreach ($turnoAlvo->movimentos as $mov) {
+                    $saldo += $mov->valor;
+                }
+            }
         }
+        return $saldo;
     }
 
-    public function addMovimento($tipo, $categoria, $valor, $data, $usuario, $recebimento = null) {
+    public function addMovimento($tipo, $categoria, $valor, $data, $hora, $usuario, $recebimento = null) {
         $movimento = new MovimentoCaixa();
         $movimento['valor'] = $valor;
         $movimento['dt_movimento'] = $data;
+        $movimento['hr_movimento'] = $hora;
 
         $tipo = TipoMovCaixa::where('nome', '=', $tipo)->first();
         $movimento->tipoMovCaixa()->associate($tipo);
@@ -90,7 +104,7 @@ class Caixa extends Model
 
         $movimento->usuario()->associate($usuario);
 
-        $turno = Turno::find($this->turnoAtual);
+        $turno = Turno::find($this['turnoAtual']);
         $movimento->turno()->associate($turno);
 
         if ($recebimento != null) {

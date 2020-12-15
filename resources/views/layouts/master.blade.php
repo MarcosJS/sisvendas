@@ -36,6 +36,10 @@
                 </div>
             </nav>
 
+            <div id="control_controle_caixa">
+                @yield('controles')
+            </div>
+
             <div id="page-content-wrapper">
                 @yield('conteudo')
             </div>

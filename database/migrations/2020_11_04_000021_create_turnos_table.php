@@ -18,6 +18,7 @@ class CreateTurnosTable extends Migration
             $table->timestamps();
             $table->dateTime('abertura');
             $table->dateTime('fechamento')->nullable();
+            $table->decimal('saldo_anterior')->default(0);
 
             $table->integer('usuario_id')->unsigned();
             $table->integer('caixa_id')->unsigned();

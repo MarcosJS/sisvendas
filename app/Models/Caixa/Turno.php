@@ -9,7 +9,7 @@ class Turno extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['abertura', 'fechamento'];
+    protected $fillable = ['abertura', 'fechamento', 'saldo_anterior'];
 
     public function movimentos() {
         return $this->hasMany('App\Models\Caixa\MovimentoCaixa');

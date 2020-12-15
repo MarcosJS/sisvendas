@@ -6,6 +6,11 @@ use App\Http\Controllers\Caixa\CaixaControllerAdicionarSuprimento;
 use App\Http\Controllers\Caixa\CaixaControllerFechar;
 use App\Http\Controllers\Caixa\CaixaControllerPagamento;
 use App\Http\Controllers\Caixa\CaixaControllerRealizarSangria;
+use App\Http\Controllers\Caixa\ControleDeCaixaContollerFiltrar;
+use App\Http\Controllers\Caixa\ControleDeCaixaControllerAcessar;
+use App\Http\Controllers\Material\MaterialControllerNovo;
+use App\Http\Controllers\Pagamento\ContasAReceberContollerFiltrar;
+use App\Http\Controllers\Pagamento\ContasAReceberControllerAcessar;
 use App\Http\Controllers\Pagamento\PagamentoControllerExcluir;
 use App\Http\Controllers\Pagamento\PagamentoControllerRegistrarCheque;
 use App\Http\Controllers\Pagamento\PagamentoControllerRegistrarDinheiro;
@@ -95,6 +100,8 @@ Route::middleware(['auth'])->group(function () {
         Route::post('usuarios/atualizar/{id}', [UsuarioControllerAtualizar::class, 'atualizar'])->name('atualizarusuario');
     });
 
+    Route::get('material/novo', [MaterialControllerNovo::class, 'novo'])->name('novomaterial');
+
     Route::get('produtos', [ProdutoControllerTodos::class, 'obterTodos'])->name('produtos');
     Route::get('produto/acessar/{id}', [ProdutoControllerAcessar::class, 'acessar'])->name('dadosdoproduto');
     Route::get('produto/novo', [ProdutoControllerNovo::class, 'novo'])->name('novoproduto');
@@ -126,12 +133,16 @@ Route::middleware(['auth'])->group(function () {
     Route::post('pagamentos/registrarvale', [PagamentoControllerRegistrarVale::class, 'registrar'])->name('registrarvale');
     Route::get('pagamentos/excluir/{id}', [PagamentoControllerExcluir::class, 'excluir'])->name('excluirpagamento');
     Route::get('vales/excluir/{id}', [ValeControllerExcluir::class, 'excluir'])->name('excluirvale');
+    Route::get('contasareceber', [ContasAReceberControllerAcessar::class, 'acessar'])->name('contasareceber');
+    Route::post('contasareceber/filtrar', [ContasAReceberContollerFiltrar::class, 'filtrar'])->name('filtrarcontasareceber');
 
     Route::get('caixa', [CaixaControllerAcessar::class, 'acessar'])->name('caixa');
+    Route::get('caixa/controledecaixa', [ControleDeCaixaControllerAcessar::class, 'acessar'])->name('controledecaixa');
     Route::get('caixa/pagamento', [CaixaControllerPagamento::class, 'pagamento'])->name('pagamento');
     Route::get('caixa/abrir', [CaixaControllerAbrir::class, 'abrir'])->name('abrircaixa');
     Route::get('caixa/fechar', [CaixaControllerFechar::class, 'fechar'])->name('fecharcaixa');
     Route::post('caixa/realizarsangria', [CaixaControllerRealizarSangria::class, 'realizarSangria'])->name('realizar_sangria');
     Route::post('caixa/adicionarsuprimento', [CaixaControllerAdicionarSuprimento::class, 'adicionarSuprimento'])->name('adicionar_suprimento');
+    Route::post('caixa/controledecaixa/filtrar', [ControleDeCaixaContollerFiltrar::class, 'filtrar'])->name('filtrarcontroledecaixa');
 });
 

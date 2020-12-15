@@ -17,7 +17,8 @@ class CaixaControllerRealizarSangria extends Controller
         if ($caixa != null && $caixa->aberto()) {
             date_default_timezone_set('America/Recife');
             $data = date("Y-m-d");
-            $caixa->addMovimento('SAIDA', 'SANGRIA', -$request['sangria'], $data, Auth::id());
+            $hora = date("H:i:s");
+            $caixa->addMovimento('SAIDA', 'SANGRIA', -$request['sangria'], $data, $hora, Auth::id());
         }
         return redirect()->back();
     }

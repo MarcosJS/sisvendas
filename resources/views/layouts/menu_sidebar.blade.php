@@ -18,7 +18,7 @@
                 </svg>
             </span>
         </a>
-        @include('caixa.caixa_submenu')
+        @include('financeiro.caixa_submenu')
 
         <a class="list-group-item list-group-item-action" href="{{route('clientes')}}">
             <strong>Clientes</strong>
@@ -33,6 +33,16 @@
             </span>
         </a>
         @include('produto.produtos_menu_painel')
+
+        <a id="menu_material" class="list-group-item list-group-item-action" data-toggle="collapse" data-target="#sub_menu_material" href="#">
+            <strong>Matéria Prima</strong>
+            <span class="float-right">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-down">
+                    <polyline points="6 9 12 15 18 9"></polyline>
+                </svg>
+            </span>
+        </a>
+        @include('material.material_submenu')
 
         @if(auth()->user()->funcao->nivel === 2)
             <a class="list-group-item list-group-item-action" href="{{route('usuarios')}}"><strong>Usuarios</strong></a>

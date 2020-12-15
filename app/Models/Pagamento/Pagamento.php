@@ -51,8 +51,9 @@ class Pagamento extends Model
 
                 date_default_timezone_set('America/Recife');
                 $data = date("Y-m-d");
+                $hora = date("H:i:s");
 
-                $caixa->addMovimento('ENTRADA', 'RECEBIMENTO', $this->valor, $data, $usu, $this);
+                $caixa->addMovimento('ENTRADA', 'RECEBIMENTO', $this->valor, $data, $hora, $usu, $this);
             } else {
                 throw new OperacaoNaoPermitidaParaCaixaFechadoException('Esse operação não é permitida para caixa fechado');
             }
