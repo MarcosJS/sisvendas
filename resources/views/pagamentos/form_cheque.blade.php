@@ -30,20 +30,8 @@
                             </span>
                             @enderror
                         </div>
-                        <!--<div class="form-group col-md-3">
-                            <label for="contacorrente">Conta Corrente</label>
-                            <input type="text" class="form-control @error('contacorrente') is-invalid @enderror" id="contacorrente" placeholder="00000-0" name="contacorrente" value="{{old('contacorrente')}}">
-                            @error('contacorrente')
-                            <span>
-                                <small class="text-danger">{{$message}}</small>
-                            </span>
-                            @enderror
-                        </div>-->
-                    </div>
-
-                    <div class="form-row">
                         <div class="form-group col-md-3">
-                            <label for="numerocheque">Numero do Cheque</label>
+                            <label for="numerocheque">Nº Cheque</label>
                             <input type="text" class="form-control @error('numero') is-invalid @enderror" id="numerocheque" placeholder="000000" name="numero" value="{{old('numero')}}">
                             @error('numero')
                             <span>
@@ -51,7 +39,10 @@
                             </span>
                             @enderror
                         </div>
-                        <div class="form-group col-md-3">
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group col-md-4">
                             <label for="valor_cheque">Valor</label>
                             <input type="text" class="form-control @error('valor') is-invalid @enderror" id="valor_cheque" placeholder="0,00" name="valor" value="{{old('valor')}}">
                             @error('valor')
@@ -60,7 +51,7 @@
                             </span>
                             @enderror
                         </div>
-                        <div class="form-group col-md-3">
+                        <div class="form-group col-md-4">
                             <label for="vencimento">Vencimento</label>
                             <input type="date" class="form-control @error('vencimento') is-invalid @enderror" id="vencimento" name="vencimento" value="{{old('vencimento')}}">
                             @error('vencimento')
@@ -69,7 +60,7 @@
                             </span>
                             @enderror
                         </div>
-                        <div class="form-group col-md-3">
+                        <div class="form-group col-md-4">
                             <label for="emissao">Emissão</label>
                             <input type="date" class="form-control @error('emissao') is-invalid @enderror" id="emissao" name="emissao" value="{{old('emissao')}}">
                             @error('emissao')

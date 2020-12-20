@@ -21,7 +21,6 @@ class Cheque extends Model
         'emisao' => 'date',
         'banco' => 'required|max:32',
         'agencia' => 'required|max:32',
-        'contacorrente' => 'required|max:32',
         'portador' => 'nullable|min:5|max:100',
         'observacao' => 'nullable|max:255'
     ];
