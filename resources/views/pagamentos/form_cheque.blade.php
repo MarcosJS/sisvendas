@@ -30,7 +30,7 @@
                             </span>
                             @enderror
                         </div>
-                        <div class="form-group col-md-3">
+                        <!--<div class="form-group col-md-3">
                             <label for="contacorrente">Conta Corrente</label>
                             <input type="text" class="form-control @error('contacorrente') is-invalid @enderror" id="contacorrente" placeholder="00000-0" name="contacorrente" value="{{old('contacorrente')}}">
                             @error('contacorrente')
@@ -38,7 +38,7 @@
                                 <small class="text-danger">{{$message}}</small>
                             </span>
                             @enderror
-                        </div>
+                        </div>-->
                     </div>
 
                     <div class="form-row">
@@ -133,8 +133,13 @@
                         </div>
                         <div class="form-group col-md-6">
                             <label for="observacoes">Observações</label>
-                            <textarea class="form-control" name="observacoes" id="observacoes" rows="2"></textarea>
+                            <textarea class="form-control @error('observacao') is-invalid @enderror" name="observacao" id="observacoes" rows="2"></textarea>
                         </div>
+                        @error('observacao')
+                        <span>
+                            <small class="text-danger">{{$message}}</small>
+                        </span>
+                        @enderror
                     </div>
                     <input class="valor_pagamento" type="hidden" name="valorcompra">
                     <input type="hidden" value="1" name="pagamento">

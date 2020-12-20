@@ -25,20 +25,25 @@
                                     <td id="novo_saldo_caixa_sa" class="text-right text-success"><b>{{number_format($caixa->obtersaldo(),2, '.', '')}}</b></td>
                                 </tr>
                             </table>
+
                         </div>
                     </div>
 
                 </div>
             </div>
-            <div class="modal-footer bg-success">
-                <form action="{{route('realizar_sangria')}}" method="post">
-                    {{csrf_field()}}
+
+            <form action="{{route('realizar_sangria')}}" method="post">
+                {{csrf_field()}}
+                <div class="form-group col">
+                    <label for="observacao">Observação:</label>
+                    <textarea class="form-control @error('observacao') is-invalid @enderror" name="observacao" id="observacao" rows="2">{{old('observacao')}}</textarea>
+                </div>
+                <div class="modal-footer bg-success">
                     <input id="sangria" type="hidden" value="0.00" name="sangria">
 
                     <button type="submit" class="btn btn-success"><b>Realizar sangria</b></button>
-
-                </form>
-            </div>
+                </div>
+            </form>
         </div>
     </div>
 </div>

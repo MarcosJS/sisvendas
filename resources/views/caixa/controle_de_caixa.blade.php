@@ -1,4 +1,4 @@
-@extends('layouts.painel_caixa')
+    @extends('layouts.painel_caixa')
 
 @section('titulo', 'SISVendas PDV - Controle de Caixa')
 
@@ -19,6 +19,7 @@
                 <th>Hora</th>
                 <th class="text-center">Tipo</th>
                 <th>Categoria</th>
+                <th>Observação</th>
                 <th class="text-right">Valor</th>
                 <th class="text-center">Pagamento</th>
             </tr>
@@ -48,6 +49,9 @@
                     <td>{{$m->hr_movimento}}</td>
                     <td class="text-center"><span class="badge {{$badge}}">{{$m->tipoMovCaixa->nome}}</span></td>
                     <td>{{$m->catMovCaixa->nome}}</td>
+                    <td>@if($m->observacao != null)
+                            <span title="{{$m->observacao}}">{{substr($m->observacao, 0, 25)}}</span>
+                        @else Inexistente @endif</td>
                     <td class="text-right @if($m->tipoMovCaixa->id == 1) text-success @else text-danger @endif">{{$m->valor}}</td>
                     <td class="text-center">@if($m->pagamento != null) <span class="badge badge-info">{{$m->pagamento->tipo}}</span>@else Inexistente @endif</td>
                  </tr>

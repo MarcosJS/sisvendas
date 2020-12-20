@@ -90,11 +90,12 @@ class Caixa extends Model
         return $saldo;
     }
 
-    public function addMovimento($tipo, $categoria, $valor, $data, $hora, $usuario, $recebimento = null) {
+    public function addMovimento($tipo, $categoria, $valor, $data, $hora, $observacao, $usuario, $recebimento = null) {
         $movimento = new MovimentoCaixa();
         $movimento['valor'] = $valor;
         $movimento['dt_movimento'] = $data;
         $movimento['hr_movimento'] = $hora;
+        $movimento['observacao'] = $observacao;
 
         $tipo = TipoMovCaixa::where('nome', '=', $tipo)->first();
         $movimento->tipoMovCaixa()->associate($tipo);

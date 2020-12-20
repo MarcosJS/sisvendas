@@ -2,7 +2,7 @@
 
 namespace Database\Seeders\Teste;
 
-use App\Models\Cliente;
+use App\Models\Cliente\Cliente;
 use App\Models\Endereco;
 use App\Models\Telefone;
 use Illuminate\Database\Seeder;

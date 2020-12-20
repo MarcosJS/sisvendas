@@ -8,14 +8,15 @@ use Illuminate\Database\Seeder;
 
 class TipoMovEstoqueSeeder extends Seeder
 {
-    public function run()
-    {
-        TipoMovEstoque::factory()->count(2)
-            ->state(new Sequence(
-                ['nome' => 'ENTRADA'],
-                ['nome' => 'SAIDA']
-            ))
-            ->create();
+    public function run() {
+        $this->newTipoMovEstoque('ENTRADA');
+        $this->newTipoMovEstoque('SAIDA');
+    }
+
+    private function newTipoMovEstoque($nome) {
+        $tipo = new TipoMovEstoque();
+        $tipo->nome = $nome;
+        $tipo->save();
     }
 
 }

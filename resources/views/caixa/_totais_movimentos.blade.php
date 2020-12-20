@@ -2,13 +2,13 @@
     <div class="col-sm-4">
         <table>
             <tr class="text-success">
-                <td>Entradas: </td> <td><b>R$ {{number_format($saldoEntradas,2, '.', '')}}</b></td>
+                <td>Entradas: </td> <td class="text-right"><b>R$ {{number_format($saldoEntradas,2, '.', '')}}</b></td>
             </tr>
             <tr class="text-danger">
-                <td>Saídas: </td> <td><b>R$ {{number_format($saldoSaidas,2, '.', '')}}</b></td>
+                <td>Saídas: </td> <td class="text-right"><b>R$ {{number_format($saldoSaidas,2, '.', '')}}</b></td>
             </tr>
             <tr class="text-white">
-                <td>Saldo do Parcial: </td> <td><b>R$ {{number_format($saldoEntradas + $saldoSaidas,2, '.', '')}}</b></td>
+                <td>Saldo do Parcial: </td> <td class="text-right"><b>R$ {{number_format($saldoEntradas + $saldoSaidas,2, '.', '')}}</b></td>
             </tr>
         </table>
     </div>

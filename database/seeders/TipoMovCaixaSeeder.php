@@ -10,12 +10,14 @@ class TipoMovCaixaSeeder extends Seeder
 {
     public function run()
     {
-        TipoMovCaixa::factory()->count(2)
-            ->state(new Sequence(
-                ['nome' => 'ENTRADA'],
-                ['nome' => 'SAIDA']
-            ))
-            ->create();
+        $this->newTipoMovCaixa('ENTRADA');
+        $this->newTipoMovCaixa('SAIDA');
+    }
+
+    private function newTipoMovCaixa($nome) {
+        $tipo = new TipoMovCaixa();
+        $tipo->nome = $nome;
+        $tipo->save();
     }
 
 }

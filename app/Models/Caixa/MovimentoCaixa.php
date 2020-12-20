@@ -9,7 +9,11 @@ class MovimentoCaixa extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['valor', 'dt_movimento', 'hr_movimento'];
+    protected $fillable = ['valor', 'dt_movimento', 'hr_movimento', 'observacao'];
+
+    public static $rules = ['observacao' => 'nullable|max:255'];
+
+    public static $messages = ['observacao.max' => 'O campo observações deve ter no máximo 255 caracteres'];
 
     public function tipoMovCaixa() {
         return $this->belongsTo('App\Models\Caixa\TipoMovCaixa');

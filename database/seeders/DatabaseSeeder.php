@@ -2,9 +2,9 @@
 
 namespace Database\Seeders;
 
-use App\Models\Caixa\CatMovCaixa;
+use App\Models\Caixa\CatMovCredCliente;
 use App\Models\Caixa\StatusTurno;
-use App\Models\Caixa\TipoMovCaixa;
+use App\Models\Caixa\TipoMovCredCliente;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder

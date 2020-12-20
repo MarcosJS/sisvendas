@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Cliente;
 
-use App\Models\Cliente;
+use App\Models\Cliente\Cliente;
 use App\Http\Controllers\Controller;
 
 class ClienteControllerAcessar extends Controller

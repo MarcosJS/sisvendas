@@ -30,15 +30,19 @@
 
                 </div>
             </div>
-            <div class="modal-footer bg-success">
-                <form action="{{route('adicionar_suprimento')}}" method="post">
-                    {{csrf_field()}}
+
+            <form action="{{route('adicionar_suprimento')}}" method="post">
+                {{csrf_field()}}
+                <div class="form-group col">
+                    <label for="observacao">Observação:</label>
+                    <textarea class="form-control @error('observacao') is-invalid @enderror" name="observacao" id="observacao" rows="2">{{old('observacao')}}</textarea>
+                </div>
+                <div class="modal-footer bg-success">
                     <input id="suprimento" type="hidden" value="0.00" name="suprimento">
 
                     <button type="submit" class="btn btn-success"><b>Adicionar suprimento</b></button>
-
-                </form>
-            </div>
+                </div>
+            </form>
         </div>
     </div>
 </div>

@@ -14,16 +14,14 @@ class StatusPagamentoSeeder extends Seeder
      */
     public function run()
     {
-        $status = new StatusPagamento();
-        $status->nomestatus = 'AGUARDANDO';
-        $status->save();
+        $this->newStatusPagamento('AGUARDANDO');
+        $this->newStatusPagamento('PAGO');
+        $this->newStatusPagamento('DEVOLVIDO');
+    }
 
+    public function newStatusPagamento($nome) {
         $status = new StatusPagamento();
-        $status->nomestatus = 'PAGO';
-        $status->save();
-
-        $status = new StatusPagamento();
-        $status->nomestatus = 'DEVOLVIDO';
+        $status->nomestatus = $nome;
         $status->save();
     }
 }

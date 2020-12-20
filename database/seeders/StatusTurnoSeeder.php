@@ -9,12 +9,13 @@ class StatusTurnoSeeder extends Seeder
 {
     public function run()
     {
-        $status = new StatusTurno();
-        $status->nome = 'ABERTO';
-        $status->save();
+        $this->newStatusTurno('ABERTO');
+        $this->newStatusTurno('FECHADO');
+    }
 
+    public function newStatusTurno($nome) {
         $status = new StatusTurno();
-        $status->nome = 'FECHADO';
+        $status->nome = $nome;
         $status->save();
     }
 }

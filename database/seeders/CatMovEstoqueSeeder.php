@@ -10,14 +10,16 @@ class CatMovEstoqueSeeder extends Seeder
 {
     public function run()
     {
-        CatMovEstoque::factory()->count(5)
-            ->state(new Sequence(
-                ['nome' => 'ENTRADA PRODUCAO'],
-                ['nome' => 'ENTRADA ESTOQUE'],
-                ['nome' => 'CANCELAMENTO VENDA'],
-                ['nome' => 'VENDA'],
-                ['nome' => 'BAIXA ESTOQUE']
-            ))
-            ->create();
+        $this->newCatMovEstoque('ENTRADA PRODUCAO');
+        $this->newCatMovEstoque('ENTRADA ESTOQUE');
+        $this->newCatMovEstoque('CANCELAMENTO VENDA');
+        $this->newCatMovEstoque('VENDA');
+        $this->newCatMovEstoque('BAIXA ESTOQUE');
+    }
+
+    private function newCatMovEstoque($nome) {
+        $tipo = new CatMovEstoque();
+        $tipo->nome = $nome;
+        $tipo->save();
     }
 }

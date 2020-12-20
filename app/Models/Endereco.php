@@ -36,6 +36,6 @@ class Endereco extends Model
     ];
 
     public function cliente() {
-        return $this->belongsTo('App\Models\Cliente');
+        return $this->belongsTo('App\Models\Cliente\Cliente');
     }
 }

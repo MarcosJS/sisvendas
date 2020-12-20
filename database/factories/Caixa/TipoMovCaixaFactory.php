@@ -2,15 +2,15 @@
 
 namespace Database\Factories\Caixa;
 
-use App\Models\Caixa\TipoMovCaixa;
+use App\Models\Caixa\TipoMovCredCliente;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 class TipoMovCaixaFactory extends Factory
 {
-    protected $model = TipoMovCaixa::class;
+    protected $model = TipoMovCredCliente::class;
 
     private function nomeTipo($nome) {
-        $tipoCadastrado = TipoMovCaixa::where('nome', '=', $nome)->count();
+        $tipoCadastrado = TipoMovCredCliente::where('nome', '=', $nome)->count();
         if($tipoCadastrado > 0) {
             $nome = $this->faker->firstName;
             return $this->nomeTipo($nome);

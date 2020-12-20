@@ -9,15 +9,15 @@ class StatusVenda extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['nomestatus'];
+    protected $fillable = ['nome'];
 
     public static $rules = [
-        'nomestatus' => 'required|max:20'
+        'nome' => 'required|max:20'
     ];
 
     public static $messages = [
-        'nomestatus.required' => 'O nome do status é obrigatório',
-        'nomestatus.max' => 'O nome do status deve ter apenas 20 caracteres'
+        'nome.required' => 'O nome do status é obrigatório',
+        'nome.max' => 'O nome do status deve ter apenas 20 caracteres'
     ];
 
     public function vendas() {

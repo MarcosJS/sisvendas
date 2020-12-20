@@ -22,7 +22,6 @@ class ChequeFactory extends Factory
             'emissao' => $this->faker->date('Y-m-d'),
             'banco' => $this->faker->numberBetween(100,100),
             'agencia' => $this->faker->numberBetween(1000, 5000),
-            'contacorrente' => $this->faker->bankAccountNumber
         ];
     }
 }

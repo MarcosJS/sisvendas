@@ -11,8 +11,7 @@ class Cheque extends Model
 
     protected $fillable = [
         'numero', 'valor', 'vencimento', 'emissao',
-        'banco', 'agencia', 'contacorrente',
-        'portador'
+        'banco', 'agencia', 'portador', 'observacao'
     ];
 
     public static $rules = [
@@ -23,7 +22,8 @@ class Cheque extends Model
         'banco' => 'required|max:32',
         'agencia' => 'required|max:32',
         'contacorrente' => 'required|max:32',
-        'portador' => 'nullable|min:5|max:100'
+        'portador' => 'nullable|min:5|max:100',
+        'observacao' => 'nullable|max:255'
     ];
 
     public static $messages = [
@@ -39,11 +39,9 @@ class Cheque extends Model
         'banco.max' => 'O numero do banco deve ter no máximo 32 caracteres',
         'agencia.required' => 'O campo agência é obrigatório',
         'agencia.max' => 'O numero da agencia deve ter no máximo 32 caracteres',
-        'contacorrente.required' => 'O campo conta corrente é obrigatório',
-        'contacorrente.max' => 'O numero da conta corrente deve ter no máximo 32 caracteres',
-        'portador.required'=>'O campo portador é obrigatório',
         'portador.min'=>'O nome do portador deve ter no mínimo 5 letras',
-        'portador.max'=>'O nome do portador deve ter no máximo 100 letras'
+        'portador.max'=>'O nome do portador deve ter no máximo 100 letras',
+        'observacao.max' => 'O campo observações deve ter no máximo 255 caracteres'
     ];
 
     public function emitente() {

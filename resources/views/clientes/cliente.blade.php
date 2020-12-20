@@ -33,15 +33,15 @@
                 <div class="row">
                     <div class="col-sm-6 emphasis">
                         <div class="row justify-content-center">
-                            <div class="">
-                                <h2><strong>{{$contasAReceber}}</strong></h2>
-                                <p><small>Contas a pagar</small></p>
+                            <div>
+                                <h2><strong>R$ {{$contasAReceber}} D</strong></h2>
+                                <p><small>Em contas a pagar</small></p>
                             </div>
                         </div>
                     </div>
                     <div class="col-sm-6 emphasis">
-                        <h2><strong>{{$vendas}}</strong></h2>
-                        <p><small>Compras realizadas</small></p>
+                        <h2><strong>R$ {{$vendas}}</strong></h2>
+                        <p><small>Crédito</small></p>
                     </div>
                 </div>
             </div>

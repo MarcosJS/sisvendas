@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Venda;
 
 use App\Http\Controllers\Controller;
-use App\Models\Cliente;
+use App\Models\Cliente\Cliente;
 use App\Models\Venda;
 use Illuminate\Support\Facades\Auth;
 

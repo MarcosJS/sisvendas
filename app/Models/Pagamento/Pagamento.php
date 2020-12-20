@@ -53,7 +53,7 @@ class Pagamento extends Model
                 $data = date("Y-m-d");
                 $hora = date("H:i:s");
 
-                $caixa->addMovimento('ENTRADA', 'RECEBIMENTO', $this->valor, $data, $hora, $usu, $this);
+                $caixa->addMovimento('ENTRADA', 'RECEBIMENTO', $this->valor, $data, $hora, null, $usu, $this);
             } else {
                 throw new OperacaoNaoPermitidaParaCaixaFechadoException('Esse operação não é permitida para caixa fechado');
             }

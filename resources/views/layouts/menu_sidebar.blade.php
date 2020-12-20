@@ -18,7 +18,7 @@
                 </svg>
             </span>
         </a>
-        @include('financeiro.caixa_submenu')
+        @include('layouts.submenu_financeiro')
 
         <a class="list-group-item list-group-item-action" href="{{route('clientes')}}">
             <strong>Clientes</strong>

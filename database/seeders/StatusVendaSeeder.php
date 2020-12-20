@@ -14,20 +14,15 @@ class StatusVendaSeeder extends Seeder
      */
     public function run()
     {
-        $status = new StatusVenda();
-        $status->nomestatus = 'EM ANDAMENTO';
-        $status->save();
+        $this->newStatusVenda('EM ANDAMENTO');
+        $this->newStatusVenda('CONCLUIDA');
+        $this->newStatusVenda('EM ABERTO');
+        $this->newStatusVenda('CANCELADA');
+    }
 
+    public function newStatusVenda($nome) {
         $status = new StatusVenda();
-        $status->nomestatus = 'CONCLUIDA';
-        $status->save();
-
-        $status = new StatusVenda();
-        $status->nomestatus = 'EM ABERTO';
-        $status->save();
-
-        $status = new StatusVenda();
-        $status->nomestatus = 'CANCELADA';
+        $status->nome = $nome;
         $status->save();
     }
 }

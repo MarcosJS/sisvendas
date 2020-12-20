@@ -16,7 +16,7 @@ class CreateStatusVendasTable extends Migration
         Schema::create('status_vendas', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
-            $table->string('nomestatus', 20);
+            $table->string('nome', 20);
         });
     }
 

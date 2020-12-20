@@ -50,7 +50,7 @@ class Venda extends Model
     }
 
     public function cliente() {
-        return $this->belongsTo('App\Models\Cliente');
+        return $this->belongsTo('App\Models\Cliente\Cliente');
     }
 
     public function statusVenda() {

@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Cliente;
 
 use App\Http\Controllers\Controller;
-use App\Models\Cliente;
+use App\Models\Cliente\Cliente;
 use App\Validator\AdicionarClienteValidator;
 use App\Validator\AtualizarClienteValidator;
 use App\Validator\ValidationException;

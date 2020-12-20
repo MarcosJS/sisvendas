@@ -22,8 +22,8 @@ class CreateChequesTable extends Migration
             $table->date('emissao')->nullable();
             $table->string('banco', 32);
             $table->string('agencia', 32);
-            $table->string('contacorrente', 32);
             $table->string('portador', 100)->nullable();
+            $table->string('observacao')->nullable();
             $table->integer('pagamento_id')->unsigned();
             $table->foreign('pagamento_id')->references('id')->on('pagamentos')->cascadeOnDelete();
         });

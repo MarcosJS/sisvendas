@@ -19,6 +19,7 @@ class CreateMovimentoCaixasTable extends Migration
             $table->decimal('valor');
             $table->date('dt_movimento');
             $table->time('hr_movimento');
+            $table->string('observacao')->nullable();
 
             $table->integer('turno_id')->unsigned();
             $table->integer('pagamento_id')->unsigned()->nullable();

@@ -10,14 +10,16 @@ class CatMovCaixaSeeder extends Seeder
 {
     public function run()
     {
-        CatMovCaixa::factory()->count(5)
-            ->state(new Sequence(
-                ['nome' => 'SUPRIMENTO'],
-                ['nome' => 'SANGRIA'],
-                ['nome' => 'RECEBIMENTO'],
-                ['nome' => 'ESTORNO'],
-                ['nome' => 'DEVOLUCAO']
-            ))
-            ->create();
+        $this->newCatMovCaixa('SUPRIMENTO');
+        $this->newCatMovCaixa('SANGRIA');
+        $this->newCatMovCaixa('RECEBIMENTO');
+        $this->newCatMovCaixa('ESTORNO');
+        $this->newCatMovCaixa('DEVOLUCAO');
+    }
+
+    private function newCatMovCaixa($nome) {
+        $tipo = new CatMovCaixa();
+        $tipo->nome = $nome;
+        $tipo->save();
     }
 }
