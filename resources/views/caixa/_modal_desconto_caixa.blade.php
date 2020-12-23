@@ -16,8 +16,8 @@
                                 <td id="totalprodutos" class="text-right">{{$venda->totalprodutos}}</td>
                             </tr>
                             <tr>
-                                <td class="text-right"><label for="novodesconto"><b>Desconto %:</b></label></td>
-                                <td class="text-right"><input id="novodesconto" class="form-control text-right p-0" type="text" value="{{number_format($venda->descPorcent(),2, '.', '')}}" name="novodesconto"></td>
+                                <td class="text-right"><label for="novodesconto"><b>Desconto R$:</b></label></td>
+                                <td class="text-right"><input id="novodesconto" class="form-control text-right p-0" type="text" value="{{number_format($venda->descCifra(),2, '.', '')}}" name="novodesconto"></td>
                             </tr>
                             <tr>
                                 <td class="text-right"><b>TOTAL COM DESCONTO R$:</b></td>
@@ -30,9 +30,9 @@
 
             </div>
             <div class="modal-footer bg-success">
-                <form action="{{route('aplicardesconto')}}" method="post">
+                <form action="{{route('aplicardesccifra')}}" method="post">
                     {{csrf_field()}}
-                    <input id="desconto" type="hidden" value="{{$venda->descPorcent()}}" name="desconto">
+                    <input id="desconto" type="hidden" value="{{$venda->descCifra()}}" name="desccifra">
 
                     <button type="submit" class="btn btn-success"><b>Aplicar Desconto</b></button>
 

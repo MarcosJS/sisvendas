@@ -19,7 +19,12 @@ class PagamentoValidator
 
         if($validator->errors()->isEmpty()) {
             $venda = Venda::find($data['venda_id']);
-            $qtdItens = $venda->vendaItens()->count();
+
+            $qtdItens = 0;
+            if ($venda != null) {
+                $qtdItens = $venda->vendaItens()->count();
+            }
+
             if($qtdItens <= 0) {
                 $validator->errors()->add('venda_id', 'Nenhum item foi adicionado a venda');
             }

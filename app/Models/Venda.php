@@ -10,14 +10,15 @@ class Venda extends Model
     use HasFactory;
 
     protected $fillable = [
-        'dtvenda', 'hrvenda', 'totalprodutos', 'desconto', 'totalliq', 'nomecliente'
+        'dtvenda', 'hrvenda', 'totalprodutos', 'descporcentagem', 'desccifra', 'creditoaplicado', 'totalliq', 'nomecliente'
     ];
 
     public  static $rules = [
         'dtvenda' => 'require|date',
         'hrvenda' => 'require|date_format:H:i:s',
         'totalprodutos' => 'numeric|min:0',
-        'desconto' => 'numeric|min:0|max:1',
+        'descporcentagem' => 'nullable|numeric|min:0|max:1',
+        'desccifra' => 'nullable|numeric|min:0',
         'totalliq' => 'numeric|min:0',
         'nomecliente' => 'nullable|min:5|max:100'
     ];
@@ -30,10 +31,11 @@ class Venda extends Model
         'totalprodutos.required' => 'O campo totalprodutos é obrigatório',
         'totalprodutos.numeric' => 'O campo totalprodutos deve ser do  tipo numerico',
         'totalprodutos.min' => 'O totalprodutos deve ser maior que 0 (zero)',
-        'desconto.required' => 'O campo desconto é obrigatório',
-        'desconto.numeric' => 'O campo desconto deve ser do  tipo numerico',
-        'desconto.min' => 'O desconto deve ser maior que 0 (zero)',
-        'desconto.max' => 'O desconto deve ser menor que 1 (um)',
+        'descporcentagem.numeric' => 'O campo desconto deve ser do  tipo numerico',
+        'descporcentagem.min' => 'O desconto deve ser maior que 0 (zero)',
+        'desccifra.numeric' => 'O campo desconto deve ser do  tipo numerico',
+        'desccifra.min' => 'O desconto deve ser maior que 0 (zero)',
+        'descporcentagem.max' => 'O desconto deve ser menor que 1 (um)',
         'totalliq.required' => 'O campo totalliq é obrigatório',
         'totalliq.numeric' => 'O campo totalliq deve ser do  tipo numerico',
         'totalliq.min' => 'O totalliq deve ser maior que 0 (zero)',
@@ -65,20 +67,47 @@ class Venda extends Model
         return $this->hasMany('App\Models\Pagamento\Vale');
     }
 
+    public  function creditoGerado() {
+        return $this->hasOne('App\Models\Cliente\MovimentoCreditoCliente');
+    }
+
+    public  function creditoDebitado() {
+        return $this->hasOne('App\Models\Cliente\MovimentoCreditoCliente');
+    }
+
     public function atualizarValores()
     {
-        if($this->vendaItens()){
-            $this->totalprodutos = $this->vendaItens()->sum('subtotal');
-            if($this->desconto === null) {
-                $this->desconto = 1;
+        if($this->vendaItens != null){
+            $this['totalprodutos'] = $this->vendaItens()->sum('subtotal');
+            $this['totalliq'] = $this['totalprodutos'] * $this['descporcentagem'];
+
+            if($this['desccifra'] > 0) {
+                $this['totalliq'] = $this['totalprodutos'] - $this['desccifra'];
             }
-            $this->totalliq = $this->totalprodutos * $this->desconto;
+
+            if($this->cliente != null) {
+
+                if($this->cliente->saldoCredito() >= $this['totalliq']) {
+                    $this['creditoaplicado']  = $this['totalliq'];
+                    $this['totalliq'] = 0;
+                } else {
+                    $this['totalliq'] -= $this->cliente->saldoCredito();
+                    $this['creditoaplicado'] = $this->cliente->saldoCredito();
+                }
+            } else {
+                $this['creditoaplicado'] = 0;
+            }
+
             $this->save();
         }
     }
 
     public function descPorcent() {
-        return (1 - $this->desconto) * 100;
+        return (1 - $this['descporcentagem']) * 100;
+    }
+
+    public function descCifra() {
+        return $this['desccifra'];
     }
 
     public function aReceber() {

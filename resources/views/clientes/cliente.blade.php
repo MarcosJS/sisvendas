@@ -35,12 +35,12 @@
                         <div class="row justify-content-center">
                             <div>
                                 <h2><strong>R$ {{$contasAReceber}} D</strong></h2>
-                                <p><small>Em contas a pagar</small></p>
+                                <p><small>Contas a pagar</small></p>
                             </div>
                         </div>
                     </div>
                     <div class="col-sm-6 emphasis">
-                        <h2><strong>R$ {{$vendas}}</strong></h2>
+                        <h2><strong>R$ {{$cliente->saldoCredito()}}</strong></h2>
                         <p><small>Crédito</small></p>
                     </div>
                 </div>

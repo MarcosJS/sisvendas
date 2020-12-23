@@ -19,7 +19,7 @@ if(novoDesconto) {
 }
 
 function atualizarTotalProdutos() {
-    let newTotalProdutos = totalProdutos.innerText * (1 - (novoDesconto.value / 100));
+    let newTotalProdutos = totalProdutos.innerText - novoDesconto.value;
     newTotalProdutos = newTotalProdutos.toFixed(2);
 
     if(newTotalProdutos !== undefined || !isNaN(newTotalProdutos)){

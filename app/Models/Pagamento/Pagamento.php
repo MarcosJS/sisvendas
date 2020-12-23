@@ -45,7 +45,7 @@ class Pagamento extends Model
 
         if ($caixa != null) {
             if ($caixa->aberto()) {
-                $statusPago = StatusPagamento::where('nomestatus', '=', 'PAGO')->first();
+                $statusPago = StatusPagamento::find(2);
                 $this->statusPagamento()->associate($statusPago);
                 $this->save();
 
@@ -53,7 +53,32 @@ class Pagamento extends Model
                 $data = date("Y-m-d");
                 $hora = date("H:i:s");
 
-                $caixa->addMovimento('ENTRADA', 'RECEBIMENTO', $this->valor, $data, $hora, null, $usu, $this);
+                $caixa->addMovimento(1, 3, $this->valor, $data, $hora, null, $usu, $this);
+            } else {
+                throw new OperacaoNaoPermitidaParaCaixaFechadoException('Esse operação não é permitida para caixa fechado');
+            }
+        } else {
+            throw new OCaixaNaoFoiInicializadoException('O caixa não foi inicializado');
+        }
+    }
+
+    public function cancelar(Caixa $caixa, $usuario = null) {
+        $usu = Auth::user();
+        if ($usuario != null) {
+            $usu = $usuario;
+        }
+
+        if ($caixa != null) {
+            if ($caixa->aberto()) {
+                $statusPago = StatusPagamento::find(4);
+                $this->statusPagamento()->associate($statusPago);
+                $this->save();
+
+                date_default_timezone_set('America/Recife');
+                $data = date("Y-m-d");
+                $hora = date("H:i:s");
+
+                $caixa->addMovimento(2, 5, -$this->valor, $data, $hora, null, $usu, $this);
             } else {
                 throw new OperacaoNaoPermitidaParaCaixaFechadoException('Esse operação não é permitida para caixa fechado');
             }

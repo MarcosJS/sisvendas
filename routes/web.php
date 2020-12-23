@@ -27,6 +27,7 @@ use App\Http\Controllers\Cliente\ClienteControllerAtualizar;
 use App\Http\Controllers\Cliente\ClienteControllerEditar;
 use App\Http\Controllers\Cliente\ClienteControllerNovo;
 use App\Http\Controllers\Cliente\ClienteControllerRemover;
+use App\Http\Controllers\Cliente\ClienteControllerGerarCredito;
 use App\Http\Controllers\Cliente\ClienteControllerTodos;
 use App\Http\Controllers\Produto\ProdutoControllerAcessar;
 use App\Http\Controllers\Produto\ProdutoControllerAdicionar;
@@ -43,6 +44,7 @@ use App\Http\Controllers\Usuario\UsuarioControllerEditar;
 use App\Http\Controllers\Usuario\UsuarioControllerNovo;
 use App\Http\Controllers\Usuario\UsuarioControllerRemover;
 use App\Http\Controllers\Venda\VendaControllerAcessar;
+use App\Http\Controllers\Venda\VendaControllerApagarDadosSecao;
 use App\Http\Controllers\Venda\VendaControllerAplicarDesconto;
 use App\Http\Controllers\Venda\VendaControllerAtivar;
 use App\Http\Controllers\Venda\VendaControllerDesvincularCliente;
@@ -86,6 +88,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('clientes/editar/{id}', [ClienteControllerEditar::class, 'editar'])->name('editarcliente');
     Route::post('clientes/atualizar/{id}', [ClienteControllerAtualizar::class, 'atualizar'])->name('atualizarcliente');
     Route::get('clientes/remover/{id}', [ClienteControllerRemover::class, 'remover'])->middleware('verificarnivel');
+    Route::post('clientes/gerarcredito', [ClienteControllerGerarCredito::class, 'gerarCredito'])->name('gerarcredito');
 
     Route::middleware('can:isAdmin')->group(function () {
         Route::get('usuarios', [UsuarioControllerTodos::class, 'obterTodos'])->name('usuarios');
@@ -114,7 +117,6 @@ Route::middleware(['auth'])->group(function () {
 
     Route::get('vendas', [VendaControllerTodos::class, 'obterTodos'])->name('listavendas');
     Route::get('venda/inicio', [VendaControllerPDV::class, 'iniciar'])->name('iniciovendas');
-    Route::get('venda/novo', [VendaControllerNovo::class, 'novo'])->name('novavenda');
     Route::get('venda/ativar/{id}', [VendaControllerAtivar::class, 'ativar'])->name('ativarvenda');
     Route::get('venda/acessar/{id}', [VendaControllerAcessar::class, 'acessar'])->name('acessarvenda');
     Route::get('venda/itens', [VendaControllerItens::class, 'todos'])->name('itens');
@@ -125,8 +127,10 @@ Route::middleware(['auth'])->group(function () {
     Route::get('venda/vincularcliente/{id}', [VendaControllerVincularCliente::class, 'vincular'])->name('vincularcliente');
     Route::post('venda/incluirnomecliente', [VendaControllerIncluirNomeCliente::class, 'incluirNome'])->name('incluirnomecliente');
     Route::get('venda/desvincularcliente', [VendaControllerDesVincularCliente::class, 'desvincular'])->name('desvincularcliente');
-    Route::post('venda/aplicardesconto', [VendaControllerAplicarDesconto::class, 'aplicar'])->name('aplicardesconto');
+    Route::post('venda/aplicardescporcetagem', [VendaControllerAplicarDesconto::class, 'aplicarPorcentagem'])->name('aplicardescporcentagem');
+    Route::post('venda/aplicardesccifra', [VendaControllerAplicarDesconto::class, 'aplicarCifra'])->name('aplicardesccifra');
     Route::get('venda/registrar', [VendaControllerRegistrar::class, 'registrar'])->name('registrarvenda');
+    Route::get('venda/apagardadossecaovenda', [VendaControllerApagarDadosSecao::class, 'apagarDados '])->name('apagardadossecaovenda');
 
     Route::post('pagamentos/registrarcheque', [PagamentoControllerRegistrarCheque::class, 'registrar'])->name('registrarcheque');
     Route::post('pagamentos/registrardinheiro', [PagamentoControllerRegistrarDinheiro::class, 'registrar'])->name('registrardinheiro');

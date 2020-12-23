@@ -17,7 +17,8 @@
                 <th>Cod. Venda</th>
                 <th>Data da Venda</th>
                 <th>Total</th>
-                <th>Desconto</th>
+                <th>Desconto R$</th>
+                <th>Credito do Cliente</th>
                 <th>Líquido</th>
                 <th class="text-center">Status</th>
             </tr>
@@ -27,7 +28,8 @@
                     <td class="col_venda_id">{{$v->id}}</td>
                     <td>{{date('d/m/Y', strtotime($v->dtvenda))}}</td>
                     <td>{{$v->totalprodutos}}</td>
-                    <td>{{$v->descPorcent()}}</td>
+                    <td>{{$v->descCifra()}}</td>
+                    <td>{{$v['creditoaplicado']}}</td>
                     <td> {{$v->totalliq}}</td>
                     @php
                         $badge = '';
@@ -52,7 +54,7 @@
                         @break
 
                     @endswitch
-                    <td class="text-center"><span class="badge {{$badge}}">{{$v->statusVenda->nomestatus}}</span></td>
+                    <td class="text-center"><span class="badge {{$badge}}">{{$v->statusVenda->nome}}</span></td>
                 </tr>
             @endforeach
         </table>

@@ -11,6 +11,13 @@
 @section('conteudo_modulo')
     <div class="row mt-3 p-3">
 
+        @error('cliente_id')
+            <div>{{$message}}</div>
+        @enderror
+        @error('falha')
+            <div>{{$message}}</div>
+        @enderror
+
         <form action="{{route('atualizarcliente', $cliente->id)}}" method="post">
             {{csrf_field()}}
             <div class="form-group row">

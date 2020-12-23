@@ -14,7 +14,8 @@ class VendaControllerVincularCliente extends Controller
             $venda = Venda::find(session()->get('venda_id'));
             $cliente =Cliente::find($id);
             $venda->cliente()->associate($cliente);
-            $venda->save();
+            $venda->atualizarValores();
+
             return redirect()->back();
         }
         return redirect()

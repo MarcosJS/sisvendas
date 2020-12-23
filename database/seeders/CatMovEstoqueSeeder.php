@@ -12,6 +12,7 @@ class CatMovEstoqueSeeder extends Seeder
     {
         $this->newCatMovEstoque('ENTRADA PRODUCAO');
         $this->newCatMovEstoque('ENTRADA ESTOQUE');
+        $this->newCatMovEstoque('RETORNO ESTOQUE');
         $this->newCatMovEstoque('CANCELAMENTO VENDA');
         $this->newCatMovEstoque('VENDA');
         $this->newCatMovEstoque('BAIXA ESTOQUE');

@@ -44,4 +44,16 @@ class Cliente extends Model
     public function vendas() {
         return $this->hasMany('App\Models\Venda');
     }
+
+    public function movimentoCreditos() {
+        return $this->hasMany('App\Models\Cliente\MovimentoCreditoCliente');
+    }
+
+    public function saldoCredito() {
+        $saldo = 0;
+        foreach ($this->movimentoCreditos as $mov) {
+            $saldo += $mov->valor;
+        }
+        return $saldo;
+    }
 }

@@ -3,6 +3,9 @@
 namespace App\Http\Controllers\Venda;
 
 use App\Http\Controllers\Controller;
+use App\Models\Cliente\CatMovCredCliente;
+use App\Models\Cliente\MovimentoCreditoCliente;
+use App\Models\Cliente\TipoMovCredCliente;
 use App\Models\StatusVenda;
 use App\Models\Venda;
 use App\Validator\FinalizarVendaValidator;
@@ -21,6 +24,25 @@ class VendaControllerRegistrar extends Controller
             $venda->dtvenda = date("Y-m-d");
             $venda->hrvenda = date("H:i:s");
 
+            if ($venda['creditoaplicado'] > 0) {
+                $tipo = TipoMovCredCliente::find(2);
+                $categoria  = CatMovCredCliente::find(2);
+
+                $credito = new MovimentoCreditoCliente();
+
+                date_default_timezone_set('America/Recife');
+                $credito['valor'] = -$venda['creditoaplicado'];
+                $credito['dt_movimento'] = date('Y-m-d');
+                $credito['hr_movimento'] = date('H:i:s');
+
+                $credito->tipoMovCredCliente()->associate($tipo);
+                $credito->catMovCredCliente()->associate($categoria);
+                $credito->cliente()->associate($venda->cliente);
+                $credito->venda()->associate($venda);
+
+                $credito->save();
+            }
+
             /*Alterando o status da venda e apagando a sessao*/
             $status = StatusVenda::find(2);
             $venda->statusVenda()->associate($status);
@@ -29,9 +51,10 @@ class VendaControllerRegistrar extends Controller
 
             return redirect()
                 ->route('listavendas')
-                ->with(['success', 'Venda finalizada com sucesso!', 'venda_id' => $venda->id]);
+                ->with(['success' => 'Venda finalizada com sucesso!', 'venda_id' => $venda->id]);
 
         } catch (ValidationException $exception) {
+
             return redirect()
                 ->back()
                 ->withErrors($exception->getValidator())

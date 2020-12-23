@@ -16,7 +16,6 @@ class VendaFactory extends Factory
         return [
             'dtvenda' => date("Y-m-d", $resultado),
             'hrvenda' => $this->faker->time('h:i:s'),
-            'desconto' => 1,
         ];
     }
 }

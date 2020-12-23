@@ -24,8 +24,16 @@ class VendaControllerItensAdicionar extends Controller
 
             if($request->session()->has('venda_id')) {
                 $venda = Venda::find($request->session()->get('venda_id'));
-                $venda->vendaItens()->saveMany([$item]);
-                $venda->atualizarValores();
+                if ($venda != null) {
+                    $venda->vendaItens()->saveMany([$item]);
+                    $venda->atualizarValores();
+                } else {
+                    Session()->forget('venda_id');
+                    return redirect()
+                        ->back()
+                        ->withErrors(['venda_id' => 'A ultima operação não foi finalizada, por favor repita a operação.']);
+                }
+
             } else {
                 $venda = new Venda();
                 $venda->usuario()->associate(Auth::id());
@@ -33,11 +41,12 @@ class VendaControllerItensAdicionar extends Controller
                 $venda->dtvenda = date("Y-m-d");
                 $venda->hrvenda = date("H:i:s");
                 $venda->save();
+                $venda = Venda::find($venda->id);
                 $venda->vendaItens()->saveMany([$item]);
                 $venda->atualizarValores();
                 $request->session()->put('venda_id', $venda->id);
             }
-            $produto->addMovEstoque('SAIDA', 'VENDA', -$item->qtd, $item->venda->dtvenda, $item->venda->usuario->id);
+            $produto->addMovEstoque(2, 4, -$item->qtd, $venda->dtvenda, Auth::id());
             $produto->save();
 
             return redirect()->back();

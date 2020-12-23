@@ -97,10 +97,10 @@ class Caixa extends Model
         $movimento['hr_movimento'] = $hora;
         $movimento['observacao'] = $observacao;
 
-        $tipo = TipoMovCaixa::where('nome', '=', $tipo)->first();
+        $tipo = TipoMovCaixa::find($tipo);
         $movimento->tipoMovCaixa()->associate($tipo);
 
-        $cat = CatMovCaixa::where('nome', '=', $categoria)->first();
+        $cat = CatMovCaixa::find($categoria);
         $movimento->catMovCaixa()->associate($cat);
 
         $movimento->usuario()->associate($usuario);

@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Cliente;
 
 use App\Http\Controllers\Controller;
 use App\Models\Cliente\Cliente;
-use App\Validator\AdicionarClienteValidator;
 use App\Validator\AtualizarClienteValidator;
 use App\Validator\ValidationException;
 use Exception;
@@ -31,7 +30,8 @@ class ClienteControllerAtualizar extends Controller
         } catch (ValidationException $exception) {
             $erro = $exception->getValidator();
         } catch (Exception $exception) {
-            $erro = ['falha' => 'Falha contate o administrador do sistema'];
+            $erro = ['falha' => $exception->getMessage()];
+            //$erro = ['falha' => 'Falha contate o administrador do sistema'];
         }
 
         return redirect()

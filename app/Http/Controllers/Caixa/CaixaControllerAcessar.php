@@ -26,6 +26,7 @@ class CaixaControllerAcessar extends Controller
             $venda = new Venda();
             $venda->totalprodutos = 0;
             $venda->totalliq = 0;
+            $venda['desccifra'] = 0;
         }
         $clientes = Cliente::all()->sortBy('nome');
 

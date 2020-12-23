@@ -5,8 +5,6 @@ namespace App\Http\Controllers\Caixa;
 use App\Http\Controllers\Controller;
 use App\Models\Caixa\Caixa;
 use App\Models\Caixa\Turno;
-use App\Models\Cliente;
-use App\Models\Produto\Produto;
 use App\Models\Venda;
 use App\Validator\PagamentoValidator;
 use App\Validator\ValidationException;
@@ -30,18 +28,25 @@ class CaixaControllerPagamento extends Controller
             $venda->totalliq = 0;
         }
 
+        $excedente = 0;
+        if (Session()->has('excedente')) {
+            $excedente = Session()->get('excedente');
+            Session()->forget('excedente');
+        }
+
         return view('caixa.pagamento', [
             'caixa' => $caixa,
             'turno' => $turno,
             'venda' => $venda,
             'pagamentos' => $venda->pagamentos,
-            'vales' => $venda->vales
+            'vales' => $venda->vales,
+            'excedente' => $excedente
         ]);
 
     } catch (ValidationException $exception) {
         return redirect()
             ->back()
-            ->withErrors($exception->getValidator());;
+            ->withErrors($exception->getValidator());
     }
 }
 }

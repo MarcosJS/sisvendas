@@ -31,7 +31,7 @@ class ProdutoTesteSeeder extends Seeder
 
         foreach ($produtos as $produto) {
             $resultado = rand(strtotime('2020-01-01'), strtotime('2020-10-28'));
-            $produto->addMovEstoque('ENTRADA', 'ENTRADA PRODUCAO', random_int(2000, 5000), date("Y-m-d", $resultado), 1);
+            $produto->addMovEstoque(1, 1, random_int(2000, 5000), date("Y-m-d", $resultado), 1);
         }
     }
 }

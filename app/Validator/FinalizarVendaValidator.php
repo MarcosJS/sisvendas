@@ -30,6 +30,7 @@ class FinalizarVendaValidator
             }
 
             $somaPagamento = 0;
+            $credito = 0;
             foreach ($pagamentos as $pagamento) {
                 $somaPagamento += $pagamento->valor;
             }
@@ -37,12 +38,20 @@ class FinalizarVendaValidator
                 $somaPagamento += $vale->valor;
             }
 
+            if ($venda->creditoGerado != null) {
+                $credito = $venda->creditoGerado->valor;
+            }
+
+            $somaPagamento -= $credito;
             $somaPagamento = strval($somaPagamento);
             $valorVenda = strval($venda->totalliq);
 
             if ($somaPagamento > $valorVenda) {
-                $validator->errors()->add('pagamentos', 'Soma dos pagamentos e (ou) vales é maior do que o valor da venda '. $valorVenda.' ->soma '.$somaPagamento);
+                $validator->errors()->add('pagamentos_maior', 'Soma dos pagamentos e (ou) vales é maior do que o valor a pagar = '. $valorVenda.', soma dos pagamentos = '.$somaPagamento);
+                $excedente = $somaPagamento - $valorVenda;
+                Session()->put('excedente', $excedente);
             }
+
             if ($somaPagamento < $valorVenda) {
                 $validator->errors()->add('pagamentos', 'Soma dos pagamentos e (ou) vales é menor do que o valor da venda '. $valorVenda.' '.gettype($valorVenda).' ->soma '.$somaPagamento.' '.gettype($somaPagamento));
             }

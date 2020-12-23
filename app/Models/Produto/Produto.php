@@ -83,10 +83,10 @@ class Produto extends Model
         $movimento->quantidade = $qtd;
         $movimento->dtmovimento = $data;
 
-        $tip = TipoMovEstoque::where('nome', '=', $tipo)->first();
+        $tip = TipoMovEstoque::find( $tipo);
         $movimento->tipoMovEstoque()->associate($tip);
 
-        $cat = CatMovEstoque::where('nome', '=', $categoria)->first();
+        $cat = CatMovEstoque::find($categoria);
         $movimento->CatMovEstoque()->associate($cat);
 
         $usuario = Usuario::find($idUsuario);

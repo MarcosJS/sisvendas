@@ -27,5 +27,5 @@ class MovimentoCreditoCliente extends Model
         return $this->belongsTo('App\Models\Venda');
     }
 
-
 }
+

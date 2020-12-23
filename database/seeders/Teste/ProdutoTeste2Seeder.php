@@ -35,7 +35,7 @@ class ProdutoTeste2Seeder extends Seeder
         $produtos[] = $produto;
 
         foreach ($produtos as $produto) {
-            $produto->addMovEstoque('ENTRADA', 'ENTRADA PRODUCAO', 5000, date("Y-m-d"), 1);
+            $produto->addMovEstoque(1, 1, 5000, date("Y-m-d"), 1);
         }
     }
 }

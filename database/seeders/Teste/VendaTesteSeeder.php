@@ -19,12 +19,17 @@ class VendaTesteSeeder extends Seeder
     {
         $vendas = Venda::factory()->count(50)->make();
 
-        //Atualização de valores de cada venda
+        //Complementação dos dados das vendas
         foreach ($vendas as $venda) {
             $venda->usuario()->associate(random_int(1, 3));
             $venda->cliente()->associate(random_int(1, 4));
             $venda->statusVenda()->associate(2);
             $venda->save();
+        }
+
+        //Atualização de valores de cada venda
+        $vendas = Venda::all();
+        foreach ($vendas as $venda) {
             $itens = VendaItem::factory()->count(random_int(1,5))->make();
             $venda->vendaItens()->saveMany($itens);
             $venda->atualizarValores();
@@ -33,7 +38,7 @@ class VendaTesteSeeder extends Seeder
         $vendaItens = VendaItem::all();
         foreach ($vendaItens as $item) {
             $produto = $item->produto;
-            $produto->addMovEstoque('SAIDA', 'VENDA', -$item->qtd, $item->venda->dtvenda, $item->venda->usuario->id);
+            $produto->addMovEstoque(2, 4, -$item->qtd, $item->venda->dtvenda, $item->venda->usuario->id);
         }
 
         $caixa = Caixa::first();

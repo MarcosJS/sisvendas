@@ -2,42 +2,11 @@
 
 @section('titulo', 'SISVendas PDV - Caixa')
 
-@section('titulo_conteudo')
-    <div id="caixa" class="row">
-        <h4>Caixa</h4>
-    </div>
-@endsection
-
 @section('conteudo_view')
 
     @include('caixa._cabecalho_caixa')
 
-    @error('venda_id')
-    <div class="alert alert-danger alert-dismissible fade show" role="alert">
-        <strong>Info: </strong> {{$message}}
-        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-        </button>
-    </div>
-    @enderror
-
-    @error('pagamentos')
-    <div class="alert alert-danger alert-dismissible fade show" role="alert">
-        <strong>Info: </strong> {{$message}}
-        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-        </button>
-    </div>
-    @enderror
-
-    @error('cliente_id')
-    <div class="alert alert-danger alert-dismissible fade show" role="alert">
-        <strong>Info: </strong> {{$message}}
-        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-        </button>
-    </div>
-    @enderror
+    @include('caixa._errors')
 
     <div class="row mt-3">
         <div class="col-sm-6 pb-1">
@@ -61,15 +30,20 @@
         <div class="col border rounded">
             <div class="container">
                 <div class="row align-items-center">
-                    <div class="col-sm-6">
+                    <div class="col-sm-5">
                         <b>Venda: {{$venda->id}}</b>
                     </div>
 
-                    <div class="col-sm-6 col-auto">
+                    <div class="col-sm-7 col-auto">
                         @if(count($venda->vendaItens) > 0)
                             <button type="button" class="btn btn-link float-right" data-toggle="modal" data-target="#form_desconto">
                                 Desconto
                             </button>
+                            @if($venda->cliente != null && $venda->cliente->saldoCredito() > 0)
+                                <button type="button" class="btn btn-danger float-right shadow-sm" data-toggle="modal" data-target="#form_credito">
+                                    Alterar Crédito Cliente
+                                </button>
+                            @endif
                         @endif
                     </div>
                 </div>

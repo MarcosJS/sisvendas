@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Venda;
 use App\Http\Controllers\Controller;
 use App\Models\VendaItem;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class VendaControllerItensExcluir extends Controller
 {
@@ -13,14 +14,14 @@ class VendaControllerItensExcluir extends Controller
 
         if($item != null) {
             $produto = $item->produto;
-            $produto->estoque += $item->qtd;
-            $produto->save();
+            $produto->addMovEstoque(1, 3, $item->qtd, $item->venda->dtvenda, Auth::id());
 
             $venda = $item->venda;
             $item->delete();
             $venda->atualizarValores();
 
-            return redirect()->back();
+            return redirect()
+                ->route('caixa');
 
         }
         return redirect()

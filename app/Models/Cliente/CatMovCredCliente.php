@@ -24,3 +24,4 @@ class CatMovCredCliente extends Model
         return $this->hasMany('App\Models\Cliente\MovimentoCreditoCliente');
     }
 }
+

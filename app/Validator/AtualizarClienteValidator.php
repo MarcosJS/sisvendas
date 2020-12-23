@@ -2,7 +2,7 @@
 
 namespace App\Validator;
 
-use App\Models\Cliente;
+use App\Models\Cliente\Cliente;
 
 class AtualizarClienteValidator
 {

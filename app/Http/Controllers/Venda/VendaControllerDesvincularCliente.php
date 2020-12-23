@@ -14,6 +14,7 @@ class VendaControllerDesvincularCliente extends Controller
             if($venda->cliente != null) {
                 $venda->cliente()->dissociate();
                 $venda->save();
+                $venda->atualizarValores();
             } elseif ($venda->nomecliente != null) {
                 $venda->nomecliente = "";
                 $venda->save();
