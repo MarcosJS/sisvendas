@@ -18,7 +18,6 @@ class ProdutoControllerAtualizar extends Controller
             if ($produto) {
                 $produto->nome = $request->nome;
                 $produto->descricao = $request->descricao;
-                $produto->estoque = $request->estoque;
                 $produto->preco = $request->preco;
                 $produto->update();
                 return redirect()->route('dadosdoproduto', $produto->id);

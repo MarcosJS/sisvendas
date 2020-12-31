@@ -9,6 +9,12 @@ use App\Http\Controllers\Caixa\CaixaControllerRealizarSangria;
 use App\Http\Controllers\Caixa\ControleDeCaixaContollerFiltrar;
 use App\Http\Controllers\Caixa\ControleDeCaixaControllerAcessar;
 use App\Http\Controllers\Material\MaterialControllerNovo;
+use App\Http\Controllers\Material\MateriaPrimaControllerAcessar;
+use App\Http\Controllers\Material\MateriaPrimaControllerAdicionar;
+use App\Http\Controllers\Material\MateriaPrimaControllerAtualizar;
+use App\Http\Controllers\Material\MateriaPrimaControllerEditar;
+use App\Http\Controllers\Material\MateriaPrimaControllerFluxoEstoque;
+use App\Http\Controllers\Material\MateriaPrimaControllerTodos;
 use App\Http\Controllers\Pagamento\ContasAReceberContollerFiltrar;
 use App\Http\Controllers\Pagamento\ContasAReceberControllerAcessar;
 use App\Http\Controllers\Pagamento\PagamentoControllerExcluir;
@@ -103,7 +109,13 @@ Route::middleware(['auth'])->group(function () {
         Route::post('usuarios/atualizar/{id}', [UsuarioControllerAtualizar::class, 'atualizar'])->name('atualizarusuario');
     });
 
+    Route::get('materiais', [MateriaPrimaControllerTodos::class, 'obterTodos'])->name('materiais');
+    Route::get('material/acessar/{id}', [MateriaPrimaControllerAcessar::class, 'acessar'])->name('dadosdomaterial');
     Route::get('material/novo', [MaterialControllerNovo::class, 'novo'])->name('novomaterial');
+    Route::post('material/adicionar', [MateriaPrimaControllerAdicionar::class, 'adicionar'])->name('adicionarmaterial');
+    Route::get('material/editar/{id}', [MateriaPrimaControllerEditar::class, 'editar'])->name('editarmaterial');
+    Route::post('material/atualizar/{id}', [MateriaPrimaControllerAtualizar::class, 'atualizar'])->name('atualizarmaterial');
+    Route::get('materiais/fluxodeestoque', [MateriaPrimaControllerFluxoEstoque::class, 'fluxo'])->name('fluxoestoquemateriais');
 
     Route::get('produtos', [ProdutoControllerTodos::class, 'obterTodos'])->name('produtos');
     Route::get('produto/acessar/{id}', [ProdutoControllerAcessar::class, 'acessar'])->name('dadosdoproduto');

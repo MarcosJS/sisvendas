@@ -11,7 +11,7 @@
 @section('conteudo_modulo')
     <div class="row justify-content-sm-center mt-3 p-3">
 
-        <form action="{{--route('adicionarmaterial')--}}" method="post">
+        <form action="{{route('adicionarmaterial')}}" method="post">
             {{csrf_field()}}
 
             <div class="form-row">
@@ -24,7 +24,22 @@
                     </span>
                     @enderror
                 </div>
-                <div class="form-group col-sm-6">
+
+                <div class="col-sm-6">
+                    <label for="estoque">Estoque</label>
+                    <input id="estoque" type="text" class="form-control @error('estoque') is-invalid @enderror" name="estoque" value="{{old('estoque')}}">
+                    @error('estoque')
+                    <span>
+                        <small class="text-danger">{{$message}}</small>
+                    </span>
+                    @enderror
+                </div>
+
+            </div>
+
+            <div class="form-row">
+
+                <div class="form-group col-sm-12">
                     <label for="descricao">Descrição</label>
                     <input id="descricao" type="text" class="form-control @error('descricao') is-invalid @enderror" name="descricao" value="{{old("descricao")}}">
                     @error('descricao')
@@ -33,31 +48,7 @@
                     </span>
                     @enderror
                 </div>
-            </div>
 
-            <div class="form-row">
-                <div class="form-group col-sm-6">
-                    <label for="metrica">Métrica</label>
-                    <select id="metrica" class="form-control @error('metrica') is-invalid @enderror" name="metrica">
-                        <option selected>Peso</option>
-                        <option>...</option>
-                    </select>
-                    @error('metrica')
-                    <span>
-                        <small class="text-danger">{{$message}}</small>
-                    </span>
-                    @enderror
-                </div>
-
-                <div class="col-sm-6">
-                    <label for="quantidade">Quantidade</label>
-                    <input id="quantidade" type="text" class="form-control @error('quantidade') is-invalid @enderror" name="quantidade" value="{{old('quantidade')}}">
-                    @error('quantidade')
-                    <span>
-                        <small class="text-danger">{{$message}}</small>
-                    </span>
-                    @enderror
-                </div>
             </div>
 
             <div class="form-group row justify-content-sm-center">

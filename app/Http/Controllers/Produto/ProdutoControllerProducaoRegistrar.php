@@ -18,7 +18,7 @@ class ProdutoControllerProducaoRegistrar extends Controller
 
             if($produto != null)
             {
-                $produto->addMovEstoque('ENTRADA', 'ENTRADA PRODUCAO', $request['quantidade'], $request['dtproducao'], Auth::id());
+                $produto->addMovEstoque(1, 1, $request['quantidade'], $request['dtproducao'], Auth::id());
                 return redirect()->back();
             } else {
                 throw new ObjetoNaoEcontradoException('Objeto ['.gettype($produto).']=>'.$id.' não encontrado no banco de dados.');

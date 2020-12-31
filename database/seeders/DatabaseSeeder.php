@@ -18,6 +18,8 @@ class DatabaseSeeder extends Seeder
         $this->call(UsuarioSeeder::class);
         $this->call(TipoMovEstoqueSeeder::class);
         $this->call(CatMovEstoqueSeeder::class);
+        $this->call(TipoMovEstoqueMatSeeder::class);
+        $this->call(CatMovEstoqueMatSeeder::class);
         $this->call(StatusVendaSeeder::class);
         $this->call(StatusPagamentoSeeder::class);
         $this->call(StatusTurnoSeeder::class);
