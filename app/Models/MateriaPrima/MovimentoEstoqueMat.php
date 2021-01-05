@@ -10,12 +10,13 @@ class MovimentoEstoqueMat extends Model
     use HasFactory;
 
     protected $fillable     = [
-        'quantidade', 'dtmovimento'
+        'quantidade', 'dtmovimento', 'observacao'
     ];
 
     public static $rules = [
         'quantidade' => 'required|integer|min:0',
-        'dtmovimento' => 'required|date'
+        'dtmovimento' => 'required|date',
+        'observacao' => 'nullable|max:255'
     ];
 
     public static $messages = [
@@ -23,7 +24,8 @@ class MovimentoEstoqueMat extends Model
         'quantidade.integer' => 'A quantidade deve ser é um numero inteiro',
         'quantidade.min' => 'A quantidade deve ser maior que 0 (zero)',
         'dtmovimento.required' => 'O campo data é obrigatório',
-        'dtmovimento.date' => 'Este campo deve ser do tipo data'
+        'dtmovimento.date' => 'Este campo deve ser do tipo data',
+        'observacao.max' => 'O campo observações deve ter no máximo 255 caracteres'
     ];
 
     public function tipoMovEstoqueMat() {

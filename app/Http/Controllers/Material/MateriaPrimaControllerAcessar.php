@@ -11,17 +11,17 @@ class MateriaPrimaControllerAcessar extends Controller
     public function acessar(Request $request) {
         $material = MateriaPrima::find($request->id);
         if ($material != null) {
-            /*$compras = $material->vendaItens()->whereHas('venda', function ($q) {
-                $q->where('status_venda_id', '=', 2);
-            })->sum('qtd');
-            $producao = $material->movimentoEstoques()->whereHas('catMovEstoque', function ($q) {
-                $q->where('nome', '=', 'ENTRADA PRODUCAO');
-            })->sum('quantidade');*/
+            $saidas = $material->movimentosEstoqueMat()->whereHas('tipoMovEstoqueMat', function ($q) {
+                $q->where('id', '=', 2);
+            })->count();
+            $entradas = $material->movimentosEstoqueMat()->whereHas('tipoMovEstoqueMat', function ($q) {
+                $q->where('id', '=', 1);
+            })->count();
 
             return view('material.material', [
-                'material' => $material/*,
-                'producao' => $producao,
-                'compras' => $compras*/]);
+                'material' => $material,
+                'entradas' => $entradas,
+                'saidas' => $saidas]);
         }
         return redirect()->back();
     }

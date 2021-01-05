@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Produto;
 
+use App\Exceptions\ComposicaoNaoLocalizadaException;
 use App\Exceptions\ObjetoNaoEcontradoException;
 use App\Http\Controllers\Controller;
 use App\Models\Produto\Produto;
@@ -18,7 +19,25 @@ class ProdutoControllerProducaoRegistrar extends Controller
 
             if($produto != null)
             {
-                $produto->addMovEstoque(1, 1, $request['quantidade'], $request['dtproducao'], Auth::id());
+                date_default_timezone_set('America/Recife');
+                $data = date("Y-m-d");
+                if ($request['dtmovimento'] != null) {
+                    $data = $request['dtmovimento'];
+                }
+
+                if ($request['categoria'] == 1) {
+                    $composicao = $produto->composicao();
+                    if ($composicao != null) {
+                        foreach ($composicao->itensComposicao as $item) {
+                            $material = $item->materiaPrima;
+                            $material->addMovEstoqueMat(2, 4, $item->quantidade * $request['quantidade'], $data, Auth::id());
+                        }
+                    } else {
+                        throw new ComposicaoNaoLocalizadaException('O Produto não possui composicao para essa origem de entrada. Selecione outra opção');
+                    }
+                }
+
+                $produto->addMovEstoque(1, $request['categoria'], $request['quantidade'], $data, Auth::id());
                 return redirect()->back();
             } else {
                 throw new ObjetoNaoEcontradoException('Objeto ['.gettype($produto).']=>'.$id.' não encontrado no banco de dados.');

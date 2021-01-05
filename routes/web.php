@@ -14,6 +14,7 @@ use App\Http\Controllers\Material\MateriaPrimaControllerAdicionar;
 use App\Http\Controllers\Material\MateriaPrimaControllerAtualizar;
 use App\Http\Controllers\Material\MateriaPrimaControllerEditar;
 use App\Http\Controllers\Material\MateriaPrimaControllerFluxoEstoque;
+use App\Http\Controllers\Material\MateriaPrimaControllerRegistrarEntrada;
 use App\Http\Controllers\Material\MateriaPrimaControllerTodos;
 use App\Http\Controllers\Pagamento\ContasAReceberContollerFiltrar;
 use App\Http\Controllers\Pagamento\ContasAReceberControllerAcessar;
@@ -22,6 +23,11 @@ use App\Http\Controllers\Pagamento\PagamentoControllerRegistrarCheque;
 use App\Http\Controllers\Pagamento\PagamentoControllerRegistrarDinheiro;
 use App\Http\Controllers\Pagamento\PagamentoControllerRegistrarVale;
 use App\Http\Controllers\Pagamento\ValeControllerExcluir;
+use App\Http\Controllers\Produto\Composicao\ComposicaoControllerAdicionarItem;
+use App\Http\Controllers\Produto\Composicao\ComposicaoControllerEditar;
+use App\Http\Controllers\Produto\Composicao\ComposicaoControllerLimpar;
+use App\Http\Controllers\Produto\Composicao\ComposicaoControllerNovo;
+use App\Http\Controllers\Produto\Composicao\ComposicaoControllerSalvar;
 use App\Http\Controllers\Produto\ProdutoControllerFluxoEstoque;
 use App\Http\Controllers\Produto\ProdutoControllerProducaoRegistrar;
 use App\Http\Controllers\Sessao\SessaoControllerDeslogar;
@@ -115,6 +121,7 @@ Route::middleware(['auth'])->group(function () {
     Route::post('material/adicionar', [MateriaPrimaControllerAdicionar::class, 'adicionar'])->name('adicionarmaterial');
     Route::get('material/editar/{id}', [MateriaPrimaControllerEditar::class, 'editar'])->name('editarmaterial');
     Route::post('material/atualizar/{id}', [MateriaPrimaControllerAtualizar::class, 'atualizar'])->name('atualizarmaterial');
+    Route::post('material/registrarentrada/{id}', [MateriaPrimaControllerRegistrarEntrada::class, 'registrar'])->name('registrarentrada');
     Route::get('materiais/fluxodeestoque', [MateriaPrimaControllerFluxoEstoque::class, 'fluxo'])->name('fluxoestoquemateriais');
 
     Route::get('produtos', [ProdutoControllerTodos::class, 'obterTodos'])->name('produtos');
@@ -126,6 +133,12 @@ Route::middleware(['auth'])->group(function () {
     Route::post('produto/registrarproducao/{id}', [ProdutoControllerProducaoRegistrar::class, 'registrar'])->name('registrarproducao');
     Route::get('produto/remover/{id}', [ProdutoControllerRemover::class, 'remover'])->name('removerproduto');
     Route::get('produtos/fluxodeestoque', [ProdutoControllerFluxoEstoque::class, 'fluxo'])->name('fluxoestoque');
+
+    Route::get('produto/{id}/composicao/novo', [ComposicaoControllerNovo::class, 'novo'])->name('novacomposicao');
+    Route::get('produto/{id}/composicao/editar', [ComposicaoControllerEditar::class, 'editar'])->name('editarcomposicao');
+    Route::post('produto/composicao/adicionaritem', [ComposicaoControllerAdicionarItem::class, 'adicionar'])->name('adicionaritemcomposicao');
+    Route::get('produto/{id}/composicao/salvarcomposicao', [ComposicaoControllerSalvar::class, 'salvar'])->name('salvarcomposicao');
+    Route::get('produto/composicao/limparcomposicao', [ComposicaoControllerLimpar::class, 'limpar'])->name('limparcomposicao');
 
     Route::get('vendas', [VendaControllerTodos::class, 'obterTodos'])->name('listavendas');
     Route::get('venda/inicio', [VendaControllerPDV::class, 'iniciar'])->name('iniciovendas');

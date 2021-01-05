@@ -9,6 +9,18 @@
 @endsection
 
 @section('conteudo_modulo')
+
+        @error('producao')
+            <div class="row">
+                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    <strong>Erro: </strong>{{$message}}
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+            </div>
+        @enderror
+
     <div class="row mt-3">
 
         <div class="col card text-left ">
@@ -21,10 +33,12 @@
                 <p><strong>Código: </strong>{{$produto->id}}</p>
                 <p><strong>Estoque: </strong>{{$produto->estoque}}</p>
                 <p><strong>Preço Unitário: </strong>R$ {{$produto->preco}}</p>
-                <p><strong>Peso: </strong>99 Kg</p>
                 <p>
                     <button class="btn btnformout" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
-                        Informar Produção
+                        Informar Entrada
+                    </button>
+                    <button class="btn btnformout" type="button" data-toggle="collapse" data-target="#formComposicao" aria-expanded="false" aria-controls="formComposicao">
+                        Composicao
                     </button>
                     <a class="btn btn-outline-primary btnformedit" href="{{route('editarproduto', $produto->id)}}">
                         Editar
@@ -33,6 +47,9 @@
                 </p>
                 <div class="collapse" id="collapseExample">
                     @include('produto.form_producao')
+                </div>
+                <div class="collapse" id="formComposicao">
+                    @include('produto.form_composicao')
                 </div>
             </div>
 

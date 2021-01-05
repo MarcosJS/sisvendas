@@ -18,6 +18,7 @@ class CreateMovimentoEstoqueMatsTable extends Migration
             $table->timestamps();
             $table->integer('quantidade');
             $table->date('dtmovimento');
+            $table->string('observacao')->nullable();
             $table->integer('tipo_mov_estoque_mat_id')->unsigned();
             $table->foreign('tipo_mov_estoque_mat_id')->references('id')->on('tipo_mov_estoque_mats');
             $table->integer('cat_mov_estoque_mat_id')->unsigned();

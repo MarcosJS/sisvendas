@@ -31,7 +31,7 @@ class MateriaPrima extends Model
         'estoque.min' => 'O estoque deve ser maior que 0 (zero)'
     ];
 
-    public function movimentoEstoquesMat() {
+    public function movimentosEstoqueMat() {
         return $this->hasMany('App\Models\MateriaPrima\MovimentoEstoqueMat');
     }
 
@@ -40,12 +40,12 @@ class MateriaPrima extends Model
     }
 
     public function estoqueApartirMovs() {
-        return $this->movimentoEstoquesMat()->sum('quantidade');
+        return $this->movimentosEstoqueMat()->sum('quantidade');
     }
 
     public function atualizarEstoque() {
         if ($this['controle_estoque']) {
-            $totalMovimentos = $this->movimentoEstoquesMat()->count();
+            $totalMovimentos = $this->movimentosEstoqueMat()->count();
 
             $pontoControle = -1;
             if ($totalMovimentos > 0) {
@@ -55,17 +55,17 @@ class MateriaPrima extends Model
             //É hora de atualizar o saldo de controle do estoque
             if ($pontoControle == 0) {
                 $indiceBusca = $totalMovimentos - $this['interv_controle'];
-                $somaMovimentos = $this->movimentoEstoquesMat()->sortBy('dtmovimento')->skip($indiceBusca)->sum('quantidade');
+                $somaMovimentos = $this->movimentosEstoqueMat()->sortBy('dtmovimento')->skip($indiceBusca)->sum('quantidade');
                 $this['saldo_control_estoque'] = $this['saldo_control_estoque'] + $somaMovimentos;
                 $this['estoque'] = $this['saldo_control_estoque'];
             } else {//Não é hora de atualizar o saldo de controle do estoque
                 $indiceBusca = $totalMovimentos / $this['interv_controle'];
                 $indiceBusca *= $this['interv_controle'];
-                $somaMovimentos = $this->movimentoEstoquesMat()->sortBy('dtmovimento')->skip($indiceBusca)->sum('quantidade');
+                $somaMovimentos = $this->movimentosEstoqueMat()->sortBy('dtmovimento')->skip($indiceBusca)->sum('quantidade');
                 $this['estoque'] = $this['saldo_control_estoque'] + $somaMovimentos;
             }
         } else {
-            $somaMovimentos = $this->movimentoEstoquesMat()->sum('quantidade');
+            $somaMovimentos = $this->movimentosEstoqueMat()->sum('quantidade');
             $this['saldo_control_estoque'] = $somaMovimentos;
             $this['estoque'] = $somaMovimentos;
         }
@@ -73,10 +73,19 @@ class MateriaPrima extends Model
         $this->save();
     }
 
-    public function addMovEstoque($tipo, $categoria, $qtd, $data, $idUsuario) {
+    public function addMovEstoqueMat($tipo, $categoria, $qtd, $data, $idUsuario, $observacao = null) {
         $movimento = new MovimentoEstoqueMat();
-        $movimento['quantidade'] = $qtd;
         $movimento['dtmovimento'] = $data;
+        $movimento['observacao'] = $observacao;
+
+        $quantidade = 0;
+        if ($tipo == 2) {
+            $quantidade  -= $qtd;
+        } else {
+            $quantidade = $qtd;
+        }
+        $movimento['quantidade'] = $quantidade;
+
 
         $tip = TipoMovEstoqueMat::find( $tipo);
         $movimento->tipoMovEstoqueMat()->associate($tip);

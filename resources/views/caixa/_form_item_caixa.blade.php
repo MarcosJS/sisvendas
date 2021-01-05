@@ -11,8 +11,8 @@
             </select>
             @error('codproduto')
             <span>
-                            <small class="text-danger">{{$message}}</small>
-                        </span>
+                <small class="text-danger">{{$message}}</small>
+            </span>
             @enderror
         <!-- Esses dados são apenas para preencher os campos id e preco através de javascrip -->
             @foreach($produtos as $produto)

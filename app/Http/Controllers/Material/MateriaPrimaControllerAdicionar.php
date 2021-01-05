@@ -23,7 +23,7 @@ class MateriaPrimaControllerAdicionar extends Controller
                 if($request['estoque'] > 0) {
                     date_default_timezone_set('America/Recife');
                     $data = date("Y-m-d");
-                    $material->addMovEstoque(1, 1, $request['estoque'], $data, Auth::id());
+                    $material->addMovEstoqueMat(1, 1, $request['estoque'], $data, Auth::id());
                 }
 
                 return redirect()->route('materiais');

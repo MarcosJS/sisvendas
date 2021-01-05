@@ -20,6 +20,7 @@ class ProdutoControllerAcessar extends Controller
 
             return view('produto.produto', [
                 'produto' => $produto,
+                'composicao' =>$produto->composicao(),
                 'producao' => $producao,
                 'vendas' => $vendas]);
         }

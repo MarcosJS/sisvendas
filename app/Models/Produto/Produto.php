@@ -13,7 +13,7 @@ class Produto extends Model
     use Notifiable;
 
     protected $fillable     = [
-        'nome', 'descricao', 'estoque', 'preco', 'saldo_control_estoque', 'interv_controle', 'controle_estoque'
+        'nome', 'descricao', 'estoque', 'preco', 'composicao_atual', 'saldo_control_estoque', 'interv_controle', 'controle_estoque'
     ];
 
     public static $rules = [
@@ -34,6 +34,14 @@ class Produto extends Model
         'preco.numeric' => 'O campo preço deve ser do  tipo numerico',
         'preco.min' => 'O preço deve ser maior que 0 (zero)'
     ];
+
+    public function composicao() {
+        return Composicao::find($this['composicao_atual']);
+    }
+
+    public function composicoes() {
+        return $this->hasMany('App\Models\Produto\Composicao');
+    }
 
     public function movimentoEstoques() {
         return $this->hasMany('App\Models\Produto\MovimentoEstoque');
