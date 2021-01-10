@@ -14,7 +14,7 @@ class Endereco extends Model
     ];
 
     public static $rules = [
-        'logradouro' => 'required|min:5|max:100',
+        'logradouro' => 'nullable|min:5|max:100',
         'numero' => 'integer',
         'bairro' => 'required|min:5|max:100',
         'cidade' => 'required|min:5|max:100',
@@ -37,5 +37,9 @@ class Endereco extends Model
 
     public function cliente() {
         return $this->belongsTo('App\Models\Cliente\Cliente');
+    }
+
+    public function colaborador() {
+        return $this->belongsTo('App\Models\Colaborador\Colaborador');
     }
 }

@@ -23,9 +23,12 @@ class DatabaseSeeder extends Seeder
         $this->call(StatusVendaSeeder::class);
         $this->call(StatusPagamentoSeeder::class);
         $this->call(StatusTurnoSeeder::class);
+        $this->call(TipoMovSalarioSeeder::class);
         $this->call(TipoMovCaixaSeeder::class);
+        $this->call(CatMovSalarioSeeder::class);
         $this->call(CatMovCaixaSeeder::class);
         $this->call(CaixaSeeder::class);
+        $this->call(CompetenciaSeeder::class);
         $this->call(TipoMovCredClienteSeeder::class);
         $this->call(CatMovCredClienteSeeder::class);
     }

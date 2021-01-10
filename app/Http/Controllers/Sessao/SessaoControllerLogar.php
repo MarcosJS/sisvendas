@@ -15,10 +15,7 @@ class SessaoControllerLogar extends Controller
         try {
             LoginValidator::validate($request->all());
 
-            /*$credencias = $request->only('usuario_id');
-            Auth::loginUsingId($credencias['usuario_id']);*/
-
-            $credencias = $request->only('cpf', 'password');
+           $credencias = $request->only('cpf', 'password');
             Auth::attempt($credencias);
 
             if(Auth::check()) {

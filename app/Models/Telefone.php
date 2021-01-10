@@ -24,4 +24,8 @@ class Telefone extends Model
     public function cliente() {
         return $this->belongsTo('App\Models\Cliente\Cliente');
     }
+
+    public function colaborador() {
+        return $this->belongsTo('App\Models\Colaborador\Colaborador');
+    }
 }

@@ -17,8 +17,10 @@ class CreateTelefonesTable extends Migration
             $table->id();
             $table->timestamps();
             $table->string('numerotel', 11)->nullable();
-            $table->integer('cliente_id')->unsigned();
+            $table->integer('cliente_id')->unsigned()->nullable();
             $table->foreign('cliente_id')->references('id')->on('clientes')->cascadeOnDelete()->cascadeOnUpdate();
+            $table->integer('colaborador_id')->unsigned()->nullable();
+            $table->foreign('colaborador_id')->references('id')->on('colaboradors')->cascadeOnDelete()->cascadeOnUpdate();
         });
     }
 

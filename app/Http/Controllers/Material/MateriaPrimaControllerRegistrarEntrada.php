@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Material;
 
-use App\Exceptions\ObjetoNaoEcontradoException;
+use App\Exceptions\ObjetoNaoEncontradoException;
 use App\Http\Controllers\Controller;
 use App\Models\MateriaPrima\MateriaPrima;
 use Exception;
@@ -27,7 +27,7 @@ class MateriaPrimaControllerRegistrarEntrada extends Controller
                 $material->addMovEstoqueMat(1, 1, $request['quantidade'], $data, Auth::id(), $request['observacao']);
                 return redirect()->back();
             } else {
-                throw new ObjetoNaoEcontradoException('Objeto ['.gettype($material).']=>'.$id.' não encontrado no banco de dados.');
+                throw new ObjetoNaoEncontradoException('Objeto ['.gettype($material).']=>'.$id.' não encontrado no banco de dados.');
             }
 
         } catch (Exception $exception) {

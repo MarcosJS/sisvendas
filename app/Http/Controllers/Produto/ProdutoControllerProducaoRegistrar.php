@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Produto;
 
 use App\Exceptions\ComposicaoNaoLocalizadaException;
-use App\Exceptions\ObjetoNaoEcontradoException;
+use App\Exceptions\ObjetoNaoEncontradoException;
 use App\Http\Controllers\Controller;
 use App\Models\Produto\Produto;
 use Exception;
@@ -40,7 +40,7 @@ class ProdutoControllerProducaoRegistrar extends Controller
                 $produto->addMovEstoque(1, $request['categoria'], $request['quantidade'], $data, Auth::id());
                 return redirect()->back();
             } else {
-                throw new ObjetoNaoEcontradoException('Objeto ['.gettype($produto).']=>'.$id.' não encontrado no banco de dados.');
+                throw new ObjetoNaoEncontradoException('Objeto ['.gettype($produto).']=>'.$id.' não encontrado no banco de dados.');
             }
 
         } catch (Exception $exception) {

@@ -26,12 +26,15 @@ class CreateMovimentoCaixasTable extends Migration
             $table->integer('tipo_mov_caixa_id')->unsigned();
             $table->integer('cat_mov_caixa_id')->unsigned();
             $table->integer('usuario_id')->unsigned();
+            $table->integer('movimento_salario_id')->unsigned()->nullable();
+
 
             $table->foreign('turno_id')->references('id')->on('turnos');
             $table->foreign('pagamento_id')->references('id')->on('pagamentos')->cascadeOnUpdate()->cascadeOnDelete();
             $table->foreign('tipo_mov_caixa_id')->references('id')->on('tipo_mov_caixas');
             $table->foreign('cat_mov_caixa_id')->references('id')->on('cat_mov_caixas');
             $table->foreign('usuario_id')->references('id')->on('usuarios');
+            $table->foreign('movimento_salario_id')->references('id')->on('movimento_salarios');
         });
     }
 

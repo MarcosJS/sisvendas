@@ -34,4 +34,8 @@ class MovimentoCaixa extends Model
     public function pagamento() {
         return $this->belongsTo('App\Models\Pagamento\Pagamento');
     }
+
+    public function movimentoSalario() {
+        return $this->belongsTo('App\Models\Colaborador\MovimentoSalario');
+    }
 }
