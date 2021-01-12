@@ -16,7 +16,7 @@
                         <select class="form-control-sm mr-sm-2" name="competencia" id="competencia" aria-label="competencia">
                             <option value="">Competência</option>
                             @foreach($competencias as $competencia)
-                                <option value="{{$competencia->id}}">
+                                <option value="{{$competencia->id}}" @if($pesquisa['competencia'] == $competencia->id) selected @endif>
                                     {{substr(str_repeat(0, 2).$competencia->numero, - 2)}}/{{$competencia->exercicio}}
                                 </option>
                             @endforeach
@@ -25,14 +25,18 @@
                         <select class="form-control-sm mr-sm-2" name="tipo" id="tipo" aria-label="tipo">
                             <option value="">Tipo de Movimento</option>
                             @foreach($tipos as $tipo)
-                                <option value="{{$tipo->id}}">{{$tipo->nome}}</option>
+                                <option value="{{$tipo->id}}" @if($pesquisa['tipo'] == $tipo->id) selected @endif>
+                                    {{$tipo->nome}}
+                                </option>
                             @endforeach
                         </select>
 
                         <select class="form-control-sm mr-sm-2" name="categoria" id="categoria" aria-label="categoria">
                             <option value="">Categoria de Movimento</option>
                             @foreach($categorias as $categoria)
-                                <option value="{{$categoria->id}}">{{$categoria->nome}}</option>
+                                <option value="{{$categoria->id}}" @if($pesquisa['categoria'] == $categoria->id) selected @endif>
+                                    {{$categoria->nome}}
+                                </option>
                             @endforeach
                         </select>
 

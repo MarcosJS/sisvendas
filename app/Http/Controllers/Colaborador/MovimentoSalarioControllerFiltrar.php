@@ -17,6 +17,11 @@ class MovimentoSalarioControllerFiltrar extends Controller
         try {
 
             $colaborador = Colaborador::find($request['colaborador']);
+            $pesquisa['colaborador'] = $request['colaborador'];
+            $pesquisa['competencia'] = $request['competencia'];
+            $pesquisa['tipo'] = $request['tipo'];
+            $pesquisa['categoria'] = $request['categoria'];
+
             $movimentos = $this->consulta($request->all());
 
             $competencias = Competencia::all();
@@ -31,6 +36,7 @@ class MovimentoSalarioControllerFiltrar extends Controller
 
             return view('colaboradores.colaborador_movimentos', [
                 'colaborador' => $colaborador,
+                'pesquisa' => $pesquisa,
                 'movimentos' => $movimentos,
                 'total' => $total,
                 'competencias' => $competencias,
