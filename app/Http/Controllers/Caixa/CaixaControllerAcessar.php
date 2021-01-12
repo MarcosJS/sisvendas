@@ -13,11 +13,12 @@ use Illuminate\Http\Request;
 class CaixaControllerAcessar extends Controller
 {
     public function acessar() {
-        $caixa = Caixa::first();
+        /*$caixa = Caixa::first();
         if ($caixa == null) {
             $caixa = new Caixa();
             $caixa->save();
-        }
+        }*/
+
         $turno = Turno::find($caixa->turnoAtual);
 
         $produtos = Produto::all()->sortBy('nome');

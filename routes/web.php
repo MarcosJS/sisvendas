@@ -18,6 +18,7 @@ use App\Http\Controllers\Colaborador\MovimentoSalarioControllerDoColaborador;
 use App\Http\Controllers\Colaborador\MovimentoSalarioControllerExcluir;
 use App\Http\Controllers\Colaborador\MovimentoSalarioControllerFiltrar;
 use App\Http\Controllers\Colaborador\MovimentoSalarioControllerLancar;
+use App\Http\Controllers\Colaborador\MovimentoSalarioControllerTodos;
 use App\Http\Controllers\Material\MaterialControllerNovo;
 use App\Http\Controllers\Material\MateriaPrimaControllerAcessar;
 use App\Http\Controllers\Material\MateriaPrimaControllerAdicionar;
@@ -42,6 +43,8 @@ use App\Http\Controllers\Produto\ProdutoControllerFluxoEstoque;
 use App\Http\Controllers\Produto\ProdutoControllerProducaoRegistrar;
 use App\Http\Controllers\Sessao\SessaoControllerDeslogar;
 use App\Http\Controllers\Sessao\SessaoControllerLogar;
+use App\Http\Controllers\Sistema\CompetenciaControllerFechamento;
+use App\Http\Controllers\Sistema\CompetenciaControllerFechar;
 use App\Http\Controllers\TesteControllerTesteRelBD;
 use App\Http\Controllers\Cliente\ClienteControllerAcessar;
 use App\Http\Controllers\Cliente\ClienteControllerAdicionar;
@@ -101,6 +104,8 @@ Route::get('teste', [TesteControllerTesteRelBD::class, 'relBD']);
 Route::middleware(['auth'])->group(function () {
 
     Route::get('/', function () {return view('inicio');})->name('inicio');
+    Route::get('fechamentodecompetencia', [CompetenciaControllerFechamento::class, 'fechamento'])->name('fechamentodecompetencia');
+    Route::get('fecharcompetencia', [CompetenciaControllerFechar::class, 'fechar'])->name('fecharcompetencia');
 
     Route::get('clientes', [ClienteControllerTodos::class, 'obterTodos'])->name('clientes');
     Route::get('clientes/acessar/{id}', [ClienteControllerAcessar::class, 'acessar'])->name('cliente');
@@ -132,6 +137,7 @@ Route::middleware(['auth'])->group(function () {
     Route::post('colaborador/atualizar/{id}', [ColaboradorControllerAtualizar::class, 'atualizar'])->name('atualizarcolaborador');
     Route::post('colaborador/lancarmovimentosalario/{id}', [MovimentoSalarioControllerLancar::class, 'lancar'])->name('lancarmovimentopagamento');
     Route::get('colaborador/movimentosdocolaborador/{id}', [MovimentoSalarioControllerDoColaborador::class, 'obterDo'])->name('movimentosdocolaborador');
+    Route::get('colaborador/movimentosdesalario', [MovimentoSalarioControllerTodos::class, 'obterTodos'])->name('movimentosdesalario');
     Route::post('colaborador/movimentossalario/filtrar', [MovimentoSalarioControllerFiltrar::class, 'filtrar'])->name('filtrarmovimentossalario');
     Route::get('colaborador/excluirmovimentosalario/{id}', [MovimentoSalarioControllerExcluir::class, 'excluir'])->name('excluirmovimentosalario');
 

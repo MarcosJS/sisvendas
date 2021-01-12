@@ -28,7 +28,6 @@ class DatabaseSeeder extends Seeder
         $this->call(CatMovSalarioSeeder::class);
         $this->call(CatMovCaixaSeeder::class);
         $this->call(CaixaSeeder::class);
-        $this->call(CompetenciaSeeder::class);
         $this->call(TipoMovCredClienteSeeder::class);
         $this->call(CatMovCredClienteSeeder::class);
     }

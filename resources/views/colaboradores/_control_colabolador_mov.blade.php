@@ -11,12 +11,14 @@
                     <form class="form-inline" action="{{route('filtrarmovimentossalario')}}" method="post">
                         @csrf
 
-                        <input type="text" class="form-control-sm text-primary mr-sm-2" name="colaborador" placeholder="Cod. Colaborador" aria-label="Pesquisar por..." aria-describedby="basic-addon2">
+                        <input type="text" class="form-control-sm text-primary mr-sm-2" name="colaborador" @if($colaborador != null) value="{{$colaborador->id}}" @endif placeholder="Cod. Colaborador" aria-label="colaborador" aria-describedby="basic-addon2">
 
                         <select class="form-control-sm mr-sm-2" name="competencia" id="competencia" aria-label="competencia">
                             <option value="">Competência</option>
                             @foreach($competencias as $competencia)
-                                <option value="{{$competencia->id}}">{{$competencia->numero}}</option>
+                                <option value="{{$competencia->id}}">
+                                    {{substr(str_repeat(0, 2).$competencia->numero, - 2)}}/{{$competencia->exercicio}}
+                                </option>
                             @endforeach
                         </select>
 

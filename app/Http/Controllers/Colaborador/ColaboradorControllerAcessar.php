@@ -23,7 +23,7 @@ class ColaboradorControllerAcessar extends Controller
                 $c->nome = str_replace('_', ' ', $c->nome);
             }
 
-            $competencia = Competencia::all()->sortByDesc('numero')->first();
+            $competencia = Session()->get('sistema')->competencia();
 
             if ($colaborador != null) {
                 $movimentos = $colaborador->movimentoSalarios()->whereHas('competencia', function ($q) use ($competencia){

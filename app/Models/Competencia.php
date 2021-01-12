@@ -10,7 +10,7 @@ class Competencia extends Model
     use HasFactory;
 
     protected $fillable = [
-        'numero', 'dtabertura', 'dtfechamento'
+        'numero', 'exercicio', 'dtabertura', 'dtfechamento'
     ];
 
     public function movimentoSalarios() {

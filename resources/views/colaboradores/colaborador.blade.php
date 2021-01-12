@@ -45,9 +45,17 @@
 
                 <div class="border-bottom border-success mt-3">
                     <p>
-                        <a class="btn btnformout" href="{{route('movimentosdocolaborador', $colaborador->id)}}">
+                        <form class="float-left mr-2" action="{{route('filtrarmovimentossalario')}}" method="post">
+                            @csrf
+                        <input type="hidden" name="colaborador" value="{{$colaborador->id}}">
+                        <input type="hidden" name="competencia">
+                        <input type="hidden" name="tipo">
+                        <input type="hidden" name="categoria">
+                        <button class="btn btnformout" type="submit">
                             Movimentos
-                        </a>
+                        </button>
+                        </form>
+
                         <button class="btn btnformout" type="button" data-toggle="collapse" data-target="#movpagamento" aria-expanded="false" aria-controls="movpagamento">
                             Novo Movimento de Pagamento
                         </button>
@@ -63,13 +71,13 @@
 
                                 <div class="col border mb-3">
                                     <p class="text-info">
-                                        Competência Atual: <strong>{{$competencia->numero}}</strong>
+                                        Competência Atual: <strong>{{substr(str_repeat(0, 2).$competencia->numero, - 2)}}/{{$competencia->exercicio}}</strong>
                                     </p>
                                     <table class="table table-sm table-striped">
                                         @foreach($movimentos as $movimento)
                                         <tr class="@if($movimento->valor < 0) text-danger @else text-success @endif">
                                             <td>{{$movimento->catMovSalario->nome}}</td>
-                                            <td class="text-right">{{$movimento->valor}}</td>
+                                            <td class="text-right">{{number_format($movimento->valor,2, ',', '.')}}</td>
                                         </tr>
                                         @endforeach
                                         <tr>

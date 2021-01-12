@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Sessao;
 
 use App\Http\Controllers\Controller;
+use App\Models\Sistema;
 use App\Validator\LoginValidator;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -19,6 +20,10 @@ class SessaoControllerLogar extends Controller
             Auth::attempt($credencias);
 
             if(Auth::check()) {
+                if (!Session()->has('sistema')) {
+                    $sistema = new Sistema();
+                    Session()->put('sistema', $sistema);
+                }
                 return redirect('/');
             }
 

@@ -17,6 +17,7 @@ class CreateCompetenciasTable extends Migration
             $table->id();
             $table->timestamps();
             $table->integer('numero');
+            $table->integer('exercicio');
             $table->date('dtabertura');
             $table->date('dtfechamento')->nullable();
         });

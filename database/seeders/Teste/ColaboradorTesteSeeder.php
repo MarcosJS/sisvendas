@@ -17,7 +17,7 @@ class ColaboradorTesteSeeder extends Seeder
      */
     public function run()
     {
-        Colaborador::factory()->count(1)
+        Colaborador::factory()->count(3)
             ->state(['funcao_id' => 1])
             ->has(Endereco::factory())
             ->has(Telefone::factory()->count(1))

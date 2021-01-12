@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Colaborador;
 use App\Exceptions\ObjetoNaoEncontradoException;
 use App\Http\Controllers\Controller;
 use App\Models\Colaborador\Colaborador;
-use App\Models\Competencia;
 use App\Validator\MovimentoSalarioValidator;
 use App\Validator\ValidationException;
 use Exception;
@@ -27,7 +26,7 @@ class MovimentoSalarioControllerLancar extends Controller
                     $data = $request['dtmovimento'];
                 }
 
-                $competencia = Competencia::all()->sortByDesc('numero')->first();
+                $competencia = Session()->get('sistema')->competencia;
 
                 $addMov = $colaborador->addMovimentoSalario($request['categoria'], $request['valor'], $data, $competencia, $request['observacao']);
 

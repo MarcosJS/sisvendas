@@ -16,6 +16,7 @@ class CompetenciaSeeder extends Seeder
     {
         $competencia = new Competencia();
         $competencia['numero'] = 1;
+        $competencia['exercicio'] = 2021;
         $competencia['dtabertura'] = '2021-01-04';
         $competencia->save();
     }

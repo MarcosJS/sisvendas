@@ -13,11 +13,11 @@ use Illuminate\Http\Request;
 class MovimentoSalarioControllerFiltrar extends Controller
 {
     public function filtrar (Request $request) {
-        $movimentos = $this->consulta($request);
 
         try {
+
             $colaborador = Colaborador::find($request['colaborador']);
-            $movimentos = $this->consulta($request);
+            $movimentos = $this->consulta($request->all());
 
             $competencias = Competencia::all();
             $tipos = TipoMovSalario::all();
@@ -47,20 +47,20 @@ class MovimentoSalarioControllerFiltrar extends Controller
     private function consulta ($dados) {
         $movimentos = MovimentoSalario::all();
 
-        if ($dados->colaborador != null) {
-            $movimentos = $movimentos->whereIn('colaborador_id', $dados->colaborador);
+        if ($dados['colaborador'] != null) {
+            $movimentos = $movimentos->where('colaborador_id', '=', $dados['colaborador']);
         }
 
-        if ($dados->competencia != null) {
-            $movimentos = $movimentos->whereIn('competencia_id', $dados->competencia);
+        if ($dados['competencia'] != null) {
+            $movimentos = $movimentos->where('competencia_id', '=', $dados['competencia']);
         }
 
-        if ($dados->tipo != null) {
-            $movimentos = $movimentos->where('tipo_mov_salario_id', '=', $dados->tipo);
+        if ($dados['tipo'] != null) {
+            $movimentos = $movimentos->where('tipo_mov_salario_id', '=', $dados['tipo']);
         }
 
-        if ($dados->categoria != null) {
-            $movimentos = $movimentos->where('cat_mov_salario_id', '=', $dados->categoria);
+        if ($dados['categoria'] != null) {
+            $movimentos = $movimentos->where('cat_mov_salario_id', '=', $dados['categoria']);
         }
 
 
