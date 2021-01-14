@@ -14,8 +14,12 @@ class Pagamento extends Model
     use HasFactory;
 
     protected $fillable = [
-        'tipo', 'valor', 'dtpagamento'
+        'valor', 'dtpagamento'
     ];
+
+    public function tipoPagamento() {
+        return $this->belongsTo('App\Models\Pagamento\TipoPagamento');
+    }
 
     public function venda() {
         return $this->belongsTo('App\Models\Venda');
@@ -31,6 +35,10 @@ class Pagamento extends Model
 
     public function cheque() {
         return $this->hasOne('App\Models\Pagamento\Cheque');
+    }
+
+    public function transferencia() {
+        return $this->hasOne('App\Models\Pagamento\Transferencia');
     }
 
     public function movimento() {
@@ -53,7 +61,7 @@ class Pagamento extends Model
                 $data = date("Y-m-d");
                 $hora = date("H:i:s");
 
-                $caixa->addMovimento(1, 3, $this->valor, $data, $hora, null, $usu, $this);
+                $caixa->addMovimento(3, $this['valor'], $data, $hora, null, $usu, $this);
             } else {
                 throw new OperacaoNaoPermitidaParaCaixaFechadoException('Esse operação não é permitida para caixa fechado');
             }

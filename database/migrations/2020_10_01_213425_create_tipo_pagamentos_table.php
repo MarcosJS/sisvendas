@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateCatMovCaixasTable extends Migration
+class CreateTipoPagamentosTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,10 @@ class CreateCatMovCaixasTable extends Migration
      */
     public function up()
     {
-        Schema::create('cat_mov_caixas', function (Blueprint $table) {
+        Schema::create('tipo_pagamentos', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
-            $table->string('nome');
-
-            $table->integer('tipo_mov_caixa_id')->unsigned();
-            $table->foreign('tipo_mov_caixa_id')->references('id')->on('tipo_mov_caixas');
+            $table->string('nome', 30);
         });
     }
 
@@ -30,6 +27,6 @@ class CreateCatMovCaixasTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('cat_mov_caixas');
+        Schema::dropIfExists('tipo_pagamentos');
     }
 }

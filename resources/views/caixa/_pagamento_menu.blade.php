@@ -14,7 +14,7 @@
         <button class="ml-1 mb-1 pt-3 pb-3 nav-item nav-link btnformout shadow" data-toggle="modal" data-target="#formvale">
            <b>VALE</b>
         </button>
-        <button class="ml-1 mb-1 pt-3 pb-3 nav-item nav-link btnformout shadow" data-toggle="modal" data-target="#formtranferencia">
+        <button class="ml-1 mb-1 pt-3 pb-3 nav-item nav-link btnformout shadow" data-toggle="modal" data-target="#formtransferencia">
            <b>TRANSFERENCIA</b>
         </button>
         <a class="ml-1 mb-1 pt-3 pb-3 nav-item nav-link btnformout shadow" href="{{route('caixa')}}">

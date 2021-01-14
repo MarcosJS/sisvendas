@@ -9,20 +9,26 @@ use Illuminate\Http\Request;
 class CaixaControllerAbrir extends Controller
 {
     public function abrir() {
-        $erro = null;
-        $caixa = Caixa::first();
-        if ($caixa != null) {
-            if(!$caixa->aberto()) {
-                $caixa->abrir();
-                return redirect()->back();
+        try {
+            $erro = null;
+            $caixa = Session()->get('sistema')->caixa();
+            if ($caixa != null) {
+                if(!$caixa->aberto()) {
+                    $caixa->abrir();
+                    return redirect()->back();
+                }
+                $erro = ['abrir' => 'O caixa já esta aberto'];
+            } else {
+                $erro = ['abrir' => 'O caixa não foi inicializado no banco de dados'];
             }
-            $erro = ['abrir' => 'O caixa já esta aberto'];
-        } else {
-            $erro = ['abrir' => 'O caixa não foi inicializado no banco de dados'];
-        }
 
-        return redirect()
-            ->back()
-            ->withErrors($erro);
+            return redirect()
+                ->back()
+                ->withErrors($erro);
+        } catch (\Exception $exception) {
+            redirect()
+                ->back()
+                ->withErrors(['erro' =>$exception->getMessage()]);
+        }
     }
 }

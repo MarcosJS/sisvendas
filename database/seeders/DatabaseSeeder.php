@@ -30,5 +30,6 @@ class DatabaseSeeder extends Seeder
         $this->call(CaixaSeeder::class);
         $this->call(TipoMovCredClienteSeeder::class);
         $this->call(CatMovCredClienteSeeder::class);
+        $this->call(TipoPagamentoSeeder::class);
     }
 }

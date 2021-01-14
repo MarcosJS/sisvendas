@@ -17,6 +17,7 @@ use App\Http\Controllers\Colaborador\ColaboradorControllerAtualizar;
 use App\Http\Controllers\Colaborador\MovimentoSalarioControllerDoColaborador;
 use App\Http\Controllers\Colaborador\MovimentoSalarioControllerExcluir;
 use App\Http\Controllers\Colaborador\MovimentoSalarioControllerFiltrar;
+use App\Http\Controllers\Colaborador\MovimentoSalarioControllerImprimir;
 use App\Http\Controllers\Colaborador\MovimentoSalarioControllerLancar;
 use App\Http\Controllers\Colaborador\MovimentoSalarioControllerTodos;
 use App\Http\Controllers\Material\MaterialControllerNovo;
@@ -32,6 +33,7 @@ use App\Http\Controllers\Pagamento\ContasAReceberControllerAcessar;
 use App\Http\Controllers\Pagamento\PagamentoControllerExcluir;
 use App\Http\Controllers\Pagamento\PagamentoControllerRegistrarCheque;
 use App\Http\Controllers\Pagamento\PagamentoControllerRegistrarDinheiro;
+use App\Http\Controllers\Pagamento\PagamentoControllerRegistrarTransferencia;
 use App\Http\Controllers\Pagamento\PagamentoControllerRegistrarVale;
 use App\Http\Controllers\Pagamento\ValeControllerExcluir;
 use App\Http\Controllers\Produto\Composicao\ComposicaoControllerAdicionarItem;
@@ -136,10 +138,10 @@ Route::middleware(['auth'])->group(function () {
     Route::get('colaborador/editar/{id}', [ColaboradorControllerEditar::class, 'editar'])->name('editarcolaborador');
     Route::post('colaborador/atualizar/{id}', [ColaboradorControllerAtualizar::class, 'atualizar'])->name('atualizarcolaborador');
     Route::post('colaborador/lancarmovimentosalario/{id}', [MovimentoSalarioControllerLancar::class, 'lancar'])->name('lancarmovimentopagamento');
-    Route::get('colaborador/movimentosdocolaborador/{id}', [MovimentoSalarioControllerDoColaborador::class, 'obterDo'])->name('movimentosdocolaborador');
     Route::get('colaborador/movimentosdesalario', [MovimentoSalarioControllerTodos::class, 'obterTodos'])->name('movimentosdesalario');
     Route::post('colaborador/movimentossalario/filtrar', [MovimentoSalarioControllerFiltrar::class, 'filtrar'])->name('filtrarmovimentossalario');
     Route::get('colaborador/excluirmovimentosalario/{id}', [MovimentoSalarioControllerExcluir::class, 'excluir'])->name('excluirmovimentosalario');
+    Route::get('colaborador/movimentosdesalario/imprimir', [MovimentoSalarioControllerImprimir::class, 'imprimir'])->name('imprimirmovimentosdesalario');
 
     Route::get('materiais', [MateriaPrimaControllerTodos::class, 'obterTodos'])->name('materiais');
     Route::get('material/acessar/{id}', [MateriaPrimaControllerAcessar::class, 'acessar'])->name('dadosdomaterial');
@@ -184,6 +186,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('venda/apagardadossecaovenda', [VendaControllerApagarDadosSecao::class, 'apagarDados '])->name('apagardadossecaovenda');
 
     Route::post('pagamentos/registrarcheque', [PagamentoControllerRegistrarCheque::class, 'registrar'])->name('registrarcheque');
+    Route::post('pagamentos/registrartransferencia', [PagamentoControllerRegistrarTransferencia::class, 'registrar'])->name('registrartransferencia');
     Route::post('pagamentos/registrardinheiro', [PagamentoControllerRegistrarDinheiro::class, 'registrar'])->name('registrardinheiro');
     Route::post('pagamentos/registrarvale', [PagamentoControllerRegistrarVale::class, 'registrar'])->name('registrarvale');
     Route::get('pagamentos/excluir/{id}', [PagamentoControllerExcluir::class, 'excluir'])->name('excluirpagamento');

@@ -10,16 +10,17 @@ class CatMovCaixaSeeder extends Seeder
 {
     public function run()
     {
-        $this->newCatMovCaixa('SUPRIMENTO');
-        $this->newCatMovCaixa('SANGRIA');
-        $this->newCatMovCaixa('RECEBIMENTO');
-        $this->newCatMovCaixa('ESTORNO');
-        $this->newCatMovCaixa('DEVOLUCAO');
+        $this->newCatMovCaixa('SUPRIMENTO', 1);
+        $this->newCatMovCaixa('SANGRIA', 2);
+        $this->newCatMovCaixa('RECEBIMENTO', 1);
+        $this->newCatMovCaixa('ESTORNO', 2);
+        $this->newCatMovCaixa('DEVOLUCAO', 2);
     }
 
-    private function newCatMovCaixa($nome) {
-        $tipo = new CatMovCaixa();
-        $tipo->nome = $nome;
-        $tipo->save();
+    private function newCatMovCaixa($nome, $tipo) {
+        $cat = new CatMovCaixa();
+        $cat->nome = $nome;
+        $cat->tipoMovCaixa()->associate($tipo);
+        $cat->save();
     }
 }

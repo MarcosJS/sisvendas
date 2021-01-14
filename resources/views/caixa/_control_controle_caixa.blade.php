@@ -5,33 +5,31 @@
             <div class="col-sm align-self-center">
                 <form class="form-inline" action="{{route('filtrarcontroledecaixa')}}" method="post">
                     @csrf
-                    <label class="mr-sm-2" for="tipo">Tipo</label>
-                    <select class="custom-select-sm mr-sm-2" id="tipo" name="tipo">
-                        <option selected value="">TODOS</option>
-                        <option value="1">ENTRADA</option>
-                        <option value="2">SAIDA</option>
-                    </select>
-
-                    <label class="mr-sm-2" for="categoria">Categoria</label>
-                    <select class="custom-select-sm mr-sm-2" id="categoria" name="categoria">
-                        <option selected value="">TODOS</option>
-                        <option value="1">SUPRIMENTO</option>
-                        <option value="2">SANGRIA</option>
-                        <option value="3">RECEBIMENTO</option>
-                        <option value="4">ESTORNO</option>
-                        <option value="5">DEVOLUCAO</option>
-                    </select>
-
-                    <label class="mr-sm-2" for="meio">Meio</label>
-                    <select class="custom-select-sm mr-sm-2" id="meio" name="meio">
-                        <option selected value="">TODOS</option>
-                        <option value="DINHEIRO">DINHEIRO</option>
-                        <option value="CHEQUE">CHEQUE</option>
-                        <option value="TRANSFERENCIA">TRANSFERENCIA</option>
-                    </select>
+                    <input type="text" class="form-control-sm text-primary mr-sm-2 col-sm-1" name="movimento" placeholder="Cod. Movimento" aria-label="Pesquisar por..." aria-describedby="basic-addon2">
 
                     <label class="mr-sm-2" for="turno">Turno</label>
-                    <input type="text" id="turno" class="form-control-sm" name="turno" value="@if($turno != null){{$turno->id}}@endif">
+                    <input type="text" id="turno" class="form-control-sm  col-sm-1" name="turno" value="@if($turno != null){{$turno->id}}@endif">
+
+                    <select class="custom-select custom-select-sm mr-sm-2" id="tipo" name="tipo" aria-label="tipo">
+                        <option selected value="">TIPO</option>
+                        @foreach($tipoMovimento as $tipoMov)
+                            <option value="{{$tipoMov->id}}">{{$tipoMov->nome}}</option>
+                        @endforeach
+                    </select>
+
+                    <select class="custom-select custom-select-sm mr-sm-2" id="categoria" name="categoria" aria-label="categoria">
+                        <option selected value="">CATEGORIA</option>
+                        @foreach($catMovimento as $catMov)
+                            <option value="{{$catMov->id}}">{{$catMov->nome}}</option>
+                        @endforeach
+                    </select>
+
+                    <select class="custom-select custom-select-sm mr-sm-2" id="meio" name="meio" aria-label="meio">
+                        <option selected value="">MEIO</option>
+                        @foreach($tipoPagamento as $tipoPag)
+                            <option value="{{$tipoPag->id}}">{{$tipoPag->nome}}</option>
+                        @endforeach
+                    </select>
 
                     <label for="dt_inicio">Início</label>
                     <input type="date" class="form-control-sm mr-sm-2" id="dt_inicio" name="dt_inicio">
@@ -51,7 +49,7 @@
                 <h4>Movimentos</h4>
             </div>
             <div class="col">
-                <input type="text" class="form-control-sm text-primary" placeholder="Pesquisar por..." aria-label="Pesquisar por..." aria-describedby="basic-addon2">
+
             </div>
         </div>
     </div>

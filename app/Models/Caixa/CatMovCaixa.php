@@ -23,4 +23,8 @@ class CatMovCaixa extends Model
     public function movimentoCaixa() {
         return $this->hasMany('App\Models\Caixa\MovimentoCaixa');
     }
+
+    public function tipoMovCaixa() {
+        return $this->belongsTo('App\Models\Caixa\TipoMovCaixa');
+    }
 }

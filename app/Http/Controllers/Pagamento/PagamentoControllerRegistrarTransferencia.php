@@ -3,45 +3,34 @@
 namespace App\Http\Controllers\Pagamento;
 
 use App\Http\Controllers\Controller;
-use App\Models\Caixa\Caixa;
-use App\Models\Pagamento\Cheque;
-use App\Models\Pagamento\Emitente;
 use App\Models\Pagamento\Pagamento;
+use App\Models\Pagamento\Transferencia;
 use App\Models\Venda;
-use App\Validator\ChequeValidator;
-use App\Validator\EmitenteValidator;
+use App\Validator\TransferenciaValidator;
 use App\Validator\ValidationException;
 use Illuminate\Http\Request;
 
-class PagamentoControllerRegistrarCheque extends Controller
+class PagamentoControllerRegistrarTransferencia extends Controller
 {
     public function registrar(Request $request) {
         try {
-            ChequeValidator::validate($request->all());
-            EmitenteValidator::validate($request->all());
+            TransferenciaValidator::validate($request->all());
 
             $venda = Venda::find($request->session()->get('venda_id'));
 
             $pagamento = new Pagamento();
             //$pagamento->tipo = 'CHEQUE';
-            $pagamento->valor = $request->valor;
+            $pagamento['valor'] = $request['valor'];
             date_default_timezone_set('America/Recife');
-            $pagamento->dtpagamento = date("Y-m-d");
+            $pagamento['dtpagamento'] = date("Y-m-d");
+            $pagamento->tipoPagamento()->associate(3);
             $pagamento->venda()->associate($venda);
-            $pagamento->tipoPagamento()->associate(2);
             $pagamento->save();
 
-            //$caixa = Session()->get('sistema')->caixa();
-            //$pagamento->concluir($caixa);
-
-            $cheque = new Cheque();
-            $cheque->fill($request->all());
-            $cheque->pagamento()->associate($pagamento);
-            $cheque->save();
-
-            $emitente = new Emitente();
-            $emitente->fill($request->all());
-            $cheque->emitente()->save($emitente);
+            $transferencia = new Transferencia();
+            $transferencia->fill($request->all());
+            $transferencia->pagamento()->associate($pagamento);
+            $transferencia->save();
 
             return redirect()->back();
 
@@ -50,6 +39,11 @@ class PagamentoControllerRegistrarCheque extends Controller
             return redirect()
                 ->back()
                 ->withErrors($exception->getValidator())
+                ->withInput();
+        } catch (\Exception $exception) {
+            return redirect()
+                ->back()
+                ->withErrors(['erro' => $exception->getMessage()])
                 ->withInput();
         }
 

@@ -56,6 +56,7 @@
 
     @include('caixa._modal_desconto_caixa')
     @include('pagamentos.form_cheque')
+    @include('pagamentos.form_transferencia')
     @include('pagamentos.form_dinheiro')
     @include('pagamentos.form_vale')
 @endsection

@@ -16,10 +16,10 @@
             <tr>
                 <th>Cod. Venda</th>
                 <th>Data da Venda</th>
-                <th>Total</th>
-                <th>Desconto R$</th>
-                <th>Credito do Cliente</th>
-                <th>Líquido</th>
+                <th class="text-right">Total</th>
+                <th class="text-right">Desconto R$</th>
+                <th class="text-right">Credito do Cliente</th>
+                <th class="text-right">Líquido</th>
                 <th class="text-center">Status</th>
             </tr>
 
@@ -27,10 +27,10 @@
                 <tr class="linhatabelavendas">
                     <td class="col_venda_id">{{$v->id}}</td>
                     <td>{{date('d/m/Y', strtotime($v->dtvenda))}}</td>
-                    <td>{{$v->totalprodutos}}</td>
-                    <td>{{$v->descCifra()}}</td>
-                    <td>{{$v['creditoaplicado']}}</td>
-                    <td> {{$v->totalliq}}</td>
+                    <td class="text-right">{{number_format($v->totalprodutos,2, ',', '.')}}</td>
+                    <td class="text-right">{{number_format($v->descCifra(),2, ',', '.')}}</td>
+                    <td class="text-right">{{number_format($v['creditoaplicado'],2, ',', '.')}}</td>
+                    <td class="text-right"> {{number_format($v->totalliq,2, ',', '.')}}</td>
                     @php
                         $badge = '';
                     @endphp

@@ -57,7 +57,7 @@ class FinalizarVendaValidator
             }
 
             if ($venda->cliente == null && $venda->nomecliente == null) {
-                $validator->errors()->add('cliente_id', 'Nenhuma informação de cliente foi vinculada a venda');
+                $validator->errors()->add('cliente_id', 'Nenhuma informação de cliente foi vinculada a venda. Retorne aos itens.');
             }
         }
 

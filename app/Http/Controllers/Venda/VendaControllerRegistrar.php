@@ -43,6 +43,13 @@ class VendaControllerRegistrar extends Controller
                 $credito->save();
             }
 
+            /*Consolidando pagamentos*/
+            $pagamentos = $venda->pagamentos;
+            $caixa = Session()->get('sistema')->caixa();
+            foreach ($pagamentos as $pagamento) {
+                $pagamento->concluir($caixa);
+            }
+
             /*Alterando o status da venda e apagando a sessao*/
             $status = StatusVenda::find(2);
             $venda->statusVenda()->associate($status);
@@ -54,10 +61,14 @@ class VendaControllerRegistrar extends Controller
                 ->with(['success' => 'Venda finalizada com sucesso!', 'venda_id' => $venda->id]);
 
         } catch (ValidationException $exception) {
-
             return redirect()
                 ->back()
                 ->withErrors($exception->getValidator())
+                ->withInput();
+        } catch (\Exception $exception) {
+            return redirect()
+                ->back()
+                ->withErrors(['erro' => $exception->getMessage()])
                 ->withInput();
         }
     }

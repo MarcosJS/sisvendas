@@ -14,19 +14,26 @@ class CaixaControllerRealizarSangria extends Controller
     public function realizarSangria(Request $request) {
         try {
             MovimentoCaixaValidator::validate($request->all());
-            $caixa = Caixa::first();
+            $caixa = Session()->get('sistema')->caixa();
             if ($caixa != null && $caixa->aberto()) {
                 date_default_timezone_set('America/Recife');
                 $data = date("Y-m-d");
                 $hora = date("H:i:s");
-                $caixa->addMovimento('SAIDA', 'SANGRIA', -$request['sangria'], $data, $hora, $request['observacao'], Auth::id());
+                $caixa->addMovimento(2, -$request['sangria'], $data, $hora, $request['observacao'], Auth::id());
+                return redirect()->back();
+            } else {
+                throw new \Exception('O Caixa precisa estar aberto para realizar esta operação');
             }
-            return redirect()->back();
 
         } catch (ValidationException $exception) {
             return redirect()
                 ->back()
                 ->withErrors($exception->getValidator())
+                ->withInput();
+        } catch (\Exception $exception) {
+            return redirect()
+                ->back()
+                ->withErrors(['erro' => $exception->getMessage()])
                 ->withInput();
         }
     }

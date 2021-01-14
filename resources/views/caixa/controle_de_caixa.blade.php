@@ -9,9 +9,8 @@
 @endsection
 
 @section('conteudo_view')
-
     <div class="row mt-5 pt-4">
-
+        @include('caixa._errors')
         <table id="tabelamovimentos" class="table table-striped table-sm table-hover">
             <tr>
                 <th>Cod.</th>
@@ -52,8 +51,8 @@
                     <td>@if($m->observacao != null)
                             <span title="{{$m->observacao}}">{{substr($m->observacao, 0, 25)}}</span>
                         @else Inexistente @endif</td>
-                    <td class="text-right @if($m->tipoMovCaixa->id == 1) text-success @else text-danger @endif">{{$m->valor}}</td>
-                    <td class="text-center">@if($m->pagamento != null) <span class="badge badge-info">{{$m->pagamento->tipo}}</span>@else Inexistente @endif</td>
+                    <td class="text-right @if($m->tipoMovCaixa->id == 1) text-success @else text-danger @endif">{{number_format($m->valor,2, ',', '.')}}</td>
+                    <td class="text-center">@if($m->pagamento != null) <span class="badge badge-info">{{$m->pagamento->tipoPagamento->nome}}</span>@else Inexistente @endif</td>
                  </tr>
             @endforeach
         </table>

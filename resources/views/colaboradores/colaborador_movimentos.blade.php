@@ -22,7 +22,7 @@
             <th>Observação</th>
             <th class="text-center">Movimento de Caixa</th>
             <th class="text-right">Valor</th>
-            <th></th>
+            <th class="text-center"><a class="btn-sm btn-outline-primary" href="{{route('imprimirmovimentosdesalario')}}" role="button">Exportar</a></th>
         </tr>
 
         @foreach($movimentos as $m)
@@ -55,7 +55,7 @@
                         <span title="{{$m->observacao}}">{{substr($m->observacao, 0, 25)}}</span>
                     @else Inexistente @endif</td>
                 <td class="text-center">@if($m->movimentoCaixa != null) <span class="badge badge-info">{{$m->movimentoCaixa->tipoMovCaixa->nome}}</span>@else Inexistente @endif</td>
-                <td class="text-right @if($m->tipoMovSalario->id == 1) text-success @else text-danger @endif">{{$m->valor}}</td>
+                <td class="text-right @if($m->tipoMovSalario->id == 1) text-success @else text-danger @endif">{{number_format($m->valor,2, ',', '.')}}</td>
                 <td class="text-center"><a class="badge-danger badge" href="{{route('excluirmovimentosalario', $m->id)}}">Remover</a></td>
             </tr>
         @endforeach

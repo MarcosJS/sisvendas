@@ -11,25 +11,25 @@
 @section('conteudo_view')
 
     <div class="row mt-5 pt-4">
-
-        <table id="tabelamovimentos" class="table table-striped table-sm table-hover">
+        @include('caixa._errors')
+        <table id="tabelavales" class="table table-striped table-sm table-hoverr">
             <tr>
                 <th>Cod.</th>
                 <th>Lançamento</th>
-                <th>Hora</th>
                 <th>Vencimento</th>
                 <th class="text-right">Valor</th>
                 <th>Cliente</th>
+                <th></th>
             </tr>
 
             @foreach($vales as $v)
-                <tr class="linhatabelamovimentos">
-                    <td class="col_movimento_id">{{$v->id}}</td>
+                <tr class="linhatabelavales">
+                    <td class="col_vale_id">{{$v->id}}</td>
                     <td>{{date('d/m/Y', strtotime($v->dtlancamento))}}</td>
-                    <td>à incluir</td>
-                    <td >{{date('d/m/Y', strtotime($v->dtvencimento))}}</span></td>
-                    <td class="text-right">{{$v->valor}}</td>
+                    <td>{{date('d/m/Y', strtotime($v->dtvencimento))}}</span></td>
+                    <td class="text-right">{{number_format($v->valor,2, ',', '.')}}</td>
                     <td>{{$v->venda->cliente->nome}}</td>
+                    <td><a class="badge badge-info" href="#">Quitar</a></td>
                  </tr>
             @endforeach
         </table>

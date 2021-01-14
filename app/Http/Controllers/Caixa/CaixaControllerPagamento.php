@@ -14,7 +14,7 @@ class CaixaControllerPagamento extends Controller
 {public function pagamento(Request $request) {
     try {
         PagamentoValidator::validate($request->session()->all());
-        $caixa = Caixa::first();
+        $caixa = Session()->get('sistema')->caixa();
         if ($caixa == null) {
             $caixa = new Caixa();
             $caixa->save();

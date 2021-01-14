@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Models\Caixa\Caixa;
+use App\Models\Colaborador\Colaborador;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -70,7 +71,15 @@ class Sistema extends Model
         $novaCompetencia->save();
         $novaCompetencia = Competencia::all()->sortByDesc('id')->first();
 
+        $antigaCompetencia = $this['competencia'];
         $this['competencia'] = $novaCompetencia;
+
+        $colaboradores = Colaborador::all();
+        foreach ($colaboradores as $colaborador) {
+            if($colaborador->saldoSalario($antigaCompetencia) < 0) {
+                $colaborador->addMovimentoSalario(3, $colaborador->saldoSalario($antigaCompetencia), $data, $this['competencia']);
+            }
+        }
 
         return true;
     }

@@ -12,8 +12,19 @@ class MovimentoSalarioControllerTodos extends Controller
 {
     public function obterTodos () {
         try {
+            $pesquisa['colaborador'] = null;
+            $pesquisa['competencia'] = null;
+            $pesquisa['tipo'] = null;
+            $pesquisa['categoria'] = null;
+
+            if (Session()->has('pesquisaMovimentosSalario')) {
+                Session()->forget('pesquisaMovimentosSalario');
+            }
+            Session()->put('pesquisaMovimentosSalario', $pesquisa);
+
             return view('colaboradores.colaborador_movimentos', [
                 'colaborador' => null,
+                'pesquisa' => $pesquisa,
                 'movimentos' => MovimentoSalario::all(),
                 'total' => MovimentoSalario::all()->sum('valor'),
                 'competencias' => Competencia::all(),

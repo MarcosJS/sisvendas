@@ -16,14 +16,16 @@ class CreatePagamentosTable extends Migration
         Schema::create('pagamentos', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
-            $table->string('tipo', 20);
             $table->decimal('valor')->default(0);
             $table->date('dtpagamento')->nullable();
+
+            $table->integer('tipo_pagamento_id')->unsigned();
+            $table->foreign('tipo_pagamento_id')->references('id')->on('tipo_pagamentos');
             $table->integer('status_pagamento_id')->unsigned()->default(1);
-            $table->integer('venda_id')->unsigned();
-            $table->integer('vale_id')->unsigned()->nullable();
             $table->foreign('status_pagamento_id')->references('id')->on('status_pagamentos');
+            $table->integer('venda_id')->unsigned();
             $table->foreign('venda_id')->references('id')->on('vendas');
+            $table->integer('vale_id')->unsigned()->nullable();
             $table->foreign('vale_id')->references('id')->on('vales');
         });
     }

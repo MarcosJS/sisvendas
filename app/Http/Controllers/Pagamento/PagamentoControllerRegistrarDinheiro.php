@@ -19,14 +19,15 @@ class PagamentoControllerRegistrarDinheiro extends Controller
                 $venda = Venda::find(Session()->get('venda_id'));
 
                 $pagamento = new Pagamento();
-                $pagamento->tipo = 'DINHEIRO';
+                //$pagamento->tipo = 'DINHEIRO';
                 $pagamento->valor = $request['dinheiro'];
                 date_default_timezone_set('America/Recife');
                 $pagamento->dtpagamento = date("Y-m-d");
+                $pagamento->tipoPagamento()->associate(1);
                 $pagamento->venda()->associate($venda);
-
-                $caixa = Caixa::first();
-                $pagamento->concluir($caixa);
+                $pagamento->save();
+                //$caixa = Session()->get('sistema')->caixa();
+                //$pagamento->concluir($caixa);
 
                 return redirect()->back();
             } catch (OCaixaNaoFoiInicializadoException $exception) {

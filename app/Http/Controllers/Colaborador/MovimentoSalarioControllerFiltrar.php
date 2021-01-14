@@ -9,6 +9,7 @@ use App\Models\Colaborador\MovimentoSalario;
 use App\Models\Colaborador\TipoMovSalario;
 use App\Models\Competencia;
 use Illuminate\Http\Request;
+use PDF;
 
 class MovimentoSalarioControllerFiltrar extends Controller
 {
@@ -21,6 +22,11 @@ class MovimentoSalarioControllerFiltrar extends Controller
             $pesquisa['competencia'] = $request['competencia'];
             $pesquisa['tipo'] = $request['tipo'];
             $pesquisa['categoria'] = $request['categoria'];
+
+            if (Session()->has('pesquisaMovimentosSalario')) {
+                Session()->forget('pesquisaMovimentosSalario');
+            }
+            Session()->put('pesquisaMovimentosSalario', $pesquisa);
 
             $movimentos = $this->consulta($request->all());
 
@@ -50,7 +56,7 @@ class MovimentoSalarioControllerFiltrar extends Controller
         }
     }
 
-    private function consulta ($dados) {
+    public static function consulta ($dados) {
         $movimentos = MovimentoSalario::all();
 
         if ($dados['colaborador'] != null) {

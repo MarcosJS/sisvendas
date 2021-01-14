@@ -2,6 +2,7 @@
 
 namespace App\Models\Caixa;
 
+use App\Exceptions\ObjetoNaoEncontradoException;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Auth;
@@ -15,7 +16,7 @@ class Caixa extends Model
 
     public function aberto() {
         $resultado = false;
-        if($this->turnoAtual != null) {
+        if($this['turnoAtual'] != null) {
             $resultado = true;
         }
         return $resultado;
@@ -90,18 +91,25 @@ class Caixa extends Model
         return $saldo;
     }
 
-    public function addMovimento($tipo, $categoria, $valor, $data, $hora, $observacao, $usuario, $recebimento = null) {
+    public function addMovimento($categoria, $valor, $data, $hora, $observacao, $usuario, $recebimento = null) {
         $movimento = new MovimentoCaixa();
-        $movimento['valor'] = $valor;
         $movimento['dt_movimento'] = $data;
         $movimento['hr_movimento'] = $hora;
         $movimento['observacao'] = $observacao;
 
-        $tipo = TipoMovCaixa::find($tipo);
-        $movimento->tipoMovCaixa()->associate($tipo);
-
         $cat = CatMovCaixa::find($categoria);
-        $movimento->catMovCaixa()->associate($cat);
+        if ($cat != null) {
+            $movimento->catMovCaixa()->associate($cat);
+            $movimento->tipoMovCaixa()->associate($cat->tipoMovCaixa);
+
+            if ($cat->tipoMovCaixa->id == 1) {
+                $movimento['valor'] = $valor;
+            } else {
+                $movimento['valor'] = -$valor;
+            }
+        } else {
+            throw new ObjetoNaoEncontradoException('Objeto Categoria ['.gettype($cat).']=>id '.$categoria.'. não encontrado no banco de dados.');
+        }
 
         $movimento->usuario()->associate($usuario);
 

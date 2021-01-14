@@ -49,6 +49,9 @@ class Colaborador extends Model
         return $this->hasMany('App\Models\Colaborador\MovimentoSalario');
     }
 
+    public function saldoSalario($competencia) {
+        return $this->movimentoSalarios()->where('competencia_id', '=', $competencia['id'])->sum('valor');
+    }
     public function funcao() {
         return $this->belongsTo('App\Models\Funcao');
     }
