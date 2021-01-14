@@ -3,8 +3,11 @@
 use App\Http\Controllers\Caixa\CaixaControllerAbrir;
 use App\Http\Controllers\Caixa\CaixaControllerAcessar;
 use App\Http\Controllers\Caixa\CaixaControllerAdicionarSuprimento;
+use App\Http\Controllers\Caixa\CaixaControllerCancelarQuitacao;
 use App\Http\Controllers\Caixa\CaixaControllerFechar;
 use App\Http\Controllers\Caixa\CaixaControllerPagamento;
+use App\Http\Controllers\Caixa\CaixaControllerQuitacaoVale;
+use App\Http\Controllers\Caixa\CaixaControllerQuitarVale;
 use App\Http\Controllers\Caixa\CaixaControllerRealizarSangria;
 use App\Http\Controllers\Caixa\ControleDeCaixaContollerFiltrar;
 use App\Http\Controllers\Caixa\ControleDeCaixaControllerAcessar;
@@ -197,6 +200,9 @@ Route::middleware(['auth'])->group(function () {
     Route::get('caixa', [CaixaControllerAcessar::class, 'acessar'])->name('caixa');
     Route::get('caixa/controledecaixa', [ControleDeCaixaControllerAcessar::class, 'acessar'])->name('controledecaixa');
     Route::get('caixa/pagamento', [CaixaControllerPagamento::class, 'pagamento'])->name('pagamento');
+    Route::get('caixa/quitacaovale/{id}', [CaixaControllerQuitacaoVale::class, 'quitacao'])->name('quitacaovale');
+    Route::get('caixa/cancelarquitacao/{id}', [CaixaControllerCancelarQuitacao::class, 'cancelar'])->name('cancelarquitacao');
+    Route::get('caixa/quitarvale/{id}', [CaixaControllerQuitarVale::class, 'quitar'])->name('quitarvale');
     Route::get('caixa/abrir', [CaixaControllerAbrir::class, 'abrir'])->name('abrircaixa');
     Route::get('caixa/fechar', [CaixaControllerFechar::class, 'fechar'])->name('fecharcaixa');
     Route::post('caixa/realizarsangria', [CaixaControllerRealizarSangria::class, 'realizarSangria'])->name('realizar_sangria');

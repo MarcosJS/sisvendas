@@ -49,6 +49,10 @@ class Cliente extends Model
         return $this->hasMany('App\Models\Cliente\MovimentoCreditoCliente');
     }
 
+    public function vales() {
+        return $this->hasMany('App\Models\Pagamento\Vale');
+    }
+
     public function saldoCredito() {
         $saldo = 0;
         foreach ($this->movimentoCreditos as $mov) {

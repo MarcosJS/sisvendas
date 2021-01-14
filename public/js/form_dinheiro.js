@@ -2,7 +2,7 @@
 
 let dinheiro = document.getElementById('dinheiro'),
     valorDinheiro = document.getElementById('valor_dinheiro'),
-    aReceber = document.getElementById('areceber_venda'),
+    aReceber = document.getElementById('areceber'),
     recebido = document.getElementById('recebido'),
     troco = document.getElementById('troco'),
     novoValorAReceberVenda = document.getElementById('novo_valor_receber_venda');

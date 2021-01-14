@@ -134,6 +134,9 @@
                     </div>
                     <input class="valor_pagamento" type="hidden" name="valorcompra">
                     <input type="hidden" value="1" name="pagamento">
+                    @if($vale != null)
+                        <input id="vale" type="hidden" value="{{$vale->id}}" name="vale">
+                    @endif
 
                 </div>
                 <div class="modal-footer">

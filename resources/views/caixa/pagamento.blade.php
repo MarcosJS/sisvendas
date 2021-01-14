@@ -50,7 +50,7 @@
             </div>
 
             @include('caixa._itens_caixa')
-            <input id="areceber_venda" type="hidden" value="{{$venda->aReceber()}}">
+            <input id="areceber" type="hidden" value="{{$venda->aReceber()}}">
         </div>
     </div>
 

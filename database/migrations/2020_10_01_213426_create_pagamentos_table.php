@@ -23,7 +23,7 @@ class CreatePagamentosTable extends Migration
             $table->foreign('tipo_pagamento_id')->references('id')->on('tipo_pagamentos');
             $table->integer('status_pagamento_id')->unsigned()->default(1);
             $table->foreign('status_pagamento_id')->references('id')->on('status_pagamentos');
-            $table->integer('venda_id')->unsigned();
+            $table->integer('venda_id')->unsigned()->nullable();
             $table->foreign('venda_id')->references('id')->on('vendas');
             $table->integer('vale_id')->unsigned()->nullable();
             $table->foreign('vale_id')->references('id')->on('vales');

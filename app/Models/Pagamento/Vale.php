@@ -17,7 +17,11 @@ class Vale extends Model
         return $this->belongsTo('App\Models\Venda');
     }
 
-    public function pagamento() {
-        return $this->hasOne('App\Models\Pagamento\Pagamento');
+    public function pagamentos() {
+        return $this->hasMany('App\Models\Pagamento\Pagamento');
+    }
+
+    public function cliente () {
+        return $this->belongsTo('App\Models\Cliente\Cliente');
     }
 }

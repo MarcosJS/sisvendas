@@ -12,9 +12,7 @@ class PagamentoControllerExcluir extends Controller
         $pagamento = Pagamento::find($id);
         try {
             if($pagamento != null) {
-                $venda = $pagamento->venda;
                 $pagamento->delete();
-                $venda->save();
                 return redirect()->back();
             } else {
                 throw ValidationException::withMessages(['pagamento' => 'O Pagamento não existe']);

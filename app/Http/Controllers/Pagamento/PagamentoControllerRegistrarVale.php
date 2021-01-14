@@ -21,6 +21,7 @@ class PagamentoControllerRegistrarVale extends Controller
                     date_default_timezone_set('America/Recife');
                     $vale['dtlancamento'] = date("Y-m-d");
                     $vale['dtvencimento'] = $request['dtvencimento'];
+                    $vale->cliente()->associate($venda->cliente);
                     $vale->venda()->associate($venda);
                     $vale->save();
 

@@ -40,7 +40,8 @@ class CaixaControllerPagamento extends Controller
             'venda' => $venda,
             'pagamentos' => $venda->pagamentos,
             'vales' => $venda->vales,
-            'excedente' => $excedente
+            'excedente' => $excedente,
+            'vale' => null
         ]);
 
     } catch (ValidationException $exception) {

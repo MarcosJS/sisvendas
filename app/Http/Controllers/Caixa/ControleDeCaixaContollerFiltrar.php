@@ -7,6 +7,7 @@ use App\Models\Caixa\Caixa;
 use App\Models\Caixa\CatMovCaixa;
 use App\Models\Caixa\MovimentoCaixa;
 use App\Models\Caixa\TipoMovCaixa;
+use App\Models\Caixa\Turno;
 use App\Models\Pagamento\TipoPagamento;
 use Illuminate\Http\Request;
 
@@ -14,7 +15,6 @@ class ControleDeCaixaContollerFiltrar extends Controller
 {
     public function filtrar (Request $request) {
         try {
-            //return $request->all();
             $movimentos = $this->consulta($request->all());
 
             $saldoAnterior = 0;
@@ -94,17 +94,17 @@ class ControleDeCaixaContollerFiltrar extends Controller
                 'tipoMovimento' => TipoMovCaixa::all(),
                 'catMovimento' => CatMovCaixa::all(),
                 'tipoPagamento' => TipoPagamento::all(),
-                'turno' => $caixa->turnos->where('id', '=', $caixa['turnoAtual'])->first(),
-                'movimentos' => $movimentos,
-                'saldoCaixa' => $saldoCaixa,
-                'saldoAnterior' => $saldoAnterior,
-                'saldoSaidas' => $saldoSaidas,
-                'saldoEntradas' => $saldoEntradas,
-                'quantSaidas' => $quantSaidas,
-                'quantEntradas' => $quantEntradas,
-                'dinheiro' => $dinheiro,
-                'cheque' => $cheque,
-                'transferencia' => $transferencia])
+                'turno' => Turno::where('id', '=', Session()->get('sistema')->caixa()['turnoAtual'])->first(),
+                'movimentos' => [],
+                'saldoCaixa' => 0,
+                'saldoAnterior' => 0,
+                'saldoSaidas' => 0,
+                'saldoEntradas' => 0,
+                'quantSaidas' => 0,
+                'quantEntradas' => 0,
+                'dinheiro' => 0,
+                'cheque' => 0,
+                'transferencia' => 0])
                 ->withErrors(['erro' => $exception->getMessage()]);
         }
     }

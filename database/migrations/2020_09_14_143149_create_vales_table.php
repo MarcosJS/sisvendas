@@ -21,8 +21,11 @@ class CreateValesTable extends Migration
             $table->date('dtvencimento');
             $table->date('dtquitacao')->nullable();
 
+            $table->integer('cliente_id')->unsigned()->nullable();
+            $table->foreign('cliente_id')->references('id')->on('clientes');
             $table->integer('venda_id')->unsigned();
             $table->foreign('venda_id')->references('id')->on('vendas')->cascadeOnUpdate()->cascadeOnDelete();
+
         });
     }
 

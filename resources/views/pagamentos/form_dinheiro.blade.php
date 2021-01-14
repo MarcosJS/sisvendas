@@ -12,26 +12,37 @@
                     <div class="row justify-content-center">
                         <div class="col-sm-12">
                             <table>
-                                <tr>
-                                    <td class="text-right"><b>Total da Venda R$:</b></td>
-                                    <td id="total_venda" class="text-right">{{number_format($venda->totalliq,2, '.', '')}}</td>
-                                </tr>
-                                <tr>
-                                    <td class="text-right"><b>A Receber R$:</b></td>
-                                    <td id="novo_valor_receber_venda" class="text-right">{{number_format($venda->aReceber(),2, '.', '')}}</td>
-                                </tr>
-                                <tr>
-                                    <td class="text-right"><label for="valor_dinheiro"><b>Entre com o valor em dinheiro R$:</b></label></td>
-                                    <td class="text-right"><input id="valor_dinheiro" class="form-control text-right p-0" value="0.00" type="text" name="valor_dinheiro"></td>
-                                </tr>
-                                <tr>
-                                    <td class="text-right"><label for="recebido"><b>Recebido R$:</b></label></td>
-                                    <td class="text-right"><input id="recebido" class="form-control text-right p-0" value="0.00" type="text" name="recebido"></td>
-                                </tr>
-                                <tr>
-                                    <td class="text-right"><b>Troco R$:</b></td>
-                                    <td id="troco" class="text-right text-success"><b>0.00</b></td>
-                                </tr>
+                                @if($venda != null)
+                                    <tr>
+                                        <td class="text-right"><b>Total da Venda R$:</b></td>
+                                        <td id="total_venda" class="text-right">{{number_format($venda->totalliq,2, ',', '.')}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="text-right"><b>A Receber R$:</b></td>
+                                        <td id="novo_valor_receber_venda" class="text-right">{{number_format($venda->aReceber(),2, ',', '.')}}</td>
+                                    </tr>
+                                @else
+                                    <tr>
+                                        <td class="text-right"><b>Total do Vale R$:</b></td>
+                                        <td id="total_vale" class="text-right">{{number_format($vale->valor,2, ',', '.')}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="text-right"><b>A Receber R$:</b></td>
+                                        <td id="novo_valor_receber_venda" class="text-right">{{number_format($vale->valor,2, ',', '.')}}</td>
+                                    </tr>
+                                @endif
+                                    <tr>
+                                        <td class="text-right"><label for="valor_dinheiro"><b>Entre com o valor em dinheiro R$:</b></label></td>
+                                        <td class="text-right"><input id="valor_dinheiro" class="form-control text-right p-0" value="0.00" type="text" name="valor_dinheiro"></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="text-right"><label for="recebido"><b>Recebido R$:</b></label></td>
+                                        <td class="text-right"><input id="recebido" class="form-control text-right p-0" value="0.00" type="text" name="recebido"></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="text-right"><b>Troco R$:</b></td>
+                                        <td id="troco" class="text-right text-success"><b>0.00</b></td>
+                                    </tr>
                             </table>
                         </div>
                     </div>
@@ -42,7 +53,9 @@
                 <form action="{{route('registrardinheiro')}}" method="post">
                     {{csrf_field()}}
                     <input id="dinheiro" type="hidden" value="0.00" name="dinheiro">
-
+                    @if($vale != null)
+                        <input id="vale" type="hidden" value="{{$vale->id}}" name="vale">
+                    @endif
                     <button type="submit" class="btn btn-success"><b>Registrar</b></button>
 
                 </form>

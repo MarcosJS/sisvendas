@@ -17,39 +17,48 @@ class PagamentoControllerRegistrarCheque extends Controller
 {
     public function registrar(Request $request) {
         try {
-            ChequeValidator::validate($request->all());
-            EmitenteValidator::validate($request->all());
+            if (Session()->has('venda_id') || $request['vale'] != null) {
+                ChequeValidator::validate($request->all());
+                EmitenteValidator::validate($request->all());
 
-            $venda = Venda::find($request->session()->get('venda_id'));
+                $pagamento = new Pagamento();
+                $pagamento['valor'] = $request['valor'];
+                date_default_timezone_set('America/Recife');
+                $pagamento->dtpagamento = date("Y-m-d");
 
-            $pagamento = new Pagamento();
-            //$pagamento->tipo = 'CHEQUE';
-            $pagamento->valor = $request->valor;
-            date_default_timezone_set('America/Recife');
-            $pagamento->dtpagamento = date("Y-m-d");
-            $pagamento->venda()->associate($venda);
-            $pagamento->tipoPagamento()->associate(2);
-            $pagamento->save();
+                if (Session()->has('venda_id')) {
+                    $venda = Venda::find($request->session()->get('venda_id'));
+                    $pagamento->venda()->associate($venda);
+                } else {
+                    $pagamento->vale()->associate($request['vale']);
+                }
 
-            //$caixa = Session()->get('sistema')->caixa();
-            //$pagamento->concluir($caixa);
+                $pagamento->tipoPagamento()->associate(2);
+                $pagamento->save();
 
-            $cheque = new Cheque();
-            $cheque->fill($request->all());
-            $cheque->pagamento()->associate($pagamento);
-            $cheque->save();
+                $cheque = new Cheque();
+                $cheque->fill($request->all());
+                $cheque->pagamento()->associate($pagamento);
+                $cheque->save();
 
-            $emitente = new Emitente();
-            $emitente->fill($request->all());
-            $cheque->emitente()->save($emitente);
+                $emitente = new Emitente();
+                $emitente->fill($request->all());
+                $cheque->emitente()->save($emitente);
 
-            return redirect()->back();
-
+                return redirect()->back();
+            } else {
+                throw new \Exception('Nenhuma venda ou vale foi informado!');
+            }
         } catch (ValidationException $exception) {
             $exception->getValidator()->errors()->add('pagamento', 'Erro na validação do pagamento');
             return redirect()
                 ->back()
                 ->withErrors($exception->getValidator())
+                ->withInput();
+        } catch (\Exception $exception) {
+            return redirect()
+                ->back()
+                ->withErrors(['erro' => $exception->getMessage()])
                 ->withInput();
         }
 

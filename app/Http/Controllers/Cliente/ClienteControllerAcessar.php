@@ -14,7 +14,7 @@ class ClienteControllerAcessar extends Controller
 
             $contasAReceber = [];
             foreach ($cliente->vendas as $venda) {
-                $vales = $venda->vales()->doesntHave('pagamento')->get();
+                $vales = $venda->vales()->doesntHave('pagamentos')->get();
                 foreach ($vales as $vale) {
                     array_push($contasAReceber, $vale);
                 }
