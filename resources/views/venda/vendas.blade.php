@@ -21,6 +21,7 @@
                 <th class="text-right">Credito do Cliente</th>
                 <th class="text-right">Líquido</th>
                 <th class="text-center">Status</th>
+                <th class="text-center"><a class="btn-sm btn-outline-primary" href="{{route('imprimirvendas')}}" role="button">Exportar</a></th>
             </tr>
 
             @foreach($vendas as $v)

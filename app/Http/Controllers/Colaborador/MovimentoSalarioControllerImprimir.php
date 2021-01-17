@@ -22,14 +22,14 @@ class MovimentoSalarioControllerImprimir extends Controller
                     $total += $mov['valor'];
                 }
 
-                return view('colaboradores.impressao.lista_movimentos', ['colaborador' => $colaborador, 'movimentos' => $movimentos, 'total' => $total,]);
+                //return view('colaboradores.impressao.lista_movimentos', ['colaborador' => $colaborador, 'movimentos' => $movimentos, 'total' => $total,]);
                 $pdf = PDF::loadView('colaboradores.impressao.lista_movimentos', [
                     'colaborador' => $colaborador,
                     'movimentos' => $movimentos,
                     'total' => $total,
                 ])->setOptions(['defaultFont' => 'arial']);
 
-                return $pdf->download('Movimentos_de_Salario.pdf');
+                return $pdf->stream('Movimentos_de_Salario.pdf');
             } else {
                 throw new \Exception('Não exitem argumentos de pesquisa para realizar a exportação');
             }

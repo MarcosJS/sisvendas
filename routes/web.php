@@ -78,6 +78,7 @@ use App\Http\Controllers\Venda\VendaControllerApagarDadosSecao;
 use App\Http\Controllers\Venda\VendaControllerAplicarDesconto;
 use App\Http\Controllers\Venda\VendaControllerAtivar;
 use App\Http\Controllers\Venda\VendaControllerDesvincularCliente;
+use App\Http\Controllers\Venda\VendaControllerImprimirVendas;
 use App\Http\Controllers\Venda\VendaControllerIncluirNomeCliente;
 use App\Http\Controllers\Venda\VendaControllerItens;
 use App\Http\Controllers\Venda\VendaControllerItensAdicionar;
@@ -187,6 +188,7 @@ Route::middleware(['auth'])->group(function () {
     Route::post('venda/aplicardesccifra', [VendaControllerAplicarDesconto::class, 'aplicarCifra'])->name('aplicardesccifra');
     Route::get('venda/registrar', [VendaControllerRegistrar::class, 'registrar'])->name('registrarvenda');
     Route::get('venda/apagardadossecaovenda', [VendaControllerApagarDadosSecao::class, 'apagarDados '])->name('apagardadossecaovenda');
+    Route::get('vendas/imprimir', [VendaControllerImprimirVendas::class, 'imprimir'])->name('imprimirvendas');
 
     Route::post('pagamentos/registrarcheque', [PagamentoControllerRegistrarCheque::class, 'registrar'])->name('registrarcheque');
     Route::post('pagamentos/registrartransferencia', [PagamentoControllerRegistrarTransferencia::class, 'registrar'])->name('registrartransferencia');

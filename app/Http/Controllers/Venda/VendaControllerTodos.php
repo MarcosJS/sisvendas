@@ -9,16 +9,17 @@ use Illuminate\Http\Request;
 class VendaControllerTodos extends Controller
 {
     public function obterTodos(Request $request) {
-        $venda = null;
+        try {
+            $vendas = Venda::all()->sortBy('id');
 
-        if($request['venda_id']){
-            $venda = Venda::find($request['venda_id']);
+            return view('venda.vendas', [
+                'success' => $request['success'],
+                'vendas' => $vendas]);
+        } catch (\Exception $exception) {
+            return redirect()
+                ->back()
+                ->withErrors(['erro' => $exception->getMessage()]);
         }
-        $vendas = Venda::all()->sortBy('id');
 
-        return view('venda.vendas', [
-            'success' => $request->success,
-            'venda' => $venda,
-            'vendas' => $vendas]);
     }
 }

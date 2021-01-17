@@ -5,10 +5,11 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <!--<link href="{{asset('css/div.css')}}" rel="stylesheet" type="text/css"/>
-    <link href="{{asset('css/app.css')}}" rel="stylesheet" type="text/css"/>
-    <link href="{{asset('css/master.css')}}" rel="stylesheet" type="text/css"/>-->
     <style>
+        @page {
+            margin: 100px 25px 50px 25px;
+        }
+
         body {
             margin: 0;
             font-family: "Nunito", sans-serif;
@@ -17,7 +18,23 @@
             line-height: 1.6;
             color: #212529;
             text-align: left;
-            background-color: #f8fafc;
+            /*background-color: #83a3c1;*/
+        }
+
+        header {
+            position: fixed;
+            top: -100px;
+            left: 0px;
+            right: 0px;
+            height: 50px;
+        }
+
+        footer {
+            position: fixed;
+            bottom: -50px;
+            left: 0px;
+            right: 0px;
+            height: 50px;
         }
         .text-left {
             text-align: left !important;
@@ -28,6 +45,7 @@
         .text-center {
             text-align: center !important;
         }
+
         table {
             border-collapse: collapse;
         }
@@ -211,15 +229,17 @@
         <header id="header" class="container">
             @yield('cabecalho')
         </header>
+        <footer id="footer" class="container">
+            @yield('rodape')
+        </footer>
 
         <div id="content" class="container">
             @yield('conteudo')
         </div>
 
-        <footer id="footer" class="container">
-            @yield('rodape')
-        </footer>
-
+    </div>
+    <div>
+        @yield('numpagina')
     </div>
 
 <!--<script src="{{asset('js/app.js')}}" type="text/javascript"></script>-->
