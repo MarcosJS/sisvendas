@@ -23,53 +23,23 @@
 
     <div class="row">
 
-        {{--@for($i = 1; $i <= count($grupos); $i++)
-            <table class="table table-striped table-sm">
-                <tr>
-                    <th class="id_colum">Cod.</th>
-                    <th class="text_center">Data</th>
-                    <th class="text_right">Total</th>
-                    <th class="text_right">Desconto</th>
-                    <th class="text_right">Credito do Cliente</th>
-                    <th class="text_right">Líquido</th>
-                    <th class="text_center">Status</th>
-                </tr>
-                @foreach($grupos[$i - 1] as $venda)
-                    <tr>
-                        <td>{{$venda->id}}</td>
-                        <td class="text_center">{{date('d/m/Y', strtotime($venda->dtvenda))}}</td>
-                        <td class="text_right">{{number_format($venda->totalprodutos,2, ',', '.')}}</td>
-                        <td class="text_right">{{number_format($venda->descCifra(),2, ',', '.')}}</td>
-                        <td class="text_right">{{number_format($venda['creditoaplicado'],2, ',', '.')}}</td>
-                        <td class="text_right"> {{number_format($venda->totalliq,2, ',', '.')}}</td>
-                        <td class="text_center"><span>{{$venda->statusVenda->nome}}</span></td>
-                    </tr>
-                @endforeach
-                @if($i < count($grupos))
-                    <!--<p style="page-break-after: always; margin: 0;"></p>-->
-                @endif
-            </table>
-        @endfor--}}
-
-        <table class="table table-striped table-sm">
+        <table style="width: 100%; border: 1px solid black">
             <tr>
-                <th class="id_colum">Cod.</th>
-                <th class="text_center">Data</th>
-                <th class="text_right">Total</th>
-                <th class="text_right">Desconto</th>
-                <th class="text_right">Credito do Cliente</th>
-                <th class="text_right">Líquido</th>
-                <th class="text_center">Status</th>
+                <th style="width: 8%;">Cod.</th>
+                <th style="width: 12%;" class="text_center">Data</th>
+                <th class="text_right td_vendas">Total</th>
+                <th class="text_right td_vendas">Desconto</th>
+                <th class="text_right td_vendas">Líquido</th>
+                <th style="width: 14%;" class="text_center">Status</th>
             </tr>
             @foreach($grupo as $venda)
                 <tr>
-                    <td>{{$venda->id}}</td>
-                    <td class="text_center">{{date('d/m/Y', strtotime($venda->dtvenda))}}</td>
-                    <td class="text_right">{{number_format($venda->totalprodutos,2, ',', '.')}}</td>
-                    <td class="text_right">{{number_format($venda->descCifra(),2, ',', '.')}}</td>
-                    <td class="text_right">{{number_format($venda['creditoaplicado'],2, ',', '.')}}</td>
-                    <td class="text_right"> {{number_format($venda->totalliq,2, ',', '.')}}</td>
-                    <td class="text_center"><span>{{$venda->statusVenda->nome}}</span></td>
+                    <td style="width: 8%;">{{$venda->id}}</td>
+                    <td style="width: 12%;" class="text_center">{{date('d/m/Y', strtotime($venda->dtvenda))}}</td>
+                    <td class="text_right td_vendas">{{number_format($venda->totalprodutos,2, ',', '.')}}</td>
+                    <td class="text_right td_vendas">{{number_format($venda->descCifra(),2, ',', '.')}}</td>
+                    <td class="text_right td_vendas"> {{number_format($venda->totalliq,2, ',', '.')}}</td>
+                    <td style="width: 14%;" class="text_center"><span>{{$venda->statusVenda->nome}}</span></td>
                 </tr>
             @endforeach
         </table>

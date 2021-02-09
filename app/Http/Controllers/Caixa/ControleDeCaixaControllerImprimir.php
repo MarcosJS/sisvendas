@@ -1,39 +1,37 @@
 <?php
 
-namespace App\Http\Controllers\Venda;
+namespace App\Http\Controllers\Caixa;
 
 use App\Http\Controllers\Controller;
-use App\Models\Venda;
-use App\Models\CustomPDF;
-use PDF;
+use Illuminate\Http\Request;
 
-class VendaControllerImprimirVendas extends Controller
+class ControleDeCaixaControllerImprimir extends Controller
 {
     public function imprimir () {
         //try {
-            $vendas = Venda::all()->sortBy('id');
+        $vendas = Venda::all()->sortBy('id');
 
-            $intervalo = 10;
+        $intervalo = 10;
 
-            $ciclo  = count($vendas) / $intervalo;
+        $ciclo  = count($vendas) / $intervalo;
 
-            if ($ciclo * $intervalo <= count($vendas)) {
-                $ciclo++;
-            }
+        if ($ciclo * $intervalo <= count($vendas)) {
+            $ciclo++;
+        }
 
-            $grupos = [];
+        $grupos = [];
 
-            for($j = 1; $j <= $ciclo; $j++) {
-                $linhas = [];
-                for ($i = $intervalo * $j - $intervalo; $i < count($vendas); $i++) {
-                    if ($i != 0 && $i % ($intervalo * $j) == 0) {
-                        break;
-                    }
-                    $linhas[] = $vendas[$i];
-
+        for($j = 1; $j <= $ciclo; $j++) {
+            $linhas = [];
+            for ($i = $intervalo * $j - $intervalo; $i < count($vendas); $i++) {
+                if ($i != 0 && $i % ($intervalo * $j) == 0) {
+                    break;
                 }
-                $grupos[] = $linhas;
+                $linhas[] = $vendas[$i];
+
             }
+            $grupos[] = $linhas;
+        }
 
         $paginasHtml = [];
 
@@ -62,7 +60,7 @@ class VendaControllerImprimirVendas extends Controller
         PDF::setHeaderCallback(function($pdf) use ($headerHTML) {
             $pdf->SetFont('courier', 'b', 10);
             $pdf->setY(3);
-           $pdf->writeHTML($headerHTML, true, false, true, false, '');
+            $pdf->writeHTML($headerHTML, true, false, true, false, '');
 
         });
 

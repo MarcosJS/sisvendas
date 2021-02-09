@@ -16,6 +16,10 @@
             text-align: left;
         }
 
+        .td_vendas {
+            width: 22%;
+        }
+
     </style>
 </head>
 <body>
