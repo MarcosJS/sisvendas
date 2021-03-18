@@ -16,36 +16,10 @@ class ControleDeCaixaContollerFiltrar extends Controller
         try {
             $movimentos = ControleDeCaixaAuxiliar::consulta($request->all());
 
-            //Se houver filtro do meio de pagamento
-            if($request['meio'] != null) {
-                $novosMov = [];
-                foreach ($movimentos as $movimento) {
-                    $pagamento = $movimento->pagamento;
-                    if ($pagamento->tipoPagamento->id == $request['meio']) {
-                        $novosMov[] = $movimento;
-                    }
-                }
-                $movimentos = $novosMov;
-            }
-
             $dados = ControleDeCaixaAuxiliar::analisar($movimentos);
 
-            return view('caixa.controle_de_caixa', [
-                'tipoMovimento' => TipoMovCaixa::all(),
-                'catMovimento' => CatMovCaixa::all(),
-                'tipoPagamento' => TipoPagamento::all(),
-                'turno' => $dados['turno'],
-                'movimentos' => $dados['movimentos'],
-                'saldoCaixa' => $dados['saldoCaixa'],
-                'saldoAnterior' => $dados['saldoAnterior'],
-                'saldoSaidas' => $dados['saldoSaidas'],
-                'saldoEntradas' => $dados['saldoEntradas'],
-                'quantSaidas' => $dados['quantSaidas'],
-                'quantEntradas' => $dados['quantEntradas'],
-                'dinheiro' => $dados['dinheiro'],
-                'cheque' => $dados['cheque'],
-                'transferencia' => $dados['transferencia']
-            ]);
+            return ControleDeCaixaAuxiliar::exibirControleDeCaixa('caixa.controle_de_caixa', $dados);
+
         } catch (\Exception $exception) {
             return view('caixa.controle_de_caixa', [
                 'tipoMovimento' => TipoMovCaixa::all(),

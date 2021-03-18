@@ -1,4 +1,4 @@
-    @extends('layouts.painel_caixa')
+@extends('layouts.painel_caixa')
 
 @section('titulo', 'SISVendas PDV - Controle de Caixa')
 

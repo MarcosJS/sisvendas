@@ -20,6 +20,10 @@
             width: 22%;
         }
 
+        .td_movimentos {
+            width: 20%;
+        }
+
     </style>
 </head>
 <body>

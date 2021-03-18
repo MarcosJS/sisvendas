@@ -1,42 +1,61 @@
 <?php
 
-
 namespace App\Auxiliar;
 
-
+use App\Models\Caixa\CatMovCaixa;
 use App\Models\Caixa\MovimentoCaixa;
+use App\Models\Caixa\TipoMovCaixa;
+use App\Models\Pagamento\TipoPagamento;
 
 class ControleDeCaixaAuxiliar
 {
-    public static function consulta ($dados) {
-        $movimentos = MovimentoCaixa::all();
+    public static function consulta($consulta) {
+        if ($consulta != null) {
+            $movimentos = MovimentoCaixa::all();
 
-        if ($dados['movimento'] != null) {
-            $movimentos = $movimentos->where('id', '=', $dados['movimento']);
+            if ($consulta['movimento'] != null) {
+                $movimentos = $movimentos->where('id', '=', $consulta['movimento']);
 
+            } else {
+                if ($consulta['turno'] != null) {
+                    $movimentos = $movimentos->whereIn('turno_id', $consulta['turno']);
+                }
+
+                if ($consulta['tipo'] != null) {
+                    $movimentos = $movimentos->whereIn('tipo_mov_caixa_id', $consulta['tipo']);
+                }
+
+                if ($consulta['categoria'] != null) {
+                    $movimentos = $movimentos->whereIn('cat_mov_caixa_id', $consulta['categoria']);
+                }
+
+                if ($consulta['dt_inicio'] != null) {
+                    $movimentos = $movimentos->where('dt_movimento', '>=', $consulta['dt_inicio']);
+                }
+
+                if ($consulta['dt_fim'] != null) {
+                    $movimentos = $movimentos->where('dt_movimento', '<=', $consulta['dt_fim']);
+                }
+
+                //Se houver filtro do meio de pagamento
+                if($consulta['meio'] != null) {
+                    $novosMov = [];
+                    foreach ($movimentos as $movimento) {
+                        $pagamento = $movimento->pagamento;
+                        if ($pagamento->tipoPagamento->id == $consulta['meio']) {
+                            $novosMov[] = $movimento;
+                        }
+                    }
+                    $movimentos = $novosMov;
+                }
+            }
         } else {
-            if ($dados['turno'] != null) {
-                $movimentos = $movimentos->whereIn('turno_id', $dados['turno']);
-            }
-
-            if ($dados['tipo'] != null) {
-                $movimentos = $movimentos->whereIn('tipo_mov_caixa_id', $dados['tipo']);
-            }
-
-            if ($dados['categoria'] != null) {
-                $movimentos = $movimentos->whereIn('cat_mov_caixa_id', $dados['categoria']);
-            }
-
-            if ($dados['dt_inicio'] != null) {
-                $movimentos = $movimentos->where('dt_movimento', '>=', $dados['dt_inicio']);
-            }
-
-            if ($dados['dt_fim'] != null) {
-                $movimentos = $movimentos->where('dt_movimento', '<=', $dados['dt_fim']);
-            }
+            $movimentos = [];
         }
 
-        return $movimentos;
+        Session()->put('pesquisaDeImpressao', $consulta);
+
+        return $movimentos->toArray();
     }
 
     public static function analisar($movimentos) {
@@ -84,6 +103,25 @@ class ControleDeCaixaAuxiliar
         }
 
         return $dados;
+    }
+
+    public static function exibirControleDeCaixa($view, $dados) {
+        return view($view, [
+            'tipoMovimento' => TipoMovCaixa::all(),
+            'catMovimento' => CatMovCaixa::all(),
+            'tipoPagamento' => TipoPagamento::all(),
+            'turno' => $dados['turno'],
+            'movimentos' => $dados['movimentos'],
+            'saldoCaixa' => $dados['saldoCaixa'],
+            'saldoAnterior' => $dados['saldoAnterior'],
+            'saldoSaidas' => $dados['saldoSaidas'],
+            'saldoEntradas' => $dados['saldoEntradas'],
+            'quantSaidas' => $dados['quantSaidas'],
+            'quantEntradas' => $dados['quantEntradas'],
+            'dinheiro' => $dados['dinheiro'],
+            'cheque' => $dados['cheque'],
+            'transferencia' => $dados['transferencia']
+        ]);
     }
 
 }

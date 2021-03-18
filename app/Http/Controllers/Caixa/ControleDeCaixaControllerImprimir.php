@@ -2,42 +2,18 @@
 
 namespace App\Http\Controllers\Caixa;
 
+use App\Auxiliar\ControleDeCaixaAuxiliar;
+use App\Auxiliar\ImpressaoAuxiliar;
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
+use PDF;
 
 class ControleDeCaixaControllerImprimir extends Controller
 {
     public function imprimir () {
         //try {
-        $vendas = Venda::all()->sortBy('id');
+        $movimentos = ControleDeCaixaAuxiliar::consulta(Session()->get('pesquisaDeImpressao'));
 
-        $intervalo = 10;
-
-        $ciclo  = count($vendas) / $intervalo;
-
-        if ($ciclo * $intervalo <= count($vendas)) {
-            $ciclo++;
-        }
-
-        $grupos = [];
-
-        for($j = 1; $j <= $ciclo; $j++) {
-            $linhas = [];
-            for ($i = $intervalo * $j - $intervalo; $i < count($vendas); $i++) {
-                if ($i != 0 && $i % ($intervalo * $j) == 0) {
-                    break;
-                }
-                $linhas[] = $vendas[$i];
-
-            }
-            $grupos[] = $linhas;
-        }
-
-        $paginasHtml = [];
-
-        foreach ($grupos as $grupo) {
-            $paginasHtml[] = view('venda.impressao.lista_vendas', ['grupo' => $grupo]);
-        }
+        $paginasHtml = ImpressaoAuxiliar::imprimirItemPorPagina(array_values($movimentos), 10, 'caixa.impressao.controle_de_caixa');
 
         //return $paginasHtml[0];
 
@@ -81,48 +57,11 @@ class ControleDeCaixaControllerImprimir extends Controller
         PDF::SetMargins(7, 14, 7);
         PDF::SetAutoPageBreak(FALSE, 10);
         foreach ($paginasHtml as $html) {
-            PDF::AddPage();
+            PDF::AddPage('L');
             PDF::SetMargins(3, 14, 7);
             PDF::writeHTML($html, true, false, true, false, '');
         }
         PDF::endPage();
         PDF::Output('test.pdf', 'I');
-
-        /*$tcpdf = new CustomPDF(PDF_PAGE_ORIENTATION, PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8', false);
-        $tcpdf->setHeaderData($ln='', $lw=0, $ht='', $hs=$headerHTML);
-        $tcpdf->AddPage();
-        $tcpdf->writeHTML($html, true, false, true, false, '');
-        $tcpdf->lastPage();
-        $tcpdf->Output('test.pdf', 'I');*/
-
-        /*CustomPDF::setHeaderData($ln='', $lw=0, $ht='', $hs=$headerHTML);//Funciona mas não altera o pdf
-        CustomPDF::AddPage();
-        CustomPDF::writeHTML($html, true, false, true, false, '');
-        CustomPDF::lastPage();
-        CustomPDF::Output('test.pdf', 'I');*/
-
-        /*PDF::setHeaderData($ln='', $lw=0, $ht='', $hs=$headerHTML);//Funciona mas não altera o pdf
-        PDF::AddPage();
-        PDF::writeHTML($html, true, false, true, false, '');
-        PDF::lastPage();
-        PDF::Output('test.pdf', 'I');*/
-
-
-        /*$pdf = PDF::loadView('venda.impressao.lista_vendas', [
-            'vendas' => $vendas,
-            'grupos' => $grupos])
-            ->setOptions(['defaultFont' => 'arial']);
-
-        return $pdf->stream('Vendas.pdf');*/
-
-        return view('venda.impressao.lista_vendas', [
-            'vendas' => $vendas,
-            'grupos' => $grupos]);
-
-        /*} catch (\Exception $exception) {
-            return redirect()
-                ->back()
-                ->withErrors(['erro' => $exception->getMessage()]);
-        }*/
     }
 }
