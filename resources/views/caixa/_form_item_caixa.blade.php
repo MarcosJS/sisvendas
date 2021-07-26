@@ -3,7 +3,7 @@
     <div class="form-row">
         <div class="form-group col-sm-7">
             <label for="nomeproduto">Produto</label>
-            <select id="nomeproduto" class="form-control @error('codproduto') is-invalid @enderror" name="nomeproduto">
+            <select id="nomeproduto" class="form-control @error('codproduto') is-invalid @enderror" name="nomeproduto" autofocus>
                 <option selected value="" {{ (old("codproduto") == "" ? "selected":"") }}>Produtos...</option>
                 @foreach($produtos as $produto)
                     <option value="{{$produto->id}}" {{ (old("codproduto") == $produto->id ? "selected":"") }}>{{$produto->nome}}</option>

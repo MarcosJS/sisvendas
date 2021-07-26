@@ -16,17 +16,17 @@
                 <th class="text_center">Pagamento</th>
             </tr>
 
-            @foreach($grupo as $movimento)
+            @foreach($linhas as $movimento)
 
                 <tr>
-                    <td>{{$movimento->id}}</td>
-                    <td bgcolor="#7fffd4" class="text_center">{{date('d/m/Y', strtotime($movimento->dt_movimento))}}</td>
-                    <td class="text_center">{{$movimento->hr_movimento}}</td>
-                    <td bgcolor="#7fffd4" class="text_center">{{$movimento->tipoMovCaixa->nome}}</td>
-                    <td class="text_left">{{$movimento->catMovCaixa->nome}}</td>
-                    <td bgcolor="#7fffd4" class="" class="text_left">@if($movimento->observacao != null) {{substr($movimento->observacao, 0, 25)}} @else Inexistente @endif</td>
-                    <td class="text_right">{{number_format($movimento->valor,2, ',', '.')}}</td>
-                    <td bgcolor="#7fffd4" class="text_center">@if($movimento->pagamento != null) {{$movimento->pagamento->tipoPagamento->nome}} @else Inexistente @endif</td>
+                    <td>{{$movimento['id']}}</td>
+                    <td bgcolor="#7fffd4" class="text_center">{{date('d/m/Y', strtotime($movimento['dt_movimento']))}}</td>
+                    <td class="text_center">{{$movimento['hr_movimento']}}</td>
+                    <td bgcolor="#7fffd4" class="text_center">{{$tipo->find($movimento['tipo_mov_caixa_id'])->nome}}</td>
+                    <td class="text_left">{{$cat->find($movimento['cat_mov_caixa_id'])->nome}}}</td>
+                    <td bgcolor="#7fffd4" class="" class="text_left">@if($movimento['observacao'] != null) {{substr($movimento['observacao'], 0, 25)}} @else Inexistente @endif</td>
+                    <td class="text_right">{{number_format($movimento['valor'],2, ',', '.')}}</td>
+                    <td bgcolor="#7fffd4" class="text_center">@if($movimento['pagamento_id'] != null) {{$pagamento->find($movimento['pagamento_id'])->tipoPagamento->nome}} @else Inexistente @endif</td>
                 </tr>
                 @endforeach
         </table>

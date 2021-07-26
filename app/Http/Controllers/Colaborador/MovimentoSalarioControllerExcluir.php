@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 class MovimentoSalarioControllerExcluir extends Controller
 {
     public function excluir($id) {
+
         try {
             $movimento = MovimentoSalario::find($id);
             $competenciaAtual = Session()->get('sistema')->competencia();

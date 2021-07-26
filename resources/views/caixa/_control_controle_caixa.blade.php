@@ -49,7 +49,7 @@
                 <h4>Movimentos</h4>
             </div>
             <div class="col-sm-1">
-                <a class="btn-sm btn-primary text-decoration-none" href="{{route('imprimircontroledecaixa')}}" role="button">Exportar</a>
+                <a class="btn-sm btn-primary text-decoration-none" href="{{route('imprimircontroledecaixa')}}" role="button" target="_blank">Exportar</a>
             </div>
         </div>
     </div>

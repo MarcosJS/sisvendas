@@ -144,7 +144,7 @@ Route::middleware(['auth'])->group(function () {
     Route::post('colaborador/atualizar/{id}', [ColaboradorControllerAtualizar::class, 'atualizar'])->name('atualizarcolaborador');
     Route::post('colaborador/lancarmovimentosalario/{id}', [MovimentoSalarioControllerLancar::class, 'lancar'])->name('lancarmovimentopagamento');
     Route::get('colaborador/movimentosdesalario', [MovimentoSalarioControllerTodos::class, 'obterTodos'])->name('movimentosdesalario');
-    Route::post('colaborador/movimentossalario/filtrar', [MovimentoSalarioControllerFiltrar::class, 'filtrar'])->name('filtrarmovimentossalario');
+    Route::get('colaborador/movimentossalario/filtrar', [MovimentoSalarioControllerFiltrar::class, 'filtrar'])->name('filtrarmovimentossalario');
     Route::get('colaborador/excluirmovimentosalario/{id}', [MovimentoSalarioControllerExcluir::class, 'excluir'])->name('excluirmovimentosalario');
     Route::get('colaborador/movimentosdesalario/imprimir', [MovimentoSalarioControllerImprimir::class, 'imprimir'])->name('imprimirmovimentosdesalario');
 

@@ -8,8 +8,7 @@
 
             <div class="col-sm-9">
                 <div class="row">
-                    <form class="form-inline" action="{{route('filtrarmovimentossalario')}}" method="post">
-                        @csrf
+                    <form class="form-inline" action="{{route('filtrarmovimentossalario')}}" method="get">
 
                         <input type="text" class="form-control-sm text-primary mr-sm-2" name="colaborador" @if($colaborador != null) value="{{$colaborador->id}}" @endif placeholder="Cod. Colaborador" aria-label="colaborador" aria-describedby="basic-addon2">
 

@@ -13,7 +13,6 @@ class ControleDeCaixaControllerAcessar extends Controller
             $ultimoTurno = Turno::orderByDesc('id')->first();
 
             if ($ultimoTurno != null) {
-                //$movimentos = $ultimoTurno->movimentos->sortByDesc('id');
                 $movimentos = ControleDeCaixaAuxiliar::consulta([
                     'movimento' => null,
                     'turno' => $ultimoTurno->id,
@@ -23,11 +22,11 @@ class ControleDeCaixaControllerAcessar extends Controller
                     'dt_fim' => null,
                     'meio' => null]);
             } else {
-                //$movimentos = [];
                 $movimentos = ControleDeCaixaAuxiliar::consulta(null);
             }
 
             $dados = ControleDeCaixaAuxiliar::analisar($movimentos);
+
 
             return ControleDeCaixaAuxiliar::exibirControleDeCaixa('caixa.controle_de_caixa', $dados);
 

@@ -6,6 +6,10 @@ let prodSelecionado = document.getElementById('nomeproduto'),
     codProduto = document.getElementById('codproduto'),
     estoqueProduto = document.getElementById('estoqueproduto');
 
+//prodSelecionado.autofocus = true;
+
+//console.log(prodSelecionado.autofocus)
+
 function atualizarValoresItens() {
     let newSubTotal = qtd.value * precoFinal.value;
     newSubTotal = newSubTotal.toFixed(2);

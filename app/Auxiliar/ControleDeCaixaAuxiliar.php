@@ -55,7 +55,8 @@ class ControleDeCaixaAuxiliar
 
         Session()->put('pesquisaDeImpressao', $consulta);
 
-        return $movimentos->toArray();
+        //return $movimentos->toArray();
+        return $movimentos;
     }
 
     public static function analisar($movimentos) {

@@ -45,8 +45,8 @@
 
                 <div class="border-bottom border-success mt-3">
                     <p>
-                        <form class="float-left mr-2" action="{{route('filtrarmovimentossalario')}}" method="post">
-                            @csrf
+                        <form class="float-left mr-2" action="{{route('filtrarmovimentossalario')}}" method="get">
+
                         <input type="hidden" name="colaborador" value="{{$colaborador->id}}">
                         <input type="hidden" name="competencia">
                         <input type="hidden" name="tipo">
@@ -78,6 +78,7 @@
                                         <tr class="@if($movimento->valor < 0) text-danger @else text-success @endif">
                                             <td>{{$movimento->catMovSalario->nome}}</td>
                                             <td class="text-right">{{number_format($movimento->valor,2, ',', '.')}}</td>
+                                            <td class="text-right"><a class="badge-danger badge" href="{{route('excluirmovimentosalario', $movimento->id)}}">Remover</a></td>
                                         </tr>
                                         @endforeach
                                         <tr>
