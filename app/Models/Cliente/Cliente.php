@@ -16,7 +16,7 @@ class Cliente extends Model
     public static $rules = [
         'nome'=>'required|min:5|max:100',
         'datanasc' => 'date',
-        'cpf'=>'required|size:11|unique:App\Models\Cliente',
+        'cpf'=>'required|size:11|unique:App\Models\Cliente\Cliente,cpf',
         'modcredito' => 'boolean',
         'status' => 'boolean'
     ];
