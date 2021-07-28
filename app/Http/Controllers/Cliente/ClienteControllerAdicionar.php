@@ -42,6 +42,10 @@ class ClienteControllerAdicionar extends Controller
             return redirect()->route('novocliente')
                 ->withErrors($exception->getValidator())
                 ->withInput();
+        } catch (\Exception $exception) {
+            return redirect()->route('novocliente')
+                ->withErrors($exception->getMessage())
+                ->withInput();
         }
     }
 }
