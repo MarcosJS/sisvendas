@@ -39,6 +39,6 @@ class CreateMovimentoSalariosTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('_movimento_salarios');
+        Schema::dropIfExists('movimento_salarios');
     }
 }

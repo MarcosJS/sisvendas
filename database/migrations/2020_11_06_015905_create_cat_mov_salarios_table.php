@@ -30,6 +30,6 @@ class CreateCatMovSalariosTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('_cat_mov_salarios');
+        Schema::dropIfExists('cat_mov_salarios');
     }
 }

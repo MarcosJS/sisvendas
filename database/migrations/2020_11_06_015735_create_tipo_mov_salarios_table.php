@@ -27,6 +27,6 @@ class CreateTipoMovSalariosTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('_tipo_mov_salarios');
+        Schema::dropIfExists('tipo_mov_salarios');
     }
 }

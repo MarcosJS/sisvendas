@@ -40,17 +40,40 @@
         "psr-4": {
             "App\\": "app/",
             "App\\Models\\": "app/Models/",
+            "App\\Http\\Controllers\\Caixa\\": "app/Http/Controllers/Caixa/",
             "App\\Http\\Controllers\\Cliente\\": "app/Http/Controllers/Cliente/",
+            "App\\Http\\Controllers\\Colaborador\\": "app/Http/Controllers/Colaborador/",
+            "App\\Http\\Controllers\\Material\\": "app/Http/Controllers/Material/",
+            "App\\Http\\Controllers\\Pagamento\\": "app/Http/Controllers/Pagamento/",
             "App\\Http\\Controllers\\Produto\\": "app//Http/Controllers/Produto/",
+            "App\\Http\\Controllers\\Sessao\\": "app/Http/Controllers/Sessao/",
+            "App\\Http\\Controllers\\Sistema\\": "app/Http/Controllers/Sistema/",
             "App\\Http\\Controllers\\Usuario\\": "app//Http/Controllers/Usuario/",
             "App\\Http\\Controllers\\Venda\\": "app//Http/Controllers/Venda/",
             "App\\Http\\Controllers\\": "app//Http/Controllers/",
             "Database\\Factories\\": "database/factories/",
+            "Database\\Migrations\\": "database/migrations/",
             "Database\\Seeders\\": "database/seeders/"
         }
     },
     "autoload-dev": {
         "psr-4": {
+            "App\\": "app/",
+            "App\\Models\\": "app/Models/",
+            "App\\Http\\Controllers\\Caixa\\": "app/Http/Controllers/Caixa/",
+            "App\\Http\\Controllers\\Cliente\\": "app/Http/Controllers/Cliente/",
+            "App\\Http\\Controllers\\Colaborador\\": "app/Http/Controllers/Colaborador/",
+            "App\\Http\\Controllers\\Material\\": "app/Http/Controllers/Material/",
+            "App\\Http\\Controllers\\Pagamento\\": "app/Http/Controllers/Pagamento/",
+            "App\\Http\\Controllers\\Produto\\": "app//Http/Controllers/Produto/",
+            "App\\Http\\Controllers\\Sessao\\": "app/Http/Controllers/Sessao/",
+            "App\\Http\\Controllers\\Sistema\\": "app/Http/Controllers/Sistema/",
+            "App\\Http\\Controllers\\Usuario\\": "app//Http/Controllers/Usuario/",
+            "App\\Http\\Controllers\\Venda\\": "app//Http/Controllers/Venda/",
+            "App\\Http\\Controllers\\": "app//Http/Controllers/",
+            "Database\\Factories\\": "database/factories/",
+            "Database\\Migrations\\": "database/migrations/",
+            "Database\\Seeders\\": "database/seeders/",
             "Tests\\": "tests/"
         }
     },
