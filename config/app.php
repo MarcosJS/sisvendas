@@ -161,8 +161,8 @@ return [
         Illuminate\Translation\TranslationServiceProvider::class,
         Illuminate\Validation\ValidationServiceProvider::class,
         Illuminate\View\ViewServiceProvider::class,
-        //Barryvdh\DomPDF\ServiceProvider::class,
-        Elibyy\TCPDF\ServiceProvider::class,
+        Barryvdh\DomPDF\ServiceProvider::class,
+        //Elibyy\TCPDF\ServiceProvider::class,
 
         /*
          * Package Service Providers...

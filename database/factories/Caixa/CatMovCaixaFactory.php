@@ -2,15 +2,16 @@
 
 namespace Database\Factories\Caixa;
 
-use App\Models\Caixa\CatMovCredCliente;
+//use App\Models\Caixa\CatMovCredCliente;
+use App\Models\Caixa\CatMovCaixa;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 class CatMovCaixaFactory extends Factory
 {
-    protected $model = CatMovCredCliente::class;
+    protected $model = CatMovCaixa::class;
 
     private function nomeCat($nome) {
-        $catCadastrado = CatMovCredCliente::where('nome', '=', $nome)->count();
+        $catCadastrado = CatMovCaixa::where('nome', '=', $nome)->count();
         if($catCadastrado > 0) {
             $nome = $this->faker->firstName;
             return $this->nomeCat($nome);

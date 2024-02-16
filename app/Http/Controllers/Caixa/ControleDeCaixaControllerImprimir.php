@@ -5,7 +5,8 @@ namespace App\Http\Controllers\Caixa;
 use App\Auxiliar\ControleDeCaixaAuxiliar;
 use App\Auxiliar\ImpressaoAuxiliar;
 use App\Http\Controllers\Controller;
-use PDF;
+use Barryvdh\DomPDF\PDF;
+//use PDF;
 
 class ControleDeCaixaControllerImprimir extends Controller
 {

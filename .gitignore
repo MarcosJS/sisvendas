@@ -7,6 +7,9 @@
 .env
 .env
 .phpunit.result.cache
+.buildpath
+.project
+.settings
 Homestead.json
 Homestead.yaml
 npm-debug.log
